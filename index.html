@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Horizons Global Consultants | AI Governance, Risk & ISO/IEC 42001-Informed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="AI Horizons Global Consultants helps mid-size businesses and government agencies transform operations through AI strategy, process redesign, and workforce training."
+  />
+
+  <!-- Luxury fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --navy:#0a1435;
+      --navy-soft:#182651;
+      --navy-light:#eef2ff;
+      --gold:#d4a740;
+      --gold-soft:#f5dca1;
+      --white:#ffffff;
+      --bg:#f5f7fd;
+      --text-main:#111827;
+      --text-soft:#4b5563;
+      --border-soft:#d4d7e5;
+
+      --shadow-soft:0 18px 45px rgba(15,23,42,.14);
+      --shadow-light:0 10px 28px rgba(15,23,42,.09);
+
+      --radius-lg:1.25rem;
+      --radius-xl:1.9rem;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; }
+    body{
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background: radial-gradient(circle at top left, #ffffff 0%, #eef1ff 40%, #e4ebff 70%, #f5f7fd 100%);
+      color:var(--text-main);
+      line-height:1.6;
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    .container{
+      width:100%;
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 1.25rem;
+    }
+
+    /* HEADER */
+    header{
+      position: sticky;
+      top:0;
+      z-index:100;
+      background: linear-gradient(to right, rgba(255,255,255,.96), rgba(250,251,255,.98));
+      border-bottom:1px solid rgba(148,163,184,.35);
+      backdrop-filter: blur(12px);
+    }
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:.9rem 0;
+      gap:1rem;
+    }
+
+    .logo-wrap{
+      display:flex;
+      align-items:center;
+      gap:.7rem;
+      min-width: 220px;
+    }
+    .logo-img-wrap{
+      position:relative;
+      width:46px;
+      height:46px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
+    .logo-orbit{
+      position:absolute;
+      inset:-4px;
+      border-radius:999px;
+      border:1px solid rgba(212,167,64,.4);
+      opacity:.8;
+    }
+    .logo-img{
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      object-fit:contain;
+      border:1px solid rgba(212,167,64,.5);
+      background: radial-gradient(circle at 30% 20%, #fff8da, #f2d38e);
+      box-shadow: 0 8px 18px rgba(212,167,64,.4);
+    }
+    .logo-text-main{
+      font-family:"Playfair Display",serif;
+      font-size:1.15rem;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--navy);
+      line-height:1.05;
+    }
+    .logo-text-sub{
+      font-size:.68rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:#6b7280;
+      margin-top:.15rem;
+    }
+
+    nav ul{
+      display:flex;
+      align-items:center;
+      gap:1.4rem;
+      list-style:none;
+      font-size:.82rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:#4b5563;
+    }
+    nav a{
+      position:relative;
+      padding-bottom:.2rem;
+    }
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:0;
+      height:2px;
+      background: linear-gradient(90deg, var(--gold), #f7e2b8);
+      transition: width .2s ease;
+    }
+    nav a:hover::after{ width:100%; }
+
+    /* Hamburger */
+    .hamburger{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.45);
+      background: linear-gradient(145deg, #ffffff, #f6f3ff);
+      box-shadow: 0 10px 22px rgba(15,23,42,.08);
+      cursor:pointer;
+    }
+    .hamburger:active{ transform: translateY(1px); }
+    .hamburger svg{ width:20px; height:20px; }
+
+    /* Mobile menu overlay/panel */
+    .mobile-overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(10,20,53,.28);
+      backdrop-filter: blur(6px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      z-index: 999;
+    }
+    .mobile-panel{
+      position:fixed;
+      top:86px;
+      right:18px;
+      width:min(340px, calc(100vw - 36px));
+      border-radius: 18px;
+      background: linear-gradient(145deg, #ffffff, #f6f3ff);
+      border: 1px solid rgba(180,187,214,.8);
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-8px) scale(.98);
+      opacity:0;
+      pointer-events:none;
+      transition: transform .18s ease, opacity .18s ease;
+      z-index: 1000;
+      overflow:hidden;
+    }
+    .mobile-panel .mobile-list{
+      list-style:none;
+      padding: .75rem;
+      display:flex;
+      flex-direction:column;
+      gap:.35rem;
+    }
+    .mobile-panel a{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      padding: .85rem .95rem;
+      border-radius: 14px;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color: var(--navy);
+    }
+    .mobile-panel a:hover{
+      background: rgba(212,167,64,.12);
+      border: 1px solid rgba(212,167,64,.28);
+    }
+
+    body.menu-open .mobile-overlay{
+      opacity:1;
+      pointer-events:auto;
+    }
+    body.menu-open .mobile-panel{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateY(0) scale(1);
+    }
+
+    /* HERO */
+    section{ padding: 3.2rem 0; }
+    .hero-shell{ padding: 2.4rem 0 2.9rem; }
+    .hero-card{
+      background: radial-gradient(circle at top left, #ffffff 0%, #f5f4ff 40%, #edf2ff 100%);
+      border-radius: var(--radius-xl);
+      padding: 2.6rem 2.2rem 2.2rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148,163,184,.3);
+      display:grid;
+      grid-template-columns: minmax(0, 2.35fr) minmax(0, 1.75fr);
+      gap: 2.2rem;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      right:-90px;
+      top:-90px;
+      width:260px;
+      height:260px;
+      background: radial-gradient(circle, rgba(212,167,64,.25), transparent 70%);
+      opacity:.9;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      left:-120px;
+      bottom:-120px;
+      width:280px;
+      height:280px;
+      background: radial-gradient(circle, rgba(24,38,81,.18), transparent 70%);
+    }
+    .hero-main{ position:relative; z-index:1; }
+    .kicker{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color: var(--navy-soft);
+      margin-bottom:.55rem;
+    }
+    .hero-title{
+      font-family:"Playfair Display",serif;
+      font-size:2.55rem;
+      line-height:1.12;
+      color:var(--navy);
+      margin-bottom:.85rem;
+    }
+    .hero-title .gold{ color: var(--gold); }
+    .hero-sub{
+      font-size:1rem;
+      color:#374151;
+      max-width: 720px;
+      margin-bottom: 1.15rem;
+    }
+    .hero-quote{
+      font-style: italic;
+      color: var(--navy-soft);
+      margin-bottom: 1.35rem;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:.9rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: .95rem 1.2rem;
+      border-radius: 999px;
+      font-size:.82rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:600;
+      border:1px solid rgba(148,163,184,.55);
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      background: linear-gradient(90deg, var(--gold), #f2d38e);
+      border: 1px solid rgba(212,167,64,.55);
+      color: #2b1b07;
+      box-shadow: 0 14px 28px rgba(212,167,64,.22);
+    }
+    .btn-ghost{
+      background: #ffffff;
+      color: var(--navy);
+      box-shadow: 0 12px 24px rgba(15,23,42,.08);
+    }
+
+    /* Right hero card */
+    .hero-side{
+      position:relative;
+      z-index:1;
+      background: linear-gradient(145deg, #ffffff, #f6f3ff);
+      border-radius: 1.5rem;
+      padding: 1.35rem 1.35rem 1.1rem;
+      border:1px solid rgba(180,187,214,.7);
+      box-shadow: var(--shadow-light);
+    }
+    .side-title{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color: var(--navy-soft);
+      margin-bottom:.6rem;
+    }
+    .side-copy{
+      font-size:.92rem;
+      color:#374151;
+      margin-bottom: .9rem;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.45rem;
+      margin-top: .6rem;
+    }
+    .pill{
+      font-size:.72rem;
+      letter-spacing:.06em;
+      color: var(--navy-soft);
+      background:#ffffff;
+      border:1px solid rgba(212,215,230,.9);
+      padding:.4rem .6rem;
+      border-radius: 999px;
+    }
+
+    /* Section headers */
+    .section-header{
+      margin-bottom: 1.9rem;
+      text-align:left;
+    }
+    .section-title{
+      font-family:"Playfair Display",serif;
+      font-size:1.7rem;
+      color: var(--navy);
+      margin-bottom:.5rem;
+    }
+    .section-sub{
+      font-size:.93rem;
+      color: var(--text-soft);
+      max-width: 680px;
+    }
+    .section-alt{
+      background:#ffffff;
+      border-top:1px solid rgba(148,163,184,.3);
+      border-bottom:1px solid rgba(148,163,184,.3);
+    }
+
+    /* Visual frame */
+    .visual-frame{
+      border-radius: 1.2rem;
+      overflow:hidden;
+      border:1px solid rgba(212,167,64,.25);
+      box-shadow: 0 18px 40px rgba(15,23,42,.12);
+      background:#ffffff;
+      max-width:100%;
+    }
+    .visual-frame img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height: 360px;
+      object-fit: cover;
+    }
+
+    /* Two-column grids */
+    .grid-2{
+      display:grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.65fr);
+      gap: 2.3rem;
+      align-items:center;
+    }
+    .copy p{
+      font-size:.95rem;
+      color:#374151;
+      margin-bottom:.9rem;
+    }
+    .highlight{
+      font-size:.86rem;
+      padding: .9rem 1rem;
+      border-radius: .85rem;
+      background:#fff7e6;
+      border:1px solid #fcd9a4;
+      color:#7c4a05;
+      margin-bottom: .85rem;
+    }
+    .bullets{
+      list-style:none;
+      margin-top:.4rem;
+      font-size:.9rem;
+      color:#374151;
+    }
+    .bullets li{
+      margin-bottom:.55rem;
+      padding-left: 1.2rem;
+      position:relative;
+    }
+    .bullets li::before{
+      content:"•";
+      position:absolute;
+      left:0;
+      top:0;
+      color: var(--gold);
+    }
+
+    /* Contact */
+    .contact-card{
+      background: radial-gradient(circle at top left, #ffffff 0%, #f5f4ff 40%, #edf2ff 100%);
+      border-radius: var(--radius-xl);
+      padding: 2rem 1.8rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148,163,184,.3);
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.6rem;
+      align-items:start;
+    }
+    .contact-card label{
+      display:block;
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color: var(--navy-soft);
+      margin-bottom:.35rem;
+    }
+    .field{
+      width:100%;
+      border-radius: 14px;
+      border:1px solid rgba(148,163,184,.45);
+      padding: .85rem .9rem;
+      font-size:.95rem;
+      outline:none;
+      background:#ffffff;
+    }
+    textarea.field{ min-height: 120px; resize: vertical; }
+    .form-row{ display:grid; gap:.85rem; }
+    .contact-note{
+      font-size:.92rem;
+      color:#374151;
+    }
+    .fineprint{
+      font-size:.78rem;
+      color:#6b7280;
+      margin-top:.9rem;
+    }
+
+    /* Footer */
+    footer{
+      padding:1.4rem 0 1.8rem;
+      font-size:.78rem;
+      color:#6b7280;
+      border-top:1px solid rgba(148,163,184,.4);
+      background:#ffffff;
+      margin-top:1.5rem;
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-card{ grid-template-columns: minmax(0,1fr); padding: 2.1rem 1.6rem 2rem; }
+      .grid-2{ grid-template-columns: minmax(0,1fr); }
+    }
+    @media (max-width: 900px){
+      nav ul{ display:none; }
+      .hamburger{ display:inline-flex; }
+      header{ position: sticky; }
+      .mobile-panel{ top: 78px; }
+    }
+    @media (max-width: 600px){
+      .hero-title{ font-size: 2.05rem; }
+      .section-title{ font-size: 1.4rem; }
+      .contact-card{ grid-template-columns: minmax(0,1fr); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile menu overlay + panel -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
+    <ul class="mobile-list" role="menu" aria-label="Mobile navigation">
+      <li><a role="menuitem" href="index.html">Home</a></li>
+      <li><a role="menuitem" href="founder.html">Founder</a></li>
+      <li><a role="menuitem" href="services.html">Services</a></li>
+      <li><a role="menuitem" href="innovation.html">Innovation Lab</a></li>
+      <li><a role="menuitem" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo-wrap">
+          <div class="logo-img-wrap">
+            <div class="logo-orbit"></div>
+            <img src="images/logo.png" alt="AI Horizons Global Consultants logo" class="logo-img" />
+          </div>
+          <div>
+            <div class="logo-text-main">AI Horizons</div>
+            <div class="logo-text-sub">Global Consultants</div>
+          </div>
+        </div>
+
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="founder.html">Founder</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="innovation.html">Innovation Lab</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="#0a1435" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero-shell">
+    <div class="container">
+      <section class="hero-card">
+        <div class="hero-main">
+          <div class="kicker">AI TRANSFORMATION • OPERATIONAL EXCELLENCE • MID-SIZE BUSINESS & GOVERNMENT</div>
+          <h1 class="hero-title">
+            Transforming <span class="gold">Organizations</span><br/>
+            for the AI Era.
+          </h1>
+          <p class="hero-sub">
+            AI Horizons Global Consultants helps mid-size businesses and government agencies redesign how they work. We start with your people — their workflows, their pain points, their daily reality — then deploy AI that becomes a natural extension of how they already operate.
+          </p>
+          <p class="hero-quote">
+            “We don’t start with tools. We start with your people. The result isn’t disruption — it’s evolution.”
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact">Schedule a consultation</a>
+            <a class="btn btn-ghost" href="services.html">View services</a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="side-title">Why organizations work with us</div>
+          <div style="margin-bottom:1rem;border-radius:1rem;overflow:hidden;border:1px solid rgba(212,167,64,.2);box-shadow:0 8px 24px rgba(15,23,42,.1);">
+            <img src="images/hero-global_jpg.png" alt="Global AI transformation" style="width:100%;height:180px;object-fit:cover;display:block;" />
+          </div>
+          <div class="side-copy">
+            We help operations leaders stop losing time, money, and talent to broken processes. Every engagement starts with discovery — understanding how your people actually work — before a single tool is introduced.
+          </div>
+
+          <div class="pill-row" aria-label="Focus areas">
+            <span class="pill">Process Redesign</span>
+            <span class="pill">AI Implementation</span>
+            <span class="pill">Workforce Training</span>
+            <span class="pill">Change Management</span>
+          </div>
+
+          <div style="margin-top:1.05rem; font-size:.86rem; color:#4b5563;">
+            Founder: Monica Lewis — 20+ years in defense logistics, fraud prevention, and catastrophe response. AI Horizons is the culmination of that operational discipline, now applied to transformation consulting.
+          </div>
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <!-- ABOUT (ISO framing) -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">About the firm</div>
+        <h2 class="section-title">We Start With Your People. Not Your Tools.</h2>
+        <p class="section-sub">
+          Most AI consultants arrive with a predetermined tool and teach your people to adapt. We build from the inside out.
+          Every recommendation is rooted in how your people already think, work, and communicate.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="copy">
+          <div class="highlight">
+            Most organizations lose time, money, and talent to three things: bottlenecks nobody has named, redundancy nobody has measured, and accountability structures that look good on paper but don't hold.
+          </div>
+          <p>
+            AI Horizons Global Consultants helps mid-size businesses and government agencies redesign how they operate — identifying process gaps, eliminating redundancy, and deploying AI that fits naturally into how your team already works.
+          </p>
+          <ul class="bullets">
+            <li>Process assessment that finds where time and money are leaking.</li>
+            <li>AI implementation matched to how your people already work.</li>
+            <li>Workforce training that moves teams from AI-fearful to AI-confident.</li>
+            <li>Accountability structures and metrics tied to real business outcomes.</li>
+          </ul>
+        </div>
+
+        <div class="visual-frame">
+          <img src="images/home-about.jpg" alt="AI governance and modern public institutions illustration" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Who we serve</div>
+        <h2 class="section-title">Mid-Size Businesses & Government Agencies</h2>
+        <p class="section-sub">
+          We serve organizations that need real transformation — not another tool nobody uses.
+          Our clients are operations leaders ready to work smarter and leaders who need AI they can trust.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="visual-frame">
+          <img src="images/home-sectors.jpg" alt="Global public-sector and institutional systems illustration" />
+        </div>
+
+        <div class="copy">
+          <p>
+            We support institutions that must modernize without losing control of safety, ethics, and compliance.
+            Our work strengthens governance maturity and reduces operational risk.
+          </p>
+          <ul class="bullets">
+            <li>Mid-size businesses (50–500 employees) with complex operations and growth ambitions.</li>
+            <li>Logistics, insurance, and property management companies.</li>
+            <li>Government agencies and public sector organizations.</li>
+            <li>Healthcare and educational institutions navigating AI adoption responsibly.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY (ISO 42001 vibe) -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">How we think</div>
+        <h2 class="section-title">ISO/IEC 42001-Informed. Evidence-Driven. Practical.</h2>
+        <p class="section-sub">
+          We help institutions establish an AI management system mindset: define scope, set controls,
+          measure outcomes, and continuously improve.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="copy">
+          <p>
+            AI governance is not one document. It is a living system. We focus on what makes governance real:
+            decision rights, review routines, evidence, and feedback loops.
+          </p>
+          <ul class="bullets">
+            <li>Scope and inventory. Know what tools exist and where they are used.</li>
+            <li>Control design. Define gates, approvals, and required oversight.</li>
+            <li>Risk management. Identify, mitigate, and track changes over time.</li>
+            <li>Audit readiness. Keep evidence that proves responsible operation.</li>
+          </ul>
+        </div>
+
+        <div class="visual-frame">
+          <img src="images/home-why.jpg" alt="Risk management and governance systems illustration" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Contact</div>
+        <h2 class="section-title">Let’s Build Your AI Governance Operating System</h2>
+        <p class="section-sub">
+          Share what you’re trying to modernize. We’ll recommend a clear path that fits your environment and constraints.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-note">
+          <p>
+            Use this form to request a consultation or ask a question. If you prefer email, you can also write directly.
+          </p>
+          <p style="margin-top:.85rem;">
+            <strong style="color:var(--navy-soft);">Email:</strong> <span style="color:#374151;">hello@aihorizonsglobal.com</span><br/>
+            
+          </p>
+          <p class="fineprint">
+            Note: This site is informational. We do not provide legal advice.
+          </p>
+        </div>
+
+        <form class="form-row" onsubmit="event.preventDefault(); alert('Form is not connected yet. Once hosted, connect it to Netlify Forms or your email workflow.');">
+          <div>
+            <label for="name">Name</label>
+            <input class="field" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input class="field" id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div>
+            <label for="org">Organization</label>
+            <input class="field" id="org" name="org" placeholder="Company, agency, institution, etc." />
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea class="field" id="message" name="message" placeholder="What processes are costing you the most time or money right now?" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> AI Horizons Global Consultants. All rights reserved.</div>
+      <div>Site for informational purposes only. Not legal advice or financial advice.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu behavior (fixes “hanging open”)
+    const btn = document.getElementById("hamburgerBtn");
+    const overlay = document.getElementById("mobileOverlay");
+    const panel = document.getElementById("mobilePanel");
+
+    function openMenu() {
+      document.body.classList.add("menu-open");
+      btn.setAttribute("aria-expanded", "true");
+      overlay.setAttribute("aria-hidden", "false");
+      panel.setAttribute("aria-hidden", "false");
+    }
+
+    function closeMenu() {
+      document.body.classList.remove("menu-open");
+      btn.setAttribute("aria-expanded", "false");
+      overlay.setAttribute("aria-hidden", "true");
+      panel.setAttribute("aria-hidden", "true");
+    }
+
+    function toggleMenu() {
+      const isOpen = document.body.classList.contains("menu-open");
+      if (isOpen) closeMenu();
+      else openMenu();
+    }
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Close when clicking outside
+    overlay.addEventListener("click", closeMenu);
+
+    // Close on ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    // Close when clicking any link inside the panel
+    panel.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => closeMenu());
+    });
+
+    // If resizing to desktop, force-close so it never “sticks”
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) closeMenu();
+    });
+  </script>
+</body>
+</html>

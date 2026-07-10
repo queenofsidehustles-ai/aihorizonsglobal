@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Innovation Lab | AI Horizons Global Consultants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Innovation Lab prototypes that inform real-world AI governance, risk management, and ISO/IEC 42001-aligned strategy."
+  />
+
+  <!-- Luxury fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --navy:#0a1435;
+      --navy-soft:#182651;
+      --gold:#d4a740;
+
+      --text-main:#111827;
+      --text-soft:#4b5563;
+
+      --shadow-soft:0 18px 45px rgba(15,23,42,.14);
+      --shadow-light:0 10px 28px rgba(15,23,42,.09);
+
+      --radius-xl:1.9rem;
+      --radius-lg:1.25rem;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top left,#ffffff 0%,#eef1ff 40%,#e4ebff 70%,#f5f7fd 100%);
+      color:var(--text-main);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 1.25rem}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:100;
+      background:linear-gradient(to right,rgba(255,255,255,.96),rgba(250,251,255,.98));
+      border-bottom:1px solid rgba(148,163,184,.35);
+      backdrop-filter:blur(12px);
+    }
+    .header-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.9rem 0;
+    }
+    .logo-wrap{display:flex;align-items:center;gap:.7rem}
+    .logo-img{width:46px;height:46px;border-radius:50%;border:1px solid rgba(212,167,64,.5)}
+    .logo-text-main{
+      font-family:"Playfair Display",serif;
+      font-size:1.15rem;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;
+      color:var(--navy);
+    }
+    .logo-text-sub{
+      font-size:.68rem;text-transform:uppercase;
+      letter-spacing:.18em;color:#6b7280;
+    }
+
+    nav ul{
+      display:flex;align-items:center;gap:1.4rem;
+      list-style:none;font-size:.82rem;
+      text-transform:uppercase;letter-spacing:.12em;
+      color:#4b5563;
+    }
+    nav a{position:relative;padding-bottom:.2rem}
+    nav a::after{
+      content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+      background:linear-gradient(90deg,var(--gold),#f7e2b8);
+      transition:width .2s ease;
+    }
+    nav a:hover::after{width:100%}
+
+    /* Hamburger */
+    .hamburger{
+      display:none;
+      width:44px;height:44px;border-radius:12px;
+      border:1px solid rgba(148,163,184,.45);
+      background:#fff;cursor:pointer;
+      font-size:18px;
+    }
+
+    /* Mobile menu */
+    .mobile-overlay{
+      position:fixed;inset:0;
+      background:rgba(10,20,53,.28);
+      backdrop-filter:blur(6px);
+      opacity:0;pointer-events:none;
+      transition:.2s;
+      z-index:999;
+    }
+    .mobile-panel{
+      position:fixed;
+      top:86px;right:18px;
+      width:min(340px,calc(100vw - 36px));
+      background:#fff;
+      border-radius:18px;
+      border:1px solid rgba(180,187,214,.8);
+      box-shadow:var(--shadow-soft);
+      opacity:0;pointer-events:none;
+      transform:translateY(-10px);
+      transition:.2s;
+      z-index:1000;
+    }
+    .mobile-panel ul{list-style:none;padding:.75rem}
+    .mobile-panel li a{
+      display:block;
+      padding:.85rem;
+      border-radius:14px;
+      font-size:.85rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .mobile-panel li a:hover{
+      background:rgba(212,167,64,.12);
+      border:1px solid rgba(212,167,64,.28);
+    }
+    body.menu-open .mobile-overlay,
+    body.menu-open .mobile-panel{opacity:1;pointer-events:auto}
+    body.menu-open .mobile-panel{transform:translateY(0)}
+
+    /* SECTIONS */
+    section{padding:3.2rem 0}
+    .hero{
+      background:radial-gradient(circle at top left,#ffffff 0%,#f5f4ff 40%,#edf2ff 100%);
+      border-radius:var(--radius-xl);
+      padding:2.6rem 2.2rem;
+      border:1px solid rgba(148,163,184,.3);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;right:-90px;top:-90px;
+      width:260px;height:260px;
+      background:radial-gradient(circle,rgba(212,167,64,.25),transparent 70%);
+      opacity:.9;
+    }
+    .kicker{
+      font-size:.78rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--navy-soft);
+      margin-bottom:.6rem;
+      position:relative;
+      z-index:1;
+    }
+    h1{
+      font-family:"Playfair Display",serif;
+      font-size:2.4rem;
+      color:var(--navy);
+      margin-bottom:.8rem;
+      position:relative;
+      z-index:1;
+    }
+    .hero p{
+      max-width:760px;
+      color:#374151;
+      position:relative;
+      z-index:1;
+    }
+
+    /* Prototype blocks */
+    .block{
+      margin-top:2.1rem;
+      background:#ffffff;
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(148,163,184,.28);
+      box-shadow:var(--shadow-light);
+      padding:2rem;
+    }
+    .block-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+      gap:2rem;
+      align-items:center;
+    }
+    .block h2{
+      font-family:"Playfair Display",serif;
+      font-size:1.65rem;
+      color:var(--navy);
+      margin-bottom:.5rem;
+    }
+    .sub{
+      color:var(--text-soft);
+      margin-bottom:1rem;
+      font-size:.98rem;
+      max-width:62ch;
+    }
+    .pill-row{
+      display:flex;flex-wrap:wrap;
+      gap:.55rem;
+      margin:.9rem 0 1.1rem;
+    }
+    .pill{
+      font-size:.78rem;
+      padding:.38rem .65rem;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.35);
+      background:linear-gradient(180deg,#ffffff,#f6f6ff);
+      color:#374151;
+      white-space:nowrap;
+    }
+    ul.bullets{
+      margin-top:.2rem;
+      padding-left:1.1rem;
+      color:#374151;
+      font-size:.94rem;
+    }
+    ul.bullets li{margin-bottom:.45rem}
+
+    /* Image frame */
+    .visual-frame{
+      border-radius:1.2rem;
+      overflow:hidden;
+      border:1px solid rgba(212,167,64,.25);
+      box-shadow:0 18px 40px rgba(15,23,42,.12);
+      background:#fff;
+      max-width:100%;
+    }
+    .visual-frame img{
+      display:block;width:100%;height:auto;
+      max-height:360px;
+      object-fit:cover;
+    }
+
+    footer{
+      border-top:1px solid rgba(148,163,184,.35);
+      background:#fff;
+      padding:1.6rem 0;
+      font-size:.78rem;
+      color:#6b7280;
+      text-align:center;
+    }
+
+    @media(max-width:900px){
+      nav ul{display:none}
+      .hamburger{display:block}
+      .block-grid{grid-template-columns:1fr}
+      h1{font-size:2rem}
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Mobile menu -->
+<div class="mobile-overlay" id="overlay"></div>
+<div class="mobile-panel" id="panel">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="founder.html">Founder</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation Lab</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <img src="images/logo.png" alt="AI Horizons Global Consultants logo" class="logo-img" />
+        <div>
+          <div class="logo-text-main">AI Horizons</div>
+          <div class="logo-text-sub">Global Consultants</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="innovation.html">Innovation Lab</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="hero">
+      <div class="kicker">Innovation Lab • ISO/IEC 42001-Informed Design</div>
+      <h1>Prototypes That Inform Real-World AI Strategy</h1>
+      <p>
+        The Innovation Lab is where we explore practical AI concepts before recommending them to clients.
+        Each prototype is shaped by governance-first thinking, risk controls, documentation discipline,
+        and human oversight aligned with ISO/IEC 42001 principles.
+      </p>
+    </div>
+
+    <!-- Genesis -->
+    <div class="block">
+      <div class="block-grid">
+        <div>
+          <h2>Genesis. AI Executive Personal Assistant</h2>
+          <p class="sub">
+            A prototype designed to support leaders with structured information workflows.
+            Built to keep human judgment at the center while improving consistency, traceability, and speed.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">Human oversight</span>
+            <span class="pill">Decision support</span>
+            <span class="pill">Documentation discipline</span>
+            <span class="pill">ISO/IEC 42001 mindset</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Summarizing long reports, policies, and meeting notes with citations and review prompts.</li>
+            <li>Drafting emails, memos, and briefings with approval-ready formatting.</li>
+            <li>Preparing talking points aligned with institutional priorities.</li>
+            <li>Tracking follow-ups and action items from complex initiatives.</li>
+          </ul>
+        </div>
+
+        <div class="visual-frame">
+          <img src="images/lab-genesis.jpg" alt="Abstract illustration representing an executive assistant workflow" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ServiceFlow AI -->
+    <div class="block">
+      <div class="block-grid">
+        <div>
+          <h2>ServiceFlow AI. Local Services Command Center</h2>
+          <p class="sub">
+            A dashboard prototype exploring how AI can support local service operations with intake, routing,
+            customer communication, and visibility. Built to test governance patterns that prevent chaos at scale.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">Intake and approvals</span>
+            <span class="pill">Workflow controls</span>
+            <span class="pill">Operational clarity</span>
+            <span class="pill">Risk-aware automation</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Content prompts and calendars tailored to local markets.</li>
+            <li>Lead capture and workflow routing for inquiries and bookings.</li>
+            <li>Trend tracking to see what offers and messages perform.</li>
+            <li>Experiments with AI-generated copy that still feels human and on-brand.</li>
+          </ul>
+        </div>
+
+        <div class="visual-frame">
+          <img src="images/lab-serviceflow.jpg" alt="Service operations dashboard illustration" />
+        </div>
+      </div>
+    </div>
+
+    <!-- GovCon AI -->
+    <div class="block">
+      <div class="block-grid">
+        <div>
+          <h2>GovCon AI. Proposal Support Assistant</h2>
+          <p class="sub">
+            An experimental assistant designed to help proposal teams think through compliance language,
+            requirements mapping, and opportunity fit. Built to reinforce controls, not replace accountability.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">Compliance support</span>
+            <span class="pill">Structured checklists</span>
+            <span class="pill">Review and approval prompts</span>
+            <span class="pill">Audit-friendly outputs</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Breaking large solicitations into structured checklists and sections.</li>
+            <li>Drafting outlines for technical, management, and staffing narratives.</li>
+            <li>Generating clarifying questions for contracting officers.</li>
+            <li>Flagging areas requiring legal or compliance review.</li>
+          </ul>
+        </div>
+
+        <div class="visual-frame">
+          <img src="images/lab-govcon.jpg" alt="Proposal and compliance illustration representing government contracting workflows" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> AI Horizons Global Consultants. All rights reserved.
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const btn = document.getElementById("hamburger");
+  const overlay = document.getElementById("overlay");
+  const panel = document.getElementById("panel");
+
+  function closeMenu(){ document.body.classList.remove("menu-open"); }
+
+  btn.onclick = () => document.body.classList.toggle("menu-open");
+  overlay.onclick = closeMenu;
+  panel.querySelectorAll("a").forEach(a => a.onclick = closeMenu);
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+</script>
+
+</body>
+</html>

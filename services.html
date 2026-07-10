@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Services | AI Horizons Global Consultants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI transformation consulting for mid-size businesses and government agencies. Process redesign, AI implementation, workforce training, and governance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--navy:#0a1435;--navy-soft:#182651;--gold:#d4a740;--text-main:#111827;--text-soft:#4b5563;--shadow-soft:0 18px 45px rgba(15,23,42,.14);--shadow-light:0 10px 28px rgba(15,23,42,.09);--radius-xl:1.9rem;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Inter",sans-serif;background:radial-gradient(circle at top left,#ffffff 0%,#eef1ff 40%,#e4ebff 70%,#f5f7fd 100%);color:var(--text-main);line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:0 1.25rem}
+    header{position:sticky;top:0;z-index:100;background:linear-gradient(to right,rgba(255,255,255,.96),rgba(250,251,255,.98));border-bottom:1px solid rgba(148,163,184,.35);backdrop-filter:blur(12px)}
+    .header-inner{display:flex;justify-content:space-between;align-items:center;padding:.9rem 0}
+    .logo-wrap{display:flex;gap:.7rem;align-items:center}
+    .logo-img-wrap{position:relative;width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .logo-orbit{position:absolute;inset:-4px;border-radius:999px;border:1px solid rgba(212,167,64,.4);opacity:.8}
+    .logo-img{width:100%;height:100%;border-radius:50%;object-fit:contain;border:1px solid rgba(212,167,64,.5);background:radial-gradient(circle at 30% 20%,#fff8da,#f2d38e);box-shadow:0 8px 18px rgba(212,167,64,.4)}
+    .logo-text-main{font-family:"Playfair Display",serif;font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+    .logo-text-sub{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#6b7280}
+    nav ul{display:flex;gap:1.4rem;list-style:none;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#4b5563}
+    nav ul li a{position:relative}
+    nav ul li a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:linear-gradient(90deg,var(--gold),#f7e2b8);transition:.2s}
+    nav ul li a:hover::after{width:100%}
+    .hamburger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(148,163,184,.45);background:#fff;cursor:pointer;font-size:18px}
+    .mobile-overlay{position:fixed;inset:0;background:rgba(10,20,53,.28);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.2s;z-index:999}
+    .mobile-panel{position:fixed;top:86px;right:18px;width:min(340px,calc(100vw - 36px));background:#fff;border-radius:18px;border:1px solid rgba(180,187,214,.8);box-shadow:var(--shadow-soft);opacity:0;pointer-events:none;transform:translateY(-10px);transition:.2s;z-index:1000}
+    .mobile-panel ul{list-style:none;padding:.75rem}
+    .mobile-panel li a{display:block;padding:.85rem;border-radius:14px;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+    .mobile-panel li a:hover{background:rgba(212,167,64,.12)}
+    body.menu-open .mobile-overlay,body.menu-open .mobile-panel{opacity:1;pointer-events:auto}
+    body.menu-open .mobile-panel{transform:translateY(0)}
+    section{padding:3.2rem 0}
+    .hero{background:radial-gradient(circle at top left,#ffffff 0%,#f5f4ff 40%,#edf2ff 100%);border-radius:var(--radius-xl);padding:2.6rem;border:1px solid rgba(148,163,184,.3);box-shadow:var(--shadow-soft)}
+    .kicker{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--navy-soft);margin-bottom:.6rem}
+    h1{font-family:"Playfair Display",serif;font-size:2.4rem;color:var(--navy);margin-bottom:.8rem}
+    h1 span{color:var(--gold)}
+    h2{font-family:"Playfair Display",serif;font-size:1.6rem;color:var(--navy);margin-bottom:.6rem}
+    .hero p{max-width:720px;color:#374151}
+    /* Track label */
+    .track-label{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;padding:.3rem .75rem;border-radius:999px;margin-bottom:1rem;font-weight:600}
+    .track-business{background:rgba(212,167,64,.15);color:#8a6200;border:1px solid rgba(212,167,64,.4)}
+    .track-gov{background:rgba(10,20,53,.08);color:var(--navy-soft);border:1px solid rgba(10,20,53,.2)}
+    /* Service grid */
+    .track-section{margin-top:2.5rem}
+    .track-header{margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:2px solid rgba(212,167,64,.3)}
+    .track-title{font-family:"Playfair Display",serif;font-size:1.35rem;color:var(--navy);margin-bottom:.3rem}
+    .track-sub{font-size:.9rem;color:var(--text-soft);max-width:680px}
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:1rem}
+    .service-card{background:#fff;border-radius:1.4rem;padding:1.6rem;border:1px solid rgba(148,163,184,.3);box-shadow:var(--shadow-light)}
+    .service-card .icon{font-size:1.6rem;margin-bottom:.7rem}
+    .service-card h3{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--navy);margin-bottom:.5rem}
+    .service-card p{font-size:.9rem;color:#374151;margin-bottom:.6rem}
+    .service-card ul{padding-left:1.1rem;font-size:.85rem;color:#4b5563}
+    .service-card ul li{margin-bottom:.35rem}
+    /* Framework strip */
+    .framework-strip{margin-top:2.8rem;background:var(--navy);border-radius:var(--radius-xl);padding:2.2rem;color:#fff}
+    .framework-strip h2{color:#fff;margin-bottom:.4rem}
+    .framework-strip .sub{color:rgba(255,255,255,.7);font-size:.93rem;margin-bottom:1.6rem}
+    .phase-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+    .phase-item{text-align:center}
+    .phase-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;font-size:.88rem;margin:0 auto .5rem}
+    .phase-name{font-weight:600;font-size:.88rem;color:#fff;margin-bottom:.25rem}
+    .phase-desc{font-size:.78rem;color:rgba(255,255,255,.6)}
+    /* CTA */
+    .cta-row{margin-top:2.8rem;text-align:center;background:linear-gradient(135deg,rgba(212,167,64,.08),rgba(10,20,53,.04));border:1px solid rgba(212,167,64,.25);border-radius:var(--radius-xl);padding:2.2rem}
+    .cta-row h2{font-size:1.5rem;margin-bottom:.6rem}
+    .cta-row p{color:var(--text-soft);max-width:580px;margin:0 auto 1.2rem}
+    .btn{display:inline-block;padding:.75rem 1.6rem;border-radius:999px;font-size:.88rem;font-weight:600;letter-spacing:.06em;cursor:pointer;text-decoration:none}
+    .btn-primary{background:var(--navy);color:#fff;border:1px solid var(--navy)}
+    .btn-primary:hover{background:var(--navy-soft)}
+    footer{border-top:1px solid rgba(148,163,184,.35);background:#fff;padding:1.6rem 0;font-size:.78rem;color:#6b7280;text-align:center}
+    @media(max-width:900px){nav ul{display:none}.hamburger{display:block}.service-grid{grid-template-columns:1fr}.phase-row{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.phase-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="mobile-overlay" id="overlay"></div>
+<div class="mobile-panel" id="panel">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="founder.html">Founder</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation Lab</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div>
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <div class="logo-img-wrap">
+          <div class="logo-orbit"></div>
+          <img src="images/logo.png" alt="AI Horizons logo" class="logo-img"/>
+        </div>
+        <div>
+          <div class="logo-text-main">AI Horizons</div>
+          <div class="logo-text-sub">Global Consultants</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="innovation.html">Innovation Lab</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="hero">
+      <div class="kicker">Services • AI Transformation Consulting</div>
+      <h1>We Don't Start With <span>Tools.</span><br/>We Start With Your People.</h1>
+      <p>
+        Most organizations bring in AI and ask their people to adapt. We do the opposite.
+        We map your workflows, identify your bottlenecks, and build AI solutions that become
+        a natural extension of how your team already works. Serving mid-size businesses and
+        government agencies across the U.S. and internationally.
+      </p>
+    </div>
+
+    <!-- MID-SIZE BUSINESS TRACK -->
+    <div class="track-section">
+      <div class="track-header">
+        <span class="track-label track-business">Mid-Size Business Track</span>
+        <div class="track-title">For Companies Ready to Work Smarter</div>
+        <p class="track-sub">Built for operations leaders, COOs, and business owners who know their processes are costing them time and money — and are ready to do something about it.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="icon">🔍</div>
+          <h3>AI Readiness Assessment</h3>
+          <p>A structured 2–5 day evaluation of your organization's processes, bottlenecks, and AI opportunity areas.</p>
+          <ul>
+            <li>Process mapping & gap analysis</li>
+            <li>Bottleneck identification</li>
+            <li>AI opportunity scoring</li>
+            <li>Executive readiness report</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="icon">⚙️</div>
+          <h3>Operational Process Redesign</h3>
+          <p>We redesign your workflows to eliminate redundancy, establish accountability, and define measurable outcomes.</p>
+          <ul>
+            <li>Workflow documentation & redesign</li>
+            <li>Accountability structures</li>
+            <li>KPI & metrics alignment</li>
+            <li>90-day transformation roadmap</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="icon">🚀</div>
+          <h3>AI Implementation</h3>
+          <p>We deploy AI solutions matched to how your team actually works — tools they'll use, not tools that gather dust.</p>
+          <ul>
+            <li>Tool selection & configuration</li>
+            <li>Workflow integration</li>
+            <li>Staff onboarding & training</li>
+            <li>30-day quick wins plan</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="icon">🎓</div>
+          <h3>Workforce AI Training</h3>
+          <p>Custom training that moves your team from AI-fearful to AI-confident — built around their actual roles.</p>
+          <ul>
+            <li>Role-specific AI workshops</li>
+            <li>Prompt design for non-technical staff</li>
+            <li>AI policy & responsible use</li>
+            <li>Ongoing adoption support</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="icon">📋</div>
+          <h3>AI Policy & Documentation</h3>
+          <p>Clear, practical AI policies your team will actually follow — not a document that sits in a drawer.</p>
+          <ul>
+            <li>Acceptable use policies</li>
+            <li>AI tool inventory</li>
+            <li>Decision rights & oversight</li>
+            <li>Audit-ready documentation</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="icon">🔄</div>
+          <h3>Monthly AI Advisory</h3>
+          <p>Ongoing strategic support to measure adoption, track ROI, and continuously improve your AI systems.</p>
+          <ul>
+            <li>Monthly check-ins</li>
+            <li>Adoption & ROI tracking</li>
+            <li>New capability integration</li>
+            <li>Continuous improvement planning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOVERNMENT TRACK -->
+    <div class="track-section">
+      <div class="track-header">
+        <span class="track-label track-gov">Government & Public Sector Track</span>
+        <div class="track-title">For Agencies That Must Modernize Without Losing Control</div>
+        <p class="track-sub">Built for government leaders navigating AI adoption in environments where accountability, compliance, and public trust are non-negotiable.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="icon">🏛️</div>
+          <h3>AI Governance Frameworks</h3>
+          <p>Governance systems that define decision rights, accountability, and oversight for AI across your agency.</p>
+          <ul>
+            <li>Acceptable use & role-based controls</li>
+            <li>Oversight committees & review gates</li>
+            <li>Policy & standards development</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="icon">🛡️</div>
+          <h3>Risk Management & ISO 42001</h3>
+          <p>Risk-based approaches aligned with ISO/IEC 42001-informed principles that support safe, auditable AI operations.</p>
+          <ul>
+            <li>AI risk identification & assessment</li>
+            <li>Control design & mitigation plans</li>
+            <li>Evidence & audit readiness</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="icon">🌍</div>
+          <h3>National AI Strategy Support</h3>
+          <p>Strategic advisory for governments building national AI frameworks, policies, and implementation roadmaps.</p>
+          <ul>
+            <li>AI readiness assessment</li>
+            <li>National strategy alignment</li>
+            <li>Ministry-specific implementation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRAMEWORK STRIP -->
+    <div class="framework-strip">
+      <div class="kicker" style="color:rgba(255,255,255,.5)">Our Methodology</div>
+      <h2>The AI Horizons Transformation Framework™</h2>
+      <p class="sub">Every engagement follows a structured 5-phase process — because solutions that look good on paper fail without accountability, defined timelines, and real follow-through.</p>
+      <div class="phase-row">
+        <div class="phase-item"><div class="phase-num">1</div><div class="phase-name">Discover</div><div class="phase-desc">Interview, observe, map current workflows</div></div>
+        <div class="phase-item"><div class="phase-num">2</div><div class="phase-name">Diagnose</div><div class="phase-desc">Identify gaps, bottlenecks & redundancies</div></div>
+        <div class="phase-item"><div class="phase-num">3</div><div class="phase-name">Design</div><div class="phase-desc">Build AI-aligned process recommendations</div></div>
+        <div class="phase-item"><div class="phase-num">4</div><div class="phase-name">Implement</div><div class="phase-desc">Deploy solutions that fit how people work</div></div>
+        <div class="phase-item"><div class="phase-num">5</div><div class="phase-name">Sustain</div><div class="phase-desc">Track adoption, ROI & continuous improvement</div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-row">
+      <div class="kicker">Ready to Start?</div>
+      <h2>Begin with an AI Readiness Assessment</h2>
+      <p>A 2–5 day assessment that gives your organization a clear picture of where AI can create real value — and a roadmap to get there.</p>
+      <a href="index.html#contact" class="btn btn-primary">Request Your Assessment →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© <span id="year"></span> AI Horizons Global Consultants. All rights reserved.</div>
+    <div>Site for informational purposes only. Not legal advice.</div>
+  </div>
+</footer>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const btn = document.getElementById("hamburger");
+  const overlay = document.getElementById("overlay");
+  const panel = document.getElementById("panel");
+  function closeMenu(){ document.body.classList.remove("menu-open"); }
+  btn.onclick = () => document.body.classList.toggle("menu-open");
+  overlay.onclick = closeMenu;
+  panel.querySelectorAll("a").forEach(a => a.onclick = closeMenu);
+  window.addEventListener("resize", () => { if(window.innerWidth > 900) closeMenu(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Founder | AI Horizons Global Consultants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Monica Lewis — Founder of AI Horizons Global Consultants. 20+ years of operational leadership across defense, logistics, fraud, and catastrophe claims." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--navy:#0a1435;--navy-soft:#182651;--gold:#d4a740;--text-main:#111827;--text-soft:#4b5563;--shadow-soft:0 18px 45px rgba(15,23,42,.14);--shadow-light:0 10px 28px rgba(15,23,42,.09);--radius-xl:1.9rem;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Inter",sans-serif;background:radial-gradient(circle at top left,#ffffff 0%,#eef1ff 40%,#e4ebff 70%,#f5f7fd 100%);color:var(--text-main);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 1.25rem}
+    header{position:sticky;top:0;z-index:100;background:linear-gradient(to right,rgba(255,255,255,.96),rgba(250,251,255,.98));border-bottom:1px solid rgba(148,163,184,.35);backdrop-filter:blur(12px)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+    .logo-wrap{display:flex;align-items:center;gap:.7rem}
+    .logo-img-wrap{position:relative;width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .logo-orbit{position:absolute;inset:-4px;border-radius:999px;border:1px solid rgba(212,167,64,.4);opacity:.8}
+    .logo-img{width:100%;height:100%;border-radius:50%;object-fit:contain;border:1px solid rgba(212,167,64,.5);background:radial-gradient(circle at 30% 20%,#fff8da,#f2d38e);box-shadow:0 8px 18px rgba(212,167,64,.4)}
+    .logo-text-main{font-family:"Playfair Display",serif;font-size:1.15rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+    .logo-text-sub{font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:#6b7280}
+    nav ul{display:flex;align-items:center;gap:1.4rem;list-style:none;font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:#4b5563}
+    nav a{position:relative;padding-bottom:.2rem}
+    nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),#f7e2b8);transition:width .2s ease}
+    nav a:hover::after{width:100%}
+    .hamburger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(148,163,184,.45);background:#fff;cursor:pointer;font-size:18px}
+    .mobile-overlay{position:fixed;inset:0;background:rgba(10,20,53,.28);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.2s;z-index:999}
+    .mobile-panel{position:fixed;top:86px;right:18px;width:min(340px,calc(100vw - 36px));background:#fff;border-radius:18px;border:1px solid rgba(180,187,214,.8);box-shadow:var(--shadow-soft);opacity:0;pointer-events:none;transform:translateY(-10px);transition:.2s;z-index:1000}
+    .mobile-panel ul{list-style:none;padding:.75rem}
+    .mobile-panel li a{display:block;padding:.85rem;border-radius:14px;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+    .mobile-panel li a:hover{background:rgba(212,167,64,.12)}
+    body.menu-open .mobile-overlay,body.menu-open .mobile-panel{opacity:1;pointer-events:auto}
+    body.menu-open .mobile-panel{transform:translateY(0)}
+    section{padding:3rem 0}
+    .section-alt{background:#fff;border-top:1px solid rgba(148,163,184,.3);border-bottom:1px solid rgba(148,163,184,.3)}
+    .section-header{margin-bottom:1.9rem}
+    .kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.18em;color:var(--navy-soft);margin-bottom:.4rem}
+    h2{font-family:"Playfair Display",serif;font-size:1.75rem;color:var(--navy);margin-bottom:.5rem}
+    .section-sub{font-size:.93rem;color:var(--text-soft);max-width:640px}
+    .grid-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.2rem;align-items:center}
+    .visual-frame{border-radius:1.2rem;overflow:hidden;border:1px solid rgba(212,167,64,.25);box-shadow:0 18px 40px rgba(15,23,42,.12);background:#fff;max-width:100%}
+    .visual-frame img{display:block;width:100%;height:auto;max-height:360px;object-fit:cover}
+    /* Founder hero */
+    .founder-hero-shell{padding:2.6rem 0 2.8rem}
+    .founder-hero{background:radial-gradient(circle at top left,#ffffff 0%,#f5f4ff 40%,#edf2ff 100%);border-radius:var(--radius-xl);padding:2.6rem 2.2rem 2.2rem;box-shadow:var(--shadow-soft);border:1px solid rgba(148,163,184,.3);display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,2.1fr);gap:2.4rem;align-items:center;position:relative;overflow:hidden}
+    .founder-hero::before{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;background:radial-gradient(circle,rgba(212,167,64,.25),transparent 70%);opacity:.9}
+    .founder-kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.18em;color:var(--navy-soft);margin-bottom:.5rem}
+    .founder-name{font-family:"Playfair Display",serif;font-size:2.8rem;color:var(--navy);margin-bottom:.4rem;line-height:1.1}
+    .founder-role{font-size:.88rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:1rem}
+    .founder-summary{font-size:1rem;color:#374151;margin-bottom:.8rem;max-width:56ch}
+    .founder-location{font-size:.85rem;color:var(--text-soft)}
+    .founder-location span{color:var(--navy-soft);font-weight:500}
+    .founder-glance{background:rgba(255,255,255,.75);border:1px solid rgba(212,167,64,.2);border-radius:1.2rem;padding:1.4rem;box-shadow:var(--shadow-light)}
+    .founder-glance-title{font-size:.75rem;text-transform:uppercase;letter-spacing:.18em;color:var(--navy-soft);margin-bottom:.9rem}
+    .glance-box{margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(148,163,184,.2);font-size:.9rem;color:#374151}
+    .glance-box:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .glance-box strong{display:block;color:var(--navy);font-size:.88rem;margin-bottom:.2rem}
+    /* Story section */
+    .story-block{background:#fff;border-radius:var(--radius-xl);padding:2.2rem;border:1px solid rgba(148,163,184,.25);box-shadow:var(--shadow-light);margin-bottom:1.5rem}
+    .story-block p{font-size:.97rem;color:#374151;margin-bottom:.85rem;max-width:72ch}
+    .story-block p:last-child{margin-bottom:0}
+    .story-block .highlight{background:linear-gradient(135deg,rgba(212,167,64,.08),rgba(10,20,53,.04));border-left:3px solid var(--gold);padding:.9rem 1.1rem;border-radius:0 .75rem .75rem 0;font-size:.97rem;color:var(--navy);margin-bottom:1rem;font-style:italic}
+    /* Credentials */
+    .cred-list{list-style:none;font-size:.9rem;color:#374151;margin-top:.5rem}
+    .cred-list li{margin-bottom:.5rem;padding-left:1.2rem;position:relative}
+    .cred-list li::before{content:"◆";position:absolute;left:0;top:0;color:var(--gold);font-size:.6rem;top:.3rem}
+    .subtitle{font-size:.8rem;text-transform:uppercase;letter-spacing:.18em;color:var(--navy-soft);margin-bottom:.5rem;margin-top:1.2rem}
+    footer{border-top:1px solid rgba(148,163,184,.35);background:#fff;padding:1.6rem 0;font-size:.78rem;color:#6b7280;text-align:center}
+    @media(max-width:900px){nav ul{display:none}.hamburger{display:block}.founder-hero{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="mobile-overlay" id="overlay"></div>
+<div class="mobile-panel" id="panel">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="founder.html">Founder</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation Lab</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div>
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <div class="logo-img-wrap">
+          <div class="logo-orbit"></div>
+          <img src="images/logo.png" alt="AI Horizons Global Consultants logo" class="logo-img" />
+        </div>
+        <div>
+          <div class="logo-text-main">AI Horizons</div>
+          <div class="logo-text-sub">Global Consultants</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="innovation.html">Innovation Lab</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- FOUNDER HERO -->
+<div class="founder-hero-shell">
+  <div class="container">
+    <section class="founder-hero">
+      <div style="position:relative;z-index:1">
+        <div class="founder-kicker">Founder & Principal Consultant</div>
+        <h1 class="founder-name">Monica Lewis</h1>
+        <div class="founder-role">AI Transformation • Operational Excellence • 20+ Years</div>
+        <p class="founder-summary">
+          Monica Lewis has spent over 20 years walking into broken systems and leaving them better.
+          Not because she was asked to — but because she couldn't help it. From the Department of Army
+          to Lockheed Martin. From Walmart to catastrophe zones across America. The mission was always
+          the same — find what's broken, understand why, and build something that actually works.
+        </p>
+        <p class="founder-location">
+          Based in Orlando, Florida. <span>Serving organizations across the U.S., Africa, and global markets.</span>
+        </p>
+      </div>
+      <aside class="founder-glance">
+        <div class="founder-glance-title">At a Glance</div>
+        <div class="glance-box">
+          <strong>20+ Years Operational Leadership</strong>
+          Government, defense, logistics, fraud prevention, and catastrophe response.
+        </div>
+        <div class="glance-box">
+          <strong>Defense & Government</strong>
+          U.S. Army logistics, F-35 program (Lockheed Martin), $28M contract commendation.
+        </div>
+        <div class="glance-box">
+          <strong>Process & Risk Expertise</strong>
+          Lean Six Sigma Green Belt. $2.6M in bottleneck savings identified at DoD.
+        </div>
+        <div class="glance-box">
+          <strong>AI Strategy & Implementation</strong>
+          Certified Prompt Design Professional. ISO/IEC 42001 AI Governance (training in progress).
+        </div>
+      </aside>
+    </section>
+  </div>
+</div>
+
+<!-- ORIGIN STORY -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">The Story</div>
+      <h2>Built on 20 Years of Making Things Work</h2>
+      <p class="section-sub">Every position Monica has held has pointed toward the same thing — systems thinking, process improvement, and results that actually hold.</p>
+    </div>
+    <div class="story-block">
+      <div class="highlight">"Every position I've held — I walk into it geared to find solutions to make things better. Not necessarily easier, but better. I've always been drawn to process improvement. Why is this being done this way? What would actually work?"</div>
+      <p>AI Horizons Global Consultants is the culmination of over two decades of that instinct. Not a technology company. Not a training program. A transformation practice built on real operational leadership — now equipped with the most powerful process improvement tool ever created.</p>
+      <p>The mission hasn't changed. The tools just got better.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:2rem">
+      <div>
+        <div class="subtitle">What Separates This Firm</div>
+        <p style="font-size:.95rem;color:#374151;margin-bottom:.85rem">Most AI consultants start with tools and ask your people to adapt. Monica starts with your people — their workflows, their pain points, their daily reality — and then identifies AI solutions that become a natural extension of how they already work.</p>
+        <p style="font-size:.95rem;color:#374151;margin-bottom:.85rem">Solutions that look good on paper fail because they have no defined end, no accountability, and no connection to how people actually work. Every engagement at AI Horizons builds in accountability and defined timelines from day one.</p>
+        <p style="font-size:.95rem;color:#374151">The result isn't disruption. It's evolution.</p>
+      </div>
+      <div class="visual-frame">
+        <img src="images/founder-systems.jpg" alt="Systems and process illustration" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="kicker">Experience & Credentials</div>
+      <h2>The Foundation Behind the Framework</h2>
+      <p class="section-sub">Monica's consulting methodology is grounded in two decades of documented, measurable operational results.</p>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="subtitle">Career Highlights</div>
+        <ul class="cred-list">
+          <li>U.S. Department of Army — Logistics Management Specialist (10+ years), identified $2.6M in process savings</li>
+          <li>Lockheed Martin — Senior Logistics Engineer, F-35 program, led fielding resulting in $28M sustainment contract</li>
+          <li>Walmart Corporate — Fraud Resolution Supervisor, reduced case resolution time by 22%</li>
+          <li>Allstate — CAT Field Property Adjuster, operating in high-pressure multi-state environments</li>
+          <li>International experience: Qatar, Germany, Ghana, UAE (F-35 UAE contract support)</li>
+        </ul>
+        <div class="subtitle">Certifications & Training</div>
+        <ul class="cred-list">
+          <li>Lean Six Sigma Green Belt</li>
+          <li>Life Cycle Logistics Level III — Defense Acquisition University</li>
+          <li>Program Management Level I — Defense Acquisition University</li>
+          <li>ISO/IEC 42001 AI Governance (training in progress)</li>
+          <li>Certified Prompt Design Professional (AAAPD / CPD Standards)</li>
+          <li>Florida All Lines Adjuster License (6-20) + 25+ state licenses</li>
+        </ul>
+      </div>
+      <div class="visual-frame">
+        <img src="images/founder-map.jpg" alt="Global reach and international experience" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© <span id="year"></span> AI Horizons Global Consultants. All rights reserved.</div>
+    <div>Site for informational purposes only. Not legal advice.</div>
+  </div>
+</footer>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const btn = document.getElementById("hamburger");
+  const overlay = document.getElementById("overlay");
+  const panel = document.getElementById("panel");
+  function closeMenu(){ document.body.classList.remove("menu-open"); }
+  btn.onclick = () => document.body.classList.toggle("menu-open");
+  overlay.onclick = closeMenu;
+  panel.querySelectorAll("a").forEach(a => a.onclick = closeMenu);
+  window.addEventListener("resize", () => { if(window.innerWidth > 900) closeMenu(); });
+</script>
+</body>
+</html>
