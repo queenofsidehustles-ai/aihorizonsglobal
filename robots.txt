@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aihorizonsglobal.com/sitemap.xml

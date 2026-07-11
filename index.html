@@ -2,12 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AI Horizons Global Consultants | AI Governance, Risk & ISO/IEC 42001-Informed</title>
+  <title>AI Horizons Global Consultants | AI &amp; Operations Consulting for Business &amp; Government</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     name="description"
-    content="AI Horizons Global Consultants helps mid-size businesses and government agencies transform operations through AI strategy, process redesign, and workforce training."
+    content="AI Horizons Global Consultants helps mid-size businesses and government agencies find where they lose time and money — then deploy AI that fits how their people already work. Led by Monica Lewis, 20+ years of operational leadership. Orlando, FL."
   />
+  <meta name="keywords" content="AI consultant, AI transformation, operations consulting, process improvement, AI readiness assessment, workforce AI training, AI governance, mid-size business, Orlando AI consultant" />
+  <meta name="author" content="Monica Lewis, AI Horizons Global Consultants" />
+  <link rel="canonical" href="https://aihorizonsglobal.com/" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="apple-touch-icon" href="images/logo.png" />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AI Horizons Global Consultants" />
+  <meta property="og:title" content="AI Horizons Global Consultants | AI &amp; Operations Consulting" />
+  <meta property="og:description" content="We find where your organization loses time and money — then deploy AI that fits how your people already work. Led by Monica Lewis, 20+ years of operational leadership." />
+  <meta property="og:url" content="https://aihorizonsglobal.com/" />
+  <meta property="og:image" content="https://aihorizonsglobal.com/images/hero-global_jpg.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Horizons Global Consultants" />
+  <meta name="twitter:description" content="AI &amp; operations transformation for mid-size businesses and government agencies." />
+  <meta name="twitter:image" content="https://aihorizonsglobal.com/images/hero-global_jpg.png" />
+
+  <!-- Structured data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Horizons Global Consultants",
+    "description": "AI and operations transformation consulting for mid-size businesses and government agencies.",
+    "url": "https://aihorizonsglobal.com/",
+    "logo": "https://aihorizonsglobal.com/images/logo.png",
+    "image": "https://aihorizonsglobal.com/images/hero-global_jpg.png",
+    "email": "hello@aihorizonsglobal.com",
+    "founder": { "@type": "Person", "name": "Monica Lewis", "jobTitle": "Founder & Principal Consultant" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Orlando", "addressRegion": "FL", "addressCountry": "US" },
+    "areaServed": [ "United States", "Global" ],
+    "knowsAbout": [ "AI Strategy", "Process Redesign", "AI Governance", "Workforce AI Training", "Operational Excellence" ]
+  }
+  </script>
 
   <!-- Luxury fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -513,6 +548,7 @@
   <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
     <ul class="mobile-list" role="menu" aria-label="Mobile navigation">
       <li><a role="menuitem" href="index.html">Home</a></li>
+      <li><a role="menuitem" href="sprint.html">AI Readiness Sprint</a></li>
       <li><a role="menuitem" href="founder.html">Founder</a></li>
       <li><a role="menuitem" href="services.html">Services</a></li>
       <li><a role="menuitem" href="innovation.html">Innovation Lab</a></li>
@@ -538,6 +574,7 @@
         <nav aria-label="Primary">
           <ul>
             <li><a href="index.html">Home</a></li>
+            <li><a href="sprint.html">The Sprint</a></li>
             <li><a href="founder.html">Founder</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="innovation.html">Innovation Lab</a></li>
@@ -572,8 +609,8 @@
           </p>
 
           <div class="cta-row">
-            <a class="btn btn-primary" href="#contact">Schedule a consultation</a>
-            <a class="btn btn-ghost" href="services.html">View services</a>
+            <a class="btn btn-primary" href="#contact">Book a free discovery call</a>
+            <a class="btn btn-ghost" href="sprint.html">See the AI Readiness Sprint</a>
           </div>
         </div>
 
@@ -702,6 +739,21 @@
     </div>
   </section>
 
+  <!-- SPRINT OFFER BAND -->
+  <section>
+    <div class="container">
+      <div style="background:var(--navy);border-radius:var(--radius-xl);padding:2.4rem 2.2rem;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-soft);">
+        <div style="position:absolute;right:-70px;top:-70px;width:220px;height:220px;background:radial-gradient(circle,rgba(212,167,64,.28),transparent 70%);"></div>
+        <div class="kicker" style="color:var(--gold);position:relative;z-index:1;">Start here — our signature engagement</div>
+        <h2 class="section-title" style="color:#ffffff;position:relative;z-index:1;">The AI Readiness Sprint</h2>
+        <p style="color:rgba(255,255,255,.82);max-width:660px;margin-bottom:1.4rem;position:relative;z-index:1;">
+          In just two weeks, we map exactly where your organization is losing time and money — then hand you a plain-English 90-day plan, with the specific AI tools that fit how your people already work. If you move forward with implementation, your Sprint investment is credited back in full.
+        </p>
+        <a class="btn btn-primary" href="sprint.html" style="position:relative;z-index:1;">Explore the Sprint →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
@@ -727,7 +779,11 @@
           </p>
         </div>
 
-        <form class="form-row" onsubmit="event.preventDefault(); alert('Form is not connected yet. Once hosted, connect it to Netlify Forms or your email workflow.');">
+        <form class="form-row" name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="consultation" />
+          <p style="display:none;">
+            <label>Leave this empty if you're human: <input name="bot-field" /></label>
+          </p>
           <div>
             <label for="name">Name</label>
             <input class="field" id="name" name="name" placeholder="Your name" required />
