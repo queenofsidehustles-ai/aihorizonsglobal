@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Insights | AI Horizons Global Consultants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Practical articles on AI, operations, and getting your time and money back — for business owners and leaders. From AI Horizons Global Consultants." />
+  <meta name="keywords" content="AI for business, operations improvement, process bottlenecks, AI strategy, small business AI, Monica Lewis" />
+  <link rel="canonical" href="https://aihorizonsglobal.com/blog.html" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="apple-touch-icon" href="images/logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AI Horizons Global Consultants" />
+  <meta property="og:title" content="Insights | AI Horizons Global Consultants" />
+  <meta property="og:description" content="Practical articles on AI and operations for business owners who want their time and money back." />
+  <meta property="og:url" content="https://aihorizonsglobal.com/blog.html" />
+  <meta property="og:image" content="https://aihorizonsglobal.com/images/hero-global_jpg.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--navy:#0a1435;--navy-soft:#182651;--gold:#d4a740;--text-main:#111827;--text-soft:#4b5563;--shadow-soft:0 18px 45px rgba(15,23,42,.14);--shadow-light:0 10px 28px rgba(15,23,42,.09);--radius-xl:1.9rem;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Inter",sans-serif;background:radial-gradient(circle at top left,#ffffff 0%,#eef1ff 40%,#e4ebff 70%,#f5f7fd 100%);color:var(--text-main);line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:0 1.25rem}
+    header{position:sticky;top:0;z-index:100;background:linear-gradient(to right,rgba(255,255,255,.96),rgba(250,251,255,.98));border-bottom:1px solid rgba(148,163,184,.35);backdrop-filter:blur(12px)}
+    .header-inner{display:flex;justify-content:space-between;align-items:center;padding:.9rem 0}
+    .logo-wrap{display:flex;gap:.7rem;align-items:center}
+    .logo-img-wrap{position:relative;width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .logo-orbit{position:absolute;inset:-4px;border-radius:999px;border:1px solid rgba(212,167,64,.4);opacity:.8}
+    .logo-img{width:100%;height:100%;border-radius:50%;object-fit:contain;border:1px solid rgba(212,167,64,.5);background:radial-gradient(circle at 30% 20%,#fff8da,#f2d38e);box-shadow:0 8px 18px rgba(212,167,64,.4)}
+    .logo-text-main{font-family:"Playfair Display",serif;font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+    .logo-text-sub{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#6b7280}
+    nav ul{display:flex;gap:1.4rem;list-style:none;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#4b5563}
+    nav ul li a{position:relative}
+    nav ul li a.active{color:var(--navy);font-weight:600}
+    nav ul li a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:linear-gradient(90deg,var(--gold),#f7e2b8);transition:.2s}
+    nav ul li a:hover::after,nav ul li a.active::after{width:100%}
+    .hamburger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(148,163,184,.45);background:#fff;cursor:pointer;font-size:18px}
+    .mobile-overlay{position:fixed;inset:0;background:rgba(10,20,53,.28);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.2s;z-index:999}
+    .mobile-panel{position:fixed;top:86px;right:18px;width:min(340px,calc(100vw - 36px));background:#fff;border-radius:18px;border:1px solid rgba(180,187,214,.8);box-shadow:var(--shadow-soft);opacity:0;pointer-events:none;transform:translateY(-10px);transition:.2s;z-index:1000}
+    .mobile-panel ul{list-style:none;padding:.75rem}
+    .mobile-panel li a{display:block;padding:.85rem;border-radius:14px;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+    .mobile-panel li a:hover{background:rgba(212,167,64,.12)}
+    body.menu-open .mobile-overlay,body.menu-open .mobile-panel{opacity:1;pointer-events:auto}
+    body.menu-open .mobile-panel{transform:translateY(0)}
+    section{padding:3rem 0}
+    .btn{display:inline-block;padding:.85rem 1.7rem;border-radius:999px;font-size:.84rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--gold),#f2d38e);color:#2b1b07;border:1px solid rgba(212,167,64,.55);box-shadow:0 14px 28px rgba(212,167,64,.22)}
+    .hero{background:var(--navy);border-radius:var(--radius-xl);padding:3rem 2.4rem;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-soft)}
+    .hero::before{content:"";position:absolute;right:-90px;top:-90px;width:280px;height:280px;background:radial-gradient(circle,rgba(212,167,64,.3),transparent 70%)}
+    .hero .kicker{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;position:relative;z-index:1}
+    .hero h1{font-family:"Playfair Display",serif;font-size:2.5rem;line-height:1.12;margin-bottom:1rem;position:relative;z-index:1}
+    .hero h1 span{color:var(--gold)}
+    .hero p{font-size:1.05rem;color:rgba(255,255,255,.85);max-width:680px;position:relative;z-index:1}
+    .post-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:2rem}
+    .post{display:block;background:#fff;border-radius:var(--radius-xl);border:1px solid rgba(148,163,184,.28);box-shadow:var(--shadow-light);padding:1.8rem;transition:transform .15s,box-shadow .15s}
+    .post:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+    .post .tag{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:#8a6200;background:rgba(212,167,64,.15);border:1px solid rgba(212,167,64,.4);padding:.3rem .7rem;border-radius:999px;margin-bottom:.9rem}
+    .post h2{font-family:"Playfair Display",serif;font-size:1.35rem;color:var(--navy);margin-bottom:.5rem;line-height:1.25}
+    .post p{font-size:.94rem;color:#374151;margin-bottom:.9rem}
+    .post .meta{font-size:.8rem;color:var(--text-soft)}
+    .post .read{color:var(--gold);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+    footer{border-top:1px solid rgba(148,163,184,.35);background:#fff;padding:1.6rem 0;font-size:.78rem;color:#6b7280;text-align:center}
+    @media(max-width:900px){nav ul{display:none}.hamburger{display:block}.post-grid{grid-template-columns:1fr}.hero h1{font-size:2rem}}
+  </style>
+</head>
+<body>
+<div class="mobile-overlay" id="overlay"></div>
+<div class="mobile-panel" id="panel">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="sprint.html">AI Readiness Sprint</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="blog.html">Insights</a></li>
+    <li><a href="founder.html">Founder</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div>
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <div class="logo-img-wrap">
+          <div class="logo-orbit"></div>
+          <img src="images/logo.png" alt="AI Horizons Global Consultants logo" class="logo-img"/>
+        </div>
+        <div>
+          <div class="logo-text-main">AI Horizons</div>
+          <div class="logo-text-sub">Global Consultants</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="sprint.html">The Sprint</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+          <li><a href="blog.html" class="active">Insights</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="hero">
+      <div class="kicker">Insights</div>
+      <h1>Practical AI &amp; operations,<br/><span>in plain English.</span></h1>
+      <p>No hype, no jargon — just clear thinking on how to stop losing time and money, and how to use AI the way it actually helps. Written for owners and leaders, not technologists.</p>
+    </div>
+
+    <div class="post-grid">
+      <a class="post" href="blog-3-places-losing-money.html">
+        <span class="tag">Operations</span>
+        <h2>The 3 Places Your Business Is Quietly Losing Time and Money</h2>
+        <p>Most waste hides in plain sight — in the handoffs, the "we've always done it this way," and the work nobody owns. Here's where to look first.</p>
+        <div class="meta"><span class="read">Read →</span> · 5 min read</div>
+      </a>
+      <a class="post" href="blog-fix-before-ai.html">
+        <span class="tag">AI Strategy</span>
+        <h2>Before You Buy Another AI Tool, Fix This First</h2>
+        <p>AI doesn't fix a broken process — it makes a broken process run faster. Why the smartest first move isn't a tool at all.</p>
+        <div class="meta"><span class="read">Read →</span> · 4 min read</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© <span id="year"></span> AI Horizons Global Consultants. All rights reserved.</div>
+    <div>Site for informational purposes only. Not legal advice.</div>
+  </div>
+</footer>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const btn = document.getElementById("hamburger");
+  const overlay = document.getElementById("overlay");
+  const panel = document.getElementById("panel");
+  function closeMenu(){ document.body.classList.remove("menu-open"); }
+  btn.onclick = () => document.body.classList.toggle("menu-open");
+  overlay.onclick = closeMenu;
+  panel.querySelectorAll("a").forEach(a => a.onclick = closeMenu);
+  window.addEventListener("resize", () => { if(window.innerWidth > 900) closeMenu(); });
+</script>
+</body>
+</html>
