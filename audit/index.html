@@ -1,0 +1,224 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Free 8-question Stress Audit: find out which AI employee to hire first for your business."><title>SOS Stress Audit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+html,body{margin:0}
+/* Layout: one centered column, a "system readout" frame; one question per screen, result as a status report. Single dark look by choice (SOS brand). */
+:root{
+  --bg:#0d0118; --panel:#170628; --line:#2e1a4a; --fg:#f3ecfb; --muted:#b5a6cc;
+  --purple:#7559d4; --pink:#d115ae; --gold:#d4a840;
+  --display:"Unbounded","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 48px;
+  background-image:radial-gradient(60rem 30rem at 85% -10%, rgba(117,89,212,.22), transparent 60%);}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,6vw,38px);line-height:1.15;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--pink)}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(19px,4.6vw,24px);line-height:1.3;margin:0;text-wrap:balance}
+p{margin:0;max-width:62ch}
+.muted{color:var(--muted)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px}
+.meter{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--pink));transition:width .3s}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:14px 16px;border-radius:10px;border:1px solid var(--line);
+  background:transparent;color:var(--fg);font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--purple)}
+.opt[aria-pressed="true"]{border-color:var(--pink);background:rgba(209,21,174,.10)}
+.opt .k{font-family:var(--mono);font-size:12px;color:var(--gold);min-width:1.5em}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.range{display:flex;flex-direction:column;gap:10px}
+.range output{font-family:var(--mono);font-size:28px;font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--pink)}
+.nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;padding:12px 20px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--pink);border-color:var(--pink);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.status{font-family:var(--mono);font-size:13px;display:grid;gap:8px;border-top:1px dashed var(--line);padding-top:16px}
+.status div{display:flex;justify-content:space-between;gap:12px}
+.status b{font-weight:600;color:var(--fg)}
+.pill{display:inline-block;font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--gold);color:var(--gold)}
+.agent{font-family:var(--display);font-size:clamp(22px,5.4vw,30px);font-weight:700;color:var(--fg);line-height:1.2}
+ul.jobs{margin:0;padding-left:20px;display:grid;gap:6px}
+form{display:grid;gap:10px}
+label{font-weight:500}
+input[type=email],input[type=text]{font:inherit;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+.note{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.preview{font-family:var(--mono);font-size:12px;color:var(--bg);background:var(--gold);padding:8px 12px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+
+<div class="wrap">
+  <header style="display:grid;gap:12px">
+    <div class="eyebrow">Systems Over Stress · Free Stress Audit</div>
+    <h1>Which job should your <em>first AI employee</em> take off your plate?</h1>
+    <p class="muted">8 quick questions. At the end you'll know which agent to build first, and how many hours a week it could hand back to you.</p>
+  </header>
+
+  <section class="panel" id="quiz" aria-live="polite">
+    <div class="meter"><span id="count">1 / 8</span><div class="bar"><i id="fill"></i></div></div>
+    <h2 id="q"></h2>
+    <div id="body"></div>
+    <div class="nav">
+      <button class="btn" id="back" type="button">Back</button>
+      <button class="btn primary" id="next" type="button" disabled>Next</button>
+    </div>
+  </section>
+
+  <section class="panel" id="result" hidden>
+    <div class="eyebrow">Your stress report</div>
+    <div><span class="pill" id="r-tag">Recommended first hire</span></div>
+    <div class="agent" id="r-agent"></div>
+    <p id="r-why"></p>
+    <div>
+      <p style="font-weight:700;margin-bottom:6px">What it takes off your plate</p>
+      <ul class="jobs" id="r-jobs"></ul>
+    </div>
+    <div class="status" id="r-status"></div>
+
+    <form id="signup" novalidate>
+      <p style="font-weight:700">Get your free Stress Audit worksheet and the blueprint for this agent</p>
+      <label for="fname">First name</label>
+      <input id="fname" type="text" autocomplete="given-name" required>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" required>
+      <button class="btn primary" type="submit">Send me the blueprint</button>
+      <p class="note" id="formmsg"></p>
+    </form>
+    <button class="btn" id="restart" type="button">Retake the audit</button>
+  </section>
+
+  <footer class="note">From Monica Lewis · @monica.lewis.ai · Hire Your First AI Employee</footer>
+</div>
+
+<script>
+const Q = [
+  {t:"What kind of business do you run?", k:"biz", o:[
+    ["Cleaning or home services",{}],["Parties, events or rentals",{}],["Beauty, wellness or salon",{}],
+    ["Real estate or insurance",{}],["Coaching, consulting or another service",{}],
+    ["TikTok Shop or live selling",{online:1}],["Digital products (courses, templates, ebooks)",{online:1}],["Faceless content channel",{online:1}]]},
+  {t:"Where do most of your new customers come from right now?", k:"src", o:[
+    ["Referrals and word of mouth only",{finder:2}],["My TikTok videos, lives or social posts",{finder:1}],
+    ["Ads or listing sites",{followup:1}],["Honestly, not enough are coming in",{finder:3}]]},
+  {t:"When someone asks about your price or product, how fast do they usually hear back?", k:"speed", o:[
+    ["Within minutes",{}],["Same day",{followup:1,responder:1}],["Next day or later",{followup:2,responder:2}],
+    ["Sometimes I forget to answer",{followup:2,responder:3}]]},
+  {t:"What happens to people who ask but don't book or buy?", k:"cold", o:[
+    ["I follow up every time",{}],["I follow up when I remember",{followup:2}],
+    ["I rarely follow up",{followup:3}],["I didn't know I should",{followup:3}]]},
+  {t:"How many comments and messages a week ask the same questions (price, link, how to book or buy)?", k:"dms", o:[
+    ["0 to 5",{}],["6 to 20",{responder:1}],["21 to 50",{responder:2}],["More than 50",{responder:3}]]},
+  {t:"About how many hours a week do you spend answering messages and texts?", k:"hMsg", range:true},
+  {t:"About how many hours a week do you spend finding new customers or growing your audience?", k:"hFind", range:true},
+  {t:"Be honest. What stresses you most right now?", k:"pain", o:[
+    ["I need more leads",{finder:3}],["Leads come in, then go cold",{followup:3}],["I'm drowning in messages",{responder:3}]]}
+];
+const AGENTS = {
+  finder:{name:"Lead Finder", why:"Your business is ready for more customers, but finding them is eating your time. A lead finder searches for people and businesses who need what you sell and hands you a fresh list every week.",
+    jobs:["Searches for local customers who fit your business","Delivers a short list every Monday","Drafts a first message for each lead for you to approve"], hours:"hFind",
+    on:{name:"Audience Scout", why:"Your offer is ready, but getting it in front of buyers is eating your time. An audience scout finds the trends, hooks and buyers in your niche and hands you a plan every week.",
+      jobs:["Finds trending topics and hooks in your niche","Spots the comments and creators where your buyers hang out","Hands you a weekly content and live plan"]}},
+  followup:{name:"Lead Follow-Up Agent", why:"People are already interested in you, and money is slipping through the cracks after the first conversation. A follow-up agent makes sure nobody gets forgotten.",
+    jobs:["Follows up with everyone who asked but didn't book","Sends friendly reminders on a schedule you set","Tells you who's ready to buy so you can step in"], hours:"hMsg",
+    on:{name:"Buyer Follow-Up Agent", why:"People watch, comment and click, then leave without buying. A follow-up agent keeps talking to them after the video or live ends so sales don't slip away.",
+      jobs:["Follows up with people who asked for the link but didn't buy","Sends your email list a friendly nudge after each live","Flags your hottest buyers so you can reply personally"]}},
+  responder:{name:"DM-to-Booking Responder", why:"You're answering the same questions over and over. A responder handles price, availability and booking questions in your voice and moves people to book.",
+    jobs:["Answers your top questions in your voice","Sends your booking link at the right moment","Hands real conversations back to you"], hours:"hMsg",
+    on:{name:"Comment-to-Sale Responder", why:"Your comments and DMs are full of the same questions. A responder answers them in your voice and sends the product link the moment someone is ready to buy.",
+      jobs:["Answers \"link?\" and \"how much?\" in your voice","Sends the right product link by keyword","Hands real conversations back to you"]}}
+};
+let i = 0; const ans = {hMsg:5,hFind:3};
+const $ = id => document.getElementById(id);
+
+function render(){
+  const q = Q[i];
+  $("count").textContent = `${i+1} / ${Q.length}`;
+  $("fill").style.width = `${(i/Q.length)*100}%`;
+  $("q").textContent = q.t;
+  const body = $("body"); body.innerHTML = "";
+  if(q.range){
+    const box = document.createElement("div"); box.className="range";
+    const out = document.createElement("output"); out.id="out-"+q.k;
+    const r = document.createElement("input"); r.type="range"; r.min=0; r.max=30; r.step=1; r.id="range-"+q.k;
+    r.setAttribute("aria-label", q.t);
+    r.value = ans[q.k]; out.textContent = `${r.value} hrs / week`;
+    r.addEventListener("input",()=>{ans[q.k]=+r.value; out.textContent=`${r.value} hrs / week`;});
+    box.append(out,r); body.append(box);
+    $("next").disabled = false;
+  } else {
+    const list = document.createElement("div"); list.className="opts";
+    q.o.forEach(([label],n)=>{
+      const b = document.createElement("button"); b.type="button"; b.className="opt";
+      b.setAttribute("aria-pressed", ans[q.k]===n ? "true":"false");
+      const k = document.createElement("span"); k.className="k"; k.textContent = String.fromCharCode(65+n);
+      const s = document.createElement("span"); s.textContent = label;
+      b.append(k,s);
+      b.addEventListener("click",()=>{ans[q.k]=n; render(); setTimeout(go,180);});
+      list.append(b);
+    });
+    body.append(list);
+    $("next").disabled = ans[q.k]===undefined;
+  }
+  $("back").disabled = i===0;
+  $("next").textContent = i===Q.length-1 ? "See my result" : "Next";
+}
+function go(){ if(i<Q.length-1){i++;render();} else showResult(); }
+$("next").addEventListener("click",go);
+$("back").addEventListener("click",()=>{ if(i>0){i--;render();} });
+
+function showResult(){
+  const s = {finder:0,followup:0,responder:0};
+  Q.forEach(q=>{ if(q.o && ans[q.k]!==undefined){ const w=q.o[ans[q.k]][1]; for(const k in w) if(k in s) s[k]+=w[k]; } });
+  const order = ["followup","responder","finder"];
+  const top = order.reduce((a,b)=> s[b]>s[a] ? b : a);
+  const base = AGENTS[top];
+  const online = Q[0].o[ans.biz] && Q[0].o[ans.biz][1].online;
+  const A = online ? {...base.on, hours: base.hours} : base;
+  $("r-agent").textContent = A.name;
+  $("r-why").textContent = A.why;
+  $("r-jobs").innerHTML = ""; A.jobs.forEach(j=>{const li=document.createElement("li"); li.textContent=j; $("r-jobs").append(li);});
+  const hrs = ans[A.hours];
+  LAST = {agent:A.name, biz:(Q[0].o[ans.biz]||["Not answered"])[0], hours:ans[A.hours]};
+  const biz = Q[0].o[ans.biz] ? Q[0].o[ans.biz][0] : "Your business";
+  const rows = [["Business", biz],["Hours a week on this job", `${hrs} hrs`],["Hours a month on this job", `${hrs*4} hrs`],
+    ["Lead finder load", s.finder],["Follow-up load", s.followup],["Message load", s.responder]];
+  $("r-status").innerHTML = "";
+  rows.forEach(([a,b])=>{ const d=document.createElement("div"); const x=document.createElement("span"); x.textContent=a; const y=document.createElement("b"); y.textContent=b; d.append(x,y); $("r-status").append(d); });
+  $("quiz").hidden = true; $("result").hidden = false;
+  $("result").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto":"smooth", block:"start"});
+}
+let LAST = {};
+$("signup").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const ok = $("email").checkValidity() && $("fname").value.trim();
+  if(!ok){ $("formmsg").textContent = "Add your first name and a valid email."; return; }
+  const btn = e.submitter || $("signup").querySelector("button"); btn.disabled = true;
+  $("formmsg").textContent = "Sending...";
+  const fd = new FormData();
+  fd.append("fields[name]", $("fname").value.trim());
+  fd.append("fields[email]", $("email").value.trim());
+  fd.append("fields[sos_agent]", LAST.agent || "");
+  fd.append("fields[sos_business]", LAST.biz || "");
+  fd.append("fields[sos_hours]", String(LAST.hours ?? ""));
+  fd.append("ml-submit","1"); fd.append("anticsrf","true");
+  try{
+    await fetch("https://assets.mailerlite.com/jsonp/1904004/forms/203357277657237007/subscribe",{method:"POST",body:fd,mode:"no-cors"});
+    $("signup").querySelectorAll("input,button").forEach(x=>x.disabled=true);
+    $("formmsg").textContent = "Almost done! Check your inbox and tap the confirm button so your blueprint can reach you.";
+  }catch(err){
+    btn.disabled = false;
+    $("formmsg").textContent = "That didn't go through. Check your connection and try again.";
+  }
+});
+$("restart").addEventListener("click",()=>{ i=0; for(const k in ans) delete ans[k]; ans.hMsg=5; ans.hFind=3; $("result").hidden=true; $("quiz").hidden=false; render(); });
+render();
+</script>
+</body></html>
