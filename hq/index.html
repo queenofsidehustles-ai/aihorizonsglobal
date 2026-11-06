@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SOS HQ</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* SOS HQ members site: sci-fi command deck. Left rail, center view, right status column; one column on phones. */
+:root{--void:#040f14;--deck:#081d25;--panel:#0c2a35;--line:#18505c;--fg:#f4fbfb;--muted:#9cc3c6;
+--neon:#2ff3e0;--neon2:#7af7ff;--gold:#f2d9a6;--pink:#ff6fd8;--ink:#041015;--bad:#ff8a8a;
+--disp:"Orbitron","Manrope",system-ui,sans-serif;--body:"Manrope",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}[hidden]{display:none!important}
+body{background:var(--void);color:var(--fg);font-family:var(--body);line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px;min-height:100vh;
+background-image:radial-gradient(70rem 30rem at 50% -10%,rgba(47,243,224,.22),transparent 65%),radial-gradient(40rem 20rem at 100% 100%,rgba(255,111,216,.10),transparent 70%),linear-gradient(rgba(47,243,224,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(47,243,224,.05) 1px,transparent 1px);background-size:auto,auto,36px 36px,36px 36px;background-attachment:fixed}
+a{color:var(--neon)}
+button{font:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.top{max-width:1200px;margin:0 auto 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:42px;width:auto;filter:drop-shadow(0 0 10px rgba(242,217,166,.45))}
+.brand .t{font-family:var(--disp);font-weight:800;letter-spacing:.12em;font-size:15px;text-shadow:0 0 12px rgba(47,243,224,.6)}
+.status{font-family:var(--mono);font-size:12px;color:var(--neon);display:flex;align-items:center;gap:8px}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon);animation:p 1.8s ease-in-out infinite}
+@keyframes p{50%{opacity:.35;box-shadow:0 0 2px var(--neon)}}
+.linkbtn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:var(--mono);font-size:11px}
+.shell{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr) 300px;gap:18px}
+.rail,.main,.side{min-width:0}
+.rail nav{display:flex;flex-direction:column;gap:6px;position:sticky;top:max(16px,env(safe-area-inset-top,0px))}
+.rail a{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;color:var(--muted);text-decoration:none;font-weight:600;border:1px solid transparent}
+.rail a .ic{font-family:var(--mono);color:var(--neon);width:18px;text-align:center}
+.rail a.on{color:var(--fg);background:linear-gradient(90deg,rgba(47,243,224,.16),rgba(47,243,224,.02));border-color:rgba(47,243,224,.45);box-shadow:0 0 18px rgba(47,243,224,.18),inset 3px 0 0 var(--neon)}
+.hero{position:relative;overflow:hidden;border-radius:18px;border:1px solid rgba(47,243,224,.55);background:linear-gradient(135deg,#0d3a46,#081d25 60%);padding:22px;box-shadow:0 0 30px rgba(47,243,224,.18);margin-bottom:14px}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(122,247,255,.16),transparent);transform:translateX(-100%);animation:scan 5s ease-in-out infinite;pointer-events:none}
+@keyframes scan{60%,100%{transform:translateX(100%)}}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--neon);text-transform:uppercase}
+h1{font-family:var(--disp);font-size:clamp(20px,3.2vw,28px);margin:6px 0 4px;letter-spacing:.04em;text-shadow:0 0 18px rgba(47,243,224,.35);text-wrap:balance}
+h2{font-family:var(--disp);font-size:16px;letter-spacing:.06em;margin:0 0 8px}
+.hero p,.muted{color:var(--muted)}p{margin:0 0 8px;max-width:66ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.chip{font-weight:600;font-size:13px;color:var(--muted);background:var(--deck);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{color:var(--ink);background:var(--neon);border-color:var(--neon);box-shadow:0 0 16px rgba(47,243,224,.55)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+.compose{display:grid;gap:10px}
+.compose .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+textarea,input[type=text],input[type=email]{width:100%;background:var(--void);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:11px 12px;font:inherit}
+textarea{min-height:80px;resize:vertical}
+select{background:var(--void);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:9px 10px;font:inherit}
+.btn{font-weight:700;font-size:14px;border:none;border-radius:10px;padding:11px 16px;background:var(--neon);color:var(--ink);cursor:pointer;box-shadow:0 0 14px rgba(47,243,224,.5)}
+.btn.ghost{background:transparent;color:var(--neon);border:1px solid var(--neon);box-shadow:none}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.posts{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.post{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;transition:border-color .2s,box-shadow .2s}
+.post:hover{border-color:rgba(47,243,224,.6);box-shadow:0 0 22px rgba(47,243,224,.14)}
+.post.pin{border-color:rgba(242,217,166,.6)}
+.who{display:flex;align-items:center;gap:10px}
+.av{width:38px;height:38px;flex:none;border-radius:50%;display:grid;place-items:center;font-weight:800;color:var(--ink);background:linear-gradient(135deg,var(--neon),var(--neon2));box-shadow:0 0 12px rgba(47,243,224,.5)}
+.av.host{background:linear-gradient(135deg,var(--gold),#ffb86b);box-shadow:0 0 12px rgba(242,217,166,.5)}
+.name{font-weight:700}.meta{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase}
+.badge{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:2px 8px;border-radius:999px;border:1px solid var(--gold);color:var(--gold);margin-left:6px;text-transform:uppercase}
+.body{margin:10px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.acts{display:flex;gap:14px;margin-top:12px;font-family:var(--mono);font-size:12px;flex-wrap:wrap}
+.acts button{background:none;border:none;color:var(--muted);cursor:pointer;padding:0}
+.acts button.on{color:var(--pink)}
+.comments{margin-top:10px;display:grid;gap:8px}
+.comment{background:var(--void);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px;overflow-wrap:anywhere}
+.side .panel{margin-bottom:14px}
+.side h3{font-family:var(--disp);font-size:13px;letter-spacing:.14em;margin:0 0 10px;color:var(--gold);text-transform:uppercase}
+.team{display:grid;gap:8px}.team div{display:flex;align-items:center;justify-content:space-between;font-size:14px;padding:8px 10px;border-radius:10px;background:var(--void);border:1px solid var(--line)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--neon);box-shadow:0 0 8px var(--neon);display:inline-block;margin-right:8px}.dot.g{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.tiny{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+.card h4{margin:0;font-size:16px}.card p{font-size:14px;color:var(--muted);margin:0}
+.card .btn{margin-top:auto}
+pre.prompt{white-space:pre-wrap;overflow-wrap:anywhere;max-height:340px;overflow:auto;background:var(--void);border:1px solid var(--line);border-radius:10px;padding:12px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
+.gate{max-width:520px;margin:6vh auto 0;text-align:center}
+.gate .panel{display:grid;gap:12px;text-align:left}
+.msg{font-family:var(--mono);font-size:12px;color:var(--gold);min-height:1em}
+.err{color:var(--bad)}
+.toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--neon);color:var(--ink);font-weight:700;padding:10px 16px;border-radius:999px;box-shadow:0 0 20px rgba(47,243,224,.6);z-index:20}
+@media (max-width:980px){.shell{grid-template-columns:minmax(0,1fr)}.rail nav{position:static;flex-direction:row;overflow-x:auto}.rail a{white-space:nowrap}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+
+<header class="top">
+  <div class="brand"><img src="/images/sos-logo.png" alt="SOS: Systems Over Stress"><span class="t">SOS HQ</span></div>
+  <div class="status"><span class="pulse"></span><span id="statusText">COMMAND DECK</span><button class="linkbtn" id="signOut" type="button" hidden>Sign out</button></div>
+</header>
+
+<!-- Sign-in -->
+<section class="gate" id="gateSignin" hidden>
+  <div class="eyebrow">● Members only</div>
+  <h1>Enter the command deck</h1>
+  <div class="panel">
+    <label for="email">Your email (the one you used to buy)</label>
+    <input id="email" type="email" autocomplete="email" placeholder="you@example.com">
+    <button class="btn" id="sendLink" type="button">Email me a sign-in link</button>
+    <p class="msg" id="signinMsg" role="status"></p>
+    <p class="tiny">No password needed. We email you a link; tap it and you're in.</p>
+  </div>
+</section>
+
+<!-- Not a member yet -->
+<section class="gate" id="gatePending" hidden>
+  <div class="eyebrow">● Almost there</div>
+  <h1>Your access is being set up</h1>
+  <div class="panel">
+    <p>You're signed in as <b id="pendingEmail"></b>, but this email isn't on the Founding Members list yet.</p>
+    <p class="muted">If you just bought, Monica unlocks your access within 24 hours. Used a different email to buy? Sign out and use that one.</p>
+  </div>
+</section>
+
+<!-- Members app -->
+<div class="shell" id="app" hidden>
+  <aside class="rail"><nav aria-label="Members area" id="nav">
+    <a href="#community" data-view="community"><span class="ic">◉</span>Community</a>
+    <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
+    <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
+    <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Twin Scene Library</a>
+    <a href="#calls" data-view="calls"><span class="ic">◷</span>Live calls</a>
+    <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
+    <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
+  </nav></aside>
+
+  <main class="main" id="main">
+    <!-- COMMUNITY -->
+    <section data-pane="community">
+      <div class="hero"><div class="eyebrow">● Founding Members · Transmission</div><h1>Welcome to the command deck.</h1><p>Show off your team, ask questions, celebrate wins.</p></div>
+      <div class="chips" id="spaceChips"></div>
+      <div class="panel compose">
+        <label for="newPost" class="tiny">SHARE WITH THE COMMUNITY</label>
+        <textarea id="newPost" maxlength="5000" placeholder="Share a win, a question, or your morning brief (blur anything private)…"></textarea>
+        <div class="row"><label for="postSpace" class="tiny">SPACE</label><select id="postSpace"></select><button class="btn" id="postBtn" type="button">Post</button></div>
+      </div>
+      <div class="posts" id="posts"><p class="muted">Loading the feed…</p></div>
+    </section>
+
+    <!-- MY TEAM -->
+    <section data-pane="team" hidden>
+      <div class="hero"><div class="eyebrow">● Your AI team</div><h1>Hire your team in about 10 minutes</h1><p>Your team lives in your own Claude account. This page walks you through hiring them.</p></div>
+      <div class="panel">
+        <h2>Step by step</h2>
+        <ol class="steps">
+          <li>Make sure you have the <b>Claude desktop app</b> and a <b>Pro plan</b> (about $20 a month). Your team runs there.</li>
+          <li>Open <a href="#kit">the kit</a> and tap <b>Copy the Team Installer</b>.</li>
+          <li>In the Claude desktop app, start a new chat, paste it, and press Enter.</li>
+          <li>Answer the questions one at a time. It will help you connect your Gmail and hire each employee.</li>
+          <li>Your first morning brief arrives right away. Post it in <a href="#community">My AI Team</a> (blur anything private).</li>
+        </ol>
+        <p class="tiny" style="margin-top:12px">Stuck? Post in Questions, or bring it to the next live setup call.</p>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="card"><div class="tag">Run it</div><h4>Chief of Staff</h4><p>Your morning brief: who needs you, today's schedule, money in, and one money move.</p></div>
+        <div class="card"><div class="tag">Win it</div><h4>Closer</h4><p>Drafts replies and gentle follow-ups so nobody slips through. Never sends without you.</p></div>
+        <div class="card"><div class="tag">Find it</div><h4>Growth Scout</h4><p>Finds customers, trends, grants, contracts or events, depending on your business.</p></div>
+        <div class="card"><div class="tag">Grow it</div><h4>Your specialist</h4><p>Content Studio, Product Creator or Business Builder. On call whenever you need it.</p></div>
+      </div>
+    </section>
+
+    <!-- KIT -->
+    <section data-pane="kit" hidden>
+      <div class="hero"><div class="eyebrow">● Build Your AI Team</div><h1>Your kit</h1><p>Everything you need to hire your team and run your HQ.</p></div>
+      <div id="kitList" class="grid"><p class="muted">Loading your kit…</p></div>
+    </section>
+
+    <!-- SCENES -->
+    <section data-pane="scenes" hidden>
+      <div class="hero"><div class="eyebrow">● Content Studio</div><h1>Twin Scene Library</h1><p>Upload your master photo in ChatGPT, tap Copy on a scene, paste, send. Your twin or avatar keeps the exact same face; only the scene changes.</p></div>
+      <details class="panel" style="margin-bottom:12px" open><summary><b>Step by step, on your phone</b></summary>
+        <ol class="steps">
+          <li>Open the <b>ChatGPT app</b>. Tap the <b>pencil</b> (top right) for a new chat.</li>
+          <li>Tap <b>+</b> next to the message box, then <b>Photos</b>, and pick your <b>master photo</b>.</li>
+          <li>Come back here and tap <b>Copy prompt</b> on a scene. It says <b>Copied ✓</b>.</li>
+          <li>In ChatGPT, <b>press and hold</b> the message box, then tap <b>Paste</b>.</li>
+          <li>Change any <b>[bracket]</b> words if you want, then tap <b>send</b>.</li>
+          <li>Like it? Press and hold the picture and tap <b>Save</b>. Not quite? Type: "Same scene, try again. Keep her face exactly the same."</li>
+        </ol>
+        <p class="tiny" style="margin-top:8px">No master photo yet? Start with the "Start here" scenes. Always label AI images as AI. Your twin must be you; an avatar must be an original made-up person.</p>
+      </details>
+      <div class="chips" id="sceneChips"></div>
+      <div class="grid" id="sceneGrid"></div>
+    </section>
+
+    <!-- CALLS -->
+    <section data-pane="calls" hidden>
+      <div class="hero"><div class="eyebrow">● Live</div><h1>Live setup calls</h1><p>We build together, answer questions, and celebrate wins.</p></div>
+      <div class="panel"><h2 id="callWhen">To be announced</h2><p class="muted" id="callNote"></p></div>
+    </section>
+
+    <!-- STORE -->
+    <section data-pane="store" hidden>
+      <div class="hero"><div class="eyebrow">● Add-ons</div><h1>Upgrade your team</h1><p>Add more specialists and powers whenever you're ready.</p></div>
+      <div class="grid">
+        <div class="card"><div class="tag">Specialist</div><h4>Extra specialist</h4><p>Add Content Studio, Product Creator or Business Builder alongside the one you have.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
+        <div class="card"><div class="tag">Voice</div><h4>Voice Chief of Staff</h4><p>Talk to your Chief of Staff with its own name and voice, push-to-talk, like Monica's Genesis.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
+        <div class="card"><div class="tag">Phase 2</div><h4>Twin Studio credits</h4><p>Make twin and avatar images right here in your HQ, without leaving.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
+        <div class="card"><div class="tag">Done for you</div><h4>Have Monica's team build it</h4><p>We set up your whole team for you. Your $47 is credited.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
+      </div>
+    </section>
+
+    <!-- HOST -->
+    <section data-pane="host" hidden>
+      <div class="hero"><div class="eyebrow">● Host panel</div><h1>Founding Members list</h1><p>Add a buyer's email to unlock their access. They sign in with that email.</p></div>
+      <div class="panel compose">
+        <label for="addEmail" class="tiny">BUYER'S EMAIL</label>
+        <input id="addEmail" type="email" placeholder="buyer@example.com">
+        <input id="addNote" type="text" placeholder="Note (optional), like 'Stripe Nov 8'">
+        <div class="row"><button class="btn" id="addBtn" type="button">Unlock access</button><span class="msg" id="hostMsg" role="status"></span></div>
+      </div>
+      <div class="panel" style="margin-top:12px"><h2>Members</h2><div id="allowList" class="tiny">Loading…</div></div>
+      <div class="panel compose" style="margin-top:12px">
+        <h2>Next live call</h2>
+        <input id="callWhenIn" type="text" placeholder="Thursday, Nov 12 · 7:00 PM ET">
+        <input id="callNoteIn" type="text" placeholder="Zoom link or note">
+        <div class="row"><button class="btn" id="callSave" type="button">Save</button></div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="side">
+    <div class="panel"><h3>Next live call</h3><p id="sideCall" style="margin:0">To be announced</p></div>
+    <div class="panel"><h3>Your profile</h3>
+      <div class="compose"><input id="myName" type="text" maxlength="40" placeholder="First name"><input id="myBiz" type="text" maxlength="80" placeholder="Business (optional)"><button class="btn ghost" id="saveMe" type="button">Save</button></div></div>
+    <div class="panel"><h3>The rules</h3><p class="tiny" style="margin:0">Your team never sends, posts or pays without your yes. Blur private details before posting a brief. Be kind; we're all building.</p></div>
+  </aside>
+</div>
+
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const SB_URL = "https://npomhoaxigydsxgqziwd.supabase.co";
+const SB_KEY = "sb_publishable_qoQhZYkspqzNy1ZdY3WDgQ_4KnWQbnk";
+const sb = supabase.createClient(SB_URL, SB_KEY);
+const $ = id => document.getElementById(id);
+const SPACES = [["announcements","Announcements"],["my-team","My AI Team"],["questions","Questions"],["wins","Wins"],["introductions","Introductions"]];
+let me = null, isHost = false, space = "all", authors = {};
+
+function toast(t){ const el=$("toast"); el.textContent=t; el.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>el.hidden=true,2200); }
+function el(tag, cls, text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+function ago(ts){ const s=(Date.now()-new Date(ts))/1000; if(s<60) return "just now"; if(s<3600) return Math.floor(s/60)+"m ago"; if(s<86400) return Math.floor(s/3600)+"h ago"; return Math.floor(s/86400)+"d ago"; }
+async function copyText(t, btn){ try{ await navigator.clipboard.writeText(t); btn.textContent="Copied ✓"; }catch(e){ btn.textContent="Copy failed. Select the text instead"; } setTimeout(()=>btn.textContent=btn.dataset.label,1800); }
+
+// ---------- auth ----------
+$("sendLink").onclick = async () => {
+  const email = $("email").value.trim().toLowerCase();
+  if(!/^\S+@\S+\.\S+$/.test(email)){ $("signinMsg").textContent="Type a valid email."; return; }
+  $("sendLink").disabled = true; $("signinMsg").textContent = "Sending…";
+  const { error } = await sb.auth.signInWithOtp({ email, options:{ emailRedirectTo: location.origin + "/hq/" } });
+  $("sendLink").disabled = false;
+  $("signinMsg").textContent = error ? ("That didn't send: " + error.message) : "Check your email and tap the link. (Check spam too.)";
+};
+$("signOut").onclick = async () => { await sb.auth.signOut(); location.hash=""; location.reload(); };
+
+async function boot(){
+  const { data:{ session } } = await sb.auth.getSession();
+  if(!session){ $("gateSignin").hidden=false; $("statusText").textContent="SIGN IN"; return; }
+  me = session.user; $("signOut").hidden=false;
+  const { data, error } = await sb.rpc("my_access");
+  const acc = (data && data[0]) || {};
+  if(error || !acc.member){ $("pendingEmail").textContent = me.email; $("gatePending").hidden=false; $("statusText").textContent="ACCESS PENDING"; return; }
+  isHost = !!acc.host; $("hostNav").hidden = !isHost;
+  $("app").hidden=false; $("statusText").textContent="COMMAND DECK ONLINE";
+  await ensureMe(); setupCommunity(); loadSettings(); route();
+}
+sb.auth.onAuthStateChange((evt) => { if(evt==="SIGNED_IN" && !me) location.reload(); });
+
+async function ensureMe(){
+  const { data } = await sb.from("members").select("first_name,business").eq("user_id", me.id).maybeSingle();
+  if(!data){ await sb.from("members").insert({ user_id: me.id }); }
+  else { $("myName").value = data.first_name || ""; $("myBiz").value = data.business || ""; }
+}
+$("saveMe").onclick = async () => {
+  const { error } = await sb.from("members").update({ first_name: $("myName").value.trim() || null, business: $("myBiz").value.trim() || null }).eq("user_id", me.id);
+  toast(error ? "Couldn't save. Try again." : "Saved"); authors = {}; loadFeed();
+};
+
+// ---------- routing ----------
+const loaded = {};
+function route(){
+  let v = (location.hash || "#community").slice(1);
+  if(!document.querySelector(`[data-pane="${v}"]`) || (v==="host" && !isHost)) v = "community";
+  document.querySelectorAll("[data-pane]").forEach(p => p.hidden = p.dataset.pane !== v);
+  document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.view === v));
+  if(v==="kit" && !loaded.kit){ loaded.kit=1; loadKit(); }
+  if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
+  if(v==="host"){ loadAllow(); }
+}
+window.addEventListener("hashchange", () => { if(me) route(); });
+
+// ---------- community ----------
+function setupCommunity(){
+  const chips = $("spaceChips");
+  [["all","All"],...SPACES].forEach(([k,label]) => {
+    const b = el("button","chip",label); b.type="button"; b.setAttribute("aria-pressed", k===space);
+    b.onclick = () => { space=k; chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c===b)); loadFeed(); };
+    chips.append(b);
+  });
+  SPACES.forEach(([k,label]) => { if(k==="announcements" && !isHost) return; const o=el("option",null,label); o.value=k; $("postSpace").append(o); });
+  $("postSpace").value = "my-team";
+  $("postBtn").onclick = async () => {
+    const body = $("newPost").value.trim(); if(!body) return;
+    $("postBtn").disabled = true;
+    const { error } = await sb.from("posts").insert({ body, space: $("postSpace").value });
+    $("postBtn").disabled = false;
+    if(error){ toast("Couldn't post. Try again."); return; }
+    $("newPost").value=""; toast("Posted"); loadFeed();
+  };
+  loadFeed();
+}
+
+async function loadFeed(){
+  let q = sb.from("posts").select("id,author_id,space,body,pinned,created_at").order("pinned",{ascending:false}).order("created_at",{ascending:false}).limit(50);
+  if(space!=="all") q = q.eq("space", space);
+  const { data: posts, error } = await q;
+  const box = $("posts"); box.innerHTML="";
+  if(error){ box.append(el("p","err","The feed didn't load. Refresh to try again.")); return; }
+  if(!posts.length){ box.append(el("p","muted","Nothing here yet. Be the first to post!")); return; }
+  const ids = posts.map(p=>p.id);
+  const [{ data: cmts }, { data: hearts }] = await Promise.all([
+    sb.from("comments").select("id,post_id,author_id,body,created_at").in("post_id", ids).order("created_at"),
+    sb.from("reactions").select("post_id,user_id").in("post_id", ids)
+  ]);
+  const need = [...new Set([...posts.map(p=>p.author_id), ...(cmts||[]).map(c=>c.author_id)])].filter(id=>!authors[id]);
+  if(need.length){ const { data: a } = await sb.rpc("feed_authors", { ids: need }); (a||[]).forEach(x=>authors[x.id]=x); }
+  posts.forEach(p => box.append(renderPost(p, (cmts||[]).filter(c=>c.post_id===p.id), (hearts||[]).filter(h=>h.post_id===p.id))));
+}
+
+function renderPost(p, cmts, hearts){
+  const a = authors[p.author_id] || { name:"Member" };
+  const card = el("article","post"+(p.pinned?" pin":""));
+  const who = el("div","who"); const av = el("div","av"+(a.is_host?" host":""), (a.name||"M").charAt(0).toUpperCase());
+  const info = el("div"); const nm = el("div","name", a.name || "Member"); if(a.is_host) nm.append(el("span","badge","Host"));
+  const label = (SPACES.find(s=>s[0]===p.space)||[,""])[1];
+  info.append(nm, el("div","meta", label + " · " + ago(p.created_at) + (p.pinned?" · pinned":"")));
+  who.append(av, info); card.append(who, el("p","body", p.body));
+  const acts = el("div","acts");
+  const mine = hearts.some(h=>h.user_id===me.id);
+  const heart = el("button", mine?"on":"", "♥ " + hearts.length); heart.type="button";
+  heart.onclick = async () => { if(mine) await sb.from("reactions").delete().eq("post_id",p.id).eq("user_id",me.id); else await sb.from("reactions").insert({ post_id:p.id }); loadFeed(); };
+  const reply = el("button",null,"💬 " + cmts.length); reply.type="button";
+  acts.append(heart, reply);
+  if(p.author_id===me.id || isHost){ const del=el("button",null,"Delete"); del.type="button"; del.onclick=async()=>{ if(del.dataset.sure){ await sb.from("posts").delete().eq("id",p.id); loadFeed(); } else { del.dataset.sure=1; del.textContent="Tap again to delete"; } }; acts.append(del); }
+  if(isHost){ const pin=el("button",null,p.pinned?"Unpin":"Pin"); pin.type="button"; pin.onclick=async()=>{ await sb.from("posts").update({ pinned:!p.pinned }).eq("id",p.id); loadFeed(); }; acts.append(pin); }
+  card.append(acts);
+  const list = el("div","comments"); list.hidden = cmts.length===0;
+  cmts.forEach(c => { const n=(authors[c.author_id]||{}).name||"Member"; const d=el("div","comment"); const b=el("b",null,n+": "); d.append(b, document.createTextNode(c.body)); list.append(d); });
+  const form = el("div","compose"); form.hidden = true;
+  const ta = el("input"); ta.type="text"; ta.placeholder="Write a reply…"; ta.maxLength=3000; ta.setAttribute("aria-label","Reply");
+  const send = el("button","btn","Reply"); send.type="button";
+  send.onclick = async () => { const body=ta.value.trim(); if(!body) return; const { error } = await sb.from("comments").insert({ post_id:p.id, body }); if(error) toast("Couldn't reply."); else loadFeed(); };
+  form.append(ta, send);
+  reply.onclick = () => { list.hidden=false; form.hidden=!form.hidden; if(!form.hidden) ta.focus(); };
+  card.append(list, form);
+  return card;
+}
+
+// ---------- kit ----------
+async function loadKit(){
+  const { data, error } = await sb.from("kit_resources").select("slug,title,kind,body").in("kind",["prompt","guide"]).order("sort");
+  const box = $("kitList"); box.innerHTML="";
+  if(error || !data){ box.append(el("p","err","Your kit didn't load. Refresh to try again.")); return; }
+  data.forEach(r => {
+    const c = el("div","card"); c.style.gridColumn = r.kind==="prompt" ? "1 / -1" : "";
+    c.append(el("div","tag", r.kind==="prompt" ? "Step 1 · Paste into Claude" : "Guide"), el("h4",null,r.title));
+    if(r.kind==="prompt"){
+      c.append(el("p",null,"Copy this, open the Claude desktop app, start a new chat, paste it, and press Enter. It walks you through everything."));
+      const b = el("button","btn","Copy the Team Installer"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(r.body,b);
+      const det = el("details"); det.append(el("summary","tiny","Peek inside"), Object.assign(el("pre","prompt"),{textContent:r.body}));
+      c.append(b, det);
+    } else { const pre = el("pre","prompt"); pre.textContent = r.body; c.append(pre); }
+    box.append(c);
+  });
+  const sc = el("div","card"); sc.append(el("div","tag","Content Studio"), el("h4",null,"Twin Scene Library"), el("p",null,"24 copy-and-paste scenes for your twin or avatar."));
+  const go = el("a","btn","Open the library"); go.href="#scenes"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
+}
+
+// ---------- scenes ----------
+let SC = null, scat = "All";
+async function loadScenes(){
+  const { data, error } = await sb.from("kit_resources").select("body").eq("slug","scenes").maybeSingle();
+  if(error || !data){ $("sceneGrid").append(el("p","err","The library didn't load. Refresh to try again.")); return; }
+  SC = JSON.parse(data.body); drawScenes();
+}
+function drawScenes(){
+  const cats = ["All", ...new Set(SC.scenes.map(s=>s[0]))];
+  const chips = $("sceneChips"); chips.innerHTML="";
+  cats.forEach(k => { const b=el("button","chip",k); b.type="button"; b.setAttribute("aria-pressed",k===scat); b.onclick=()=>{ scat=k; drawScenes(); }; chips.append(b); });
+  const g = $("sceneGrid"); g.innerHTML="";
+  SC.scenes.filter(s=>scat==="All"||s[0]===scat).forEach(s => {
+    const c = el("div","card"); c.append(el("div","tag",s[0]), el("h4",null,s[1]), el("p",null,s[2]));
+    const full = s[0]==="Start here" ? `${s[2]}\n\n${SC.avoid}` : `${SC.lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
+    const b = el("button","btn","Copy prompt"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(full,b);
+    c.append(b); g.append(c);
+  });
+}
+
+// ---------- settings / calls ----------
+async function loadSettings(){
+  const { data } = await sb.from("kit_resources").select("body").eq("slug","next_call").maybeSingle();
+  if(!data) return;
+  try{ const s = JSON.parse(data.body); $("callWhen").textContent=s.when; $("sideCall").textContent=s.when; $("callNote").textContent=s.note||""; $("callWhenIn").value=s.when; $("callNoteIn").value=s.note||""; }catch(e){}
+}
+$("callSave").onclick = async () => {
+  const body = JSON.stringify({ when: $("callWhenIn").value.trim() || "To be announced", note: $("callNoteIn").value.trim() });
+  const { error } = await sb.from("kit_resources").update({ body, updated_at: new Date().toISOString() }).eq("slug","next_call");
+  toast(error ? "Couldn't save." : "Call saved"); loadSettings();
+};
+
+// ---------- host ----------
+async function loadAllow(){
+  const { data, error } = await sb.from("member_allowlist").select("email,note,added_at").order("added_at",{ascending:false});
+  const box = $("allowList"); box.innerHTML="";
+  if(error){ box.textContent="Couldn't load the list."; return; }
+  if(!data.length){ box.textContent="No members yet."; return; }
+  data.forEach(r => { const row=el("div"); row.style.cssText="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap";
+    row.append(el("span",null, r.email + (r.note? " · "+r.note : "")));
+    const rm = el("button","linkbtn","Remove"); rm.type="button";
+    rm.onclick = async () => { if(rm.dataset.sure){ await sb.from("member_allowlist").delete().eq("email",r.email); loadAllow(); } else { rm.dataset.sure=1; rm.textContent="Tap again"; } };
+    row.append(rm); box.append(row); });
+}
+$("addBtn").onclick = async () => {
+  const email = $("addEmail").value.trim().toLowerCase();
+  if(!/^\S+@\S+\.\S+$/.test(email)){ $("hostMsg").textContent="Type a valid email."; return; }
+  const { error } = await sb.from("member_allowlist").insert({ email, note: $("addNote").value.trim() || null });
+  $("hostMsg").textContent = error ? (error.code==="23505" ? "Already a member." : "Couldn't add.") : "Unlocked ✓";
+  if(!error){ $("addEmail").value=""; $("addNote").value=""; loadAllow(); }
+};
+
+boot();
+</script>
+</body></html>
