@@ -6,8 +6,8 @@
 html,body{margin:0}
 /* Layout: one centered column, a "system readout" frame; one question per screen, result as a status report. Single dark look by choice (SOS brand). */
 :root{
-  --bg:#0d0118; --panel:#170628; --line:#2e1a4a; --fg:#f3ecfb; --muted:#b5a6cc;
-  --purple:#7559d4; --pink:#d115ae; --gold:#d4a840;
+  --bg:#102C35; --panel:#15394a; --line:#26505f; --fg:#F5F4EF; --muted:#a9c3c6;
+  --purple:#19B8B0; --pink:#19B8B0; --gold:#D9C29A; --on-accent:#102C35;
   --display:"Unbounded","Manrope",system-ui,sans-serif;
   --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -16,7 +16,7 @@ html,body{margin:0}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 48px;
-  background-image:radial-gradient(60rem 30rem at 85% -10%, rgba(117,89,212,.22), transparent 60%);}
+  background-image:radial-gradient(60rem 30rem at 85% -10%, rgba(25,184,176,.16), transparent 60%);}
 .wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,6vw,38px);line-height:1.15;margin:0;text-wrap:balance}
@@ -27,12 +27,12 @@ p{margin:0;max-width:62ch}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px}
 .meter{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
 .bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--pink));transition:width .3s}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .3s}
 .opts{display:grid;gap:10px}
 .opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:14px 16px;border-radius:10px;border:1px solid var(--line);
   background:transparent;color:var(--fg);font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
 .opt:hover{border-color:var(--purple)}
-.opt[aria-pressed="true"]{border-color:var(--pink);background:rgba(209,21,174,.10)}
+.opt[aria-pressed="true"]{border-color:var(--pink);background:rgba(25,184,176,.12)}
 .opt .k{font-family:var(--mono);font-size:12px;color:var(--gold);min-width:1.5em}
 button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .range{display:flex;flex-direction:column;gap:10px}
@@ -40,13 +40,13 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-o
 input[type=range]{width:100%;accent-color:var(--pink)}
 .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .btn{font:inherit;font-weight:700;padding:12px 20px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
-.btn.primary{background:var(--pink);border-color:var(--pink);color:#fff}
+.btn.primary{background:var(--pink);border-color:var(--pink);color:var(--on-accent)}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .status{font-family:var(--mono);font-size:13px;display:grid;gap:8px;border-top:1px dashed var(--line);padding-top:16px}
 .status div{display:flex;justify-content:space-between;gap:12px}
 .status b{font-weight:600;color:var(--fg)}
 .pill{display:inline-block;font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--gold);color:var(--gold)}
-.agent{font-family:var(--display);font-size:clamp(22px,5.4vw,30px);font-weight:700;color:var(--fg);line-height:1.2}
+.agent{font-family:var(--display);font-size:clamp(22px,5.4vw,30px);font-weight:700;color:var(--pink);line-height:1.2}
 ul.jobs{margin:0;padding-left:20px;display:grid;gap:6px}
 form{display:grid;gap:10px}
 label{font-weight:500}
@@ -58,6 +58,7 @@ input[type=email],input[type=text]{font:inherit;padding:12px 14px;border-radius:
 
 <div class="wrap">
   <header style="display:grid;gap:12px">
+    <img src="/images/sos-logo.png" alt="SOS: Systems Over Stress. AI, automation, simplicity." width="1000" height="333" style="width:min(320px,80%);height:auto;margin-bottom:4px">
     <div class="eyebrow">Systems Over Stress · Free Stress Audit</div>
     <h1>Which job should your <em>first AI employee</em> take off your plate?</h1>
     <p class="muted">8 quick questions. At the end you'll know which agent to build first, and how many hours a week it could hand back to you.</p>
