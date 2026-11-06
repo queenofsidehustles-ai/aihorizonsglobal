@@ -190,8 +190,7 @@ function showResult(){
   const hrs = ans[A.hours];
   LAST = {agent:A.name, biz:(Q[0].o[ans.biz]||["Not answered"])[0], hours:ans[A.hours]};
   const biz = Q[0].o[ans.biz] ? Q[0].o[ans.biz][0] : "Your business";
-  const rows = [["Business", biz],["Hours a week on this job", `${hrs} hrs`],["Hours a month on this job", `${hrs*4} hrs`],
-    ["Lead finder load", s.finder],["Follow-up load", s.followup],["Message load", s.responder]];
+  const rows = [["Business", biz],["Hours a week on this job", `${hrs} hrs`],["Hours a month on this job", `${hrs*4} hrs`]];
   $("r-status").innerHTML = "";
   rows.forEach(([a,b])=>{ const d=document.createElement("div"); const x=document.createElement("span"); x.textContent=a; const y=document.createElement("b"); y.textContent=b; d.append(x,y); $("r-status").append(d); });
   $("quiz").hidden = true; $("result").hidden = false;
