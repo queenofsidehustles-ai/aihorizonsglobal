@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Your First AI Employee Blueprints</title>
+<meta name="description" content="Free blueprints from the SOS Stress Audit: the worksheet plus step-by-step setups for your first AI agent.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column; a sticky chip bar jumps to the worksheet and each agent. SOS brand, single dark look by choice. */
+:root{
+  --bg:#102C35; --panel:#15394a; --line:#26505f; --fg:#F5F4EF; --muted:#a9c3c6;
+  --aqua:#19B8B0; --gold:#D9C29A; --on-accent:#102C35;
+  --display:"Unbounded","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+html,body{margin:0}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 56px;
+  background-image:radial-gradient(60rem 30rem at 85% -10%, rgba(25,184,176,.16), transparent 60%);}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,6vw,38px);line-height:1.15;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--aqua)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(20px,4.8vw,26px);line-height:1.25;margin:0;color:var(--aqua);text-wrap:balance}
+h3{font-size:15px;margin:0;font-weight:700}
+p{margin:0;max-width:64ch}
+.muted{color:var(--muted)}
+.chips{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line)}
+.chips a{font-family:var(--mono);font-size:12px;color:var(--fg);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.chips a:hover,.chips a:focus-visible{border-color:var(--aqua);outline:none}
+.group{font-family:var(--mono);font-size:12px;color:var(--muted);width:100%}
+section.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:18px;scroll-margin-top:120px}
+.tag{font-family:var(--mono);font-size:12px;color:var(--gold)}
+ol,ul{margin:0;padding-left:22px;display:grid;gap:8px}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tools span{font-family:var(--mono);font-size:12px;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:4px 10px}
+.prompt{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px;font-family:var(--mono);font-size:13px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{font:inherit;font-family:var(--body);font-weight:700;font-size:13px;padding:8px 14px;border-radius:8px;border:none;background:var(--aqua);color:var(--on-accent);cursor:pointer;justify-self:start}
+.copy:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:600}
+td.blank{height:40px}
+.check{border-top:1px dashed var(--line);padding-top:14px}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
+img.logo{width:min(280px,75%);height:auto}
+@media (max-width:640px){.chips{position:static}section.card{scroll-margin-top:16px}}
+</style></head><body>
+<div class="wrap">
+  <header style="display:grid;gap:12px">
+    <img class="logo" src="/images/sos-logo.png" alt="SOS: Systems Over Stress. AI, automation, simplicity." width="1000" height="333">
+    <div class="eyebrow">Your Stress Audit blueprints</div>
+    <h1>Hire your <em>first AI employee</em>, one job at a time</h1>
+    <p class="muted">Start with the worksheet. Then jump to the agent the quiz matched you with. Each blueprint has the tools, the steps, and a starter prompt you can copy.</p>
+  </header>
+
+  <nav class="chips" aria-label="Jump to a blueprint">
+    <a href="#worksheet">Worksheet</a>
+    <span class="group">Service businesses</span>
+    <a href="#lead-finder">Lead Finder</a><a href="#lead-follow-up">Lead Follow-Up</a><a href="#dm-responder">DM-to-Booking</a>
+    <span class="group">TikTok and online sellers</span>
+    <a href="#audience-scout">Audience Scout</a><a href="#buyer-follow-up">Buyer Follow-Up</a><a href="#comment-to-sale">Comment-to-Sale</a>
+  </nav>
+
+  <section class="card" id="worksheet">
+    <div class="tag">Step 1 · Before you build anything</div>
+    <h2>The Stress Audit worksheet</h2>
+    <p>For one week, write down every task you do more than once. Then score each one. The task with the highest total is your first agent's job.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Task</th><th>Hours a week</th><th>Drains me? (0–3)</th><th>Repeats the same way? (0–3)</th><th>Needs me personally? (3 = no, 0 = yes)</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>Example: answering price questions in DMs</td><td>4</td><td>3</td><td>3</td><td>3</td><td>9</td></tr>
+        <tr><td class="blank"></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="blank"></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="blank"></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="blank"></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table></div>
+    <h3>Then map that one job</h3>
+    <ol>
+      <li><b>What starts it?</b> A new DM, a form, a Monday morning.</li>
+      <li><b>What do you do, step by step?</b> Write it like you're training a new assistant.</li>
+      <li><b>What does "done" look like?</b> Booked, answered, list delivered.</li>
+      <li><b>When should it stop and get you?</b> An upset customer, a custom quote, a big order.</li>
+    </ol>
+    <p class="muted">That page becomes your agent's instructions. You can't hand off a job you haven't written down.</p>
+  </section>
+
+  <section class="card" id="lead-finder">
+    <div class="tag">Service businesses · Lead Finder</div>
+    <h2>Lead Finder</h2>
+    <p>Finds people and businesses who need what you sell, and hands you a short list every week.</p>
+    <div class="tools"><span>ChatGPT or Claude (with web search)</span><span>Google Sheet</span><span>Weekly reminder or scheduled task</span></div>
+    <h3>Set it up</h3>
+    <ol>
+      <li>Describe your ideal customer in 3 lines: who they are, where they are, and what tells you they need you.</li>
+      <li>Create a Google Sheet with columns: Name, Where found, Why they fit, Contact, Status.</li>
+      <li>Paste the starter prompt below into your AI, filled in with your details.</li>
+      <li>Set it to run every Monday, as a scheduled task if your AI tool has one, or a calendar reminder to paste it in.</li>
+      <li>Add the best leads to your sheet. You approve every message before it goes out.</li>
+    </ol>
+    <div class="prompt" id="p-lf">You are my Lead Finder for [business name], a [type of business] in [city/area].
+My ideal customer: [3 lines from step 1].
+Search the web for 10 people or businesses posted in the last 7 days who match. Look at [local Facebook groups, Google Maps, new business listings, Nextdoor, event pages].
+For each one give me: name, where you found them, why they fit, and how to contact them.
+Then write a short, friendly first message for each in my voice: warm, plain, no pressure. Do not send anything. I review everything first.</div>
+    <button class="copy" type="button" data-copy="p-lf">Copy prompt</button>
+    <p class="check muted"><b>Weekly check:</b> Did at least 3 of the 10 actually fit? If not, tighten the ideal customer lines.</p>
+  </section>
+
+  <section class="card" id="lead-follow-up">
+    <div class="tag">Service businesses · Lead Follow-Up</div>
+    <h2>Lead Follow-Up Agent</h2>
+    <p>Makes sure nobody who asked about your service gets forgotten.</p>
+    <div class="tools"><span>Google Sheet or your CRM</span><span>ChatGPT or Claude</span><span>Email tool like MailerLite</span></div>
+    <h3>Set it up</h3>
+    <ol>
+      <li>List everyone who asked in the last 30 days and didn't book: name, what they asked about, date, how they reached you.</li>
+      <li>Decide your rhythm: day 1, day 3, day 7, then once a month.</li>
+      <li>Use the starter prompt to write the follow-ups for each step, in your voice.</li>
+      <li>Put the emails into an automation, or keep the texts saved and send from your sheet each morning.</li>
+      <li>Anyone who replies goes straight to you.</li>
+    </ol>
+    <div class="prompt" id="p-fu">You are my Lead Follow-Up assistant for [business name].
+Here is someone who asked about [service] on [date] and didn't book: [paste their message].
+Write 3 follow-up texts I can send on day 1, day 3 and day 7. Keep each under 40 words, warm and plain, no pressure, no fake urgency.
+Each one should give them a reason to reply (a question, a helpful tip or an open date), and the last one should make it easy to say "not right now."</div>
+    <button class="copy" type="button" data-copy="p-fu">Copy prompt</button>
+    <p class="check muted"><b>Weekly check:</b> How many people replied, and how many booked? Rewrite the message that gets the fewest replies.</p>
+  </section>
+
+  <section class="card" id="dm-responder">
+    <div class="tag">Service businesses · DM-to-Booking</div>
+    <h2>DM-to-Booking Responder</h2>
+    <p>Answers the same questions about prices, availability and booking in your voice, and moves people to book.</p>
+    <div class="tools"><span>ManyChat or your inbox's saved replies</span><span>ChatGPT or Claude</span><span>Your booking link</span></div>
+    <h3>Set it up</h3>
+    <ol>
+      <li>Write down your top 10 questions and your real answers, the way you'd say them.</li>
+      <li>Use the starter prompt to turn them into short replies that end with a next step.</li>
+      <li>Load them into ManyChat as keyword replies, or as saved replies in your inbox.</li>
+      <li>Every reply ends with your booking link or one simple question.</li>
+      <li>Set a rule: complaints, custom quotes and anything unusual come to you.</li>
+    </ol>
+    <div class="prompt" id="p-dm">You are my booking assistant for [business name].
+Here are my top questions and my real answers: [paste your list].
+Rewrite each answer as a reply under 50 words, in a warm, plain voice. End every reply with one next step: my booking link [link] or one simple question.
+Then list the kinds of messages you should NOT answer and should send to me instead.</div>
+    <button class="copy" type="button" data-copy="p-dm">Copy prompt</button>
+    <p class="check muted"><b>Weekly check:</b> Read 5 real conversations. Fix any reply that sounded robotic or missed the question.</p>
+  </section>
+
+  <section class="card" id="audience-scout">
+    <div class="tag">TikTok and online sellers · Audience Scout</div>
+    <h2>Audience Scout</h2>
+    <p>Finds the trends, hooks and buyers in your niche and hands you a weekly content and live plan.</p>
+    <div class="tools"><span>ChatGPT or Claude (with web search)</span><span>TikTok search and Creative Center</span><span>Notes or Google Doc</span></div>
+    <h3>Set it up</h3>
+    <ol>
+      <li>Write your niche, your product and who buys it in 3 lines.</li>
+      <li>Each week, save 10 videos in your niche that did well, and paste the captions or hooks into a doc.</li>
+      <li>Run the starter prompt with your notes.</li>
+      <li>Pick 3 videos and 1 live topic from the plan. Film in a batch.</li>
+    </ol>
+    <div class="prompt" id="p-as">You are my Audience Scout. My niche: [niche]. My product: [product]. My buyer: [who buys].
+Here are hooks and captions from videos doing well in my niche this week: [paste].
+Tell me what these have in common, then give me 7 video ideas and 1 live topic for next week.
+For each video: the hook (first line), the point, and the call to action that leads to my product. Keep it honest: no fake results or income claims.</div>
+    <button class="copy" type="button" data-copy="p-as">Copy prompt</button>
+    <p class="check muted"><b>Weekly check:</b> Which idea got the most saves and comments? Tell your scout next week so it learns.</p>
+  </section>
+
+  <section class="card" id="buyer-follow-up">
+    <div class="tag">TikTok and online sellers · Buyer Follow-Up</div>
+    <h2>Buyer Follow-Up Agent</h2>
+    <p>Keeps talking to people after the video or live ends, so sales don't slip away.</p>
+    <div class="tools"><span>ManyChat</span><span>Email tool like MailerLite</span><span>ChatGPT or Claude</span></div>
+    <h3>Set it up</h3>
+    <ol>
+      <li>Give people a reason to join your list: a free guide, a checklist, or a live replay.</li>
+      <li>Use a comment keyword in ManyChat to send the link and collect their email.</li>
+      <li>Use the starter prompt to write a 3-email follow-up.</li>
+      <li>Load it into an email automation that starts when someone joins.</li>
+    </ol>
+    <div class="prompt" id="p-bf">You are my Buyer Follow-Up writer. I sell [product] for [price] to [buyer].
+Someone just asked for my free [lead magnet] after a TikTok video or live.
+Write 3 short emails: day 0 (deliver the freebie and one quick win), day 2 (a real story or result and what it took), day 4 (an invitation to buy, with an easy no).
+Warm, plain, no pressure, no countdown tricks. Each email under 150 words.</div>
+    <button class="copy" type="button" data-copy="p-bf">Copy prompt</button>
+    <p class="check muted"><b>Weekly check:</b> Look at opens and clicks for each email. Rewrite the subject line of the weakest one.</p>
+  </section>
+
+  <section class="card" id="comment-to-sale">
+    <div class="tag">TikTok and online sellers · Comment-to-Sale</div>
+    <h2>Comment-to-Sale Responder</h2>
+    <p>Answers "link?" and "how much?" in your voice and sends the right product link the moment someone is ready.</p>
+    <div class="tools"><span>ManyChat</span><span>ChatGPT or Claude</span><span>Your product links</span></div>
+    <h3>Set it up</h3>
+    <ol>
+      <li>Pick one keyword per product, like GUIDE or KIT.</li>
+      <li>Use the starter prompt to write the reply for each keyword.</li>
+      <li>Set each one up in ManyChat as a comment keyword that sends a DM with the link.</li>
+      <li>Say the keyword in every video and live: "Comment KIT and I'll send it to you."</li>
+    </ol>
+    <div class="prompt" id="p-cs">You are my Comment-to-Sale assistant. My products: [list each product, price and link].
+For each product, write a DM reply someone gets when they comment the keyword [keyword]. Under 40 words, warm, in my voice, with the link and one line about who it's for.
+Also write replies for "how much?", "is it worth it?" and "I can't afford it right now" that are honest and never pushy.</div>
+    <button class="copy" type="button" data-copy="p-cs">Copy prompt</button>
+    <p class="check muted"><b>Weekly check:</b> How many people commented the keyword, and how many bought? If they comment but don't buy, rewrite the DM.</p>
+  </section>
+
+  <footer>From Monica Lewis · Systems Over Stress · @monica.lewis.ai</footer>
+</div>
+<script>
+document.querySelectorAll(".copy").forEach(b=>{
+  b.addEventListener("click",async()=>{
+    const el=document.getElementById(b.dataset.copy); const t=el.textContent;
+    try{ await navigator.clipboard.writeText(t); b.textContent="Copied"; }
+    catch(e){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent="Selected. Press copy"; }
+    setTimeout(()=>{b.textContent="Copy prompt"},2000);
+  });
+});
+</script>
+</body></html>
