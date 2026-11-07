@@ -254,9 +254,29 @@ $("sendLink").onclick = async () => {
 };
 $("signOut").onclick = async () => { await sb.auth.signOut(); location.hash=""; location.reload(); };
 
-async function boot(){
-  const { data:{ session } } = await sb.auth.getSession();
-  if(!session){ $("gateSignin").hidden=false; $("statusText").textContent="SIGN IN"; return; }
+// Read any error Supabase put in the link (e.g. expired link), then clean the URL.
+const linkErr = (() => {
+  const h = new URLSearchParams(location.hash.slice(1)), q = new URLSearchParams(location.search);
+  return h.get("error_description") || q.get("error_description") || "";
+})();
+function cleanUrl(){
+  if (/access_token|error=|refresh_token|type=magiclink/.test(location.hash) || location.search.includes("error")) {
+    history.replaceState(null, "", location.pathname);
+  }
+}
+
+let booting = false;
+async function boot(session){
+  if (booting || me) return; booting = true;
+  if (session === undefined) { ({ data:{ session } } = await sb.auth.getSession()); }
+  cleanUrl();
+  if(!session){
+    booting = false;
+    $("gateSignin").hidden=false; $("statusText").textContent="SIGN IN";
+    if (linkErr) $("signinMsg").textContent = "That link expired or was already used. Send yourself a new one below.";
+    return;
+  }
+  $("gateSignin").hidden=true;
   me = session.user; $("signOut").hidden=false;
   const { data, error } = await sb.rpc("my_access");
   const acc = (data && data[0]) || {};
@@ -265,7 +285,9 @@ async function boot(){
   $("app").hidden=false; $("statusText").textContent="COMMAND DECK ONLINE";
   await ensureMe(); setupCommunity(); loadSettings(); route();
 }
-sb.auth.onAuthStateChange((evt) => { if(evt==="SIGNED_IN" && !me) location.reload(); });
+sb.auth.onAuthStateChange((evt, session) => {
+  if (session && !me) setTimeout(() => boot(session), 0);
+});
 
 async function ensureMe(){
   const { data } = await sb.from("members").select("first_name,business").eq("user_id", me.id).maybeSingle();
