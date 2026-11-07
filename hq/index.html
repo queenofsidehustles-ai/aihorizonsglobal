@@ -108,7 +108,7 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
   <h1>Your access is being set up</h1>
   <div class="panel">
     <p>You're signed in as <b id="pendingEmail"></b>, but this email isn't on the Founding Members list yet.</p>
-    <p class="muted">If you just bought, Monica unlocks your access within 24 hours. Used a different email to buy? Sign out and use that one.</p>
+    <p class="muted">If you just bought, give it a minute and refresh. Access unlocks automatically. Used a different email at checkout? Sign out and use that one.</p>
   </div>
 </section>
 
@@ -119,7 +119,7 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
     <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
     <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Twin Scene Library</a>
-    <a href="#calls" data-view="calls"><span class="ic">◷</span>Live calls</a>
+    <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
   </nav></aside>
@@ -149,7 +149,7 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
           <li>Answer the questions one at a time. It will help you connect your Gmail and hire each employee.</li>
           <li>Your first morning brief arrives right away. Post it in <a href="#community">My AI Team</a> (blur anything private).</li>
         </ol>
-        <p class="tiny" style="margin-top:12px">Stuck? Post in Questions, or bring it to the next live setup call.</p>
+        <p class="tiny" style="margin-top:12px">Stuck? Ask the <a href="#help">Help desk</a>. It answers right away.</p>
       </div>
       <div class="grid" style="margin-top:12px">
         <div class="card"><div class="tag">Run it</div><h4>Chief of Staff</h4><p>Your morning brief: who needs you, today's schedule, money in, and one money move.</p></div>
@@ -183,26 +183,37 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
       <div class="grid" id="sceneGrid"></div>
     </section>
 
-    <!-- CALLS -->
-    <section data-pane="calls" hidden>
-      <div class="hero"><div class="eyebrow">● Live</div><h1>Live setup calls</h1><p>We build together, answer questions, and celebrate wins.</p></div>
-      <div class="panel"><h2 id="callWhen">To be announced</h2><p class="muted" id="callNote"></p></div>
+    <!-- HELP -->
+    <section data-pane="help" hidden>
+      <div class="hero"><div class="eyebrow">● Help desk · AI assistant</div><h1>Stuck? Ask here.</h1><p>Your AI help assistant knows the whole kit and answers right away. If it can't fix it, tap <b>Send to Monica</b> and she'll reply here.</p></div>
+      <div class="panel compose">
+        <label for="helpQ" class="tiny">YOUR QUESTION</label>
+        <textarea id="helpQ" maxlength="2000" placeholder="Like: My morning brief didn't come today. What do I check?"></textarea>
+        <div class="row"><button class="btn" id="helpAsk" type="button">Ask</button><span class="msg" id="helpMsg" role="status"></span></div>
+        <div class="chips" id="helpStarters" style="margin:0"></div>
+        <p class="tiny" style="margin:0">Never type passwords, card numbers or API keys here.</p>
+      </div>
+      <div class="posts" id="helpList"></div>
     </section>
 
     <!-- STORE -->
     <section data-pane="store" hidden>
       <div class="hero"><div class="eyebrow">● Add-ons</div><h1>Upgrade your team</h1><p>Add more specialists and powers whenever you're ready.</p></div>
       <div class="grid">
-        <div class="card"><div class="tag">Specialist</div><h4>Extra specialist</h4><p>Add Content Studio, Product Creator or Business Builder alongside the one you have.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
-        <div class="card"><div class="tag">Voice</div><h4>Voice Chief of Staff</h4><p>Talk to your Chief of Staff with its own name and voice, push-to-talk, like Monica's Genesis.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
-        <div class="card"><div class="tag">Phase 2</div><h4>Twin Studio credits</h4><p>Make twin and avatar images right here in your HQ, without leaving.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
-        <div class="card"><div class="tag">Done for you</div><h4>Have Monica's team build it</h4><p>We set up your whole team for you. Your $47 is credited.</p><button class="btn ghost" type="button" disabled>Coming soon</button></div>
+        <div class="card"><div class="tag">Voice</div><h4>Voice Chief of Staff</h4><p>Talk to your Chief of Staff with its own name and voice, push-to-talk, like Monica's Genesis. (Free voice already works in the Claude app; see the Kit.)</p><button class="btn ghost" type="button" data-wait="voice">Join the waitlist</button></div>
+        <div class="card"><div class="tag">Specialist</div><h4>Extra specialist</h4><p>Add Content Studio, Product Creator or Business Builder alongside the one you have.</p><button class="btn ghost" type="button" data-wait="specialist">Join the waitlist</button></div>
+        <div class="card"><div class="tag">Phase 2</div><h4>Twin Studio credits</h4><p>Make twin and avatar images right here in your HQ, without leaving.</p><button class="btn ghost" type="button" data-wait="twin_studio">Join the waitlist</button></div>
+        <div class="card"><div class="tag">Done for you</div><h4>Have Monica's team build it</h4><p>We set up your whole team for you. Your $47 is credited.</p><button class="btn ghost" type="button" data-wait="done_for_you">Join the waitlist</button></div>
       </div>
     </section>
 
     <!-- HOST -->
     <section data-pane="host" hidden>
-      <div class="hero"><div class="eyebrow">● Host panel</div><h1>Founding Members list</h1><p>Add a buyer's email to unlock their access. They sign in with that email.</p></div>
+      <div class="hero"><div class="eyebrow">● Host panel</div><h1>Mission control</h1><p>Buyers are added automatically when they pay. Answer help requests and watch the waitlists here.</p></div>
+      <div class="panel" style="margin-bottom:12px"><h2>Help requests for you <span class="badge" id="helpCount">0 open</span></h2><div id="hostHelp" class="posts" style="margin-top:8px"><p class="tiny">Loading…</p></div></div>
+      <div class="panel" style="margin-bottom:12px"><h2>Add-on waitlists</h2><div id="hostWait" class="tiny">Loading…</div></div>
+      <h2 style="margin:6px 0 8px">Founding Members list</h2>
+      <p class="tiny" style="margin:0 0 8px">Manual backup: add someone who paid another way.</p>
       <div class="panel compose">
         <label for="addEmail" class="tiny">BUYER'S EMAIL</label>
         <input id="addEmail" type="email" placeholder="buyer@example.com">
@@ -210,17 +221,11 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
         <div class="row"><button class="btn" id="addBtn" type="button">Unlock access</button><span class="msg" id="hostMsg" role="status"></span></div>
       </div>
       <div class="panel" style="margin-top:12px"><h2>Members</h2><div id="allowList" class="tiny">Loading…</div></div>
-      <div class="panel compose" style="margin-top:12px">
-        <h2>Next live call</h2>
-        <input id="callWhenIn" type="text" placeholder="Thursday, Nov 12 · 7:00 PM ET">
-        <input id="callNoteIn" type="text" placeholder="Zoom link or note">
-        <div class="row"><button class="btn" id="callSave" type="button">Save</button></div>
-      </div>
     </section>
   </main>
 
   <aside class="side">
-    <div class="panel"><h3>Next live call</h3><p id="sideCall" style="margin:0">To be announced</p></div>
+    <div class="panel"><h3>Need help?</h3><p class="tiny" style="margin:0 0 10px">Your AI help assistant answers right away, any time.</p><a class="btn" href="#help" style="display:block;text-align:center;text-decoration:none">Open the Help desk</a></div>
     <div class="panel"><h3>Your profile</h3>
       <div class="compose"><input id="myName" type="text" maxlength="40" placeholder="First name"><input id="myBiz" type="text" maxlength="80" placeholder="Business (optional)"><button class="btn ghost" id="saveMe" type="button">Save</button></div></div>
     <div class="panel"><h3>The rules</h3><p class="tiny" style="margin:0">Your team never sends, posts or pays without your yes. Blur private details before posting a brief. Be kind; we're all building.</p></div>
@@ -282,8 +287,9 @@ async function boot(session){
   const acc = (data && data[0]) || {};
   if(error || !acc.member){ $("pendingEmail").textContent = me.email; $("gatePending").hidden=false; $("statusText").textContent="ACCESS PENDING"; return; }
   isHost = !!acc.host; $("hostNav").hidden = !isHost;
+  if(isHost){ sb.from("help_requests").select("id",{count:"exact",head:true}).eq("status","open").then(({count})=>{ if(count){ $("hostNav").lastChild.textContent = "Host panel ("+count+")"; toast(count+" help request"+(count>1?"s":"")+" waiting for you"); } }); }
   $("app").hidden=false; $("statusText").textContent="COMMAND DECK ONLINE";
-  await ensureMe(); setupCommunity(); loadSettings(); route();
+  await ensureMe(); setupCommunity(); loadWaits(); route();
 }
 sb.auth.onAuthStateChange((evt, session) => {
   if (session && !me) setTimeout(() => boot(session), 0);
@@ -308,7 +314,8 @@ function route(){
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.view === v));
   if(v==="kit" && !loaded.kit){ loaded.kit=1; loadKit(); }
   if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
-  if(v==="host"){ loadAllow(); }
+  if(v==="help"){ loadHelp(); }
+  if(v==="host"){ loadAllow(); loadHostHelp(); loadHostWait(); }
 }
 window.addEventListener("hashchange", () => { if(me) route(); });
 
@@ -419,17 +426,86 @@ function drawScenes(){
   });
 }
 
-// ---------- settings / calls ----------
-async function loadSettings(){
-  const { data } = await sb.from("kit_resources").select("body").eq("slug","next_call").maybeSingle();
-  if(!data) return;
-  try{ const s = JSON.parse(data.body); $("callWhen").textContent=s.when; $("sideCall").textContent=s.when; $("callNote").textContent=s.note||""; $("callWhenIn").value=s.when; $("callNoteIn").value=s.note||""; }catch(e){}
+// ---------- help desk ----------
+const STARTERS = ["How do I start setting up my team?","My morning brief didn't come","How do I talk to my team by voice?","How do I connect Gmail?"];
+function helpCard(h){
+  const card = el("article","post");
+  const q = el("div","who"); q.append(el("div","av",(($("myName").value||me.email||"M").charAt(0)).toUpperCase()), Object.assign(el("div"),{}));
+  q.lastChild.append(el("div","name","You asked"), el("div","meta", ago(h.created_at)));
+  card.append(q, el("p","body", h.question));
+  const a = el("div","comment"); a.style.marginTop="10px";
+  a.append(el("div","meta","◈ AI help assistant"), el("p","body", h.ai_answer || ""));
+  card.append(a);
+  if(h.host_reply){ const r=el("div","comment"); r.style.borderColor="var(--gold)"; r.append(el("div","meta","★ Monica replied"), el("p","body",h.host_reply)); card.append(r); }
+  const acts = el("div","acts");
+  if(h.status==="ai"){
+    const send = el("button",null,"Still stuck? Send to Monica →"); send.type="button"; send.style.color="var(--gold)";
+    send.onclick = async () => { send.disabled=true; const { error } = await sb.from("help_requests").update({ status:"open" }).eq("id",h.id); if(error){ send.disabled=false; toast("Couldn't send. Try again."); } else { toast("Sent to Monica"); loadHelp(); } };
+    acts.append(send);
+  } else if(h.status==="open"){ acts.append(el("span",null,"⏳ With Monica. Her reply shows up right here.")); }
+  else { acts.append(el("span",null,"✓ Answered")); }
+  card.append(acts); return card;
 }
-$("callSave").onclick = async () => {
-  const body = JSON.stringify({ when: $("callWhenIn").value.trim() || "To be announced", note: $("callNoteIn").value.trim() });
-  const { error } = await sb.from("kit_resources").update({ body, updated_at: new Date().toISOString() }).eq("slug","next_call");
-  toast(error ? "Couldn't save." : "Call saved"); loadSettings();
-};
+async function loadHelp(){
+  const { data, error } = await sb.from("help_requests").select("id,question,ai_answer,status,host_reply,created_at").eq("user_id",me.id).order("created_at",{ascending:false}).limit(30);
+  const box = $("helpList"); box.innerHTML="";
+  if(error){ box.append(el("p","err","Couldn't load your questions. Refresh to try again.")); return; }
+  if(!data.length){ box.append(el("p","muted","Your questions and answers will show up here.")); return; }
+  data.forEach(h => box.append(helpCard(h)));
+}
+async function askHelp(){
+  const question = $("helpQ").value.trim(); if(!question) { $("helpMsg").textContent="Type a question first."; return; }
+  $("helpAsk").disabled = true; $("helpMsg").textContent = "Thinking…";
+  const { data, error } = await sb.functions.invoke("hq-help", { body:{ question } });
+  $("helpAsk").disabled = false;
+  if(error){ let m="Help is busy. Try again in a minute."; try{ const j = await error.context.json(); if(j.error) m=j.error; }catch(e){} $("helpMsg").textContent=m; return; }
+  $("helpMsg").textContent=""; $("helpQ").value=""; loadHelp();
+}
+$("helpAsk").onclick = askHelp;
+STARTERS.forEach(s => { const b=el("button","chip",s); b.type="button"; b.onclick=()=>{ $("helpQ").value=s; askHelp(); }; $("helpStarters").append(b); });
+
+// ---------- add-on waitlist ----------
+async function loadWaits(){
+  const { data } = await sb.from("waitlist").select("item").eq("user_id",me.id);
+  const mine = new Set((data||[]).map(r=>r.item));
+  document.querySelectorAll("[data-wait]").forEach(b => {
+    const on = mine.has(b.dataset.wait);
+    b.textContent = on ? "You're on the list ✓" : "Join the waitlist";
+    b.onclick = async () => {
+      b.disabled = true;
+      const res = on ? await sb.from("waitlist").delete().eq("user_id",me.id).eq("item",b.dataset.wait)
+                     : await sb.from("waitlist").insert({ item:b.dataset.wait });
+      b.disabled = false; if(res.error) toast("Couldn't save. Try again."); else { toast(on ? "Removed" : "You're on the list"); loadWaits(); }
+    };
+  });
+}
+
+// ---------- host: help queue + waitlists ----------
+async function loadHostHelp(){
+  const { data, error } = await sb.rpc("host_help_queue");
+  const box = $("hostHelp"); box.innerHTML="";
+  const open = (data||[]).filter(h=>h.status==="open").length;
+  $("helpCount").textContent = open + " open";
+  if(error){ box.append(el("p","err","Couldn't load help requests.")); return; }
+  if(!data.length){ box.append(el("p","tiny","No one needs you right now. The AI is handling it.")); return; }
+  data.forEach(h => {
+    const c = el("article","post"+(h.status==="open"?" pin":""));
+    c.append(el("div","meta", h.email + " · " + ago(h.created_at) + " · " + (h.status==="open"?"needs you":"answered")));
+    c.append(el("p","body", h.question));
+    const ai = el("div","comment"); ai.append(el("div","meta","AI answered"), el("p","body",h.ai_answer||"")); c.append(ai);
+    const f = el("div","compose"); f.style.marginTop="10px";
+    const ta = el("textarea"); ta.value = h.host_reply || ""; ta.placeholder="Your reply (they'll see it in their Help desk)"; ta.setAttribute("aria-label","Reply to "+h.email);
+    const b = el("button","btn", h.status==="open" ? "Send reply" : "Update reply"); b.type="button";
+    b.onclick = async () => { const t=ta.value.trim(); if(!t) return; b.disabled=true; const { error } = await sb.from("help_requests").update({ host_reply:t, status:"answered" }).eq("id",h.id); b.disabled=false; toast(error?"Couldn't send.":"Reply sent"); loadHostHelp(); };
+    f.append(ta, b); c.append(f); box.append(c);
+  });
+}
+async function loadHostWait(){
+  const { data } = await sb.rpc("host_waitlist");
+  const names = { voice:"Voice Chief of Staff", specialist:"Extra specialist", twin_studio:"Twin Studio", done_for_you:"Done for you" };
+  const box = $("hostWait"); box.innerHTML="";
+  Object.keys(names).forEach(k => { const n = ((data||[]).find(r=>r.item===k)||{}).members || 0; const row=el("div"); row.style.cssText="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)"; row.append(el("span",null,names[k]), el("b",null,String(n))); box.append(row); });
+}
 
 // ---------- host ----------
 async function loadAllow(){
