@@ -118,7 +118,7 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
     <a href="#community" data-view="community"><span class="ic">◉</span>Community</a>
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
     <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
-    <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Twin Scene Library</a>
+    <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Scene Library</a>
     <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
@@ -167,19 +167,22 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
 
     <!-- SCENES -->
     <section data-pane="scenes" hidden>
-      <div class="hero"><div class="eyebrow">● Content Studio</div><h1>Twin Scene Library</h1><p>Upload your master photo in ChatGPT, tap Copy on a scene, paste, send. Your twin or avatar keeps the exact same face; only the scene changes.</p></div>
-      <details class="panel" style="margin-bottom:12px" open><summary><b>Step by step, on your phone</b></summary>
+      <div class="hero"><div class="eyebrow">● Creator Studio · Story Studio</div><h1>Scene Library</h1><p>300 copy-and-paste scenes for your twin, avatar or AI influencer: lifestyle, kitchen, fashion, UGC and product, TikTok Shop, mini dramas and more. Upload your master photo, copy a scene, paste, send. The face stays the same; only the scene changes.</p></div>
+      <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
+      <details class="panel" style="margin-bottom:12px"><summary><b>How to use a scene, step by step</b></summary>
         <ol class="steps">
-          <li>Open the <b>ChatGPT app</b>. Tap the <b>pencil</b> (top right) for a new chat.</li>
-          <li>Tap <b>+</b> next to the message box, then <b>Photos</b>, and pick your <b>master photo</b>.</li>
+          <li>Open your picture or video app. We recommend <b>Google Flow</b> (flow.google.com, free daily credits). ChatGPT, Gemini, HeyGen, Higgsfield and Kling work too.</li>
+          <li>Upload your <b>master photo</b> (your twin or your avatar). For product scenes, upload the <b>real product photo</b> too.</li>
           <li>Come back here and tap <b>Copy prompt</b> on a scene. It says <b>Copied ✓</b>.</li>
-          <li>In ChatGPT, <b>press and hold</b> the message box, then tap <b>Paste</b>.</li>
-          <li>Change any <b>[bracket]</b> words if you want, then tap <b>send</b>.</li>
-          <li>Like it? Press and hold the picture and tap <b>Save</b>. Not quite? Type: "Same scene, try again. Keep her face exactly the same."</li>
+          <li>Paste it into your app, change any <b>[bracket]</b> words, and send.</li>
+          <li>Like it? Save it. Not quite? Type: "Same scene, try again. Keep the face exactly the same."</li>
+          <li>Want a look you saw on Pinterest? Tap <b>Ideas on Pinterest</b>, save a picture you love, then use the <b>"Use my Pinterest pick"</b> scene in Start here.</li>
         </ol>
-        <p class="tiny" style="margin-top:8px">No master photo yet? Start with the "Start here" scenes. Always label AI images as AI. Your twin must be you; an avatar must be an original made-up person.</p>
+        <p class="tiny" style="margin-top:8px">No master photo yet? Start with the "Start here" scenes: one set for your twin (you), one for an avatar (an original made-up person). Always label AI images and videos as AI. Never use a real person's face, and never present AI as a real customer review.</p>
       </details>
+      <input type="search" id="sceneSearch" placeholder="Search 300 scenes (try kitchen, unboxing, romance)" aria-label="Search scenes" style="width:100%;margin-bottom:10px">
       <div class="chips" id="sceneChips"></div>
+      <p class="tiny" id="sceneCount" style="margin:6px 0 10px"></p>
       <div class="grid" id="sceneGrid"></div>
     </section>
 
@@ -402,7 +405,7 @@ async function loadKit(){
     } else { const pre = el("pre","prompt"); pre.textContent = r.body; c.append(pre); }
     box.append(c);
   });
-  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Scene Library"), el("p",null,"32 copy-and-paste scenes: 24 for your twin or avatar, plus 8 Mini Story shots for your drama series."));
+  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Scene Library"), el("p",null,"300 copy-and-paste scenes for your twin, avatar or AI influencer, plus a new Scene of the Day."));
   const go = el("a","btn","Open the library"); go.href="#scenes"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
 }
 
@@ -411,19 +414,35 @@ let SC = null, scat = "All";
 async function loadScenes(){
   const { data, error } = await sb.from("kit_resources").select("body").eq("slug","scenes").maybeSingle();
   if(error || !data){ $("sceneGrid").append(el("p","err","The library didn't load. Refresh to try again.")); return; }
-  SC = JSON.parse(data.body); drawScenes();
+  SC = JSON.parse(data.body);
+  $("sceneSearch").addEventListener("input", ()=>drawScenes());
+  drawToday(); drawScenes();
+}
+function sceneFull(s){ return s[0]==="Mini Story" ? s[2] : s[0]==="Start here" ? `${s[2]}\n\n${SC.avoid}` : `${SC.lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`; }
+function pinUrl(s){ const q = (s[1].replace(/^[^:]+:\s*/,"").replace(/\(.*?\)/g,"")+" "+(s[0]==="Mini Story"?"cinematic scene":s[0].split(" ")[0]+" aesthetic")).trim(); return "https://www.pinterest.com/search/pins/?q="+encodeURIComponent(q); }
+function sceneCard(s){
+  const c = el("div","card"); c.append(el("div","tag",s[0]), el("h4",null,s[1]), el("p",null,s[2]));
+  const b = el("button","btn","Copy prompt"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(sceneFull(s),b);
+  c.append(b);
+  if(s[0]!=="Start here"){ const p = el("a","btn ghost","Ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p); }
+  return c;
+}
+function drawToday(){
+  const pool = SC.scenes.filter(s=>s[0]!=="Start here"); if(!pool.length) return;
+  const day = Math.floor((Date.now() - new Date().getTimezoneOffset()*60000)/86400000);
+  const s = pool[day % pool.length]; const box = $("sceneToday"); box.innerHTML="";
+  box.append(el("div","tag","✦ Scene of the Day"), sceneCard(s)); box.hidden=false;
 }
 function drawScenes(){
   const cats = ["All", ...new Set(SC.scenes.map(s=>s[0]))];
   const chips = $("sceneChips"); chips.innerHTML="";
   cats.forEach(k => { const b=el("button","chip",k); b.type="button"; b.setAttribute("aria-pressed",k===scat); b.onclick=()=>{ scat=k; drawScenes(); }; chips.append(b); });
+  const q = ($("sceneSearch").value||"").trim().toLowerCase();
+  const list = SC.scenes.filter(s=>(scat==="All"||s[0]===scat) && (!q || (s[0]+" "+s[1]+" "+s[2]).toLowerCase().includes(q)));
+  $("sceneCount").textContent = `${list.length} scene${list.length===1?"":"s"}`;
   const g = $("sceneGrid"); g.innerHTML="";
-  SC.scenes.filter(s=>scat==="All"||s[0]===scat).forEach(s => {
-    const c = el("div","card"); c.append(el("div","tag",s[0]), el("h4",null,s[1]), el("p",null,s[2]));
-    const full = s[0]==="Mini Story" ? s[2] : s[0]==="Start here" ? `${s[2]}\n\n${SC.avoid}` : `${SC.lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
-    const b = el("button","btn","Copy prompt"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(full,b);
-    c.append(b); g.append(c);
-  });
+  list.forEach(s => g.append(sceneCard(s)));
+  if(!list.length) g.append(el("p","muted","No scenes match. Try another word."));
 }
 
 // ---------- help desk ----------
