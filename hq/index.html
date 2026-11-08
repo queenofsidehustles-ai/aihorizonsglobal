@@ -258,7 +258,9 @@ $("sendLink").onclick = async () => {
   $("sendLink").disabled = true; $("signinMsg").textContent = "Sending…";
   const { error } = await sb.auth.signInWithOtp({ email, options:{ emailRedirectTo: location.origin + "/hq/" } });
   $("sendLink").disabled = false;
-  $("signinMsg").textContent = error ? ("That didn't send: " + error.message) : "Check your email and tap the link. (Check spam too.)";
+  const wait = error && /security purposes|after \d+ seconds|rate limit/i.test(error.message || "");
+  $("signinMsg").textContent = wait ? "A sign-in link was just sent to your email. Check your inbox (and spam) and tap it. Need a new one? Try again in a minute."
+    : error ? ("That didn't send: " + error.message) : "Check your email and tap the link. (Check spam too.)";
 };
 $("signOut").onclick = async () => { await sb.auth.signOut(); location.hash=""; location.reload(); };
 
