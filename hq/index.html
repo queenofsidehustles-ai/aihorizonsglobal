@@ -402,7 +402,7 @@ async function loadKit(){
     } else { const pre = el("pre","prompt"); pre.textContent = r.body; c.append(pre); }
     box.append(c);
   });
-  const sc = el("div","card"); sc.append(el("div","tag","Content Studio"), el("h4",null,"Twin Scene Library"), el("p",null,"24 copy-and-paste scenes for your twin or avatar."));
+  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Scene Library"), el("p",null,"32 copy-and-paste scenes: 24 for your twin or avatar, plus 8 Mini Story shots for your drama series."));
   const go = el("a","btn","Open the library"); go.href="#scenes"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
 }
 
@@ -420,7 +420,7 @@ function drawScenes(){
   const g = $("sceneGrid"); g.innerHTML="";
   SC.scenes.filter(s=>scat==="All"||s[0]===scat).forEach(s => {
     const c = el("div","card"); c.append(el("div","tag",s[0]), el("h4",null,s[1]), el("p",null,s[2]));
-    const full = s[0]==="Start here" ? `${s[2]}\n\n${SC.avoid}` : `${SC.lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
+    const full = s[0]==="Mini Story" ? s[2] : s[0]==="Start here" ? `${s[2]}\n\n${SC.avoid}` : `${SC.lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
     const b = el("button","btn","Copy prompt"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(full,b);
     c.append(b); g.append(c);
   });
