@@ -106,7 +106,8 @@ const Q = [
   {t:"What kind of business do you run?", k:"biz", o:[
     ["Cleaning or home services",{}],["Parties, events or rentals",{}],["Beauty, wellness or salon",{}],
     ["Real estate or insurance",{}],["Coaching, consulting or another service",{}],
-    ["TikTok Shop or live selling",{online:1}],["Digital products (courses, templates, ebooks)",{online:1}],["Faceless content channel",{online:1}]]},
+    ["TikTok Shop or live selling",{online:1}],["Digital products (courses, templates, ebooks)",{online:1}],["Faceless content channel",{online:1}],
+    ["UGC creator or brand deals",{online:1}],["AI videos or mini drama series",{online:1}],["Just starting out",{}]]},
   {t:"Where do most of your new customers come from right now?", k:"src", o:[
     ["Referrals and word of mouth only",{finder:2}],["My TikTok videos, lives or social posts",{finder:1}],
     ["Ads or listing sites",{followup:1}],["Honestly, not enough are coming in",{finder:3}]]},
@@ -127,15 +128,15 @@ const AGENTS = {
   finder:{name:"Lead Finder", why:"Your business is ready for more customers, but finding them is eating your time. A lead finder searches for people and businesses who need what you sell and hands you a fresh list every week.",
     jobs:["Searches for local customers who fit your business","Delivers a short list every Monday","Drafts a first message for each lead for you to approve"], hours:"hFind",
     on:{name:"Audience Scout", why:"Your offer is ready, but getting it in front of buyers is eating your time. An audience scout finds the trends, hooks and buyers in your niche and hands you a plan every week.",
-      jobs:["Finds trending topics and hooks in your niche","Spots the comments and creators where your buyers hang out","Hands you a weekly content and live plan"]}},
+      jobs:["Finds trending topics, products and hooks in your niche","Spots brands looking for creators and where your buyers hang out","Hands you a weekly content and live plan"]}},
   followup:{name:"Lead Follow-Up Agent", why:"People are already interested in you, and money is slipping through the cracks after the first conversation. A follow-up agent makes sure nobody gets forgotten.",
     jobs:["Follows up with everyone who asked but didn't book","Sends friendly reminders on a schedule you set","Tells you who's ready to buy so you can step in"], hours:"hMsg",
     on:{name:"Buyer Follow-Up Agent", why:"People watch, comment and click, then leave without buying. A follow-up agent keeps talking to them after the video or live ends so sales don't slip away.",
       jobs:["Follows up with people who asked for the link but didn't buy","Sends your email list a friendly nudge after each live","Flags your hottest buyers so you can reply personally"]}},
   responder:{name:"DM-to-Booking Responder", why:"You're answering the same questions over and over. A responder handles price, availability and booking questions in your voice and moves people to book.",
-    jobs:["Answers your top questions in your voice","Sends your booking link at the right moment","Hands real conversations back to you"], hours:"hMsg",
+    jobs:["Drafts answers to your top questions in your voice","Turns them into saved replies you can paste in seconds","Ends every reply with an easy next step to book"], hours:"hMsg",
     on:{name:"Comment-to-Sale Responder", why:"Your comments and DMs are full of the same questions. A responder answers them in your voice and sends the product link the moment someone is ready to buy.",
-      jobs:["Answers \"link?\" and \"how much?\" in your voice","Sends the right product link by keyword","Hands real conversations back to you"]}}
+      jobs:["Drafts answers to \"link?\" and \"how much?\" in your voice","Turns them into saved replies you can paste in seconds","Moves commenters to your link in bio so you can follow up by email"]}}
 };
 let i = 0; const ans = {hMsg:5,hFind:3};
 const $ = id => document.getElementById(id);
