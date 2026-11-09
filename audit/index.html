@@ -107,7 +107,7 @@ const Q = [
     ["Cleaning or home services",{}],["Parties, events or rentals",{}],["Beauty, wellness or salon",{}],
     ["Real estate or insurance",{}],["Coaching, consulting or another service",{}],
     ["TikTok Shop or live selling",{online:1}],["Digital products (courses, templates, ebooks)",{online:1}],["Faceless content channel",{online:1}],
-    ["UGC creator or brand deals",{online:1}],["AI videos or mini drama series",{online:1}],["Just starting out",{}]]},
+    ["UGC creator or brand deals",{online:1}],["AI story or mini drama series",{online:1,story:1}],["Just starting out",{}]]},
   {t:"Where do most of your new customers come from right now?", k:"src", o:[
     ["Referrals and word of mouth only",{finder:2}],["My TikTok videos, lives or social posts",{finder:1}],
     ["Ads or listing sites",{followup:1}],["Honestly, not enough are coming in",{finder:3}]]},
@@ -138,6 +138,9 @@ const AGENTS = {
     on:{name:"Comment-to-Sale Responder", why:"Your comments and DMs are full of the same questions. A responder answers them in your voice and sends the product link the moment someone is ready to buy.",
       jobs:["Drafts answers to \"link?\" and \"how much?\" in your voice","Turns them into saved replies you can paste in seconds","Moves commenters to your link in bio so you can follow up by email"]}}
 };
+const STORY = {name:"Story Studio", hours:"hFind",
+  why:"You want to tell stories that keep people coming back for the next episode. Story Studio plans your series with you and keeps every character looking the same from episode to episode, the part that trips most people up.",
+  jobs:["Plans your season: the hook, the twists and a cliffhanger for every episode","Writes each episode shot by shot, with copy-and-paste picture and clip prompts","Keeps your characters consistent, then puts your clips together into one finished video"]};
 let i = 0; const ans = {hMsg:5,hFind:3};
 const $ = id => document.getElementById(id);
 
@@ -184,7 +187,8 @@ function showResult(){
   const top = order.reduce((a,b)=> s[b]>s[a] ? b : a);
   const base = AGENTS[top];
   const online = Q[0].o[ans.biz] && Q[0].o[ans.biz][1].online;
-  const A = online ? {...base.on, hours: base.hours} : base;
+  const story = Q[0].o[ans.biz] && Q[0].o[ans.biz][1].story;
+  const A = story ? STORY : online ? {...base.on, hours: base.hours} : base;
   $("r-agent").textContent = A.name;
   $("r-why").textContent = A.why;
   $("r-jobs").innerHTML = ""; A.jobs.forEach(j=>{const li=document.createElement("li"); li.textContent=j; $("r-jobs").append(li);});
@@ -214,7 +218,7 @@ $("signup").addEventListener("submit",async e=>{
   try{
     await fetch("https://assets.mailerlite.com/jsonp/1904004/forms/203357277657237007/subscribe",{method:"POST",body:fd,mode:"no-cors"});
     $("signup").querySelectorAll("input,button").forEach(x=>x.disabled=true);
-    const slug = {"Lead Finder":"lead-finder","Lead Follow-Up Agent":"lead-follow-up","DM-to-Booking Responder":"dm-responder","Audience Scout":"audience-scout","Buyer Follow-Up Agent":"buyer-follow-up","Comment-to-Sale Responder":"comment-to-sale"}[LAST.agent] || "worksheet";
+    const slug = {"Lead Finder":"lead-finder","Lead Follow-Up Agent":"lead-follow-up","DM-to-Booking Responder":"dm-responder","Audience Scout":"audience-scout","Buyer Follow-Up Agent":"buyer-follow-up","Comment-to-Sale Responder":"comment-to-sale","Story Studio":"story-studio"}[LAST.agent] || "worksheet";
     $("formmsg").textContent = "You're in! Confirm the email in your inbox so I can keep sending you help. Your blueprint is ready now: ";
     const a = document.createElement("a"); a.href = "/audit/blueprints/#" + slug; a.textContent = "open your blueprint"; a.style.color = "var(--pink)"; a.style.fontWeight = "700";
     $("formmsg").append(a, document.createTextNode(". Ready for your whole AI team? "));
