@@ -730,7 +730,7 @@ async function loadScWho(){
 }
 function loadScWhoDraw(){ [...$("scWho").querySelectorAll("button")].forEach(b=>b.setAttribute("aria-pressed", scWho ? b.textContent===scWho.name : b.textContent==="No character")); }
 function drawStudioTabs(v){
-  const T=[["builder","1","Make your character","Do this once"],["scenes","2","Make posts","300+ scene ideas"],["series","3","Make videos and a series","Clips and mini-dramas"]];
+  const T=[["builder","1","Your character","Make her once"],["scenes","2","Make posts","300+ ideas"],["series","3","Make videos","Clips and series"]];
   document.querySelectorAll("[data-tabs]").forEach(box=>{ box.innerHTML=""; T.forEach(t=>{ const a=el("a"); a.href="#"+t[0]; if(t[0]===v){ a.className="on"; a.setAttribute("aria-current","page"); } const b=el("b",null,t[1]); const s=el("span"); s.append(document.createTextNode(t[2])); s.append(el("small",null,t[3])); a.append(b,s); box.append(a); }); });
 }
 
