@@ -80,6 +80,16 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
 .msg{font-family:var(--mono);font-size:12px;color:var(--gold);min-height:1em}
 .err{color:var(--bad)}
 .toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--neon);color:var(--ink);font-weight:700;padding:10px 16px;border-radius:999px;box-shadow:0 0 20px rgba(47,243,224,.6);z-index:20}
+.cb-step{display:flex;align-items:center;gap:10px;margin-bottom:6px}.cb-step h2{margin:0}
+.cb-n{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-weight:700;color:var(--ink);background:var(--neon);box-shadow:0 0 12px rgba(47,243,224,.6)}
+.cb-l{margin:12px 0 6px;text-transform:uppercase;letter-spacing:.08em}
+.cb-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.cb-row .btn{text-decoration:none;text-align:center}
+.cb-guide{margin-top:12px;border:1px dashed rgba(242,217,166,.6);border-radius:12px;padding:12px}
+.cb-guide .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+.cb-out{border-color:rgba(47,243,224,.6);box-shadow:0 0 24px rgba(47,243,224,.15)}
+.cb-check{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:14px;color:var(--muted)}
+.cb-check input{margin-top:4px;width:18px;height:18px;accent-color:var(--neon)}
 @media (max-width:980px){.shell{grid-template-columns:minmax(0,1fr)}.rail nav{position:static;flex-direction:row;overflow-x:auto}.rail a{white-space:nowrap}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
@@ -119,6 +129,7 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
     <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
     <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Content Studio</a>
+    <a href="#builder" data-view="builder"><span class="ic">◐</span>Character Builder</a>
     <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
@@ -201,6 +212,103 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
       <div class="chips" id="sceneChips"></div>
       <p class="tiny" id="sceneCount" style="margin:6px 0 10px"></p>
       <div class="grid" id="sceneGrid"></div>
+    </section>
+
+    <!-- CHARACTER BUILDER -->
+    <section data-pane="builder" hidden>
+      <div class="hero"><div class="eyebrow">● Creator Studio · Character Builder</div><h1>Build your character</h1><p>Tap your choices. Your prompt writes itself as you go, using the realism recipe: who, age and shot first, then face, skin tone and undertone, real skin details, never just "realistic."</p></div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">1</span><h2>Who are we making?</h2></div>
+        <div class="chips" data-cb="mode" data-single></div>
+        <div id="cbGuide" class="cb-guide" hidden>
+          <div class="tag">📸 Your twin photo checklist (30 seconds)</div>
+          <ol class="steps">
+            <li>Face a window. Daylight on your face, no harsh shadows.</li>
+            <li>No filters, no beauty mode, no heavy edits.</li>
+            <li>Hair the way you usually wear it, and the earrings or glasses you always wear.</li>
+            <li>Phone at eye level, about an arm's length away. Neutral face or a soft smile.</li>
+            <li>Take 3: straight on, a little to the left, a little to the right.</li>
+            <li>Then tap the choices below that match <b>your real features</b>. They help the app keep your face, skin tone and hair the same.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">2</span><h2>The basics</h2></div>
+        <p class="tiny cb-l">Shot type</p><div class="chips" data-cb="shot" data-single></div>
+        <p class="tiny cb-l">Gender</p><div class="chips" data-cb="gender" data-single></div>
+        <p class="tiny cb-l">Age range</p><div class="chips" data-cb="age" data-single></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">3</span><h2>Face and skin</h2></div>
+        <p class="tiny cb-l">Face shape</p><div class="chips" data-cb="face" data-single></div>
+        <p class="tiny cb-l">Skin tone (how light or deep)</p><div class="chips" data-cb="depth" data-single></div>
+        <p class="tiny cb-l">Undertone (look at the veins on your wrist: blue = cool, green = warm, both = neutral)</p><div class="chips" data-cb="under" data-single></div>
+        <p class="tiny cb-l">Eyes</p><div class="chips" data-cb="eyes" data-single></div>
+        <p class="tiny cb-l">Eye color</p><div class="chips" data-cb="eyecolor" data-single></div>
+        <p class="tiny cb-l">Nose</p><div class="chips" data-cb="nose" data-single></div>
+        <p class="tiny cb-l">Lips</p><div class="chips" data-cb="lips" data-single></div>
+        <p class="tiny cb-l">Brows</p><div class="chips" data-cb="brows" data-single></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">4</span><h2>Hair, body and style</h2></div>
+        <p class="tiny cb-l">Hair texture</p><div class="chips" data-cb="hair" data-single></div>
+        <p class="tiny cb-l">Hair length</p><div class="chips" data-cb="hlen" data-single></div>
+        <p class="tiny cb-l">Worn as</p><div class="chips" data-cb="hstyle" data-single></div>
+        <p class="tiny cb-l">Hair color</p><div class="chips" data-cb="hcolor" data-single></div>
+        <p class="tiny cb-l">Body type (used for half and full body shots)</p><div class="chips" data-cb="body" data-single></div>
+        <p class="tiny cb-l">Makeup</p><div class="chips" data-cb="makeup" data-single></div>
+        <p class="tiny cb-l">Extras (tap any)</p><div class="chips" data-cb="extras"></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">5</span><h2>Make it look real</h2></div>
+        <p class="tiny cb-l">Real-skin details (keep at least 3 on: perfect skin is what makes AI look fake)</p><div class="chips" data-cb="real"></div>
+        <p class="tiny cb-l">Outfit</p><div class="chips" data-cb="outfit" data-single></div>
+        <p class="tiny cb-l">Background</p><div class="chips" data-cb="bg" data-single></div>
+        <p class="tiny cb-l">Light</p><div class="chips" data-cb="light" data-single></div>
+        <p class="tiny cb-l">Camera look</p><div class="chips" data-cb="cam" data-single></div>
+      </div>
+
+      <div class="panel cb-out" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">6</span><h2>Your prompt</h2></div>
+        <div class="row cb-row"><button class="btn ghost" type="button" id="cbSurprise">🎲 Surprise me</button><button class="btn ghost" type="button" id="cbReset">Start over</button></div>
+        <pre class="prompt" id="cbPrompt" aria-live="polite"></pre>
+        <div class="row cb-row">
+          <button class="btn" type="button" id="cbCopy" data-label="Copy prompt">Copy prompt</button>
+          <a class="btn ghost" id="cbOpenGpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT</a>
+          <a class="btn ghost" href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Open Google Flow</a>
+        </div>
+        <p class="tiny" id="cbHow"></p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">7</span><h2>Save your character</h2></div>
+        <p class="muted" style="font-size:14px">Love the picture? Give your character a name and save her card. Every scene below will use her exact description, so she looks the same in every post.</p>
+        <div class="row cb-row"><input type="text" id="cbName" maxlength="40" placeholder="Character name, like Megan" style="flex:1;min-width:180px"><button class="btn" type="button" id="cbSave">Save character</button></div>
+        <div class="chips" id="cbSaved" style="margin-top:10px"></div>
+        <p class="tiny">Saved on this device and browser.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">8</span><h2>Put your character in a scene</h2></div>
+        <p class="tiny cb-l">Character</p><div class="chips" id="cbSceneWho"></div>
+        <p class="tiny cb-l">Scene (each one comes with a caption idea)</p><div class="chips" data-cb="scene" data-single></div>
+        <label class="cb-check"><input type="checkbox" id="cbProduct"> I'm adding a product photo too (keeps the label, colors and shape exactly the same)</label>
+        <pre class="prompt" id="cbScenePrompt"></pre>
+        <div class="row cb-row"><button class="btn" type="button" id="cbSceneCopy" data-label="Copy scene prompt">Copy scene prompt</button><button class="btn ghost" type="button" id="cbMove" data-label="Make it move: copy clip prompt">Make it move: copy clip prompt</button></div>
+        <p class="tiny" id="cbCaption"></p>
+      </div>
+
+      <div class="panel">
+        <div class="cb-step"><span class="cb-n">9</span><h2>Picture came out wrong? Tap the fix</h2></div>
+        <p class="muted" style="font-size:14px">Paste the fix into the same chat, right under the picture. Attach your photo again if the face changed.</p>
+        <div class="grid" id="cbFixes"></div>
+      </div>
+      <p class="tiny" style="margin-top:10px">Always turn on the AI label when you post. Make up your own characters: never a real person's face (except your own), never a celebrity, and no realistic AI children.</p>
     </section>
 
     <!-- HELP -->
@@ -336,6 +444,7 @@ function route(){
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.view === v));
   if(v==="kit" && !loaded.kit){ loaded.kit=1; loadKit(); }
   if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
+  if(v==="builder" && !loaded.builder){ loaded.builder=1; initBuilder(); }
   if(v==="help"){ loadHelp(); }
   if(v==="host"){ loadAllow(); loadHostHelp(); loadHostWait(); }
 }
@@ -564,6 +673,168 @@ $("addBtn").onclick = async () => {
   $("hostMsg").textContent = error ? (error.code==="23505" ? "Already a member." : "Couldn't add.") : "Unlocked ✓";
   if(!error){ $("addEmail").value=""; $("addNote").value=""; loadAllow(); }
 };
+
+
+// ---------- character builder ----------
+const CB = {
+  mode:[["My twin (from my photo)","twin"],["An avatar (made from scratch)","avatar"]],
+  shot:[["Headshot","headshot portrait|Framed from the top of the head to just below the shoulders."],["Half body","half-body portrait|Framed from the top of the head to the waist."],["Full body","full-body portrait|Head to feet fully in frame."],["Character sheet","character reference sheet|Three views side by side: front, three-quarter and side profile, same outfit and light in each."]],
+  gender:[["Woman","woman"],["Man","man"]],
+  age:[["Early 20s","early 20s"],["Mid 20s","mid 20s"],["Late 20s","late 20s"],["30s","30s"],["40s","40s"],["50s","50s"],["60+","60s"]],
+  face:[["Oval","an oval face with balanced proportions"],["Round","a round face with soft, full cheeks"],["Heart","a heart-shaped face with high cheekbones and a softly tapered chin"],["Square","a square face with a strong, defined jawline"],["Long","a long, oblong face with a straight jawline"],["Diamond","a diamond-shaped face with prominent cheekbones and a narrow chin"]],
+  depth:[["Fair","fair and very light"],["Light","light"],["Light-medium","light-medium"],["Medium","medium"],["Tan","tan"],["Brown","medium brown"],["Deep brown","deep brown"],["Rich deep","rich, very deep brown"]],
+  under:[["Cool (pink)","with cool, pink undertones"],["Warm (golden)","with warm, golden undertones"],["Neutral","with neutral undertones"],["Olive","with olive undertones"],["Red-brown","with warm red-brown undertones"]],
+  eyes:[["Almond","almond-shaped eyes"],["Round","round eyes"],["Hooded","hooded eyes"],["Monolid","monolid eyes"],["Deep-set","deep-set eyes"],["Upturned","upturned eyes"]],
+  eyecolor:[["Dark brown","dark brown"],["Brown","warm brown"],["Hazel","hazel"],["Green","green"],["Blue","blue"],["Gray","gray"]],
+  nose:[["Straight","a straight, medium nose"],["Small","a small, slightly upturned nose"],["Broad","a broad nose with a rounded tip"],["Wide bridge","a wide nose bridge with full nostrils"],["Aquiline","an aquiline nose with a gentle curve"]],
+  lips:[["Full","full lips"],["Medium","medium lips"],["Thin","thin lips"],["Full lower lip","a fuller lower lip"],["Defined bow","lips with a defined cupid's bow"]],
+  brows:[["Natural full","naturally full, softly groomed brows"],["Thin arched","thin, arched brows"],["Straight","straight, thick brows"],["Soft feathered","soft, feathered brows"]],
+  hair:[["Straight","straight hair"],["Wavy","wavy hair"],["Curly","curly hair (3B to 3C curls)"],["Coily","coily natural hair (4B to 4C texture)"],["Locs","locs"],["Braids","box braids"],["Twists","two-strand twists"],["Short cut","short cropped hair"],["Bald","bald (no hair)"]],
+  hlen:[["Very short","very short"],["Chin","chin-length"],["Shoulder","shoulder-length"],["Mid-back","mid-back-length"],["Long","long, waist-length"]],
+  hstyle:[["Worn down","worn down and loose"],["Ponytail","pulled into a sleek ponytail"],["Bun","pulled into a soft bun"],["Afro / picked out","worn out in a full, rounded shape"],["Half up","worn half up, half down"],["Silk press","silk-pressed straight"]],
+  hcolor:[["Black","black"],["Dark brown","dark brown"],["Brown","medium brown"],["Honey blonde","honey blonde"],["Blonde","blonde"],["Auburn","auburn"],["Burgundy","burgundy"],["Gray / silver","natural gray and silver"]],
+  body:[["Slim","a slim build"],["Athletic","an athletic, toned build"],["Average","an average build"],["Curvy","a curvy, hourglass build"],["Plus-size","a plus-size, full-figured build"],["Muscular","a muscular build"]],
+  makeup:[["Bare","no makeup, bare natural skin"],["Natural","light natural makeup: a touch of mascara and tinted lip balm"],["Soft glam","soft glam makeup: visible blush, soft contour, mascara, filled brows and lip liner with gloss"],["Full glam","full glam makeup: defined contour, highlight, false lashes and a bold lip"]],
+  extras:[["Hoop earrings","small gold hoop earrings"],["Stud earrings","small stud earrings"],["Glasses","glasses"],["Nose stud","a small nose stud"],["Beard","a neatly trimmed beard"],["Headband","a simple headband"]],
+  real:[["Visible pores","textured skin with visible pores"],["Uneven tone","slightly uneven skin tone, the way real skin looks"],["Flyaway hairs","a few natural flyaway hairs"],["Lip lines","natural lines in the lips"],["Light freckles","light freckles"],["Small blemish","a small blemish"],["Under-eye lines","faint lines under the eyes"],["Beauty mark","a small beauty mark"]],
+  outfit:[["White tee","a plain white t-shirt"],["Cozy knit","a cozy knit sweater"],["Blazer","a tailored blazer over a simple top"],["Athleisure","a matching athleisure set"],["Casual chic","a casual chic outfit: fitted top and high-waisted jeans"],["Sundress","a simple sundress"],["Scrubs","medical scrubs"]],
+  bg:[["Plain white wall","a plain off-white wall"],["Soft gray studio","a soft gray studio backdrop"],["Cozy home","a cozy, lived-in living room, softly blurred"],["Kitchen","a bright home kitchen, softly blurred"],["Café","a busy café, softly blurred"],["Outdoors","a city sidewalk, softly blurred"],["Office","a modern home office, softly blurred"]],
+  light:[["Window daylight","soft natural window light from one side"],["Studio softbox","soft, even studio light"],["Golden hour","warm golden-hour sunlight"],["Indoor lamp","warm indoor lamp light in the evening"]],
+  cam:[["Pro camera","shot on a full-frame camera with an 85mm lens, shallow depth of field, natural color"],["Phone selfie","a casual front-facing phone photo, slightly imperfect framing, like a real social media post"],["Phone (someone else)","shot on a phone by a friend, natural and candid"]],
+  scene:[["Product review (UGC)","holding [PRODUCT] up near her face and smiling, talking to the camera like a real customer review, in a bright bedroom","Honest thoughts on [PRODUCT] after a week 👀 Link in bio"],["Unboxing","opening a package on a kitchen counter and lifting out [PRODUCT], excited, hands in focus","Unboxing [PRODUCT] 📦 Was it worth it? Comment LINK"],["Get ready with me","sitting at a vanity mirror doing her makeup, chatting to the camera, morning light","GRWM ✨ Everything I used is linked. Comment LINK"],["Outfit of the day","full-length mirror selfie in a stylish outfit, phone in hand, clean bedroom","Today's fit 🤍 Comment LINK and I'll send every piece"],["Kitchen cooking","cooking at a home stove, stirring a pot and smiling, steam rising","Dinner in 20 minutes 🍲 Save this one"],["Gym","at the gym between sets, wiping sweat, water bottle in hand","No excuses today 💪 Who's training with me?"],["Café laptop","working on a laptop at a café table with a latte","Building my business one coffee at a time ☕"],["Car selfie","sitting in the driver's seat of a parked car, talking to the camera, daylight","Real talk from my car 🚗 You need to hear this"],["Mini-drama moment","in a dramatic close-up, eyes wide, reacting to shocking news, cinematic light","She did NOT see that coming 😳 Part 2?"],["Pinterest pin","styled flat-lay-style shot from above, holding [PRODUCT] beside aesthetic props, clean neutral colors","Save this for later 📌"]]
+};
+const CB_DEF = {mode:"avatar",shot:"Headshot",gender:"Woman",age:"Mid 20s",face:"Oval",depth:"Brown",under:"Warm (golden)",eyes:"Almond",eyecolor:"Dark brown",nose:"Straight",lips:"Full",brows:"Natural full",hair:"Curly",hlen:"Shoulder",hstyle:"Worn down",hcolor:"Dark brown",body:"Average",makeup:"Soft glam",extras:[],real:["Visible pores","Uneven tone","Flyaway hairs","Lip lines"],outfit:"White tee",bg:"Plain white wall",light:"Window daylight",cam:"Pro camera",scene:"Product review (UGC)"};
+let cb = JSON.parse(JSON.stringify(CB_DEF));
+let cbWho = null; // saved character for scenes
+const cbStoreKey = "sos_characters_v1";
+function cbLoad(){ try{ return JSON.parse(localStorage.getItem(cbStoreKey)||"[]"); }catch(e){ return []; } }
+function cbStore(list){ try{ localStorage.setItem(cbStoreKey, JSON.stringify(list)); return true; }catch(e){ return false; } }
+const cbv = (k, lab) => { const r = CB[k].find(x=>x[0]===(lab!==undefined?lab:cb[k])); return r ? r[1] : ""; };
+const cbList = (k) => cb[k].map(l=>cbv(k,l)).filter(Boolean);
+function cbJoin(a){ return a.length<2 ? (a[0]||"") : a.slice(0,-1).join(", ")+" and "+a[a.length-1]; }
+
+function cbLock(){
+  const she = cb.gender==="Man" ? "He" : "She", her = cb.gender==="Man" ? "his" : "her";
+  const hairLine = cb.hair==="Bald" ? `${she} is bald.` : `${she} has ${cbv("hcolor")} ${cbv("hair")}, ${cbv("hlen")}, ${cbv("hstyle")}.`;
+  const ex = cbList("extras");
+  return [
+    `A ${cbv("gender")} in ${her} ${cbv("age")}.`,
+    `${she} has ${cbv("face")}.`,
+    `${her[0].toUpperCase()+her.slice(1)} skin is ${cbv("depth")} ${cbv("under")}.`,
+    `${she} has ${cbv("eyecolor")} ${cbv("eyes")}, ${cbv("nose")}, ${cbv("lips")} and ${cbv("brows")}.`,
+    hairLine,
+    (cb.shot!=="Headshot" ? `${she} has ${cbv("body")}.` : ""),
+    `Makeup: ${cbv("makeup")}.`,
+    ex.length ? `${she} wears ${cbJoin(ex)}.` : ""
+  ].filter(Boolean).join(" ");
+}
+function cbRealLine(){
+  const r = cbList("real");
+  return (r.length ? `Real skin, not retouched: ${cbJoin(r)}.` : "") + " Natural, unretouched look. No airbrushing, no plastic or overly smooth skin, no doll-like proportions.";
+}
+function cbTwinLine(){
+  return "Use my attached photo as the exact reference for this person. Keep the same face, facial structure, skin tone, undertone, hair texture and features exactly as in the photo. Do not beautify, slim, lighten, darken or change the age.";
+}
+function cbPrompt(){
+  const she = cb.gender==="Man" ? "He" : "She";
+  const parts = [];
+  if(cb.mode==="twin") parts.push(cbTwinLine());
+  const [shotType, framing] = cbv("shot").split("|");
+  parts.push(`Vertical ${shotType} of a ${cbv("gender")} in ${cb.gender==="Man"?"his":"her"} ${cbv("age")}. ${framing} ${she} is looking at the camera with a relaxed, natural expression.`);
+  parts.push(cbLock().split(". ").slice(1).join(". "));
+  parts.push(`${she} is wearing ${cbv("outfit")}. Background: ${cbv("bg")}. Light: ${cbv("light")}. ${cbv("cam")[0].toUpperCase()+cbv("cam").slice(1)}.`);
+  parts.push(cbRealLine().trim());
+  parts.push("Photorealistic, like a real photograph. No text, no watermark, no logos. Vertical 9:16.");
+  return parts.join("\n\n");
+}
+function cbScenePrompt(){
+  const who = cbWho || {name:"your character", lock:cbLock()};
+  const sc = CB.scene.find(x=>x[0]===cb.scene);
+  const she = /^A man\b/.test(who.lock) ? "he" : "she";
+  let act = sc[1].replace(/\bher\b/g, she==="he"?"his":"her");
+  const p = [];
+  p.push(`Use my attached photo of ${who.name} as the exact reference. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age.`);
+  if($("cbProduct") && $("cbProduct").checked) p.push("Use my second attached photo as the exact product: keep the label, logo, text, colors, shape and size exactly the same. The product must look real and unchanged.");
+  p.push(`Character: ${who.lock}`);
+  p.push(`Scene: ${who.name} is ${act}.`);
+  p.push(cbRealLine().trim()+" Shot on a phone, candid, like a real social media post. Vertical 9:16. No text, no watermark.");
+  return p.join("\n\n");
+}
+function cbMovePrompt(){
+  const who = cbWho || {name:"the person", lock:cbLock()};
+  const sc = CB.scene.find(x=>x[0]===cb.scene);
+  const his = /^A man\b/.test(who.lock||"");
+  const act0 = his ? sc[1].replace(/\bher\b/g,"his") : sc[1];
+  return `Vertical 9:16 video, 8 seconds, starting from this exact picture. Keep ${who.name}'s face, hair and outfit exactly the same. ${who.name} ${act0.replace(/^holding/,"holds").replace(/^opening/,"opens").replace(/^sitting/,"sits").replace(/^full-length mirror selfie/,"takes a mirror selfie").replace(/^cooking/,"cooks").replace(/^at the gym/,"rests at the gym").replace(/^working/,"works").replace(/^in a dramatic close-up/,"reacts in a dramatic close-up").replace(/^styled/,"arranges a styled shot")}. Natural small movements, a slow camera push-in. ${who.name} says: "[YOUR LINE, one or two short sentences]" Natural background sound, no music, no text on screen.`;
+}
+const CB_FIX = [
+  ["Looks too AI","Same picture, but make it look like a real, unedited photo: visible skin pores and texture, slightly uneven skin tone, a few flyaway hairs, natural camera grain and softer natural light. Remove the airbrushed, plastic, overly smooth look. Keep everything else exactly the same."],
+  ["Face changed","The face changed. Keep the face exactly like my attached reference photo: same face shape, eyes, nose, lips, skin tone and hair. Only change the scene. Do not beautify, slim or alter any features."],
+  ["Skin too smooth","Keep everything the same, but bring back real skin: visible pores, fine texture, natural shine on the forehead and nose, and slight unevenness. No smoothing filter."],
+  ["Wrong skin tone","The skin tone is off. Match the skin tone and undertone in my reference photo exactly: [say it, like deep brown with warm red-brown undertones]. Keep the light natural so the skin is not washed out, grayed or darkened."],
+  ["Hair changed","Keep the hair exactly like my reference photo: same texture, length, color and style. Do not straighten, lengthen or change the hairline."],
+  ["Product looks wrong","The product changed. Use my attached product photo exactly: same label, logo, text, colors, shape and size. Do not redesign or relabel it."],
+  ["Weird hands","Fix the hands: five natural fingers on each hand, relaxed and natural grip, correct size for the body. Keep everything else the same."],
+  ["Too perfect, model-like","Make the person look like an everyday real person, not a model: natural proportions, real skin texture, a candid expression and casual posture. Keep the face and identity the same."]
+];
+function cbChips(){
+  document.querySelectorAll("[data-cb]").forEach(box=>{
+    const k = box.dataset.cb, single = box.hasAttribute("data-single");
+    box.innerHTML = "";
+    CB[k].forEach(r=>{
+      const b = el("button","chip",r[0]); b.type="button";
+      const on = single ? cb[k]===r[0] : cb[k].includes(r[0]);
+      b.setAttribute("aria-pressed", on);
+      b.onclick = () => { if(k==="gender" && cb.gender!==r[0]){ cb.makeup = r[0]==="Man" ? "Bare" : "Soft glam"; } if(single) cb[k]=r[0]; else { cb[k] = cb[k].includes(r[0]) ? cb[k].filter(x=>x!==r[0]) : [...cb[k], r[0]]; } cbDraw(); };
+      box.append(b);
+    });
+  });
+  // mode chips store values, not labels
+  const mb = document.querySelector('[data-cb="mode"]');
+  mb.querySelectorAll("button").forEach((b,i)=>{ const v=CB.mode[i][1]; b.setAttribute("aria-pressed", cb.mode===v); b.onclick=()=>{ cb.mode=v; cbDraw(); }; });
+}
+function cbDrawSaved(){
+  const list = cbLoad(), box = $("cbSaved"), who = $("cbSceneWho");
+  box.innerHTML = ""; who.innerHTML = "";
+  if(!list.length){ box.append(el("span","tiny","No saved characters yet.")); }
+  const cur = el("button","chip","Current build"); cur.type="button"; cur.setAttribute("aria-pressed", !cbWho); cur.onclick=()=>{ cbWho=null; cbDrawScene(); cbDrawSaved(); }; who.append(cur);
+  list.forEach((c,i)=>{
+    const b = el("button","chip","🗑 "+c.name); b.type="button"; b.title="Delete "+c.name; b.onclick=()=>{ if(confirm("Delete "+c.name+"?")){ const l=cbLoad(); l.splice(i,1); cbStore(l); if(cbWho&&cbWho.name===c.name) cbWho=null; cbDrawSaved(); cbDrawScene(); } }; box.append(b);
+    const w = el("button","chip",c.name); w.type="button"; w.setAttribute("aria-pressed", !!cbWho && cbWho.name===c.name); w.onclick=()=>{ cbWho=c; cbDrawScene(); cbDrawSaved(); }; who.append(w);
+  });
+}
+function cbDrawScene(){
+  $("cbScenePrompt").textContent = cbScenePrompt();
+  const sc = CB.scene.find(x=>x[0]===cb.scene);
+  $("cbCaption").textContent = "Caption idea: " + sc[2] + "  ·  Turn on the AI label.";
+}
+function cbDraw(){
+  cbChips();
+  $("cbGuide").hidden = cb.mode!=="twin";
+  const p = cbPrompt();
+  $("cbPrompt").textContent = p;
+  const gpt = $("cbOpenGpt");
+  if(cb.mode==="twin"){ gpt.href="https://chatgpt.com/"; gpt.textContent="Open ChatGPT"; $("cbHow").textContent = "Twin: tap Copy prompt, open ChatGPT, attach your photo first, then paste and send."; }
+  else { gpt.href="https://chatgpt.com/?q="+encodeURIComponent(p); gpt.textContent="Open in ChatGPT (prompt filled in)"; $("cbHow").textContent = "Avatar: tap Open in ChatGPT and your prompt is filled in for you. Using another app? Tap Copy prompt and paste it there."; }
+  cbDrawScene();
+}
+function cbRand(a){ return a[Math.floor(Math.random()*a.length)][0]; }
+function initBuilder(){
+  cbDrawSaved(); cbDraw();
+  $("cbCopy").onclick = e => copyText(cbPrompt(), e.currentTarget);
+  $("cbSceneCopy").onclick = e => copyText(cbScenePrompt(), e.currentTarget);
+  $("cbMove").onclick = e => copyText(cbMovePrompt(), e.currentTarget);
+  $("cbProduct").onchange = cbDrawScene;
+  $("cbReset").onclick = () => { cb = JSON.parse(JSON.stringify(CB_DEF)); cbWho=null; cbDraw(); cbDrawSaved(); };
+  $("cbSurprise").onclick = () => { ["shot","age","face","depth","under","eyes","eyecolor","nose","lips","brows","hair","hlen","hstyle","hcolor","body","makeup","outfit","bg","light"].forEach(k=>cb[k]=cbRand(CB[k])); if(cb.hair==="Bald") cb.hair="Wavy"; cb.mode="avatar"; cbDraw(); toast("New character rolled 🎲"); };
+  $("cbSave").onclick = () => {
+    const name = ($("cbName").value||"").trim(); if(!name){ toast("Give your character a name first"); return; }
+    const list = cbLoad().filter(c=>c.name!==name); const c = {name, lock:cbLock()}; list.push(c);
+    if(cbStore(list)){ cbWho=c; cbDrawSaved(); cbDrawScene(); toast(name+" saved ✓"); } else toast("Couldn't save on this browser. Copy the prompt instead.");
+  };
+  const fx = $("cbFixes"); fx.innerHTML="";
+  CB_FIX.forEach(f=>{ const c=el("div","card"); c.append(el("h4",null,f[0])); const b=el("button","btn ghost","Copy the fix"); b.type="button"; b.dataset.label="Copy the fix"; b.onclick=e=>copyText(f[1],e.currentTarget); c.append(b); fx.append(c); });
+}
 
 boot();
 </script>
