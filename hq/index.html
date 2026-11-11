@@ -91,6 +91,14 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
 .cb-check{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:14px;color:var(--muted)}
 .cb-check input{margin-top:4px;width:18px;height:18px;accent-color:var(--neon)}
 
+.studio-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.studio-tabs a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;text-decoration:none;color:var(--muted);font-weight:700;background:linear-gradient(180deg,#123f4a,#0a2730);border:1px solid rgba(122,247,255,.2);box-shadow:0 3px 0 #031015,inset 0 1px 0 rgba(255,255,255,.1)}
+.studio-tabs a b{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);color:var(--neon);border:1px solid rgba(122,247,255,.4)}
+.studio-tabs a.on{color:var(--ink);background:linear-gradient(180deg,#7af7ff,#22d6c6);border-color:#b9fff9;box-shadow:0 0 18px rgba(47,243,224,.55)}
+.studio-tabs a.on b{color:var(--ink);border-color:rgba(4,16,21,.4)}
+.studio-tabs small{display:block;font-weight:600;font-size:11px;opacity:.8}
+ol.steps.easy{font-size:15.5px;gap:10px}
+@media (max-width:640px){.studio-tabs{grid-template-columns:1fr}}
 /* ---- Character Builder: premium glass + depth ---- */
 .hi{font-family:var(--body);font-weight:700;font-size:13px;color:var(--gold);letter-spacing:.02em;margin-right:6px}
 .on-list{display:flex;flex-direction:column;gap:8px}
@@ -191,8 +199,7 @@ body.cb-on .side{display:none}
     <a href="#community" data-view="community"><span class="ic">◉</span>Community</a>
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
     <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
-    <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Content Studio</a>
-    <a href="#builder" data-view="builder"><span class="ic">◐</span>Character Builder</a>
+    <a href="#builder" data-view="builder" data-views="builder scenes series"><span class="ic">✦</span>Content Studio</a>
     <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
@@ -248,38 +255,55 @@ body.cb-on .side{display:none}
 
     <!-- SCENES -->
     <section data-pane="scenes" hidden>
-      <div class="hero"><div class="eyebrow">● Creator Studio · Story Studio</div><h1>Content Studio</h1><p>Your team plans and writes your posts and episodes. You tap, paste and post. Here's how it works, plus 300 scene ideas whenever you want extra inspiration.</p></div>
+      <div class="studio-tabs" data-tabs></div>
+      <div class="hero"><div class="eyebrow">● Content Studio · Step 2</div><h1>Make posts</h1><p>Pick a scene, copy it, paste it into ChatGPT with your character's picture. That's it. Over 300 ideas to choose from.</p></div>
       <div class="panel" style="margin-bottom:12px">
-        <div class="tag" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase">How your content gets made: 4 moves</div>
-        <ol class="steps">
-          <li><b>Find your path.</b> Not sure what to sell yet? Your Team Installer asks 6 quick questions and picks one path for your first 30 days: TikTok Shop, a digital product, AI content for businesses, your own service, or a story channel.</li>
-          <li><b>Build your cast (one time, about 20 minutes).</b> Ask Creator Studio or Story Studio: <i>"Let's build my cast."</i> You get your character's face, outfits, places and style, and the pictures to make, in order. You make them in ChatGPT and save them in your <b>Cast home</b> (a ChatGPT project). That keeps every face, outfit and room the same.</li>
-          <li><b>Get your post cards.</b> Ask: <i>"Plan my posts this week."</i> Or start your own way: <i>"my idea…"</i>, share a Pinterest picture, or paste a video that's doing well and say <i>"copy this format."</i> Each card has the hook, script, caption, hashtags, best time to post and the shots. For a mini series, ask Story Studio for the next episode.</li>
-          <li><b>Film and post.</b> In your Cast home, attach your character and place pictures and paste each shot. Make the first shot, then ask for the other angles from it. Turn pictures into video in your video app, or let Director Mode film your episodes. Post with the caption on your card, and turn on the AI label.</li>
+        <h2>How it works</h2>
+        <ol class="steps easy">
+          <li><b>Pick your character</b> below. Her look is added to every scene for you, so she always looks the same. (No character yet? Do <a href="#builder">Step 1</a> first.)</li>
+          <li><b>Find a scene</b> you like. Search, or tap a topic like Kitchen or Skincare. Tap <b>Copy prompt</b>.</li>
+          <li><b>Open ChatGPT.</b> Attach your character's picture (tap the <b>+</b>), paste, and send.</li>
+          <li><b>Not quite right?</b> Type: <i>"Try again. Keep her face exactly the same."</i></li>
         </ol>
-        <p class="tiny" style="margin-top:8px">Picture looks wrong? Attach your character's photo again, or start a new chat in your Cast home and attach the pictures. Faces stay the same when the photo is in the chat.</p>
+        <p class="tiny cb-l" style="margin-top:14px">Your character</p>
+        <div class="chips" id="scWho"><span class="tiny">Loading…</span></div>
+        <details style="margin-top:8px"><summary class="tiny">Tip: keep her pictures in one place</summary><p class="tiny" style="margin-top:6px">In ChatGPT, tap <b>Projects → New project</b>, name it after your character, and upload her best picture (tap <b>Add files</b>). Start every new post inside that project. Using Google Flow, Gemini, HeyGen, Higgsfield or Kling instead? Same idea: attach her picture, then paste.</p></details>
       </div>
       <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
-      <details class="panel" style="margin-bottom:12px"><summary><b>Using a scene idea yourself, step by step</b></summary>
-        <ol class="steps">
-          <li>Open your <b>Cast home</b> in ChatGPT. That's a ChatGPT <b>Project</b> (a folder in ChatGPT's left menu) where you keep your character's pictures, so her face stays the same every time. <b>Don't have one yet?</b> In ChatGPT, tap <b>Projects → New project</b>, name it like "Megan Cast," and upload your character's best picture into it (tap <b>Add files</b>). No picture yet? Make your character first in the <a href="#builder">Character Builder</a>. Prefer another app? Google Flow, Gemini, HeyGen, Higgsfield and Kling work too: just attach your character's picture there.</li>
-          <li>Upload your <b>master photo</b> (your twin or your avatar). For product scenes, upload the <b>real product photo</b> too.</li>
-          <li>Come back here and tap <b>Copy prompt</b> on a scene. It says <b>Copied ✓</b>.</li>
-          <li>Paste it into your app, change any <b>[bracket]</b> words, and send.</li>
-          <li>Like it? Save it. Not quite? Type: "Same scene, try again. Keep the face exactly the same."</li>
-          <li>Want a look you saw on Pinterest? Tap <b>Ideas on Pinterest</b>, save a picture you love, then use the <b>"Use my Pinterest pick"</b> scene in Start here.</li>
-        </ol>
-        <p class="tiny" style="margin-top:8px">No master photo yet? Start with the "Start here" scenes: one set for your twin (you), one for an avatar (an original made-up person). Always label AI images and videos as AI. Never use a real person's face, and never present AI as a real customer review.</p>
-      </details>
-      <input type="search" id="sceneSearch" placeholder="Search 300 scenes (try kitchen, unboxing, romance)" aria-label="Search scenes" style="width:100%;margin-bottom:10px">
+            <input type="search" id="sceneSearch" placeholder="Search 300 scenes (try kitchen, unboxing, romance)" aria-label="Search scenes" style="width:100%;margin-bottom:10px">
       <div class="chips" id="sceneChips"></div>
       <p class="tiny" id="sceneCount" style="margin:6px 0 10px"></p>
       <div class="grid" id="sceneGrid"></div>
     </section>
 
+    <!-- SERIES -->
+    <section data-pane="series" hidden>
+      <div class="studio-tabs" data-tabs></div>
+      <div class="hero"><div class="eyebrow">● Content Studio · Step 3</div><h1>Make videos and a series</h1><p>Turn a picture into a moving, talking video. Or let your AI team plan and film a whole mini-drama for you.</p></div>
+      <div class="grid">
+        <div class="card"><div class="tag">Easy · 5 minutes</div><h4>Turn one picture into a video</h4>
+          <ol class="steps easy">
+            <li>In <a href="#builder">Step 1</a>, scroll to <b>"Put your character in a scene"</b> and tap <b>Make it move</b>. That copies the video instructions.</li>
+            <li>Open <a href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Google Flow</a>. Tap the settings next to the arrow and pick <b>Video → Frames → 9:16</b>.</li>
+            <li>Tap <b>+</b> and add your picture. Paste. Change <b>[YOUR LINE]</b> to what she says. Tap the arrow.</li>
+            <li>Play it with sound. Like it? Download it.</li>
+          </ol></div>
+        <div class="card"><div class="tag">Mini-drama series</div><h4>Let your AI team make a series</h4>
+          <ol class="steps easy">
+            <li>Open <b>Claude</b> and start a new chat. Type: <i>"Let's start a series."</i></li>
+            <li>Story Studio helps you pick a story and plans every episode. Say <i>"Approved"</i> when you love it.</li>
+            <li>Type: <i>"Film Episode 1 for me."</i> It tells you the cost first. Say yes. When Chrome asks, tap <b>Allow for this session</b>.</li>
+            <li>It makes the clips while you watch. Then type: <i>"Put Episode 1 together."</i> You get one finished video.</li>
+          </ol>
+          <p class="tiny">Filming for you needs the free "Claude in Chrome" add-on on a computer. Full steps: <a href="#kit">Mini Story Quick Start</a> in your kit.</p></div>
+      </div>
+      <div class="panel" style="margin-top:12px"><h2>Before you post</h2><ol class="steps easy"><li>Turn on the <b>AI label</b> in the app.</li><li>Add a sound from the app's own music, kept low.</li><li>Use your own made-up characters. Never a real person's face (except yours) or a celebrity.</li></ol></div>
+    </section>
+
     <!-- CHARACTER BUILDER -->
     <section data-pane="builder" class="cb" hidden>
-      <div class="hero"><div class="eyebrow">● Creator Studio · Character Builder</div><h1>Build your character</h1><p>Tap your choices. Your prompt writes itself as you go, using the realism recipe: who, age and shot first, then face, skin tone and undertone, real skin details, never just "realistic."</p></div>
+      <div class="studio-tabs" data-tabs></div>
+      <div class="hero"><div class="eyebrow">● Content Studio · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once, then use her in every post.</p></div>
 
       <div class="cb-prog" id="cbProg" role="navigation" aria-label="Builder steps"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">STEP 1 OF 9</span></div>
       <div class="cb-layout">
@@ -554,10 +578,12 @@ function route(){
   let v = (location.hash || "#community").slice(1);
   if(!document.querySelector(`[data-pane="${v}"]`) || (v==="host" && !isHost)) v = "community";
   document.querySelectorAll("[data-pane]").forEach(p => p.hidden = p.dataset.pane !== v);
-  document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.view === v));
+  document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", (a.dataset.views||a.dataset.view).split(" ").includes(v)));
+  drawStudioTabs(v);
   document.body.classList.toggle("cb-on", v==="builder");
   if(v==="kit" && !loaded.kit){ loaded.kit=1; loadKit(); }
   if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
+  if(v==="scenes"){ loadScWho(); }
   if(v==="builder" && !loaded.builder){ loaded.builder=1; initBuilder(); }
   if(v==="help"){ loadHelp(); }
   if(v==="host"){ loadAllow(); loadHostHelp(); loadHostWait(); }
@@ -648,7 +674,7 @@ async function loadKit(){
     box.append(c);
   });
   const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Content Studio"), el("p",null,"How your posts and episodes get made in 4 moves, plus 300 scene ideas and a new Scene of the Day."));
-  const go = el("a","btn","Open the library"); go.href="#scenes"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
+  const go = el("a","btn","Open Content Studio"); go.href="#builder"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
 }
 
 // ---------- scenes ----------
@@ -660,7 +686,12 @@ async function loadScenes(){
   $("sceneSearch").addEventListener("input", ()=>drawScenes());
   drawToday(); drawScenes();
 }
-function sceneFull(s){ return s[0]==="Mini Story" ? s[2] : s[0]==="Start here" ? `${s[2]}\n\n${SC.avoid}` : `${SC.lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`; }
+function sceneFull(s){
+  if(s[0]==="Mini Story") return s[2];
+  if(s[0]==="Start here") return `${s[2]}\n\n${SC.avoid}`;
+  const lock = scWho ? `Use my attached photo of ${scWho.name} as the exact reference. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age.\n\nCharacter: ${scWho.lock}` : SC.lock;
+  return `${lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
+}
 function pinUrl(s){ const q = (s[1].replace(/^[^:]+:\s*/,"").replace(/\(.*?\)/g,"")+" "+(s[0]==="Mini Story"?"cinematic scene":s[0].split(" ")[0]+" aesthetic")).trim(); return "https://www.pinterest.com/search/pins/?q="+encodeURIComponent(q); }
 function sceneCard(s){
   const c = el("div","card"); c.append(el("div","tag",s[0]), el("h4",null,s[1]), el("p",null,s[2]));
@@ -685,6 +716,22 @@ function drawScenes(){
   const g = $("sceneGrid"); g.innerHTML="";
   list.forEach(s => g.append(sceneCard(s)));
   if(!list.length) g.append(el("p","muted","No scenes match. Try another word."));
+}
+
+let scWho = null, scChars = [];
+async function loadScWho(){
+  const { data } = await sb.from("characters").select("id,name,lock").order("created_at");
+  scChars = data || []; if(scWho && !scChars.some(c=>c.id===scWho.id)) scWho=null;
+  if(!scWho && scChars.length) scWho = scChars[scChars.length-1];
+  const box=$("scWho"); box.innerHTML="";
+  if(!scChars.length){ const a=el("a","chip","➕ Make my character first (Step 1)"); a.href="#builder"; a.style.textDecoration="none"; box.append(a); return; }
+  scChars.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed", !!scWho && scWho.id===c.id); b.onclick=()=>{ scWho=c; loadScWhoDraw(); }; box.append(b); });
+  const n=el("button","chip","No character"); n.type="button"; n.setAttribute("aria-pressed", !scWho); n.onclick=()=>{ scWho=null; loadScWhoDraw(); }; box.append(n);
+}
+function loadScWhoDraw(){ [...$("scWho").querySelectorAll("button")].forEach(b=>b.setAttribute("aria-pressed", scWho ? b.textContent===scWho.name : b.textContent==="No character")); }
+function drawStudioTabs(v){
+  const T=[["builder","1","Make your character","Do this once"],["scenes","2","Make posts","300+ scene ideas"],["series","3","Make videos and a series","Clips and mini-dramas"]];
+  document.querySelectorAll("[data-tabs]").forEach(box=>{ box.innerHTML=""; T.forEach(t=>{ const a=el("a"); a.href="#"+t[0]; if(t[0]===v){ a.className="on"; a.setAttribute("aria-current","page"); } const b=el("b",null,t[1]); const s=el("span"); s.append(document.createTextNode(t[2])); s.append(el("small",null,t[3])); a.append(b,s); box.append(a); }); });
 }
 
 // ---------- help desk ----------
