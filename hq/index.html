@@ -118,7 +118,7 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
     <a href="#community" data-view="community"><span class="ic">◉</span>Community</a>
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
     <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
-    <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Scene Library</a>
+    <a href="#scenes" data-view="scenes"><span class="ic">✦</span>Content Studio</a>
     <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
@@ -174,11 +174,21 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
 
     <!-- SCENES -->
     <section data-pane="scenes" hidden>
-      <div class="hero"><div class="eyebrow">● Creator Studio · Story Studio</div><h1>Scene Library</h1><p>300 copy-and-paste scenes for your twin, avatar or AI influencer: lifestyle, kitchen, fashion, UGC and product, TikTok Shop, mini dramas and more. Upload your master photo, copy a scene, paste, send. The face stays the same; only the scene changes.</p></div>
-      <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
-      <details class="panel" style="margin-bottom:12px"><summary><b>How to use a scene, step by step</b></summary>
+      <div class="hero"><div class="eyebrow">● Creator Studio · Story Studio</div><h1>Content Studio</h1><p>Your team plans and writes your posts and episodes. You tap, paste and post. Here's how it works, plus 300 scene ideas whenever you want extra inspiration.</p></div>
+      <div class="panel" style="margin-bottom:12px">
+        <div class="tag" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase">How your content gets made: 4 moves</div>
         <ol class="steps">
-          <li>Open your picture or video app. We recommend <b>Google Flow</b> (flow.google.com, free daily credits). ChatGPT, Gemini, HeyGen, Higgsfield and Kling work too.</li>
+          <li><b>Find your path.</b> Not sure what to sell yet? Your Team Installer asks 6 quick questions and picks one path for your first 30 days: TikTok Shop, a digital product, AI content for businesses, your own service, or a story channel.</li>
+          <li><b>Build your cast (one time, about 20 minutes).</b> Ask Creator Studio or Story Studio: <i>"Let's build my cast."</i> You get your character's face, outfits, places and style, and the pictures to make, in order. You make them in ChatGPT and save them in your <b>Cast home</b> (a ChatGPT project). That keeps every face, outfit and room the same.</li>
+          <li><b>Get your post cards.</b> Ask: <i>"Plan my posts this week."</i> Or start your own way: <i>"my idea…"</i>, share a Pinterest picture, or paste a video that's doing well and say <i>"copy this format."</i> Each card has the hook, script, caption, hashtags, best time to post and the shots. For a mini series, ask Story Studio for the next episode.</li>
+          <li><b>Film and post.</b> In your Cast home, attach your character and place pictures and paste each shot. Make the first shot, then ask for the other angles from it. Turn pictures into video in your video app, or let Director Mode film your episodes. Post with the caption on your card, and turn on the AI label.</li>
+        </ol>
+        <p class="tiny" style="margin-top:8px">Picture looks wrong? Attach your character's photo again, or start a new chat in your Cast home and attach the pictures. Faces stay the same when the photo is in the chat.</p>
+      </div>
+      <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
+      <details class="panel" style="margin-bottom:12px"><summary><b>Using a scene idea yourself, step by step</b></summary>
+        <ol class="steps">
+          <li>Open your <b>Cast home</b> in ChatGPT (or the picture or video app you like: Google Flow, Gemini, HeyGen, Higgsfield and Kling work too).</li>
           <li>Upload your <b>master photo</b> (your twin or your avatar). For product scenes, upload the <b>real product photo</b> too.</li>
           <li>Come back here and tap <b>Copy prompt</b> on a scene. It says <b>Copied ✓</b>.</li>
           <li>Paste it into your app, change any <b>[bracket]</b> words, and send.</li>
@@ -414,7 +424,7 @@ async function loadKit(){
     } else { const pre = el("pre","prompt"); pre.textContent = r.body; c.append(pre); }
     box.append(c);
   });
-  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Scene Library"), el("p",null,"300 copy-and-paste scenes for your twin, avatar or AI influencer, plus a new Scene of the Day."));
+  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Content Studio"), el("p",null,"How your posts and episodes get made in 4 moves, plus 300 scene ideas and a new Scene of the Day."));
   const go = el("a","btn","Open the library"); go.href="#scenes"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
 }
 
