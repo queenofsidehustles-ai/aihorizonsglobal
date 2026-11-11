@@ -303,13 +303,13 @@ body.cb-on .side{display:none}
     <!-- CHARACTER BUILDER -->
     <section data-pane="builder" class="cb" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Content Studio · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once, then use her in every post.</p></div>
+      <div class="hero"><div class="eyebrow">● Content Studio · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once. Then tap <b>2 Make posts</b> at the top to put her in any of 300+ scenes.</p></div>
 
-      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Builder steps"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">STEP 1 OF 9</span></div>
+      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF I</span></div>
       <div class="cb-layout">
         <div class="cb-steps">
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">1</span><h2>Who are we making?</h2></div>
+        <div class="cb-step"><span class="cb-n">A</span><h2>Who are we making?</h2></div>
         <div class="chips" data-cb="mode" data-single></div>
         <div id="cbGuide" class="cb-guide" hidden>
           <div class="tag">📸 Your twin photo checklist (30 seconds)</div>
@@ -325,14 +325,14 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">2</span><h2>The basics</h2></div>
+        <div class="cb-step"><span class="cb-n">B</span><h2>The basics</h2></div>
         <p class="tiny cb-l">Shot type</p><div class="chips" data-cb="shot" data-single></div>
         <p class="tiny cb-l">Gender</p><div class="chips" data-cb="gender" data-single></div>
         <p class="tiny cb-l">Age range</p><div class="chips" data-cb="age" data-single></div>
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">3</span><h2>Face and skin</h2></div>
+        <div class="cb-step"><span class="cb-n">C</span><h2>Face and skin</h2></div>
         <p class="tiny cb-l">Face shape</p><div class="chips" data-cb="face" data-single></div>
         <p class="tiny cb-l">Skin tone (how light or deep)</p><div class="chips" data-cb="depth" data-single></div>
         <p class="tiny cb-l">Undertone (look at the veins on your wrist: blue = cool, green = warm, both = neutral)</p><div class="chips" data-cb="under" data-single></div>
@@ -344,7 +344,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">4</span><h2>Hair, body and style</h2></div>
+        <div class="cb-step"><span class="cb-n">D</span><h2>Hair, body and style</h2></div>
         <p class="tiny cb-l">Hair texture</p><div class="chips" data-cb="hair" data-single></div>
         <p class="tiny cb-l">Hair length</p><div class="chips" data-cb="hlen" data-single></div>
         <p class="tiny cb-l">Worn as</p><div class="chips" data-cb="hstyle" data-single></div>
@@ -355,7 +355,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">5</span><h2>Make it look real</h2></div>
+        <div class="cb-step"><span class="cb-n">E</span><h2>Make it look real</h2></div>
         <p class="tiny cb-l">Real-skin details (keep at least 3 on: perfect skin is what makes AI look fake)</p><div class="chips" data-cb="real"></div>
         <p class="tiny cb-l">Outfit</p><div class="chips" data-cb="outfit" data-single></div>
         <p class="tiny cb-l">Background</p><div class="chips" data-cb="bg" data-single></div>
@@ -364,7 +364,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel cb-out" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">6</span><h2>Your prompt</h2></div>
+        <div class="cb-step"><span class="cb-n">F</span><h2>Your prompt</h2></div>
         <div class="row cb-row"><button class="btn ghost" type="button" id="cbSurprise">🎲 Surprise me</button><button class="btn ghost" type="button" id="cbReset">Start over</button></div>
         <div class="cb-term"><div class="cb-term-h"><i></i><i></i><i></i><span>PROMPT.TXT</span><em id="cbUpd">LIVE</em></div><pre class="prompt" id="cbPrompt" aria-live="polite"></pre></div>
         <div class="row cb-row">
@@ -376,7 +376,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">7</span><h2>Save your character</h2></div>
+        <div class="cb-step"><span class="cb-n">G</span><h2>Save your character</h2></div>
         <p class="muted" style="font-size:14px">Love the picture? Give your character a name and save her card. Every scene below will use her exact description, so she looks the same in every post.</p>
         <div class="row cb-row"><input type="text" id="cbName" maxlength="40" placeholder="Character name, like Megan" style="flex:1;min-width:180px"><button class="btn" type="button" id="cbSave">Save character</button></div>
         <div class="chips" id="cbSaved" style="margin-top:10px"></div>
@@ -384,8 +384,8 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">8</span><h2>Put your character in a scene</h2></div>
-        <ol class="steps" style="margin-bottom:6px"><li>Save your character above, then pick her here.</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
+        <div class="cb-step"><span class="cb-n">H</span><h2>Put your character in a scene</h2></div>
+        <ol class="steps" style="margin-bottom:6px"><li>Save your character in part G above, then pick her here.</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
         <p class="tiny cb-l">Character</p><div class="chips" id="cbSceneWho"></div>
         <p class="tiny cb-l">Scene (each one comes with a caption idea)</p><div class="chips" data-cb="scene" data-single></div>
         <label class="cb-check"><input type="checkbox" id="cbProduct"> I'm adding a product photo too (keeps the label, colors and shape exactly the same)</label>
@@ -395,7 +395,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel">
-        <div class="cb-step"><span class="cb-n">9</span><h2>Picture came out wrong? Tap the fix</h2></div>
+        <div class="cb-step"><span class="cb-n">I</span><h2>Picture came out wrong? Tap the fix</h2></div>
         <p class="muted" style="font-size:14px">Paste the fix into the same chat, right under the picture. Attach your photo again if the face changed.</p>
         <div class="grid" id="cbFixes"></div>
       </div>
@@ -1035,8 +1035,8 @@ function cbIdDraw(){
 }
 function cbProgInit(){
   const steps=[...document.querySelectorAll(".cb-steps > .panel")], dots=$("cbProgDots"); dots.innerHTML="";
-  steps.forEach((s,i)=>{ const b=el("button",null,String(i+1)); b.type="button"; b.setAttribute("aria-label","Go to step "+(i+1)); b.onclick=()=>s.scrollIntoView({behavior:"smooth",block:"start"}); dots.append(b); s.style.scrollMarginTop="80px"; });
-  const set=i=>{ steps.forEach((s,j)=>s.classList.toggle("cur",j===i)); [...dots.children].forEach((d,j)=>{ d.classList.toggle("done",j<i); d.classList.toggle("cur",j===i); }); $("cbProgFill").style.width=((i+1)/steps.length*100)+"%"; $("cbProgT").textContent=`STEP ${i+1} OF ${steps.length}`; };
+  steps.forEach((s,i)=>{ const b=el("button",null,"ABCDEFGHI"[i]||String(i+1)); b.type="button"; b.setAttribute("aria-label","Go to part "+("ABCDEFGHI"[i]||i+1)); b.onclick=()=>s.scrollIntoView({behavior:"smooth",block:"start"}); dots.append(b); s.style.scrollMarginTop="80px"; });
+  const set=i=>{ steps.forEach((s,j)=>s.classList.toggle("cur",j===i)); [...dots.children].forEach((d,j)=>{ d.classList.toggle("done",j<i); d.classList.toggle("cur",j===i); }); $("cbProgFill").style.width=((i+1)/steps.length*100)+"%"; $("cbProgT").textContent=`PART ${"ABCDEFGHI"[i]} OF ${"ABCDEFGHI"[steps.length-1]}`; };
   if("IntersectionObserver" in window){
     const vis=new Map(); const io=new IntersectionObserver(es=>{ es.forEach(e=>vis.set(e.target,e.intersectionRatio)); let best=0,bi=0; steps.forEach((s,i)=>{ const r=vis.get(s)||0; if(r>best){best=r;bi=i;} }); if(best>0) set(bi); },{threshold:[0,.25,.5,.75,1],rootMargin:"-80px 0px -35% 0px"});
     steps.forEach(s=>io.observe(s));
