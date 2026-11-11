@@ -292,12 +292,20 @@ body.cb-on .side{display:none}
       <div class="hero"><div class="eyebrow">● Content Studio · Step 3</div><h1>Make videos and a series</h1><p>Turn a picture into a moving, talking video. Or let your AI team plan and film a whole mini-drama for you.</p></div>
       <div class="grid">
         <div class="card"><div class="tag">Easy · 5 minutes</div><h4>Turn one picture into a video</h4>
+          <p class="tiny" style="margin:0">We recommend <b>Google Flow</b> (it has free daily credits and makes her talk). Any video app works too: Kling, Higgsfield, HeyGen, Runway and others.</p>
+          <p class="tiny" id="mvWho" style="margin:8px 0 0"></p>
+          <label class="tiny cb-l" for="mvWhat">What is happening in your picture?</label>
+          <input type="text" id="mvWhat" maxlength="200" placeholder="Like: she pours a green smoothie in a bright kitchen">
+          <label class="tiny cb-l" for="mvSay">What does she say? (optional, one or two short sentences)</label>
+          <input type="text" id="mvSay" maxlength="200" placeholder="Like: This is my secret morning boost!">
+          <button class="btn" type="button" id="mvCopy" data-label="Copy my video prompt" style="margin-top:10px">Copy my video prompt</button>
           <ol class="steps easy">
-            <li>In <a href="#builder">Step 1</a>, scroll to <b>"Put your character in a scene"</b> and tap <b>Make it move</b>. That copies the video instructions.</li>
-            <li>Open <a href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Google Flow</a>. Tap the settings next to the arrow and pick <b>Video → Frames → 9:16</b>.</li>
-            <li>Tap <b>+</b> and add your picture. Paste. Change <b>[YOUR LINE]</b> to what she says. Tap the arrow.</li>
-            <li>Play it with sound. Like it? Download it.</li>
-          </ol></div>
+            <li>Open your video app. <a href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Open Google Flow</a> (recommended).</li>
+            <li>Choose <b>video</b>, <b>vertical (9:16)</b>, and <b>start from a picture</b>. In Flow: tap the settings next to the arrow and pick <b>Video → Frames → 9:16</b>.</li>
+            <li>Add your picture. Paste your video prompt. Tap the arrow (or Generate).</li>
+            <li>Play it with sound. Like it? Download it. Not quite? Generate again.</li>
+          </ol>
+        </div>
         <div class="card"><div class="tag">Mini-drama series</div><h4>Let your AI team make a series</h4>
           <ol class="steps easy">
             <li>Open <b>Claude</b> and start a new chat. Type: <i>"Let's start a series."</i></li>
@@ -380,7 +388,7 @@ body.cb-on .side{display:none}
         <div class="row cb-row">
           <button class="btn" type="button" id="cbCopy" data-label="Copy prompt">Copy prompt</button>
           <a class="btn ghost" id="cbOpenGpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT</a>
-          <a class="btn ghost" href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Open Google Flow</a>
+          <a class="btn ghost" href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Open Google Flow (recommended for video)</a>
         </div>
         <p class="tiny" id="cbHow"></p>
       </div>
@@ -594,6 +602,7 @@ function route(){
   if(v==="kit" && !loaded.kit){ loaded.kit=1; loadKit(); }
   if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
   if(v==="scenes"){ loadScWho(); }
+  if(v==="series"){ initMove(); (scChars.length ? Promise.resolve() : loadScWho()).then(()=>{ $("mvWho").innerHTML = scWho ? "Character: <b>"+scWho.name.replace(/[<>&]/g,"")+"</b> (change it in <a href='#scenes'>2 Make posts</a>)" : "No character picked. That's okay: the prompt works for any picture."; }); }
   if(v==="builder" && !loaded.builder){ loaded.builder=1; initBuilder(); }
   if(v==="help"){ loadHelp(); }
   if(v==="host"){ loadAllow(); loadHostHelp(); loadHostWait(); }
@@ -751,6 +760,14 @@ function drawStudioTabs(v){
   const T=[["builder","1","Your character","Make her once"],["scenes","2","Make posts","300+ ideas"],["series","3","Make videos","Clips and series"]];
   document.querySelectorAll("[data-tabs]").forEach(box=>{ box.innerHTML=""; T.forEach(t=>{ const a=el("a"); a.href="#"+t[0]; if(t[0]===v){ a.className="on"; a.setAttribute("aria-current","page"); } const b=el("b",null,t[1]); const s=el("span"); s.append(document.createTextNode(t[2])); s.append(el("small",null,t[3])); a.append(b,s); box.append(a); }); });
 }
+
+function mvPrompt(){
+  const who = scWho ? scWho.name : "the person";
+  const what = ($("mvWhat").value||"").trim() || "a natural moment from the picture";
+  const say = ($("mvSay").value||"").trim();
+  return `Vertical 9:16 video, 8 seconds, starting from this exact picture. Keep ${who}'s face, hair, outfit and the background exactly the same. Action: ${what}. Natural, small movements and a slow camera push-in.` + (say ? ` ${who} looks at the camera and says: "${say}"` : " No talking.") + " Natural background sound, no music, no text on screen.";
+}
+function initMove(){ if(initMove.done) return; initMove.done=1; $("mvCopy").onclick=e=>copyText(mvPrompt(),e.currentTarget); }
 
 // ---------- help desk ----------
 const STARTERS = ["How do I start setting up my team?","My morning brief didn't come","How do I talk to my team by voice?","How do I connect Gmail?"];
