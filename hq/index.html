@@ -267,6 +267,16 @@ body.cb-on .side{display:none}
         </ol>
         <p class="tiny cb-l" style="margin-top:14px">Your character</p>
         <div class="chips" id="scWho"><span class="tiny">Loading…</span></div>
+        <details style="margin-top:8px"><summary class="tiny"><b>Using a Pinterest idea? How to save the picture</b></summary>
+          <p class="tiny" style="margin-top:6px">Pinterest's red <b>Save</b> button does NOT put the picture on your device. Take a screenshot instead:</p>
+          <ol class="steps easy">
+            <li>Tap <b>1. Find ideas on Pinterest</b> on a scene. Tap a picture you like so it opens big.</li>
+            <li><b>Computer (Mac):</b> press <b>Command + Shift + 4</b>, then drag a box around the picture. It lands on your Desktop.<br><b>iPhone:</b> press the <b>side button + volume up</b> together. It goes to your Photos.</li>
+            <li>Come back here and tap <b>2. Saved one? Copy the Pinterest version</b> on the same scene.</li>
+            <li>In ChatGPT, tap <b>+</b> and add <b>your character's picture first</b>, then the <b>screenshot second</b>. Paste and send.</li>
+          </ol>
+          <p class="tiny">We only use the Pinterest picture for ideas (outfit, pose, place, light). Her face always comes from your character's picture.</p>
+        </details>
         <details style="margin-top:8px"><summary class="tiny">Tip: keep her pictures in one place</summary><p class="tiny" style="margin-top:6px">In ChatGPT, tap <b>Projects → New project</b>, name it after your character, and upload her best picture (tap <b>Add files</b>). Start every new post inside that project. Using Google Flow, Gemini, HeyGen, Higgsfield or Kling instead? Same idea: attach her picture, then paste.</p></details>
       </div>
       <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
@@ -704,7 +714,7 @@ function sceneCard(s){
   if(s[0]!=="Start here" && s[0]!=="Mini Story"){
     const p = el("a","btn ghost","1. Find ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p);
     const q = el("button","btn ghost","2. Saved one? Copy the Pinterest version"); q.type="button"; q.dataset.label=q.textContent; q.style.marginTop="8px"; q.onclick=()=>copyText(scenePin(s),q); c.append(q);
-    c.append(el("p","tiny","Pinterest version: in ChatGPT, attach your character's picture first and the Pinterest picture second, then paste."));
+    c.append(el("p","tiny","Pinterest version: screenshot the Pinterest picture, then in ChatGPT add your character's picture first and the screenshot second, then paste."));
   } else if(s[0]==="Mini Story"){ const p = el("a","btn ghost","Ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p); }
   return c;
 }
