@@ -781,8 +781,7 @@
           </p>
         </div>
 
-        <form class="form-row" name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="consultation" />
+        <form class="form-row" name="consultation" id="consultForm" novalidate>
           <p style="display:none;">
             <label>Leave this empty if you're human: <input name="bot-field" /></label>
           </p>
@@ -802,7 +801,8 @@
             <label for="message">Message</label>
             <textarea class="field" id="message" name="message" placeholder="What processes are costing you the most time or money right now?" required></textarea>
           </div>
-          <button class="btn btn-primary" type="submit">Send message</button>
+          <button class="btn btn-primary" type="submit" id="consultBtn">Send message</button>
+          <p id="consultMsg" role="status" style="margin:.5rem 0 0;font-weight:600;"></p>
         </form>
       </div>
     </div>
@@ -819,6 +819,30 @@
   <script>
     // Year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Consultation form: saved to our secure database
+    (function(){
+      const f = document.getElementById("consultForm"); if(!f) return;
+      const msg = document.getElementById("consultMsg"), btn = document.getElementById("consultBtn");
+      f.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (f.querySelector('[name="bot-field"]').value) return;
+        const d = { name: f.name.value.trim(), email: f.email.value.trim(), org: f.org.value.trim() || null, message: f.message.value.trim() };
+        if (!d.name || !/^\S+@\S+\.\S+$/.test(d.email) || !d.message) { msg.style.color = "#b42318"; msg.textContent = "Please add your name, a valid email and a short message."; return; }
+        btn.disabled = true; msg.style.color = ""; msg.textContent = "Sending…";
+        try {
+          const r = await fetch("https://npomhoaxigydsxgqziwd.supabase.co/rest/v1/consultation_requests", {
+            method: "POST",
+            headers: { "apikey": "sb_publishable_qoQhZYkspqzNy1ZdY3WDgQ_4KnWQbnk", "Content-Type": "application/json", "Prefer": "return=minimal" },
+            body: JSON.stringify(d)
+          });
+          if (!r.ok) throw new Error(r.status);
+          f.reset(); msg.style.color = "#067647"; msg.textContent = "Thank you! Your message was sent. We'll reply within 1–2 business days.";
+        } catch (err) {
+          msg.style.color = "#b42318"; msg.textContent = "That didn't send. Please email hello@aihorizonsglobal.com instead.";
+        } finally { btn.disabled = false; }
+      });
+    })();
 
     // Mobile menu behavior (fixes “hanging open”)
     const btn = document.getElementById("hamburgerBtn");

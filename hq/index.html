@@ -471,6 +471,7 @@ body.cb-on .side{display:none}
     <section data-pane="host" hidden>
       <div class="hero"><div class="eyebrow">● Host panel</div><h1>Mission control</h1><p>Buyers are added automatically when they pay. Answer help requests and watch the waitlists here.</p></div>
       <div class="panel" style="margin-bottom:12px"><h2>Help requests for you <span class="badge" id="helpCount">0 open</span></h2><div id="hostHelp" class="posts" style="margin-top:8px"><p class="tiny">Loading…</p></div></div>
+      <div class="panel" style="margin-bottom:12px"><h2>Website messages <span class="badge" id="consultCount">0</span></h2><p class="tiny" style="margin:0 0 8px">From the consultation form on aihorizonsglobal.com.</p><div id="hostConsult" class="posts"><p class="tiny">Loading…</p></div></div>
       <div class="panel" style="margin-bottom:12px"><h2>Add-on waitlists</h2><div id="hostWait" class="tiny">Loading…</div></div>
       <h2 style="margin:6px 0 8px">Founding Members list</h2>
       <p class="tiny" style="margin:0 0 8px">Manual backup: add someone who paid another way.</p>
@@ -605,7 +606,7 @@ function route(){
   if(v==="series"){ initMove(); (scChars.length ? Promise.resolve() : loadScWho()).then(()=>{ $("mvWho").innerHTML = scWho ? "Character: <b>"+scWho.name.replace(/[<>&]/g,"")+"</b> (change it in <a href='#scenes'>2 Make posts</a>)" : "No character picked. That's okay: the prompt works for any picture."; }); }
   if(v==="builder" && !loaded.builder){ loaded.builder=1; initBuilder(); }
   if(v==="help"){ loadHelp(); }
-  if(v==="host"){ loadAllow(); loadHostHelp(); loadHostWait(); }
+  if(v==="host"){ loadAllow(); loadHostHelp(); loadHostWait(); loadConsults(); }
 }
 window.addEventListener("hashchange", () => { if(me) route(); });
 
@@ -768,6 +769,17 @@ function mvPrompt(){
   return `Vertical 9:16 video, 8 seconds, starting from this exact picture. Keep ${who}'s face, hair, outfit and the background exactly the same. Action: ${what}. Natural, small movements and a slow camera push-in.` + (say ? ` ${who} looks at the camera and says: "${say}"` : " No talking.") + " Natural background sound, no music, no text on screen.";
 }
 function initMove(){ if(initMove.done) return; initMove.done=1; $("mvCopy").onclick=e=>copyText(mvPrompt(),e.currentTarget); }
+
+async function loadConsults(){
+  const box=$("hostConsult"); const { data, error } = await sb.from("consultation_requests").select("*").order("created_at",{ascending:false}).limit(50);
+  box.innerHTML=""; if(error){ box.append(el("p","tiny","Couldn't load messages.")); return; }
+  $("consultCount").textContent = (data||[]).length;
+  if(!data.length){ box.append(el("p","tiny","No messages yet.")); return; }
+  data.forEach(m=>{ const c=el("div","post"); const top=el("div","who"); top.append(el("span","name",m.name), el("span","meta"," · "+ago(m.created_at)));
+    const mail=el("a",null,m.email); mail.href="mailto:"+encodeURIComponent(m.email); const line=el("p","tiny"); line.append(mail); if(m.org) line.append(document.createTextNode(" · "+m.org));
+    c.append(top, line, el("p","body",m.message));
+    const del=el("button","linkbtn","Delete"); del.type="button"; del.onclick=async()=>{ if(!confirm("Delete this message?")) return; await sb.from("consultation_requests").delete().eq("id",m.id); loadConsults(); }; c.append(del); box.append(c); });
+}
 
 // ---------- help desk ----------
 const STARTERS = ["How do I start setting up my team?","My morning brief didn't come","How do I talk to my team by voice?","How do I connect Gmail?"];
