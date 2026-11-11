@@ -290,7 +290,7 @@ ol.steps{padding-left:22px;display:grid;gap:8px;margin:8px 0 0}
         <p class="muted" style="font-size:14px">Love the picture? Give your character a name and save her card. Every scene below will use her exact description, so she looks the same in every post.</p>
         <div class="row cb-row"><input type="text" id="cbName" maxlength="40" placeholder="Character name, like Megan" style="flex:1;min-width:180px"><button class="btn" type="button" id="cbSave">Save character</button></div>
         <div class="chips" id="cbSaved" style="margin-top:10px"></div>
-        <p class="tiny">Saved on this device and browser.</p>
+        <p class="tiny">Saved to your HQ account, so your characters are there on any phone or computer you sign in on.</p>
       </div>
 
       <div class="panel" style="margin-bottom:12px">
@@ -706,9 +706,17 @@ const CB = {
 const CB_DEF = {mode:"avatar",shot:"Headshot",gender:"Woman",age:"Mid 20s",face:"Oval",depth:"Brown",under:"Warm (golden)",eyes:"Almond",eyecolor:"Dark brown",nose:"Straight",lips:"Full",brows:"Natural full",hair:"Curly",hlen:"Shoulder",hstyle:"Worn down",hcolor:"Dark brown",body:"Average",makeup:"Soft glam",extras:[],real:["Visible pores","Uneven tone","Flyaway hairs","Lip lines"],outfit:"White tee",bg:"Plain white wall",light:"Window daylight",cam:"Pro camera",scene:"Product review (UGC)"};
 let cb = JSON.parse(JSON.stringify(CB_DEF));
 let cbWho = null; // saved character for scenes
-const cbStoreKey = "sos_characters_v1";
-function cbLoad(){ try{ return JSON.parse(localStorage.getItem(cbStoreKey)||"[]"); }catch(e){ return []; } }
-function cbStore(list){ try{ localStorage.setItem(cbStoreKey, JSON.stringify(list)); return true; }catch(e){ return false; } }
+let cbChars = [];
+async function cbFetch(){
+  const { data, error } = await sb.from("characters").select("id,name,lock").order("created_at");
+  if(!error) cbChars = data || [];
+  // one-time move of anything saved on this device before accounts were used
+  try{ const old = JSON.parse(localStorage.getItem("sos_characters_v1")||"[]");
+    if(old.length){ for(const c of old){ if(!cbChars.some(x=>x.name===c.name)) await sb.from("characters").insert({name:c.name, lock:c.lock}); }
+      localStorage.removeItem("sos_characters_v1"); const r = await sb.from("characters").select("id,name,lock").order("created_at"); if(!r.error) cbChars = r.data||[]; } }catch(e){}
+  cbDrawSaved();
+}
+function cbLoad(){ return cbChars; }
 const cbv = (k, lab) => { const r = CB[k].find(x=>x[0]===(lab!==undefined?lab:cb[k])); return r ? r[1] : ""; };
 const cbList = (k) => cb[k].map(l=>cbv(k,l)).filter(Boolean);
 function cbJoin(a){ return a.length<2 ? (a[0]||"") : a.slice(0,-1).join(", ")+" and "+a[a.length-1]; }
@@ -799,7 +807,7 @@ function cbDrawSaved(){
   if(!list.length){ box.append(el("span","tiny","No saved characters yet.")); }
   const cur = el("button","chip","Current build"); cur.type="button"; cur.setAttribute("aria-pressed", !cbWho); cur.onclick=()=>{ cbWho=null; cbDrawScene(); cbDrawSaved(); }; who.append(cur);
   list.forEach((c,i)=>{
-    const b = el("button","chip","🗑 "+c.name); b.type="button"; b.title="Delete "+c.name; b.onclick=()=>{ if(confirm("Delete "+c.name+"?")){ const l=cbLoad(); l.splice(i,1); cbStore(l); if(cbWho&&cbWho.name===c.name) cbWho=null; cbDrawSaved(); cbDrawScene(); } }; box.append(b);
+    const b = el("button","chip","🗑 "+c.name); b.type="button"; b.title="Delete "+c.name; b.onclick=async()=>{ if(confirm("Delete "+c.name+"?")){ const { error } = await sb.from("characters").delete().eq("id", c.id); if(error){ toast("Couldn't delete. Try again."); return; } if(cbWho&&cbWho.name===c.name) cbWho=null; await cbFetch(); cbDrawScene(); } }; box.append(b);
     const w = el("button","chip",c.name); w.type="button"; w.setAttribute("aria-pressed", !!cbWho && cbWho.name===c.name); w.onclick=()=>{ cbWho=c; cbDrawScene(); cbDrawSaved(); }; who.append(w);
   });
 }
@@ -820,17 +828,21 @@ function cbDraw(){
 }
 function cbRand(a){ return a[Math.floor(Math.random()*a.length)][0]; }
 function initBuilder(){
-  cbDrawSaved(); cbDraw();
+  cbDrawSaved(); cbDraw(); cbFetch();
   $("cbCopy").onclick = e => copyText(cbPrompt(), e.currentTarget);
   $("cbSceneCopy").onclick = e => copyText(cbScenePrompt(), e.currentTarget);
   $("cbMove").onclick = e => copyText(cbMovePrompt(), e.currentTarget);
   $("cbProduct").onchange = cbDrawScene;
   $("cbReset").onclick = () => { cb = JSON.parse(JSON.stringify(CB_DEF)); cbWho=null; cbDraw(); cbDrawSaved(); };
   $("cbSurprise").onclick = () => { ["shot","age","face","depth","under","eyes","eyecolor","nose","lips","brows","hair","hlen","hstyle","hcolor","body","makeup","outfit","bg","light"].forEach(k=>cb[k]=cbRand(CB[k])); if(cb.hair==="Bald") cb.hair="Wavy"; cb.mode="avatar"; cbDraw(); toast("New character rolled 🎲"); };
-  $("cbSave").onclick = () => {
+  $("cbSave").onclick = async () => {
     const name = ($("cbName").value||"").trim(); if(!name){ toast("Give your character a name first"); return; }
-    const list = cbLoad().filter(c=>c.name!==name); const c = {name, lock:cbLock()}; list.push(c);
-    if(cbStore(list)){ cbWho=c; cbDrawSaved(); cbDrawScene(); toast(name+" saved ✓"); } else toast("Couldn't save on this browser. Copy the prompt instead.");
+    const btn = $("cbSave"); btn.disabled = true;
+    const lock = cbLock(), ex = cbChars.find(c=>c.name===name);
+    const { error } = ex ? await sb.from("characters").update({lock}).eq("id", ex.id) : await sb.from("characters").insert({name, lock});
+    btn.disabled = false;
+    if(error){ toast("Couldn't save. Try again."); return; }
+    await cbFetch(); cbWho = cbChars.find(c=>c.name===name) || null; cbDrawSaved(); cbDrawScene(); toast(name+" saved ✓");
   };
   const fx = $("cbFixes"); fx.innerHTML="";
   CB_FIX.forEach(f=>{ const c=el("div","card"); c.append(el("h4",null,f[0])); const b=el("button","btn ghost","Copy the fix"); b.type="button"; b.dataset.label="Copy the fix"; b.onclick=e=>copyText(f[1],e.currentTarget); c.append(b); fx.append(c); });
