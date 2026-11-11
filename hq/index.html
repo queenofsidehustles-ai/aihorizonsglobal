@@ -692,12 +692,20 @@ function sceneFull(s){
   const lock = scWho ? `Use my attached photo of ${scWho.name} as the exact reference. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age.\n\nCharacter: ${scWho.lock}` : SC.lock;
   return `${lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
 }
+function scenePin(s){
+  const who = scWho ? `Use my FIRST attached photo of ${scWho.name} as the exact reference for the person. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age.\n\nCharacter: ${scWho.lock}` : `Use my FIRST attached photo (my master photo) as the exact reference for the person. Keep the same face, skin tone, hair and features exactly the same.`;
+  return `${who}\n\nUse my SECOND attached photo (a Pinterest picture) ONLY for ideas: the outfit, pose, setting, colors and lighting. Never copy the face, body or identity of the person in it, and do not copy the photo exactly. Make it original.\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
+}
 function pinUrl(s){ const q = (s[1].replace(/^[^:]+:\s*/,"").replace(/\(.*?\)/g,"")+" "+(s[0]==="Mini Story"?"cinematic scene":s[0].split(" ")[0]+" aesthetic")).trim(); return "https://www.pinterest.com/search/pins/?q="+encodeURIComponent(q); }
 function sceneCard(s){
   const c = el("div","card"); c.append(el("div","tag",s[0]), el("h4",null,s[1]), el("p",null,s[2]));
   const b = el("button","btn","Copy prompt"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(sceneFull(s),b);
   c.append(b);
-  if(s[0]!=="Start here"){ const p = el("a","btn ghost","Ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p); }
+  if(s[0]!=="Start here" && s[0]!=="Mini Story"){
+    const p = el("a","btn ghost","1. Find ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p);
+    const q = el("button","btn ghost","2. Saved one? Copy the Pinterest version"); q.type="button"; q.dataset.label=q.textContent; q.style.marginTop="8px"; q.onclick=()=>copyText(scenePin(s),q); c.append(q);
+    c.append(el("p","tiny","Pinterest version: in ChatGPT, attach your character's picture first and the Pinterest picture second, then paste."));
+  } else if(s[0]==="Mini Story"){ const p = el("a","btn ghost","Ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p); }
   return c;
 }
 function drawToday(){
