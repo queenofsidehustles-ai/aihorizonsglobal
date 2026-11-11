@@ -48,6 +48,9 @@ select{background:var(--void);border:1px solid var(--line);color:var(--fg);borde
 .btn{font-weight:700;font-size:14px;border:none;border-radius:10px;padding:11px 16px;background:var(--neon);color:var(--ink);cursor:pointer;box-shadow:0 0 14px rgba(47,243,224,.5)}
 .btn.ghost{background:transparent;color:var(--neon);border:1px solid var(--neon);box-shadow:none}
 .btn:disabled{opacity:.5;cursor:not-allowed}
+.mv-in{display:flex;gap:6px;align-items:center}.mv-in input{flex:1;min-width:0}
+.mv-mic{flex:none;width:42px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--deck);font-size:18px;cursor:pointer}
+.mv-mic.on{background:#ff4d6d;border-color:#ff4d6d;animation:mvp 1s infinite}@keyframes mvp{50%{box-shadow:0 0 0 6px rgba(255,77,109,.25)}}
 .posts{display:flex;flex-direction:column;gap:12px;margin-top:12px}
 .post{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;transition:border-color .2s,box-shadow .2s}
 .post:hover{border-color:rgba(47,243,224,.6);box-shadow:0 0 22px rgba(47,243,224,.14)}
@@ -292,18 +295,25 @@ body.cb-on .side{display:none}
       <div class="hero"><div class="eyebrow">● Content Studio · Step 3</div><h1>Make videos and a series</h1><p>Turn a picture into a moving, talking video. Or let your AI team plan and film a whole mini-drama for you.</p></div>
       <div class="grid">
         <div class="card"><div class="tag">Easy · 5 minutes</div><h4>Turn one picture into a video</h4>
-          <p class="tiny" style="margin:0">We recommend <b>Google Flow</b> (it has free daily credits and makes her talk). Any video app works too: Kling, Higgsfield, HeyGen, Runway and others.</p>
+          <p class="tiny" style="margin:0"><b>Start with ONE finished picture</b> of her already in the scene. Make it in <a href="#scenes">2 Make posts</a> (Pinterest idea? Use <b>"Copy the Pinterest version"</b> there first). One finished picture keeps her face from changing.</p>
+          <p class="tiny" style="margin:6px 0 0">Any video app works. We recommend <b>Google Flow</b> (free daily credits, and she can talk).</p>
           <p class="tiny" id="mvWho" style="margin:8px 0 0"></p>
-          <label class="tiny cb-l" for="mvWhat">What is happening in your picture?</label>
-          <input type="text" id="mvWhat" maxlength="200" placeholder="Like: she pours a green smoothie in a bright kitchen">
+          <p class="tiny cb-l" style="margin-bottom:4px">Quick ideas (tap one, or say your own):</p>
+          <div class="chips" id="mvIdeas"></div>
+          <label class="tiny cb-l" for="mvWhat">What should happen in the video?</label>
+          <div class="mv-in"><input type="text" id="mvWhat" maxlength="240" placeholder="Like: she pours a green smoothie and takes a sip"><button class="mv-mic" type="button" data-for="mvWhat" aria-label="Speak instead of typing">🎤</button></div>
           <label class="tiny cb-l" for="mvSay">What does she say? (optional, one or two short sentences)</label>
-          <input type="text" id="mvSay" maxlength="200" placeholder="Like: This is my secret morning boost!">
-          <button class="btn" type="button" id="mvCopy" data-label="Copy my video prompt" style="margin-top:10px">Copy my video prompt</button>
+          <div class="mv-in"><input type="text" id="mvSay" maxlength="200" placeholder="Like: This is my secret morning boost!"><button class="mv-mic" type="button" data-for="mvSay" aria-label="Speak instead of typing">🎤</button></div>
+          <p class="tiny" id="mvMicMsg" style="margin:4px 0 0" aria-live="polite"></p>
+          <p class="tiny cb-l" style="margin:12px 0 4px"><b>Pick one:</b></p>
+          <button class="btn" type="button" id="mvCopy" data-label="Quick: copy my video prompt">Quick: copy my video prompt</button>
+          <button class="btn ghost" type="button" id="mvAsk" data-label="Creative: have my AI write it" style="margin-top:8px">Creative: have my AI write it</button>
+          <details class="tiny" style="margin-top:8px"><summary>What's the difference?</summary><p><b>Quick</b> turns your words into a ready prompt right away. <b>Creative</b> copies a message for your own Claude or ChatGPT. Paste it, add your picture, and your AI writes a fresh, more detailed prompt for you.</p></details>
           <ol class="steps easy">
             <li>Open your video app. <a href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Open Google Flow</a> (recommended).</li>
             <li>Choose <b>video</b>, <b>vertical (9:16)</b>, and <b>start from a picture</b>. In Flow: tap the settings next to the arrow and pick <b>Video → Frames → 9:16</b>.</li>
-            <li>Add your picture. Paste your video prompt. Tap the arrow (or Generate).</li>
-            <li>Play it with sound. Like it? Download it. Not quite? Generate again.</li>
+            <li>Add your ONE picture. Paste your prompt. Tap Generate.</li>
+            <li>Play it with sound. Like it? Download it. Something odd (like a cup disappearing)? Generate again.</li>
           </ol>
         </div>
         <div class="card"><div class="tag">Mini-drama series</div><h4>Let your AI team make a series</h4>
@@ -762,13 +772,41 @@ function drawStudioTabs(v){
   document.querySelectorAll("[data-tabs]").forEach(box=>{ box.innerHTML=""; T.forEach(t=>{ const a=el("a"); a.href="#"+t[0]; if(t[0]===v){ a.className="on"; a.setAttribute("aria-current","page"); } const b=el("b",null,t[1]); const s=el("span"); s.append(document.createTextNode(t[2])); s.append(el("small",null,t[3])); a.append(b,s); box.append(a); }); });
 }
 
+const MV_IDEAS=[
+ ["Pour and sip","she pours a drink into a glass, then picks up the glass and takes a sip"],
+ ["Show a product","she holds up the product next to her face, turns it slowly so the label shows, and smiles"],
+ ["Unbox","she opens a box, lifts the item out and looks happy"],
+ ["Skincare","she gently pats a skincare product onto her cheek, then smiles at the camera"],
+ ["Walk in and wave","she walks into the room toward the camera and waves"],
+ ["Talk to camera","she looks at the camera and talks warmly, using small hand gestures"],
+ ["Cook and stir","she stirs the pot, tastes from the spoon and nods"],
+ ["Twirl","she does a slow happy twirl and laughs"]];
+function mvWhatTxt(){ return ($("mvWhat").value||"").trim() || "a natural moment from the picture"; }
 function mvPrompt(){
-  const who = scWho ? scWho.name : "the person";
-  const what = ($("mvWhat").value||"").trim() || "a natural moment from the picture";
   const say = ($("mvSay").value||"").trim();
-  return `Vertical 9:16 video, 8 seconds, starting from this exact picture. Keep ${who}'s face, hair, outfit and the background exactly the same. Action: ${what}. Natural, small movements and a slow camera push-in.` + (say ? ` ${who} looks at the camera and says: "${say}"` : " No talking.") + " Natural background sound, no music, no text on screen.";
+  return `Vertical 9:16 video, about 8 seconds, starting from this exact picture. Keep her face, hair, outfit and the background exactly the same the whole time. What happens: ${mvWhatTxt()}. Anything she holds stays in her hands and is used the right way (she drinks only from a cup or glass). Nothing appears or disappears. Natural, small movements. Steady camera with a slow push-in, natural light.` + (say ? ` She looks at the camera and says: "${say}"` : " No talking.") + " Natural background sound, no music, no text on screen.";
 }
-function initMove(){ if(initMove.done) return; initMove.done=1; $("mvCopy").onclick=e=>copyText(mvPrompt(),e.currentTarget); }
+function mvAskMsg(){
+  const say = ($("mvSay").value||"").trim();
+  return `I'm attaching a picture of my character. Please write me ONE short prompt (under 120 words) for an AI video app that turns this picture into a vertical 9:16 video, about 8 seconds long.\n\nWhat I want to happen: ${mvWhatTxt()}.` + (say ? `\nShe says: "${say}"` : `\nShe doesn't talk.`) + `\n\nRules for the prompt: start from this exact picture. Keep her face, hair, outfit and background exactly the same. Anything she holds stays in her hands and is used the right way. Nothing appears or disappears. Steady camera, natural light, no music, no text on screen. Make it feel real and a little more creative than my description. Give me only the prompt, ready to paste.`;
+}
+function mvMic(btn){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ $("mvMicMsg").textContent="Your browser can't listen here. Tip: tap the box, then use the microphone on your phone's keyboard."; return; }
+  if(mvMic.rec){ mvMic.rec.stop(); return; }
+  const rec = new SR(); rec.lang = navigator.language || "en-US"; rec.interimResults = true; rec.continuous = false;
+  const inp = $(btn.dataset.for); const before = inp.value.trim();
+  rec.onresult = e => { let t=""; for(const r of e.results) t += r[0].transcript; inp.value = (before ? before+" " : "") + t.trim(); };
+  rec.onerror = e => { $("mvMicMsg").textContent = e.error==="not-allowed" ? "Please allow the microphone, then tap 🎤 again." : "Didn't catch that. Tap 🎤 and try again."; };
+  rec.onend = () => { btn.classList.remove("on"); mvMic.rec=null; if(!$("mvMicMsg").textContent.startsWith("Please")) $("mvMicMsg").textContent=""; };
+  mvMic.rec = rec; btn.classList.add("on"); $("mvMicMsg").textContent="Listening… speak now, then pause."; rec.start();
+}
+function initMove(){ if(initMove.done) return; initMove.done=1;
+  $("mvCopy").onclick=e=>copyText(mvPrompt(),e.currentTarget);
+  $("mvAsk").onclick=e=>copyText(mvAskMsg(),e.currentTarget);
+  const box=$("mvIdeas"); MV_IDEAS.forEach(([lab,txt])=>{ const c=el("button","chip",lab); c.type="button"; c.onclick=()=>{ $("mvWhat").value=txt; box.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed","false")); c.setAttribute("aria-pressed","true"); }; box.append(c); });
+  document.querySelectorAll(".mv-mic").forEach(b=>b.onclick=()=>mvMic(b));
+}
 
 async function loadConsults(){
   const box=$("hostConsult"); const { data, error } = await sb.from("consultation_requests").select("*").order("created_at",{ascending:false}).limit(50);
