@@ -756,7 +756,7 @@ async function loadScenes(){
   const fx=$("scFixes"); fx.innerHTML=""; CB_FIX.forEach(f=>{ const c=el("div","card"); c.append(el("h4",null,f[0])); const btn=el("button","btn ghost","Copy the fix"); btn.type="button"; btn.dataset.label="Copy the fix"; btn.onclick=e=>copyText(f[1],e.currentTarget); c.append(btn); fx.append(c); });
   drawToday(); drawScenes();
 }
-function sheetRule(n){ n = n || "this person"; return `If my attached picture is a character sheet showing ${n} from several angles, it is the SAME person. Show only ONE ${n} in the new picture.`; }
+function sheetRule(n){ n = n || "this person"; return `If my attached picture is a character sheet showing ${n} from several angles, it is the SAME person. Show only ONE ${n} in each picture.`; }
 function scShortOn(){ return !!($("scShort") && $("scShort").checked); }
 function sceneFull(s){
   if(s[0]==="Mini Story") return s[2];
