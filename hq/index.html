@@ -265,22 +265,25 @@ body.cb-on .side{display:none}
         <ol class="steps easy">
           <li><b>Pick your character</b> below. Her look is added to every scene for you, so she always looks the same. (No character yet? Do <a href="#builder">Step 1</a> first.)</li>
           <li><b>Find a scene</b> you like. Search, or tap a topic like Kitchen or Skincare. Tap <b>Copy prompt</b>.</li>
-          <li><b>Open ChatGPT.</b> Attach your character's picture (tap the <b>+</b>), paste, and send.</li>
+          <li><b>Open ChatGPT</b> (or her Project). Attach her picture or character sheet (tap the <b>+</b>), paste, and send.</li>
           <li><b>Not quite right?</b> Type: <i>"Try again. Keep her face exactly the same."</i></li>
         </ol>
         <p class="tiny cb-l" style="margin-top:14px">Your character</p>
         <div class="chips" id="scWho"><span class="tiny">Loading…</span></div>
+        <label class="cb-check" style="margin-top:8px"><input type="checkbox" id="scShort"> She has a ChatGPT Project (copy short prompts, her look is already saved there)</label>
         <details style="margin-top:8px"><summary class="tiny"><b>Using a Pinterest idea? How to save the picture</b></summary>
           <p class="tiny" style="margin-top:6px">Pinterest's red <b>Save</b> button does NOT put the picture on your device. Take a screenshot instead:</p>
           <ol class="steps easy">
             <li>Tap <b>1. Find ideas on Pinterest</b> on a scene. Tap a picture you like so it opens big.</li>
             <li><b>Computer (Mac):</b> press <b>Command + Shift + 4</b>, then drag a box around the picture. It lands on your Desktop.<br><b>iPhone:</b> press the <b>side button + volume up</b> together. It goes to your Photos.</li>
             <li>Come back here and tap <b>2. Saved one? Copy the Pinterest version</b> on the same scene.</li>
-            <li>In ChatGPT, tap <b>+</b> and add <b>your character's picture first</b>, then the <b>screenshot second</b>. Paste and send.</li>
+            <li>In ChatGPT, tap <b>+</b> and add <b>her picture or character sheet first</b>, then the <b>screenshot second</b>. Paste and send.</li>
           </ol>
-          <p class="tiny">We only use the Pinterest picture for ideas (outfit, pose, place, light). Her face always comes from your character's picture.</p>
+          <p class="tiny">We only use the Pinterest picture for ideas (outfit, pose, place, light). Her face always comes from her picture.</p>
+          <p class="tiny"><b>Two pictures at most.</b> Want a certain outfit AND a certain place? Do two steps: first the outfit (save that picture), then use that new picture with the place. Three pictures at once makes her face drift.</p>
         </details>
-        <details style="margin-top:8px"><summary class="tiny">Tip: keep her pictures in one place</summary><p class="tiny" style="margin-top:6px">In ChatGPT, tap <b>Projects → New project</b>, name it after your character, and upload her best picture (tap <b>Add files</b>). Start every new post inside that project. Using Google Flow, Gemini, HeyGen, Higgsfield or Kling instead? Same idea: attach her picture, then paste.</p></details>
+        <details style="margin-top:8px"><summary class="tiny"><b>Picture came out wrong? Quick fixes</b></summary><p class="tiny" style="margin-top:6px">Paste the fix in the same chat, right under the picture. Attach her picture again if the face changed. Want her look changed for good? Use <a href="#builder">Step 1, part J</a>.</p><div class="grid" id="scFixes"></div></details>
+        <details style="margin-top:8px"><summary class="tiny">Tip: give her a home in ChatGPT</summary><p class="tiny" style="margin-top:6px">Set up her starter message or ChatGPT Project once in <a href="#builder">Step 1, part I</a>. Then making a new picture is just: new chat, attach her sheet, say the scene.</p></details>
       </div>
       <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
             <input type="search" id="sceneSearch" placeholder="Search 300 scenes (try kitchen, unboxing, romance)" aria-label="Search scenes" style="width:100%;margin-bottom:10px">
@@ -308,6 +311,7 @@ body.cb-on .side{display:none}
           <p class="tiny cb-l" style="margin:12px 0 4px"><b>Pick one:</b></p>
           <button class="btn" type="button" id="mvCopy" data-label="Quick: copy my video prompt">Quick: copy my video prompt</button>
           <button class="btn ghost" type="button" id="mvAsk" data-label="Creative: have my AI write it" style="margin-top:8px">Creative: have my AI write it</button>
+          <p class="tiny" id="mvNext" aria-live="polite" style="margin:8px 0 0"></p>
           <details class="tiny" style="margin-top:8px"><summary>What's the difference?</summary><p><b>Quick</b> turns your words into a ready prompt right away. <b>Creative</b> copies a message for your own Claude or ChatGPT. Paste it, add your picture, and your AI writes a fresh, more detailed prompt for you.</p></details>
           <ol class="steps easy">
             <li>Open your video app. <a href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Open Google Flow</a> (recommended).</li>
@@ -331,9 +335,9 @@ body.cb-on .side{display:none}
     <!-- CHARACTER BUILDER -->
     <section data-pane="builder" class="cb" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Content Studio · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once. Then tap <b>2 Make posts</b> at the top to put her in any of 300+ scenes.</p></div>
+      <div class="hero"><div class="eyebrow">● Content Studio · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once, then give her a character sheet and a home in ChatGPT (parts H and I). Then tap <b>2 Make posts</b> at the top to put her in any of 300+ scenes.</p></div>
 
-      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF I</span></div>
+      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF L</span></div>
       <div class="cb-layout">
         <div class="cb-steps">
       <div class="panel" style="margin-bottom:12px">
@@ -412,8 +416,42 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">H</span><h2>Put your character in a scene</h2></div>
-        <ol class="steps" style="margin-bottom:6px"><li>Save your character in part G above, then pick her here.</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
+        <div class="cb-step"><span class="cb-n">H</span><h2>Make her character sheet</h2></div>
+        <p class="muted" style="font-size:14px">One picture of <b class="cbHomeName">your character</b> from 3 angles. It becomes her "master photo" and keeps her face the same in every new picture.</p>
+        <ol class="steps easy"><li>In ChatGPT, open the chat where you made her picture (or start a new chat and attach her best picture).</li><li>Tap <b>Copy sheet prompt</b>, paste it there and send.</li><li>Download the sheet. Use it as her photo from now on.</li></ol>
+        <div class="row cb-row"><button class="btn" type="button" id="cbSheetCopy" data-label="Copy sheet prompt">Copy sheet prompt</button></div>
+        <p class="tiny">Don't cut the sheet into pieces. Every prompt in HQ already tells ChatGPT it's the same person and to show her only once.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">I</span><h2>Give her a home in ChatGPT</h2></div>
+        <p class="muted" style="font-size:14px">Pick the way you like. Both keep <b class="cbHomeName">your character</b> looking the same.</p>
+        <div class="grid">
+          <div class="card"><div class="tag">Quick way · no setup</div><h4>Start each chat with this</h4>
+            <p class="tiny" style="margin:0">Open a <b>new chat</b>, attach her character sheet, paste this and send. Then just say scenes, like <i>"now at the beach in a red dress."</i> It remembers for the whole chat.</p>
+            <button class="btn" type="button" id="cbStarterCopy" data-label="Copy starter message" style="margin-top:10px">Copy starter message</button>
+            <p class="tiny">Tip: save it in your phone's Notes so it's always handy.</p></div>
+          <div class="card"><div class="tag">Best way · 5-minute setup</div><h4>Make her a ChatGPT Project</h4>
+            <ol class="steps easy"><li>In ChatGPT tap <b>Projects → New project</b>. Name it <b class="cbHomeName">your character</b>.</li><li>Open the project's <b>Instructions</b>, paste, and save.</li><li>Add her character sheet to the project's <b>files</b>.</li><li>Each new picture: start a <b>new chat inside the project</b>, attach her sheet, say the scene.</li></ol>
+            <button class="btn" type="button" id="cbProjCopy" data-label="Copy project instructions">Copy project instructions</button></div>
+        </div>
+        <p class="tiny">Pictures come from ChatGPT. Videos come from your video app (we recommend Google Flow) in <a href="#series">3 Make videos</a>.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">J</span><h2>Changed her look in ChatGPT? Update her here</h2></div>
+        <p class="muted" style="font-size:14px">Made her face rounder or her hair longer while chatting? Bring the new look back here so every HQ prompt matches. Do this once, when you love her new look.</p>
+        <ol class="steps easy"><li>Tap <b>Copy the question</b>, paste it in your ChatGPT chat with her newest picture, and send.</li><li>Copy ChatGPT's answer and paste it in the box below.</li><li>Tap <b>Save her new look</b>. Then make a new character sheet (part H) and update your project instructions (part I).</li></ol>
+        <div class="row cb-row"><button class="btn ghost" type="button" id="cbAskLook" data-label="Copy the question">Copy the question</button></div>
+        <p class="tiny cb-l">Updating</p><div class="chips" id="cbUpdWho"></div>
+        <textarea id="cbNewLook" rows="4" maxlength="1500" placeholder="Paste ChatGPT's description of her here" style="width:100%;margin-top:6px"></textarea>
+        <div class="row cb-row"><button class="btn" type="button" id="cbSaveLook">Save her new look</button></div>
+        <p class="tiny" id="cbLookMsg" aria-live="polite"></p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">K</span><h2>Put your character in a scene</h2></div>
+        <ol class="steps" style="margin-bottom:6px"><li>Save your character in part G above, then pick her here. (Using her Project or starter message from part I? You can also just pick scenes in <a href="#scenes">2 Make posts</a>.)</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
         <p class="tiny cb-l">Character</p><div class="chips" id="cbSceneWho"></div>
         <p class="tiny cb-l">Scene (each one comes with a caption idea)</p><div class="chips" data-cb="scene" data-single></div>
         <label class="cb-check"><input type="checkbox" id="cbProduct"> I'm adding a product photo too (keeps the label, colors and shape exactly the same)</label>
@@ -423,7 +461,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel">
-        <div class="cb-step"><span class="cb-n">I</span><h2>Picture came out wrong? Tap the fix</h2></div>
+        <div class="cb-step"><span class="cb-n">L</span><h2>Picture came out wrong? Tap the fix</h2></div>
         <p class="muted" style="font-size:14px">Paste the fix into the same chat, right under the picture. Attach your photo again if the face changed.</p>
         <div class="grid" id="cbFixes"></div>
       </div>
@@ -714,17 +752,23 @@ async function loadScenes(){
   if(error || !data){ $("sceneGrid").append(el("p","err","The library didn't load. Refresh to try again.")); return; }
   SC = JSON.parse(data.body);
   $("sceneSearch").addEventListener("input", ()=>drawScenes());
+  const sh=$("scShort"); try{ sh.checked = localStorage.getItem("sos_sc_short")==="1"; }catch(e){} sh.onchange=()=>{ try{ localStorage.setItem("sos_sc_short", sh.checked?"1":"0"); }catch(e){} };
+  const fx=$("scFixes"); fx.innerHTML=""; CB_FIX.forEach(f=>{ const c=el("div","card"); c.append(el("h4",null,f[0])); const btn=el("button","btn ghost","Copy the fix"); btn.type="button"; btn.dataset.label="Copy the fix"; btn.onclick=e=>copyText(f[1],e.currentTarget); c.append(btn); fx.append(c); });
   drawToday(); drawScenes();
 }
+function sheetRule(n){ n = n || "this person"; return `If my attached picture is a character sheet showing ${n} from several angles, it is the SAME person. Show only ONE ${n} in the new picture.`; }
+function scShortOn(){ return !!($("scShort") && $("scShort").checked); }
 function sceneFull(s){
   if(s[0]==="Mini Story") return s[2];
   if(s[0]==="Start here") return `${s[2]}\n\n${SC.avoid}`;
-  const lock = scWho ? `Use my attached photo of ${scWho.name} as the exact reference. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age.\n\nCharacter: ${scWho.lock}` : SC.lock;
+  if(scWho && scShortOn()) return `New picture of ${scWho.name}. Use the attached picture or character sheet as her exact reference and show only ONE of her.\n\nSCENE: ${s[2]}`;
+  const lock = scWho ? `Use my attached photo of ${scWho.name} as the exact reference. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age. ${sheetRule(scWho.name)}\n\nCharacter: ${scWho.lock}` : `${SC.lock}\n\n${sheetRule()}`;
   return `${lock}\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
 }
 function scenePin(s){
-  const who = scWho ? `Use my FIRST attached photo of ${scWho.name} as the exact reference for the person. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age.\n\nCharacter: ${scWho.lock}` : `Use my FIRST attached photo (my master photo) as the exact reference for the person. Keep the same face, skin tone, hair and features exactly the same.`;
-  return `${who}\n\nUse my SECOND attached photo (a Pinterest picture) ONLY for ideas: the outfit, pose, setting, colors and lighting. Never copy the face, body or identity of the person in it, and do not copy the photo exactly. Make it original.\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
+  const nm = scWho ? scWho.name : "my character";
+  const who = (scWho && scShortOn()) ? `Picture 1 = ${nm}'s picture or character sheet. Use it as her exact reference and show only ONE of her.` : scWho ? `Picture 1 = my photo or character sheet of ${scWho.name}. Use it as the exact reference for the person. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age. ${sheetRule(scWho.name)}\n\nCharacter: ${scWho.lock}` : `Picture 1 = my master photo or character sheet. Use it as the exact reference for the person. Keep the same face, skin tone, hair and features exactly the same. ${sheetRule()}`;
+  return `${who}\n\nPicture 2 = a Pinterest picture. Use it ONLY for ideas: the outfit, pose, setting, colors and lighting. Never copy the face, body or identity of the person in it, and do not copy the photo exactly. Make it original.\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
 }
 function pinUrl(s){ const q = (s[1].replace(/^[^:]+:\s*/,"").replace(/\(.*?\)/g,"")+" "+(s[0]==="Mini Story"?"cinematic scene":s[0].split(" ")[0]+" aesthetic")).trim(); return "https://www.pinterest.com/search/pins/?q="+encodeURIComponent(q); }
 function sceneCard(s){
@@ -734,7 +778,7 @@ function sceneCard(s){
   if(s[0]!=="Start here" && s[0]!=="Mini Story"){
     const p = el("a","btn ghost","1. Find ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p);
     const q = el("button","btn ghost","2. Saved one? Copy the Pinterest version"); q.type="button"; q.dataset.label=q.textContent; q.style.marginTop="8px"; q.onclick=()=>copyText(scenePin(s),q); c.append(q);
-    c.append(el("p","tiny","Pinterest version: screenshot the Pinterest picture, then in ChatGPT add your character's picture first and the screenshot second, then paste."));
+    c.append(el("p","tiny","Pinterest version: screenshot the Pinterest picture. In ChatGPT add her picture or sheet first, the screenshot second, then paste. Two pictures at most."));
   } else if(s[0]==="Mini Story"){ const p = el("a","btn ghost","Ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p); }
   return c;
 }
@@ -802,8 +846,8 @@ function mvMic(btn){
   mvMic.rec = rec; btn.classList.add("on"); $("mvMicMsg").textContent="Listening… speak now, then pause."; rec.start();
 }
 function initMove(){ if(initMove.done) return; initMove.done=1;
-  $("mvCopy").onclick=e=>copyText(mvPrompt(),e.currentTarget);
-  $("mvAsk").onclick=e=>copyText(mvAskMsg(),e.currentTarget);
+  $("mvCopy").onclick=e=>{ copyText(mvPrompt(),e.currentTarget); $("mvNext").innerHTML="<b>Copied!</b> Now open your video app, add your ONE picture, paste and tap Generate."; };
+  $("mvAsk").onclick=e=>{ copyText(mvAskMsg(),e.currentTarget); $("mvNext").innerHTML="<b>Copied!</b> Now open your Claude or ChatGPT, paste it, attach your picture and send. Copy the prompt it writes, then paste that into your video app."; };
   const box=$("mvIdeas"); MV_IDEAS.forEach(([lab,txt])=>{ const c=el("button","chip",lab); c.type="button"; c.onclick=()=>{ $("mvWhat").value=txt; box.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed","false")); c.setAttribute("aria-pressed","true"); }; box.append(c); });
   document.querySelectorAll(".mv-mic").forEach(b=>b.onclick=()=>mvMic(b));
 }
@@ -960,7 +1004,7 @@ async function cbFetch(){
   try{ const old = JSON.parse(localStorage.getItem("sos_characters_v1")||"[]");
     if(old.length){ for(const c of old){ if(!cbChars.some(x=>x.name===c.name)) await sb.from("characters").insert({name:c.name, lock:c.lock}); }
       localStorage.removeItem("sos_characters_v1"); const r = await sb.from("characters").select("id,name,lock").order("created_at"); if(!r.error) cbChars = r.data||[]; } }catch(e){}
-  cbDrawSaved();
+  cbDrawSaved(); cbDrawHome();
 }
 function cbLoad(){ return cbChars; }
 const cbv = (k, lab) => { const r = CB[k].find(x=>x[0]===(lab!==undefined?lab:cb[k])); return r ? r[1] : ""; };
@@ -1007,7 +1051,7 @@ function cbScenePrompt(){
   const she = /^A man\b/.test(who.lock) ? "he" : "she";
   let act = sc[1].replace(/\bher\b/g, she==="he"?"his":"her");
   const p = [];
-  p.push(`Use my attached photo of ${who.name} as the exact reference. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age.`);
+  p.push(`Use my attached photo of ${who.name} as the exact reference. Keep the same face, skin tone, hair and features exactly the same. Do not beautify or change the age. ${sheetRule(who.name)}`);
   if($("cbProduct") && $("cbProduct").checked) p.push("Use my second attached photo as the exact product: keep the label, logo, text, colors, shape and size exactly the same. The product must look real and unchanged.");
   p.push(`Character: ${who.lock}`);
   p.push(`Scene: ${who.name} is ${act}.`);
@@ -1058,6 +1102,7 @@ function cbDrawSaved(){
   });
 }
 function cbDrawScene(){
+  cbDrawHome();
   $("cbScenePrompt").textContent = cbScenePrompt();
   const sc = CB.scene.find(x=>x[0]===cb.scene);
   $("cbCaption").textContent = "Caption idea: " + sc[2] + "  ·  Turn on the AI label.";
@@ -1120,8 +1165,8 @@ function cbIdDraw(){
 }
 function cbProgInit(){
   const steps=[...document.querySelectorAll(".cb-steps > .panel")], dots=$("cbProgDots"); dots.innerHTML="";
-  steps.forEach((s,i)=>{ const b=el("button",null,"ABCDEFGHI"[i]||String(i+1)); b.type="button"; b.setAttribute("aria-label","Go to part "+("ABCDEFGHI"[i]||i+1)); b.onclick=()=>s.scrollIntoView({behavior:"smooth",block:"start"}); dots.append(b); s.style.scrollMarginTop="80px"; });
-  const set=i=>{ steps.forEach((s,j)=>s.classList.toggle("cur",j===i)); [...dots.children].forEach((d,j)=>{ d.classList.toggle("done",j<i); d.classList.toggle("cur",j===i); }); $("cbProgFill").style.width=((i+1)/steps.length*100)+"%"; $("cbProgT").textContent=`PART ${"ABCDEFGHI"[i]} OF ${"ABCDEFGHI"[steps.length-1]}`; };
+  steps.forEach((s,i)=>{ const b=el("button",null,"ABCDEFGHIJKL"[i]||String(i+1)); b.type="button"; b.setAttribute("aria-label","Go to part "+("ABCDEFGHIJKL"[i]||i+1)); b.onclick=()=>s.scrollIntoView({behavior:"smooth",block:"start"}); dots.append(b); s.style.scrollMarginTop="80px"; });
+  const set=i=>{ steps.forEach((s,j)=>s.classList.toggle("cur",j===i)); [...dots.children].forEach((d,j)=>{ d.classList.toggle("done",j<i); d.classList.toggle("cur",j===i); }); $("cbProgFill").style.width=((i+1)/steps.length*100)+"%"; $("cbProgT").textContent=`PART ${"ABCDEFGHIJKL"[i]} OF ${"ABCDEFGHIJKL"[steps.length-1]}`; };
   if("IntersectionObserver" in window){
     const vis=new Map(); const io=new IntersectionObserver(es=>{ es.forEach(e=>vis.set(e.target,e.intersectionRatio)); let best=0,bi=0; steps.forEach((s,i)=>{ const r=vis.get(s)||0; if(r>best){best=r;bi=i;} }); if(best>0) set(bi); },{threshold:[0,.25,.5,.75,1],rootMargin:"-80px 0px -35% 0px"});
     steps.forEach(s=>io.observe(s));
@@ -1134,6 +1179,15 @@ function cbProgInit(){
   }
   $("cbName").addEventListener("input", cbIdDraw);
 }
+function cbHomeWho(){ if(cbWho) return cbWho; const n=($("cbName")&&$("cbName").value||"").trim(); return {name:n||"my character", lock:cbLock()}; }
+function cbHer(w){ return /^A man\b/.test(w.lock||"") ? ["he","his","him"] : ["she","her","her"]; }
+function cbSheetPrompt(){ const w=cbHomeWho(); return `Create a character reference sheet of this exact person, ${w.name}.\nShow ${w.name} 3 times side by side on a plain light gray background: front view, three-quarter view and side view, all full body, standing relaxed.\nKeep the face, skin tone, hair, makeup, body shape and proportions exactly the same as my attached picture. Do not beautify or change the age.\nSimple fitted neutral clothes, soft even studio light, calm expression with a slight smile.\nNo text, no labels, no props. Wide 3:2 image.`; }
+function cbStarter(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `For this whole chat, my attached picture is my character, ${w.name}. ${sheetRule(w.name)}\nIn every picture you make in this chat: keep ${his} face, skin tone, undertone, hair and body exactly the same as the attached picture. Do not beautify, slim or change ${his} age. Real, unretouched look with visible skin texture and natural light. Vertical 9:16. No text, logos or watermarks.\nWho ${w.name} is: ${w.lock}\nSay "Ready" and wait. Then I'll tell you scenes in a few words, and you make each picture.`; }
+function cbProject(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `You are my picture studio for my character, ${w.name}.\n\nWho ${w.name} is: ${w.lock}\n\nRules for every picture:\n1. Always use the picture or character sheet I attach (or the one in this project's files) as ${w.name}'s exact reference. Keep ${his} face, skin tone, undertone, hair and body shape exactly the same. Do not beautify, slim or change ${his} age.\n2. A character sheet shows the SAME person from several angles. Show only ONE ${w.name} in each picture.\n3. If I attach another picture (an outfit or a place), use it only for that: the outfit, or the setting. Never copy anyone else's face or body.\n4. Real, unretouched look: visible skin texture, natural light, no plastic skin, no beauty filters.\n5. Vertical 9:16 unless I ask for something else. No text, logos or watermarks.\n6. When I describe a scene in a few words, fill in the details yourself and make the picture right away, keeping ${w.name}'s look the same.`; }
+const CB_ASK = "Describe the person in this picture so another AI could recreate them exactly. One paragraph, facts only: age range, face shape, skin tone and undertone, eye shape and color, nose, lips, brows, hair (color, texture, length and how it's worn), body type, makeup, and any jewelry they always wear. Don't describe the outfit or the background.";
+function cbDrawHome(){ const w=cbHomeWho(); document.querySelectorAll(".cbHomeName").forEach(e=>e.textContent=w.name); cbDrawUpd(); }
+let cbUpdId = null;
+function cbDrawUpd(){ const box=$("cbUpdWho"); if(!box) return; box.innerHTML=""; if(!cbChars.length){ box.append(el("span","tiny","Save her first in part G.")); return; } if(!cbChars.some(c=>c.id===cbUpdId)) cbUpdId = (cbWho&&cbWho.id) || cbChars[cbChars.length-1].id; cbChars.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed", c.id===cbUpdId); b.onclick=()=>{ cbUpdId=c.id; cbDrawUpd(); }; box.append(b); }); }
 function initBuilder(){
   cbDrawSaved(); cbDraw(); cbFetch(); cbProgInit();
   $("cbCopy").onclick = e => copyText(cbPrompt(), e.currentTarget);
@@ -1150,6 +1204,23 @@ function initBuilder(){
     btn.disabled = false;
     if(error){ toast("Couldn't save. Try again."); return; }
     await cbFetch(); cbWho = cbChars.find(c=>c.name===name) || null; cbDrawSaved(); cbDrawScene(); toast(name+" saved ✓");
+  };
+  $("cbSheetCopy").onclick = e => copyText(cbSheetPrompt(), e.currentTarget);
+  $("cbStarterCopy").onclick = e => copyText(cbStarter(), e.currentTarget);
+  $("cbProjCopy").onclick = e => copyText(cbProject(), e.currentTarget);
+  $("cbAskLook").onclick = e => copyText(CB_ASK, e.currentTarget);
+  $("cbName").addEventListener("input", cbDrawHome);
+  $("cbSaveLook").onclick = async () => {
+    const txt = ($("cbNewLook").value||"").trim().replace(/\s+/g," "); const c = cbChars.find(x=>x.id===cbUpdId);
+    if(!c){ $("cbLookMsg").textContent="Save your character in part G first."; return; }
+    if(txt.length<40){ $("cbLookMsg").textContent="Paste ChatGPT's full description first."; return; }
+    const btn=$("cbSaveLook"); btn.disabled=true;
+    const { error } = await sb.from("characters").update({lock: txt}).eq("id", c.id);
+    btn.disabled=false;
+    if(error){ $("cbLookMsg").textContent="Couldn't save. Try again."; return; }
+    await cbFetch(); if(cbWho && cbWho.id===c.id) cbWho = cbChars.find(x=>x.id===c.id)||cbWho; if(scWho && scWho.id===c.id) scWho = null;
+    $("cbNewLook").value=""; $("cbLookMsg").textContent = c.name+"'s new look is saved ✓ Every HQ prompt now uses it. Next: make a new character sheet (part H) and update your project instructions (part I).";
+    cbDrawSaved(); cbDrawScene(); toast(c.name+" updated ✓");
   };
   const fx = $("cbFixes"); fx.innerHTML="";
   CB_FIX.forEach(f=>{ const c=el("div","card"); c.append(el("h4",null,f[0])); const b=el("button","btn ghost","Copy the fix"); b.type="button"; b.dataset.label="Copy the fix"; b.onclick=e=>copyText(f[1],e.currentTarget); c.append(b); fx.append(c); });
