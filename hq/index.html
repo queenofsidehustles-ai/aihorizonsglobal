@@ -202,7 +202,7 @@ body.cb-on .side{display:none}
     <a href="#community" data-view="community"><span class="ic">◉</span>Community</a>
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
     <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
-    <a href="#builder" data-view="builder" data-views="builder scenes series"><span class="ic">✦</span>Content Studio</a>
+    <a href="#builder" data-view="builder" data-views="builder scenes series"><span class="ic">✦</span>Dream Cast</a>
     <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
@@ -259,7 +259,7 @@ body.cb-on .side{display:none}
     <!-- SCENES -->
     <section data-pane="scenes" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Content Studio · Step 2</div><h1>Make posts</h1><p>Pick a scene, copy it, paste it into ChatGPT with your character's picture. That's it. Over 300 ideas to choose from.</p></div>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Step 2</div><h1>Make posts</h1><p>Pick a scene, copy it, paste it into ChatGPT with your character's picture. That's it. Over 300 ideas to choose from.</p></div>
       <div class="panel" style="margin-bottom:12px">
         <h2>How it works</h2>
         <ol class="steps easy">
@@ -312,7 +312,7 @@ body.cb-on .side{display:none}
     <!-- SERIES -->
     <section data-pane="series" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Content Studio · Step 3</div><h1>Make videos and a series</h1><p>Turn a picture into a moving, talking video. Or let your AI team plan and film a whole mini-drama for you.</p></div>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Step 3</div><h1>Make videos and a series</h1><p>Turn a picture into a moving, talking video. Or let your AI team plan and film a whole mini-drama for you.</p></div>
       <div class="grid">
         <div class="card"><div class="tag">Easy · 5 minutes</div><h4>Turn one picture into a video</h4>
           <p class="tiny" style="margin:0"><b>Start with ONE finished picture</b> of her already in the scene. Make it in <a href="#scenes">2 Make posts</a> (Pinterest idea? Use <b>"Copy the Pinterest version"</b> there first). One finished picture keeps her face from changing.</p>
@@ -368,7 +368,7 @@ body.cb-on .side{display:none}
     <!-- CHARACTER BUILDER -->
     <section data-pane="builder" class="cb" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Content Studio · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once, then give her a character sheet and a home in ChatGPT (parts H and I). Then tap <b>2 Make posts</b> at the top to put her in any of 300+ scenes.</p></div>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once, then give her a character sheet and a home in ChatGPT (parts H and I). Then tap <b>2 Make posts</b> at the top to put her in any of 300+ scenes.</p></div>
 
       <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF L</span></div>
       <div class="cb-layout">
@@ -479,7 +479,7 @@ body.cb-on .side{display:none}
             <ol class="steps easy"><li>In ChatGPT tap <b>Projects → New project</b>. Name it <b class="cbHomeName">your character</b>.</li><li>Open the project's <b>Instructions</b>, paste, and save.</li><li>Add her character sheet to the project's <b>files</b>.</li><li>Each new picture: start a <b>new chat inside the project</b>, attach her sheet, say the scene.</li></ol>
             <button class="btn" type="button" id="cbProjCopy" data-label="Copy project instructions">Copy project instructions</button></div>
         </div>
-        <div class="card" id="cbGptCard" style="margin-top:12px" hidden><div class="tag">Easiest · no setup</div><h4>Use the SOS Picture Studio in ChatGPT</h4><p class="tiny" style="margin:0">Open it, attach her character sheet, and tell it the scene. It already knows all the rules.</p><a class="btn" id="cbGptLink" href="#" target="_blank" rel="noopener noreferrer" style="margin-top:10px;text-align:center;text-decoration:none">Open SOS Picture Studio</a></div>
+        <div class="card" id="cbGptCard" style="margin-top:12px" hidden><div class="tag">Easiest · no setup</div><h4>Use Dream Cast inside ChatGPT</h4><p class="tiny" style="margin:0">Open it, attach her character sheet, and tell it the scene. It already knows all the rules.</p><a class="btn" id="cbGptLink" href="#" target="_blank" rel="noopener noreferrer" style="margin-top:10px;text-align:center;text-decoration:none">Open Dream Cast in ChatGPT</a></div>
         <p class="tiny">Pictures come from ChatGPT. Videos come from your video app (we recommend Google Flow) in <a href="#series">3 Make videos</a>.</p>
       </div>
 
@@ -786,8 +786,8 @@ async function loadKit(){
     } else { const pre = el("pre","prompt"); pre.textContent = r.body; c.append(pre); }
     box.append(c);
   });
-  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Content Studio"), el("p",null,"How your posts and episodes get made in 4 moves, plus 300 scene ideas and a new Scene of the Day."));
-  const go = el("a","btn","Open Content Studio"); go.href="#builder"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
+  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Dream Cast"), el("p",null,"How your posts and episodes get made in 4 moves, plus 300 scene ideas and a new Scene of the Day."));
+  const go = el("a","btn","Open Dream Cast"); go.href="#builder"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
 }
 
 // ---------- scenes ----------
@@ -1050,7 +1050,7 @@ $("addBtn").onclick = async () => {
 
 
 // ---------- character builder ----------
-const SOS_GPT_URL = ""; // paste the SOS Picture Studio GPT link here to show its card in part I
+const SOS_GPT_URL = "https://chatgpt.com/plugins/plugins_6af7d3900f0c8191bc40b4cbbeb5e158"; // Dream Cast in ChatGPT (card in part I)
 const CB = {
   mode:[["My twin (from my photo)","twin"],["An avatar (made from scratch)","avatar"],["From a picture (keep some, change some)","photo"]],
   keep:[["Face shape","face shape"],["Eyes","eyes"],["Nose","nose"],["Lips","lips"],["Skin tone","skin tone and undertone"],["Hair","hair"],["Body shape","body shape"],["Outfit","outfit"]],
