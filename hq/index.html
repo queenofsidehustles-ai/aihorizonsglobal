@@ -484,6 +484,157 @@ body.cb-on .side{display:none}
         </div>
         <div class="card" id="dcCard" style="margin-top:12px"><div class="tag">New · Dream Cast inside ChatGPT</div><h4>Use Dream Cast right inside ChatGPT</h4>
           <p class="tiny" style="margin:0">Connect once, then type <b>@Dream Cast</b> in any ChatGPT chat. It already knows your saved characters, the scene library and the quick fixes. You just attach her sheet and say what you want.</p>
+          <p class="tiny cb-l" style="margin-bottom:0">Watch first (1 minute):</p>
+<div class="dcd" id="dcDemo" aria-label="Animated walkthrough: how to connect Dream Cast in ChatGPT">
+  <div class="dcd-stage-wrap"><div class="dcd-stage" id="dcdStage">
+    <!-- scene 1: HQ -->
+    <div class="dcd-scene" data-s="1">
+      <div class="dcd-hq"><div class="dcd-hq-t">✦ Dream Cast · part I</div>
+        <div class="dcd-card"><b>Use Dream Cast right inside ChatGPT</b>
+          <div class="dcd-btn" id="dcdShow">Show my Dream Cast link</div>
+          <div class="dcd-link" id="dcdLink">https://…supabase.co/functions/v1/dreamcast/••••••</div>
+          <div class="dcd-btn" id="dcdCopy">Copy my link</div>
+          <div class="dcd-toast" id="dcdToast">Copied! ✓</div>
+        </div></div>
+    </div>
+    <!-- scenes 2-5: ChatGPT -->
+    <div class="dcd-scene" data-s="2">
+      <div class="dcd-gpt">
+        <div class="dcd-side"><div class="dcd-logo">ChatGPT</div><div class="dcd-nav">New chat</div><div class="dcd-nav">Library</div><div class="dcd-nav" id="dcdPlugins">Plugins</div><div class="dcd-nav">Explore</div></div>
+        <div class="dcd-main" id="dcdMain">
+          <div class="dcd-view" id="dcdHome"><div class="dcd-hello">What's on your mind today?</div><div class="dcd-input" id="dcdInput"><span id="dcdTyped"></span><i class="dcd-caret"></i></div>
+            <div class="dcd-pop" id="dcdPop"><div class="dcd-pop-h">Plugins</div><div class="dcd-pop-i" id="dcdPick">🎬 Dream Cast <small>the same face in every picture</small></div></div>
+            <div class="dcd-chat" id="dcdChat"><div class="dcd-me" id="dcdMe">@Dream Cast Hi!</div><div class="dcd-bot" id="dcdBot"><b>🎬 Welcome to Dream Cast!</b><br>Your character, the same face in every picture. ✨<br><br>1️⃣ Character sheet<br>2️⃣ New scene<br>3️⃣ Outfit swap<br>4️⃣ Two characters<br>5️⃣ Plan a video</div></div>
+          </div>
+          <div class="dcd-view" id="dcdPlug"><div class="dcd-ph">Plugins <span class="dcd-add" id="dcdAdd">Add ▾</span></div>
+            <div class="dcd-menu" id="dcdMenu"><div>Create plugin</div><div>Upload plugin archive</div><div id="dcdCustom">Add custom MCP server</div></div>
+            <div class="dcd-tiles"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="dcd-form" id="dcdForm"><b>Add custom MCP server</b>
+              <label>Name</label><div class="dcd-f" id="dcdName"></div>
+              <label>Server URL</label><div class="dcd-f" id="dcdUrl"></div>
+              <label>Authentication</label><div class="dcd-f dcd-sel" id="dcdAuth">OAuth</div>
+              <div class="dcd-chk" id="dcdChk"><i id="dcdBox"></i> I understand and want to continue</div>
+              <div class="dcd-create" id="dcdCreate">Create as a plugin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dcd-cursor" id="dcdCursor" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 2l15 10-7 1.5L8.5 21z" fill="#fff" stroke="#041015" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+    <div class="dcd-ring" id="dcdRing"></div>
+  </div></div>
+  <div class="dcd-cap" id="dcdCap" aria-live="polite">Press play to watch how it works</div>
+  <div class="dcd-bar">
+    <button type="button" class="dcd-play" id="dcdPlay">▶ Play</button>
+    <div class="dcd-dots" id="dcdDots"></div>
+  </div>
+</div>
+<style>
+.dcd{margin:12px 0 4px;border:1px solid rgba(47,243,224,.35);border-radius:16px;padding:10px;background:rgba(4,16,21,.6)}
+.dcd-stage-wrap{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:10px;background:#0b1d24}
+.dcd-stage{position:absolute;left:0;top:0;width:640px;height:400px;transform-origin:0 0;font:13px/1.4 var(--body,system-ui);color:#e8f4f4}
+.dcd-scene{position:absolute;inset:0;opacity:0;transition:opacity .4s}
+.dcd-scene.on{opacity:1}
+.dcd-hq{position:absolute;inset:0;padding:26px;background:radial-gradient(30rem 16rem at 50% 0,rgba(47,243,224,.18),transparent 70%),#06161c}
+.dcd-hq-t{font:700 12px var(--mono,monospace);letter-spacing:.14em;color:#2ff3e0;margin-bottom:14px}
+.dcd-card{border:1px solid rgba(47,243,224,.45);border-radius:14px;padding:18px;max-width:420px;background:#0d2a33}
+.dcd-card b{display:block;font-size:16px;margin-bottom:12px}
+.dcd-btn{display:inline-block;background:#2ff3e0;color:#041015;font-weight:800;padding:9px 14px;border-radius:10px;margin:4px 0}
+.dcd-link{display:none;background:#041015;border:1px solid #2a4a52;border-radius:8px;padding:7px 9px;font:11px var(--mono,monospace);margin:6px 0;color:#9cc3c6}
+#dcdCopy{display:none}.dcd-toast{display:none;margin-top:8px;color:#2ff3e0;font-weight:800}
+.dcd-gpt{position:absolute;inset:0;display:flex;background:#fff;color:#111}
+.dcd-side{width:130px;background:#f7f7f8;padding:12px 10px;border-right:1px solid #eee}
+.dcd-logo{font-weight:800;margin-bottom:12px}.dcd-nav{padding:6px 8px;border-radius:8px;margin:2px 0;color:#333}
+.dcd-nav.hl{background:#e8e8ea}
+.dcd-main{position:relative;flex:1}
+.dcd-view{position:absolute;inset:0;display:none;padding:18px}.dcd-view.on{display:block}
+.dcd-hello{text-align:center;font-size:19px;margin-top:110px;color:#222}
+.dcd-input{margin:18px auto 0;width:380px;border:1px solid #ddd;border-radius:22px;padding:10px 14px;min-height:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.dcd-caret{display:inline-block;width:1px;height:14px;background:#111;vertical-align:middle;animation:dcdb 1s steps(1) infinite}
+@keyframes dcdb{50%{opacity:0}}
+.dcd-pop{display:none;position:absolute;left:50%;transform:translateX(-50%);top:236px;width:380px;background:#fff;border:1px solid #e5e5e5;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:6px}
+.dcd-pop-h{font-size:11px;color:#888;padding:4px 8px}.dcd-pop-i{padding:8px;border-radius:8px}.dcd-pop-i small{color:#888}
+.dcd-pop-i.hl{background:#f0f0f2}
+.dcd-chat{display:none;padding:6px 10px}
+.dcd-me{margin-left:auto;width:max-content;background:#f0f0f2;border-radius:16px;padding:7px 12px;margin-bottom:10px}
+.dcd-bot{display:none;font-size:12.5px;line-height:1.5}
+.dcd-ph{font-size:20px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.dcd-add{font-size:12px;background:#111;color:#fff;border-radius:16px;padding:5px 12px}
+.dcd-menu{display:none;position:absolute;right:18px;top:52px;background:#fff;border:1px solid #e5e5e5;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:5px;font-size:12px;z-index:2}
+.dcd-menu div{padding:7px 10px;border-radius:7px}.dcd-menu div.hl{background:#f0f0f2}
+.dcd-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.dcd-tiles span{height:46px;border-radius:10px;background:#f4f4f5}
+.dcd-form{display:none;position:absolute;left:50%;top:14px;transform:translateX(-50%);width:330px;background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:14px;font-size:12px;z-index:3}
+.dcd-form b{display:block;font-size:14px;margin-bottom:6px}.dcd-form label{display:block;color:#555;margin-top:6px}
+.dcd-f{border:1px solid #ddd;border-radius:8px;padding:6px 8px;min-height:16px;font-size:11.5px;white-space:nowrap;overflow:hidden}
+.dcd-sel::after{content:" ▾";color:#888}
+.dcd-chk{margin-top:10px;display:flex;gap:7px;align-items:center}.dcd-chk i{width:13px;height:13px;border:1.5px solid #888;border-radius:3px;display:inline-block}
+.dcd-chk i.on{background:#111;border-color:#111;box-shadow:inset 0 0 0 2px #fff}
+.dcd-create{margin-top:10px;margin-left:auto;width:max-content;background:#ccc;color:#fff;border-radius:16px;padding:6px 12px;font-weight:700}.dcd-create.ok{background:#111}
+.dcd-cursor{position:absolute;left:560px;top:340px;z-index:9;transition:left .7s cubic-bezier(.4,0,.2,1),top .7s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));pointer-events:none}
+.dcd-ring{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #ff6fd8;opacity:0;z-index:8;pointer-events:none}
+.dcd-ring.go{animation:dcdr .5s ease-out}
+@keyframes dcdr{from{opacity:1;transform:scale(.4)}to{opacity:0;transform:scale(1.6)}}
+.dcd-cap{min-height:44px;margin:10px 4px 6px;font-size:15px;font-weight:700;color:#f2d9a6}
+.dcd-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.dcd-play{background:#2ff3e0;color:#041015;border:0;border-radius:12px;padding:10px 16px;font-weight:800;font-size:15px;cursor:pointer}
+.dcd-dots{display:flex;gap:6px;flex-wrap:wrap}
+.dcd-dots button{border:1px solid rgba(47,243,224,.5);background:transparent;color:#9cc3c6;border-radius:999px;padding:5px 11px;font-weight:700;cursor:pointer}
+.dcd-dots button[aria-current="step"]{background:#2ff3e0;color:#041015}
+@media (prefers-reduced-motion:reduce){.dcd-cursor,.dcd-scene{transition:none}.dcd-ring.go{animation:none}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id), stage=$("dcdStage"), wrap=stage.parentElement;
+  const fit=()=>{ stage.style.transform=`scale(${wrap.clientWidth/640})`; };
+  new ResizeObserver(fit).observe(wrap); fit();
+  const STEPS=[
+    "1. In HQ, tap “Show my Dream Cast link,” then “Copy my link.”",
+    "2. Open ChatGPT and tap Plugins on the left.",
+    "3. Tap Add (top right), then “Add custom MCP server.”",
+    "4. Name it Dream Cast, paste your link, pick “No authentication,” tick the box, tap “Create as a plugin.”",
+    "5. Start a new chat, type @Dream, pick Dream Cast and say hi. 🎬 You're in!"];
+  let run=0, playing=false, cur=0;
+  const sleep=(ms,r)=>new Promise((ok,no)=>setTimeout(()=>r===run?ok():no("stop"),ms));
+  const scene=n=>document.querySelectorAll("#dcdStage .dcd-scene").forEach(s=>s.classList.toggle("on",s.dataset.s==n));
+  const view=id=>["dcdHome","dcdPlug"].forEach(v=>$(v).classList.toggle("on",v===id));
+  const show=(id,on=true,d="block")=>{$(id).style.display=on?d:"none";};
+  const rel=el=>{ const a=el.getBoundingClientRect(), b=stage.getBoundingClientRect(), k=640/b.width; return {x:(a.left-b.left+a.width/2)*k, y:(a.top-b.top+a.height/2)*k}; };
+  async function moveTo(id,r){ const p=rel($(id)); const c=$("dcdCursor"); c.style.left=(p.x-4)+"px"; c.style.top=(p.y-2)+"px"; await sleep(800,r); }
+  async function click(id,r){ await moveTo(id,r); const p=rel($(id)), g=$("dcdRing"); g.style.left=p.x+"px"; g.style.top=p.y+"px"; g.classList.remove("go"); void g.offsetWidth; g.classList.add("go"); await sleep(350,r); }
+  async function type(id,text,r,ms=45){ const el=$(id); el.textContent=""; for(const ch of text){ el.textContent+=ch; await sleep(ms,r);} }
+  function reset(){
+    show("dcdLink",false); show("dcdCopy",false,"inline-block"); show("dcdToast",false); show("dcdShow",true,"inline-block");
+    show("dcdMenu",false); show("dcdForm",false); show("dcdPop",false); show("dcdChat",false); show("dcdBot",false);
+    $("dcdName").textContent=""; $("dcdUrl").textContent=""; $("dcdAuth").textContent="OAuth"; $("dcdBox").classList.remove("on"); $("dcdCreate").classList.remove("ok");
+    $("dcdTyped").textContent=""; $("dcdPlugins").classList.remove("hl"); $("dcdCustom").classList.remove("hl"); $("dcdPick").classList.remove("hl");
+    $("dcdInput").style.display="block"; document.querySelector("#dcdHome .dcd-hello").style.display="block";
+  }
+  async function step(n,r){
+    cur=n; $("dcdCap").textContent=STEPS[n]; [...$("dcdDots").children].forEach((b,i)=>b.setAttribute("aria-current",i===n?"step":"false"));
+    reset();
+    if(n===0){ scene(1); await sleep(500,r); await click("dcdShow",r); show("dcdShow",false); show("dcdLink",true); show("dcdCopy",true,"inline-block"); await sleep(500,r); await click("dcdCopy",r); show("dcdToast",true); await sleep(1400,r); }
+    if(n===1){ scene(2); view("dcdHome"); await sleep(500,r); await click("dcdPlugins",r); $("dcdPlugins").classList.add("hl"); view("dcdPlug"); await sleep(1200,r); }
+    if(n===2){ scene(2); view("dcdPlug"); $("dcdPlugins").classList.add("hl"); await sleep(400,r); await click("dcdAdd",r); show("dcdMenu",true); await sleep(500,r); await moveTo("dcdCustom",r); $("dcdCustom").classList.add("hl"); await click("dcdCustom",r); show("dcdMenu",false); show("dcdForm",true); await sleep(1200,r); }
+    if(n===3){ scene(2); view("dcdPlug"); $("dcdPlugins").classList.add("hl"); show("dcdForm",true); await sleep(400,r);
+      await click("dcdName",r); await type("dcdName","Dream Cast",r);
+      await click("dcdUrl",r); $("dcdUrl").textContent="https://…/functions/v1/dreamcast/••••"; await sleep(500,r);
+      await click("dcdAuth",r); $("dcdAuth").textContent="No authentication"; await sleep(500,r);
+      await click("dcdBox",r); $("dcdBox").classList.add("on"); $("dcdCreate").classList.add("ok"); await sleep(300,r);
+      await click("dcdCreate",r); await sleep(900,r); }
+    if(n===4){ scene(2); view("dcdHome"); await sleep(400,r); await click("dcdInput",r); await type("dcdTyped","@Dream",r,90); show("dcdPop",true); await sleep(500,r);
+      await moveTo("dcdPick",r); $("dcdPick").classList.add("hl"); await click("dcdPick",r); show("dcdPop",false); $("dcdTyped").textContent="Dream Cast  "; await type("dcdTyped","Dream Cast  Hi!",r,60); await sleep(400,r);
+      $("dcdInput").style.display="none"; document.querySelector("#dcdHome .dcd-hello").style.display="none"; show("dcdChat",true); await sleep(900,r); show("dcdBot",true); await sleep(2600,r); }
+  }
+  async function play(from){
+    const r=++run; playing=true; $("dcdPlay").textContent="❚❚ Pause";
+    try{ for(let i=from;i<STEPS.length;i++){ await step(i,r); } $("dcdPlay").textContent="↻ Replay"; playing=false; cur=0; }catch(e){}
+  }
+  STEPS.forEach((_,i)=>{ const b=document.createElement("button"); b.type="button"; b.textContent=i+1; b.setAttribute("aria-label","Show step "+(i+1)); b.onclick=()=>{ play(i).then(()=>{}); }; $("dcdDots").append(b); });
+  $("dcdPlay").onclick=()=>{ if(playing){ run++; playing=false; $("dcdPlay").textContent="▶ Play"; } else play(cur||0); };
+  scene(1);
+})();
+</script>
+
           <button class="btn" type="button" id="dcShow" style="margin-top:10px">Show my Dream Cast link</button>
           <div id="dcBox" hidden>
             <p class="tiny cb-l" style="margin-bottom:4px">Your private link (it opens your characters, so don't share it)</p>
