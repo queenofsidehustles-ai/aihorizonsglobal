@@ -482,7 +482,22 @@ body.cb-on .side{display:none}
             <ol class="steps easy"><li>In ChatGPT tap <b>Projects → New project</b>. Name it <b class="cbHomeName">your character</b>.</li><li>Open the project's <b>Instructions</b>, paste, and save.</li><li>Add her character sheet to the project's <b>files</b>.</li><li>Each new picture: start a <b>new chat inside the project</b>, attach her sheet, say the scene.</li></ol>
             <button class="btn" type="button" id="cbProjCopy" data-label="Copy project instructions">Copy project instructions</button></div>
         </div>
-        <div class="card" id="cbGptCard" style="margin-top:12px" hidden><div class="tag">Easiest · no setup</div><h4>Use Dream Cast inside ChatGPT</h4><p class="tiny" style="margin:0">Open it, attach her character sheet, and tell it the scene. It already knows all the rules.</p><a class="btn" id="cbGptLink" href="#" target="_blank" rel="noopener noreferrer" style="margin-top:10px;text-align:center;text-decoration:none">Open Dream Cast in ChatGPT</a></div>
+        <div class="card" id="dcCard" style="margin-top:12px"><div class="tag">New · Dream Cast inside ChatGPT</div><h4>Use Dream Cast right inside ChatGPT</h4>
+          <p class="tiny" style="margin:0">Connect once, then type <b>@Dream Cast</b> in any ChatGPT chat. It already knows your saved characters, the scene library and the quick fixes. You just attach her sheet and say what you want.</p>
+          <button class="btn" type="button" id="dcShow" style="margin-top:10px">Show my Dream Cast link</button>
+          <div id="dcBox" hidden>
+            <p class="tiny cb-l" style="margin-bottom:4px">Your private link (it opens your characters, so don't share it)</p>
+            <input type="text" id="dcLink" readonly style="width:100%;font-size:13px" aria-label="Your Dream Cast link">
+            <button class="btn" type="button" id="dcCopy" data-label="Copy my link" style="margin-top:8px">Copy my link</button>
+            <ol class="steps easy">
+              <li>In ChatGPT, tap <b>Plugins</b> on the left.</li>
+              <li>Tap <b>+</b>, then <b>Add custom MCP server</b>. Don't see it? Go to <b>Settings → Security and login</b>, turn on <b>Developer mode</b>, then try again.</li>
+              <li>Name: <b>Dream Cast</b>. Paste your link into <b>Server URL</b>. Sign-in: <b>None</b>. Tap <b>Create</b>, then <b>Install</b>.</li>
+              <li>Start a chat, type <b>@Dream Cast</b> and say hi. 🎬</li>
+            </ol>
+            <p class="tiny">Saved a new character or changed her look? Dream Cast sees it right away. Link shared by mistake? <a href="#" id="dcNew">Make a new link</a> (the old one stops working).</p>
+          </div>
+        </div>
         <p class="tiny">Pictures come from ChatGPT. Videos come from your video app (we recommend Google Flow) in <a href="#series">3 Make videos</a>.</p>
       </div>
 
@@ -1313,7 +1328,11 @@ function initBuilder(){
   $("cbAskLook").onclick = e => copyText(CB_ASK, e.currentTarget);
   $("cbName").addEventListener("input", cbDrawHome);
   $("cbCustom").addEventListener("input", e=>{ cb.custom=e.target.value; const pre=$("cbPrompt"); pre.textContent=cbPrompt(); cbDrawScene(); });
-  if(SOS_GPT_URL){ $("cbGptCard").hidden=false; $("cbGptLink").href=SOS_GPT_URL; }
+  const DC_URL="https://npomhoaxigydsxgqziwd.supabase.co/functions/v1/dreamcast/";
+  const dcLoad=async(fresh)=>{ const { data, error } = await sb.rpc("dreamcast_my_key",{ new_key: !!fresh }); if(error||!data){ toast("Couldn't load your link. Refresh and try again."); return; } $("dcLink").value=DC_URL+data; $("dcBox").hidden=false; $("dcShow").hidden=true; };
+  $("dcShow").onclick=()=>dcLoad(false);
+  $("dcCopy").onclick=e=>copyText($("dcLink").value,e.currentTarget);
+  $("dcNew").onclick=async e=>{ e.preventDefault(); if(confirm("Make a new link? Your old link will stop working in ChatGPT, and you'll paste the new one there.")){ await dcLoad(true); toast("New link ready. Paste it in ChatGPT."); } };
   $("cbSaveLook").onclick = async () => {
     const txt = ($("cbNewLook").value||"").trim().replace(/\s+/g," "); const c = cbChars.find(x=>x.id===cbUpdId);
     if(!c){ $("cbLookMsg").textContent="Save your character in part G first."; return; }
