@@ -1103,7 +1103,7 @@ async function loadHot(){
   if(!hpCats.length){ const {data}=await sb.from("hot_categories").select("slug,label").eq("active",true).order("sort"); hpCats=data||[]; hpCat=hpCats[0]?.slug; }
   const c=$("hpCats"); c.innerHTML=""; hpCats.forEach(k=>{ const b=el("button","chip",k.label); b.type="button"; b.setAttribute("aria-pressed",k.slug===hpCat); b.onclick=()=>{ hpCat=k.slug; loadHot(); }; c.append(b); });
   const so=$("hpSort"); so.innerHTML=""; HP_SORT.forEach(([k,t])=>{ const b=el("button","chip",t); b.type="button"; b.setAttribute("aria-pressed",k===hpSortBy); b.onclick=()=>{ hpSortBy=k; drawHot(); loadHot.sortOnly=1; so.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b)); }; so.append(b); });
-  const {data}=await sb.from("hot_products").select("*").eq("category",hpCat).order("rank").limit(50); hpRows=data||[];
+  const {data}=await sb.from("hot_products").select("*").eq("category",hpCat).order("rank").limit(100); hpRows=data||[];
   const when=hpRows[0]?.refreshed_at; $("hpWhen").textContent= when ? "Updated "+new Date(when).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+"." : "";
   drawHot(); loadMine();
 }

@@ -13,8 +13,11 @@ const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers
 const out = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...CORS, "Content-Type": "application/json" } });
 
 async function allowed(req: Request): Promise<string | null> {
-  const ck = Deno.env.get("HOT_CRON_KEY");
-  if (ck && req.headers.get("x-cron-key") === ck) return "schedule";
+  const given = req.headers.get("x-cron-key");
+  if (given) {
+    const { data: k } = await db.from("hot_private").select("cron_key").eq("id", 1).maybeSingle();
+    if (k && given === k.cron_key) return "schedule";
+  }
   const auth = req.headers.get("authorization") || "";
   if (!auth.startsWith("Bearer ")) return null;
   const u = createClient(URL_, Deno.env.get("SUPABASE_ANON_KEY")!, { global: { headers: { Authorization: auth } }, auth: { persistSession: false } });
