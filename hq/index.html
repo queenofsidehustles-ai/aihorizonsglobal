@@ -396,9 +396,9 @@ body.cb-on .side{display:none}
       <div class="studio-tabs" data-tabs></div>
       <div class="hero"><div class="eyebrow">● Dream Cast · Step 1</div><h1>Make your character</h1><p>Connect Dream Cast once (A). Tap what she looks like (B to F). Tap <b>Try her on</b> (G), then meet her in ChatGPT, change anything you like, and say <b>"Keep her."</b> That's it.</p></div>
 
-      <p class="tiny cb-l" style="margin:4px 0 6px">New here? Watch how it works (1 minute):</p>
+      <p class="tiny cb-l" style="margin:4px 0 6px">New here? Watch how it works (1 minute). This is just a video. You'll type her real name in <a href="#" class="goName">part B</a>.</p>
 <div class="dcj" id="dcJourney" aria-label="Animated walkthrough: making your character with Dream Cast">
-  <div class="dcj-wrap"><div class="dcj-stage" id="dcjStage">
+  <div class="dcj-wrap"><span class="demo-badge">▶ VIDEO · JUST WATCH</span><div class="dcj-stage" id="dcjStage">
     <div class="dcj-sc" data-s="hq">
       <div class="dcj-hq">
         <div class="dcj-t">✦ Dream Cast · Step 1</div>
@@ -423,6 +423,9 @@ body.cb-on .side{display:none}
   <div class="dcj-bar"><button type="button" class="dcj-play" id="dcjPlay">▶ Play</button><div class="dcj-dots" id="dcjDots"></div></div>
 </div>
 <style>
+.dcj-wrap,.dcd-stage-wrap{cursor:pointer}
+.dcj-stage *,.dcd-stage *{pointer-events:none}
+.demo-badge{position:absolute;top:8px;right:8px;z-index:5;background:#ff5fa2;color:#fff;font:700 11px/1 system-ui;letter-spacing:.06em;padding:5px 8px;border-radius:999px;pointer-events:none}
 .dcj{margin:0 0 14px;border:1px solid rgba(47,243,224,.35);border-radius:16px;padding:10px;background:rgba(4,16,21,.6)}
 .dcj-wrap{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:10px;background:#0b1d24}
 .dcj-stage{position:absolute;left:0;top:0;width:640px;height:400px;transform-origin:0 0;font:13px/1.4 var(--body,system-ui);color:#e8f4f4}
@@ -517,7 +520,7 @@ body.cb-on .side{display:none}
           <p class="tiny" style="margin:0">Connect once, then type <b>@Dream Cast</b> in any ChatGPT chat. It already knows your saved characters, the scene library and the quick fixes. You just attach her sheet and say what you want.</p>
           <p class="tiny cb-l" style="margin-bottom:0">Watch first (1 minute):</p>
 <div class="dcd" id="dcDemo" aria-label="Animated walkthrough: how to connect Dream Cast in ChatGPT">
-  <div class="dcd-stage-wrap"><div class="dcd-stage" id="dcdStage">
+  <div class="dcd-stage-wrap"><span class="demo-badge">▶ VIDEO · JUST WATCH</span><div class="dcd-stage" id="dcdStage">
     <!-- scene 1: HQ -->
     <div class="dcd-scene" data-s="1">
       <div class="dcd-hq"><div class="dcd-hq-t">✦ Dream Cast · part A</div>
@@ -1637,6 +1640,12 @@ function cbProgInit(){
     card.addEventListener("mouseleave",()=>card.style.transform="");
   }
   $("cbName").addEventListener("input", cbIdDraw);
+// clicking a demo video sends people to the real box
+function goName(e){ if(e) e.preventDefault(); const i=$("cbName"); i.scrollIntoView({behavior:"smooth",block:"center"}); setTimeout(()=>i.focus({preventScroll:true}),450); toast("Type her name here 👇"); }
+document.querySelectorAll(".goName").forEach(a=>a.addEventListener("click",goName));
+document.querySelector(".dcj-wrap")?.addEventListener("click",goName);
+document.querySelector(".dcd-stage-wrap")?.addEventListener("click",()=>toast("That's just a video 🙂 Use the buttons below it."));
+
 }
 function cbHomeWho(){ if(cbWho) return cbWho; const n=($("cbName")&&$("cbName").value||"").trim(); return {name:n||"my character", lock:cbLock()}; }
 function cbHer(w){ return /^A man\b/.test(w.lock||"") ? ["he","his","him"] : ["she","her","her"]; }
