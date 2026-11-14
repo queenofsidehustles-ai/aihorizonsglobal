@@ -203,6 +203,7 @@ body.cb-on .side{display:none}
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
     <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
     <a href="#builder" data-view="builder" data-views="builder scenes series"><span class="ic">✦</span>Dream Cast</a>
+    <a href="#products" data-view="products"><span class="ic">🛍</span>Hot Products</a>
     <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
@@ -332,7 +333,7 @@ body.cb-on .side{display:none}
       <div class="panel cb-out" style="margin-bottom:12px">
         <h2>The easy way</h2>
         <ol class="steps easy">
-          <li>In your Dream Cast chat, under the picture you like, say: <b>Make it move</b> <button class="btn ghost" type="button" id="mvSay" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button>. Add what she does or says if you want, like <i>"she sips her latte and says Saturday mornings are mine."</i></li>
+          <li>In your Dream Cast chat, under the picture you like, say: <b>Make it move</b> <button class="btn ghost" type="button" id="mvEasy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button>. Add what she does or says if you want, like <i>"she sips her latte and says Saturday mornings are mine."</i></li>
           <li>Save that picture to your phone. Copy the video prompt Dream Cast gives you.</li>
           <li>Open your video app (we recommend Google Flow). Start a new clip <b>from your picture</b>, paste the prompt, and make it.</li>
           <li>Download the video. Post it with the AI label turned on.</li>
@@ -852,11 +853,11 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel">
-        <div class="cb-step"><span class="cb-n">6</span><h2>Picture came out wrong? Tap the fix</h2>      </details>
-</div>
+        <div class="cb-step"><span class="cb-n">6</span><h2>Picture came out wrong? Tap the fix</h2></div>
         <p class="muted" style="font-size:14px">Paste the fix into the same chat, right under the picture. Attach your photo again if the face changed.</p>
         <div class="grid" id="cbFixes"></div>
       </div>
+      </details>
         </div>
         <aside class="cb-card-col">
           <div class="cb-id" id="cbId" aria-label="Your character so far">
@@ -884,6 +885,47 @@ body.cb-on .side{display:none}
     </section>
 
     <!-- HELP -->
+    <!-- HOT PRODUCTS -->
+    <section data-pane="products" hidden>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Hot Products</div><h1>What's selling on TikTok Shop</h1><p>The top 25 sellers in each category, updated every morning. Pick one, add it to your products, and let Dream Cast make the video. <span class="tiny" id="hpWhen"></span></p></div>
+      <div class="panel" id="hpAdmin" hidden style="margin-bottom:12px;border:2px solid #ffd34d">
+        <div class="dc-pre">Only you see this</div>
+        <p class="tiny" style="margin:4px 0 8px">The list updates by itself once a day. Tap below to update it right now (about 2 minutes, about 70¢).</p>
+        <button class="btn" type="button" id="hpRefresh" data-label="🔄 Refresh now">🔄 Refresh now</button> <span class="tiny" id="hpStatus"></span>
+      </div>
+      <div class="chips" id="hpCats" style="margin-bottom:8px"></div>
+      <div class="chips" id="hpSort" style="margin-bottom:12px"></div>
+      <div id="hpList"></div>
+      <p class="tiny" style="margin-top:10px">Numbers are TikTok Shop estimates for the last 7 days: good for comparing, not exact. Commission is what the shop pays you per sale.</p>
+
+      <div class="panel" id="hpMake" hidden style="margin:16px 0;border:2px solid var(--neon)">
+        <h2 style="margin-top:0">🎬 Make a video for: <span id="hpMakeName"></span></h2>
+        <p class="tiny cb-l">Pick a style:</p>
+        <div class="chips" id="hpStyle"></div>
+        <ol class="steps easy">
+          <li>Tap <b>Copy</b>. <button class="btn ghost" type="button" id="hpCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
+          <li>In ChatGPT, open your Dream Cast chat (or start one: type <b>@Dream</b>, pick Dream Cast, say <b>Hi</b>).</li>
+          <li>Paste and send. Attach a picture of the product if you have one, plus her character sheet.</li>
+          <li>Dream Cast suggests 10 scenes. Pick one and it writes the script, makes her picture, and gives you the video prompt.</li>
+        </ol>
+        <pre class="tiny" id="hpLine" style="white-space:pre-wrap;margin:8px 0 0"></pre>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2 style="margin-top:0">⭐ My products</h2>
+        <p class="tiny">Dream Cast can see these. Add from the list above, or add your own (your shop, a client's product, anything).</p>
+        <div id="mpList"></div>
+        <details style="margin-top:10px"><summary class="tiny"><b>+ Add my own product</b></summary>
+          <label class="tiny cb-l" for="mpTitle">Product name</label><input type="text" id="mpTitle" maxlength="300" placeholder="Like: Gold balloon arch kit, 120 pieces">
+          <label class="tiny cb-l" for="mpUrl">Link (optional)</label><input type="url" id="mpUrl" maxlength="1000" placeholder="https://">
+          <label class="tiny cb-l" for="mpPrice">Price (optional)</label><input type="text" id="mpPrice" maxlength="40" placeholder="$24.99">
+          <label class="tiny cb-l" for="mpDetails">What's great about it? (optional)</label><textarea id="mpDetails" maxlength="2000" rows="3" placeholder="Like: sets up in 20 minutes, reusable, comes in 6 colors"></textarea>
+          <button class="btn" type="button" id="mpAdd" style="margin-top:8px">Save product</button>
+        </details>
+      </div>
+      <p class="tiny" style="margin-top:12px"><b>Keep it honest:</b> your AI presenter shows the product. She doesn't say she owns it or used it. Turn on TikTok's AI label, and no health claims ("cures," "lose weight").</p>
+    </section>
+
     <section data-pane="help" hidden>
       <div class="hero"><div class="eyebrow">● Help desk · AI assistant</div><h1>Stuck? Ask here.</h1><p>Your AI help assistant knows the whole kit and answers right away. If it can't fix it, tap <b>Send to Monica</b> and she'll reply here.</p></div>
       <div class="panel compose">
@@ -1045,10 +1087,82 @@ function route(){
   if(v==="scenes"){ loadScWho(); }
   if(v==="series"){ initMove(); (scChars.length ? Promise.resolve() : loadScWho()).then(()=>{ $("mvWho").innerHTML = scWho ? "Character: <b>"+scWho.name.replace(/[<>&]/g,"")+"</b> (change it in <a href='#scenes'>2 Make posts</a>)" : "No character picked. That's okay: the prompt works for any picture."; }); }
   if(v==="builder" && !loaded.builder){ loaded.builder=1; initBuilder(); }
+  if(v==="products"){ loadHot(); }
   if(v==="help"){ loadHelp(); }
   if(v==="host"){ loadAllow(); loadHostHelp(); loadHostWait(); loadConsults(); }
 }
 window.addEventListener("hashchange", () => { if(me) route(); });
+
+// ---------- hot products ----------
+let hpCats=[], hpCat=null, hpSortBy="units", hpRows=[], myProds=[], hpPick=null, hpStyleV="Hands only";
+const HP_SORT=[["units","🔥 Most sold"],["growth","📈 Growing fastest"],["commission","💰 Best commission"]];
+const HP_STYLE=[["Full presenter","🗣️ She talks to camera"],["Hands only","🤲 Hands only"],["Product only","📦 Product only"]];
+const fmtN=n=>n==null?"–":Number(n)>=1000?(Math.round(Number(n)/100)/10)+"K":String(Math.round(Number(n)));
+async function loadHot(){
+  $("hpAdmin").hidden=!isHost;
+  if(!hpCats.length){ const {data}=await sb.from("hot_categories").select("slug,label").eq("active",true).order("sort"); hpCats=data||[]; hpCat=hpCats[0]?.slug; }
+  const c=$("hpCats"); c.innerHTML=""; hpCats.forEach(k=>{ const b=el("button","chip",k.label); b.type="button"; b.setAttribute("aria-pressed",k.slug===hpCat); b.onclick=()=>{ hpCat=k.slug; loadHot(); }; c.append(b); });
+  const so=$("hpSort"); so.innerHTML=""; HP_SORT.forEach(([k,t])=>{ const b=el("button","chip",t); b.type="button"; b.setAttribute("aria-pressed",k===hpSortBy); b.onclick=()=>{ hpSortBy=k; drawHot(); loadHot.sortOnly=1; so.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b)); }; so.append(b); });
+  const {data}=await sb.from("hot_products").select("*").eq("category",hpCat).order("rank").limit(50); hpRows=data||[];
+  const when=hpRows[0]?.refreshed_at; $("hpWhen").textContent= when ? "Updated "+new Date(when).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+"." : "";
+  drawHot(); loadMine();
+}
+function drawHot(){
+  const L=$("hpList"); L.innerHTML="";
+  if(!hpRows.length){ L.append(el("p","tiny","No products here yet. The list fills in after the first daily update.")); return; }
+  const key={units:"units_sold",growth:"growth_pct",commission:"commission_pct"}[hpSortBy];
+  const rows=[...hpRows].sort((a,b)=>(Number(b[key])||-1e9)-(Number(a[key])||-1e9));
+  rows.forEach((r,i)=>{
+    const card=el("div","panel"); card.style.cssText="margin-bottom:8px;padding:12px 14px";
+    const top=el("div"); top.style.cssText="display:flex;gap:10px;align-items:flex-start";
+    top.append(el("b",null,"#"+(i+1)));
+    const t=el("div"); t.style.flex="1";
+    const name=r.url?el("a",null,r.title):el("span",null,r.title); if(r.url){ name.href=r.url; name.target="_blank"; name.rel="noopener noreferrer"; } name.style.fontWeight="700";
+    t.append(name);
+    const g=r.growth_pct==null?"":(r.growth_pct>=0?" · 📈 +":" · 📉 ")+Math.round(r.growth_pct)+"%";
+    t.append(el("div","tiny",(r.price!=null?"$"+Number(r.price).toFixed(2)+" · ":"")+fmtN(r.units_sold)+" sold this week"+g+(r.commission_pct!=null?" · 💰 "+r.commission_pct+"% commission":"")));
+    top.append(t); card.append(top);
+    const btns=el("div"); btns.style.cssText="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap";
+    const have=myProds.some(p=>p.source_product_id && p.source_product_id===r.product_id);
+    const add=el("button","btn ghost",have?"✓ In my products":"+ Add to my products"); add.type="button"; add.disabled=have;
+    add.onclick=async()=>{ const {error}=await sb.from("my_products").insert({title:r.title,url:r.url,price:r.price!=null?"$"+Number(r.price).toFixed(2):null,category:r.category,source_product_id:r.product_id}); if(error){ toast("Couldn't save. Try again."); return; } toast("Added ✓"); await loadMine(); drawHot(); };
+    const mk=el("button","btn","🎬 Make a video"); mk.type="button"; mk.onclick=()=>openMake({title:r.title,url:r.url});
+    btns.append(add,mk); card.append(btns); L.append(card);
+  });
+}
+async function loadMine(){
+  const {data}=await sb.from("my_products").select("*").order("created_at",{ascending:false}); myProds=data||[];
+  const L=$("mpList"); L.innerHTML="";
+  if(!myProds.length){ L.append(el("p","tiny","Nothing saved yet.")); return; }
+  myProds.forEach(p=>{
+    const row=el("div"); row.style.cssText="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 0;border-top:1px solid rgba(122,247,255,.15)";
+    const n=el("span",null,p.title+(p.price?" · "+p.price:"")); n.style.flex="1";
+    const mk=el("button","btn","🎬 Make a video"); mk.type="button"; mk.onclick=()=>openMake(p);
+    const rm=el("button","btn ghost","Remove"); rm.type="button"; rm.onclick=async()=>{ await sb.from("my_products").delete().eq("id",p.id); await loadMine(); if(hpRows.length) drawHot(); };
+    row.append(n,mk,rm); L.append(row);
+  });
+}
+function hpLineTxt(){ return `Make a product video for "${hpPick.title}". Style: ${hpStyleV}.`; }
+function openMake(p){
+  hpPick=p; $("hpMake").hidden=false; $("hpMakeName").textContent=p.title.length>70?p.title.slice(0,70)+"…":p.title;
+  const st=$("hpStyle"); st.innerHTML=""; HP_STYLE.forEach(([k,t])=>{ const b=el("button","chip",t); b.type="button"; b.setAttribute("aria-pressed",k===hpStyleV); b.onclick=()=>{ hpStyleV=k; openMake(p); }; st.append(b); });
+  $("hpLine").textContent=hpLineTxt(); $("hpMake").scrollIntoView({behavior:"smooth",block:"center"});
+}
+$("hpCopy").onclick=e=>copyText(hpLineTxt(),e.currentTarget);
+$("mpAdd").onclick=async()=>{
+  const title=($("mpTitle").value||"").trim(); if(!title){ toast("Add the product name"); $("mpTitle").focus(); return; }
+  const row={title, url:($("mpUrl").value||"").trim()||null, price:($("mpPrice").value||"").trim()||null, details:($("mpDetails").value||"").trim()||null};
+  const {error}=await sb.from("my_products").insert(row); if(error){ toast("Couldn't save. Check the link starts with https://"); return; }
+  ["mpTitle","mpUrl","mpPrice","mpDetails"].forEach(i=>$(i).value=""); toast("Saved ✓"); loadMine();
+};
+$("hpRefresh").onclick=async()=>{
+  const b=$("hpRefresh"), st=$("hpStatus"); b.disabled=true; st.textContent="Starting…";
+  const {data,error}=await sb.functions.invoke("hot-refresh",{body:{action:"start"}});
+  if(error||data?.error){ st.textContent=(data?.error)||"Couldn't start. Try again."; b.disabled=false; return; }
+  st.textContent="Updating… about 2 minutes. You can leave this page.";
+  for(let i=0;i<30;i++){ await new Promise(r=>setTimeout(r,10000)); const {data:c}=await sb.functions.invoke("hot-refresh",{body:{action:"collect"}}); if(c?.done){ st.textContent="Done ✓ "+(c.rows??0)+" products"+(c.cost?" · cost "+c.cost:""); b.disabled=false; loadHot(); return; } }
+  st.textContent="Still working. Check back in a few minutes."; b.disabled=false;
+};
 
 // ---------- community ----------
 function setupCommunity(){
@@ -1295,7 +1409,7 @@ function sbPrompt(){
   return `I'm attaching ${who}'s character sheet. Plan a vertical video, about ${secs} seconds, in ${sbLen} scenes, starring ${who}.\nIdea: ${idea}\nKind of video: ${sbStyle}\n\nStep 1. Write the storyboard. For each scene give:\n- Scene number and seconds (like 0-3s)\n- Visual: what we see\n- Camera: the shot (close-up, wide, slow push-in...)\n- POV: whose eyes we see it through\n- Action: what moves or happens\n- Line: what ${who} says, if anything (one short sentence)\nKeep it simple and real. Nothing appears or disappears. ${who} looks exactly like the sheet in every scene. ${sheetRule(who)}\n\nStep 2. Make ONE storyboard picture: all ${sbLen} scenes in a numbered grid of small vertical frames, the same ${who} in every frame.\n\nStep 3. Under the storyboard, give me for each scene:\n- Picture prompt: to make that scene's starting picture of ${who}.\n- Video prompt: under 80 words, vertical 9:16, starts from that picture, natural small movements, natural sound, no music, no text on screen.\n\nIf the idea is unclear, ask me one short question first. When we're done, I'll say "Make the scene 1 picture" and we'll go scene by scene.`;
 }
 function initMove(){ if(initMove.done) return; initMove.done=1;
-  $("mvSay").onclick=e=>copyText("Make it move",e.currentTarget);
+  $("mvEasy").onclick=e=>copyText("Make it move",e.currentTarget);
   const ss=$("sbStyle"), sl=$("sbLen");
   const drawSb=()=>{ ss.innerHTML=""; ["Product video (UGC)","Mini story","Day in my life","How-to / tips"].forEach(t=>{ const c=el("button","chip",t); c.type="button"; c.setAttribute("aria-pressed",sbStyle===t); c.onclick=()=>{ sbStyle=t; drawSb(); }; ss.append(c); });
     sl.innerHTML=""; [[3,"15 sec · 3 scenes"],[5,"30 sec · 5 scenes"],[7,"Mini story · 7 scenes"]].forEach(([n,t])=>{ const c=el("button","chip",t); c.type="button"; c.setAttribute("aria-pressed",sbLen===n); c.onclick=()=>{ sbLen=n; drawSb(); }; sl.append(c); }); };

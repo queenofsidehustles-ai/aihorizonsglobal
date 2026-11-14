@@ -26,6 +26,7 @@ What are we making today?
 **4️⃣ Outfit swap**: attach the outfit picture
 **5️⃣ Two characters**: pick who's in the scene
 **6️⃣ Make it move**: get a video prompt for a picture
+**7️⃣ Product video**: pick a product from Hot Products in HQ
 Just type a number, or tell me in your own words. 💛
 
 Her journey (follow it):
@@ -36,6 +37,7 @@ Her journey (follow it):
 - She says "keep her" / "I love her" → call keep_character with her full updated description (include every change she asked for), then make her character sheet exactly as the tool says, and tell her to save the sheet to her phone: she attaches it in every new chat.
 - "Make my shoot list" → call my_shoot_list, then make the scenes one at a time with picture_prompt (kind "scene"). After each picture, call shoot_list_done with that item's id, then offer the next one.
 - "Make it move" / "video prompt" → call video_prompt.
+- "Make a product video for ..." → call product_video with the product and style (Full presenter, Hands only or Product only). Show her the 10 scene ideas as a short numbered list. When she picks one, call product_video again with that scene, then follow it: write the script, make the picture, give the video prompt and the caption.
 - Later she wants to change who her character is for good ("change her look and keep it") → change_look, then keep_character.
 
 How to work:
@@ -72,6 +74,8 @@ const TOOLS = [
   { name: "keep_character", title: "Keep her", description: "She loves how her character looks. Saves the final look to SOS HQ (so every future picture uses it) and returns the character sheet prompt to make next.", inputSchema: { type: "object", properties: { character: { type: "string" }, description: { type: "string", description: "Her full updated look in one paragraph, facts only, same style as her saved description, including every change she asked for. Leave empty if nothing changed." } }, required: ["character"], additionalProperties: false }, annotations: W },
   { name: "my_shoot_list", title: "My shoot list", description: "The scenes she picked in SOS HQ to make next. Make them one at a time with picture_prompt (kind scene), then call shoot_list_done for each.", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations: R },
   { name: "shoot_list_done", title: "Mark scenes done", description: "Mark shoot list scenes as made, after their pictures are done.", inputSchema: { type: "object", properties: { ids: { type: "array", items: { type: "string" }, minItems: 1, maxItems: 20 } }, required: ["ids"], additionalProperties: false }, annotations: W },
+  { name: "product_video", title: "Product video", description: "Plan a TikTok Shop style product video starring her character. First call without scene: returns 10 scene ideas. Second call with the scene she picked: returns the script, picture prompt, video prompt and caption.", inputSchema: { type: "object", properties: { product: { type: "string", description: "Product name, as she said it or from her saved products" }, style: { type: "string", enum: ["Full presenter", "Hands only", "Product only"] }, character: { type: "string", description: "Saved character (not needed for Product only)" }, scene: { type: "string", description: "The scene she picked (second call)" } }, required: ["product"], additionalProperties: false }, annotations: R },
+  { name: "my_products", title: "My products", description: "Products she saved in SOS HQ (Hot Products or her own).", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations: R },
   { name: "video_prompt", title: "Video prompt", description: "Get a short video prompt to make a picture of her move in a video app (8 seconds, vertical).", inputSchema: { type: "object", properties: { character: { type: "string" }, action: { type: "string", description: "What she does in the clip (optional)" }, line: { type: "string", description: "What she says (optional)" } }, required: ["character"], additionalProperties: false }, annotations: R },
   {
     name: "picture_prompt", title: "Picture prompt",
@@ -187,6 +191,32 @@ async function callTool(name: string, a: Record<string, unknown>, chars: Char[],
       const { error } = await db.from("shoot_list").update({ done: true }).in("id", ids).eq("user_id", uid);
       return error ? "Couldn't mark them done. Keep going; it's fine." : `Marked ${ids.length} done ✓`;
     }
+    case "my_products": {
+      const { data } = await db.from("my_products").select("title,price,url,details").eq("user_id", uid).order("created_at", { ascending: false }).limit(30);
+      if (!data || !data.length) return "No saved products yet. She can add them in SOS HQ → Hot Products.";
+      return `Saved products:\n${data.map((p, i) => `${i + 1}. ${p.title}${p.price ? ` (${p.price})` : ""}${p.details ? `: ${p.details}` : ""}`).join("\n")}`;
+    }
+    case "product_video": {
+      const name = ((a.product as string) || "").trim(); if (!name) return "Ask which product.";
+      const { data: prods } = await db.from("my_products").select("title,price,url,details").eq("user_id", uid).limit(60);
+      const n = name.toLowerCase();
+      const prod = (prods || []).find((p) => p.title.toLowerCase() === n) || (prods || []).find((p) => p.title.toLowerCase().includes(n) || n.includes(p.title.toLowerCase().slice(0, 40)));
+      const pname = prod ? prod.title : name;
+      const facts = prod ? [prod.price ? `Price: ${prod.price}` : "", prod.details ? `What's great: ${prod.details}` : ""].filter(Boolean).join(". ") : "";
+      const style = (a.style as string) || "Hands only";
+      const needChar = style !== "Product only";
+      let c: Char | null = null;
+      if (needChar) { const pc = pick(chars, (a.character as string) || (chars.find((x) => x.status !== "draft") || chars[0])?.name); if (typeof pc === "string") return pc; c = pc; }
+      const who = c ? c.name : "the product";
+      const rules = `HONESTY RULES (always): ${c ? `${c.name} is an AI presenter. She shows and describes the product; she never says she owns it, used it, or got results ("I've been using", "it changed my skin").` : ""} Say what the product is and what buyers like about it, from the product title, details or what the user tells you. No health or medical claims, no fake reviews, no made-up prices or discounts. Remind the user to turn on TikTok's AI-generated label.`;
+      const scene = ((a.scene as string) || "").trim();
+      if (!scene) {
+        return `Product: ${pname}${facts ? ` (${facts})` : ""}. Style: ${style}.\n\nSuggest exactly 10 short scene ideas for a vertical 8 to 15 second TikTok Shop video in this style (${style === "Full presenter" ? `${who} talks to the camera while showing it` : style === "Hands only" ? "only her hands with the product, no face" : "the product alone, styled in a real setting, no people"}). Mix settings (kitchen counter, vanity, car, café table, party table, bedroom closet, outdoor...). One line each, numbered. Then ask her to pick one. If you don't know what the product does, ask one short question first.\n\n${rules}`;
+      }
+      const look = c ? `\nWho ${c.name} is: ${c.lock}` : "";
+      const sheet = c ? `ATTACH: ${c.name}'s character sheet${style === "Hands only" ? " (for skin tone and nails)" : ""} and a photo of the product if she has one.` : "ATTACH: a photo of the product if she has one.";
+      return `${sheet}\n\nProduct: ${pname}${facts ? ` (${facts})` : ""}. Style: ${style}. Scene: ${scene}.${look}\n\nDo these in order:\n1. SCRIPT: a hook in the first 2 seconds, 2 or 3 short lines about the product, and a soft call to action ("Tap the orange cart to see colors and price"). Under 40 words${style === "Product only" ? ", written as on-screen text" : ""}.\n2. Make the picture now with your image tool. PROMPT: Vertical 9:16 realistic photo. ${style === "Full presenter" && c ? `${refLock(c)}\n${c.name} holds the product in ${scene}, looking at the camera.` : style === "Hands only" && c ? `Close-up of a woman's hands (same skin tone and nails as ${c.name}) holding and showing the product in ${scene}. No face.` : `The product alone, styled in ${scene}. No people.`} If she attached a product photo, copy the product exactly: same shape, colors, label and logo. ${avoid}\n3. VIDEO PROMPT in a code box (under 80 words, for her video app): starts from that picture, 8 seconds, natural small movements${style === "Full presenter" && c ? `, ${c.name} says the script lines` : ""}, the product stays the same and never changes shape, natural sound, no music, no text on screen.\n4. CAPTION with 3 to 5 hashtags.\n\n${rules}`;
+    }
     case "video_prompt": {
       const c = pick(chars, a.character as string); if (typeof c === "string") return c;
       const act = ((a.action as string) || "moves naturally in this moment, with small real movements").trim();
@@ -290,7 +320,7 @@ Deno.serve(async (req) => {
     try {
       if (m.method === "initialize") {
         const want = (m.params?.protocolVersion as string) || VERSIONS[0];
-        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.1.3" }, instructions: INSTRUCTIONS } });
+        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.2.0" }, instructions: INSTRUCTIONS } });
       } else if (m.method === "ping") {
         out.push({ jsonrpc: "2.0", id: m.id, result: {} });
       } else if (m.method === "tools/list") {
