@@ -259,7 +259,23 @@ body.cb-on .side{display:none}
     <!-- SCENES -->
     <section data-pane="scenes" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Dream Cast · Step 2</div><h1>Make posts</h1><p>Pick a scene, copy it, paste it into ChatGPT with your character's picture. That's it. Over 300 ideas to choose from.</p></div>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Step 2</div><h1>Post ideas</h1><p>Shop for scenes like you'd shop for outfits. Tap <b>+ Add to shoot list</b> on the ones you like. Then in ChatGPT, tell Dream Cast <b>"Make my shoot list"</b> and it makes them, one by one.</p></div>
+      <div class="panel cb-out" style="margin-bottom:12px">
+        <h2>🎬 Your shoot list</h2>
+        <p class="tiny cb-l">Who's starring?</p>
+        <div class="chips" id="scWho"><span class="tiny">Loading…</span></div>
+        <div id="shootList" style="margin-top:12px"><span class="tiny">Loading…</span></div>
+        <div class="cb-guide" style="margin-top:12px">
+          <div class="tag">When your list is ready</div>
+          <ol class="steps easy">
+            <li>In ChatGPT, start a new chat. Type <b>@Dream</b> and pick <b>Dream Cast</b>.</li>
+            <li>Attach her character sheet (tap <b>+</b>).</li>
+            <li>Say: <b>Make my shoot list</b> <button class="btn ghost" type="button" id="shootCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
+          </ol>
+          <a class="btn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;text-align:center;display:inline-block">Open ChatGPT</a>
+        </div>
+      </div>
+      <details style="margin:0 0 12px"><summary class="btn ghost" style="display:inline-block;cursor:pointer">No Dream Cast? Copy-paste way and extra tools</summary>
       <div class="panel" style="margin-bottom:12px">
         <h2>How it works</h2>
         <ol class="steps easy">
@@ -268,8 +284,6 @@ body.cb-on .side{display:none}
           <li><b>Open ChatGPT</b> (or her Project). Attach her picture or character sheet (tap the <b>+</b>), paste, and send.</li>
           <li><b>Not quite right?</b> Type: <i>"Try again. Keep her face exactly the same."</i></li>
         </ol>
-        <p class="tiny cb-l" style="margin-top:14px">Your character</p>
-        <div class="chips" id="scWho"><span class="tiny">Loading…</span></div>
         <label class="cb-check" style="margin-top:8px"><input type="checkbox" id="scShort"> She has a ChatGPT Project (copy short prompts, her look is already saved there)</label>
         <details style="margin-top:8px"><summary class="tiny"><b>Using a Pinterest idea? How to save the picture</b></summary>
           <p class="tiny" style="margin-top:6px">Pinterest's red <b>Save</b> button does NOT put the picture on your device. Take a screenshot instead:</p>
@@ -282,8 +296,8 @@ body.cb-on .side{display:none}
           <p class="tiny">We only use the Pinterest picture for ideas (outfit, pose, place, light). Her face always comes from her picture.</p>
           <p class="tiny"><b>Two pictures at most.</b> Want a certain outfit AND a certain place? Do two steps: first the outfit (save that picture), then use that new picture with the place. Three pictures at once makes her face drift.</p>
         </details>
-        <details style="margin-top:8px"><summary class="tiny"><b>Picture came out wrong? Quick fixes</b></summary><p class="tiny" style="margin-top:6px">Paste the fix in the same chat, right under the picture. Attach her picture again if the face changed. Want her look changed for good? Use <a href="#builder">Step 1, part J</a>.</p><div class="grid" id="scFixes"></div></details>
-        <details style="margin-top:8px"><summary class="tiny">Tip: give her a home in ChatGPT</summary><p class="tiny" style="margin-top:6px">Set up her starter message or ChatGPT Project once in <a href="#builder">Step 1, part I</a>. Then making a new picture is just: new chat, attach her sheet, say the scene.</p></details>
+        <details style="margin-top:8px"><summary class="tiny"><b>Picture came out wrong? Quick fixes</b></summary><p class="tiny" style="margin-top:6px">Paste the fix in the same chat, right under the picture. Attach her picture again if the face changed. Want her look changed for good? In ChatGPT, tell Dream Cast "Change her look and keep it."</p><div class="grid" id="scFixes"></div></details>
+        <details style="margin-top:8px"><summary class="tiny">Tip: give her a home in ChatGPT</summary><p class="tiny" style="margin-top:6px">Set up her starter message or ChatGPT Project once in <a href="#builder">Step 1 → copy-paste way, step 3</a>. Then making a new picture is just: new chat, attach her sheet, say the scene.</p></details>
       </div>
       <div class="panel" style="margin-bottom:12px">
         <h2>Quick tools</h2>
@@ -302,7 +316,9 @@ body.cb-on .side{display:none}
             <ol class="steps easy"><li>In ChatGPT tap <b>+</b>. Add the first character's sheet <b>first</b>, the second's <b>second</b>.</li><li>Paste and send.</li></ol></div>
         </div>
       </div>
+      </details>
       <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
+            <h2 style="margin:6px 0 10px">Browse scenes</h2>
             <input type="search" id="sceneSearch" placeholder="Search 300 scenes (try kitchen, unboxing, romance)" aria-label="Search scenes" style="width:100%;margin-bottom:10px">
       <div class="chips" id="sceneChips"></div>
       <p class="tiny" id="sceneCount" style="margin:6px 0 10px"></p>
@@ -312,7 +328,17 @@ body.cb-on .side{display:none}
     <!-- SERIES -->
     <section data-pane="series" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Dream Cast · Step 3</div><h1>Make videos and a series</h1><p>Turn a picture into a moving, talking video. Or let your AI team plan and film a whole mini-drama for you.</p></div>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Step 3</div><h1>Make it move</h1><p>ChatGPT makes pictures. A video app makes them move. This page shows you how, step by step.</p></div>
+      <div class="panel cb-out" style="margin-bottom:12px">
+        <h2>The easy way</h2>
+        <ol class="steps easy">
+          <li>In your Dream Cast chat, under the picture you like, say: <b>Make it move</b> <button class="btn ghost" type="button" id="mvSay" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button>. Add what she does or says if you want, like <i>"she sips her latte and says Saturday mornings are mine."</i></li>
+          <li>Save that picture to your phone. Copy the video prompt Dream Cast gives you.</li>
+          <li>Open your video app (we recommend Google Flow). Start a new clip <b>from your picture</b>, paste the prompt, and make it.</li>
+          <li>Download the video. Post it with the AI label turned on.</li>
+        </ol>
+        <a class="btn ghost" href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:inline-block">Open Google Flow</a>
+      </div>
       <div class="grid">
         <div class="card"><div class="tag">Easy · 5 minutes</div><h4>Turn one picture into a video</h4>
           <p class="tiny" style="margin:0"><b>Start with ONE finished picture</b> of her already in the scene. Make it in <a href="#scenes">2 Make posts</a> (Pinterest idea? Use <b>"Copy the Pinterest version"</b> there first). One finished picture keeps her face from changing.</p>
@@ -368,128 +394,133 @@ body.cb-on .side{display:none}
     <!-- CHARACTER BUILDER -->
     <section data-pane="builder" class="cb" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Dream Cast · Step 1</div><h1>Make your character</h1><p>Tap what your character looks like. We write the instructions (the "prompt") for you as you tap. Then you paste them into ChatGPT, and it makes her picture. Do this once, then give her a character sheet and a home in ChatGPT (parts H and I). Then tap <b>2 Make posts</b> at the top to put her in any of 300+ scenes.</p></div>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Step 1</div><h1>Make your character</h1><p>Connect Dream Cast once (A). Tap what she looks like (B to F). Tap <b>Try her on</b> (G), then meet her in ChatGPT, change anything you like, and say <b>"Keep her."</b> That's it.</p></div>
 
-      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF L</span></div>
+      <p class="tiny cb-l" style="margin:4px 0 6px">New here? Watch how it works (1 minute):</p>
+<div class="dcj" id="dcJourney" aria-label="Animated walkthrough: making your character with Dream Cast">
+  <div class="dcj-wrap"><div class="dcj-stage" id="dcjStage">
+    <div class="dcj-sc" data-s="hq">
+      <div class="dcj-hq">
+        <div class="dcj-t">✦ Dream Cast · Step 1</div>
+        <div class="dcj-row"><span class="dcj-l">Her name</span><span class="dcj-in" id="dcjName"></span></div>
+        <div class="dcj-row"><span class="dcj-l">Skin</span><span class="dcj-chip" id="dcjC1">Brown</span><span class="dcj-chip">Deep brown</span><span class="dcj-chip">Tan</span></div>
+        <div class="dcj-row"><span class="dcj-l">Hair</span><span class="dcj-chip">Straight</span><span class="dcj-chip" id="dcjC2">Curly</span><span class="dcj-chip">Locs</span></div>
+        <div class="dcj-row"><span class="dcj-l">Outfit</span><span class="dcj-chip" id="dcjC3">Blazer</span><span class="dcj-chip">Sundress</span></div>
+        <div class="dcj-try" id="dcjTry">✨ Try her on</div>
+        <div class="dcj-ok" id="dcjOk">Adjoa is ready to try on ✨</div>
+      </div>
+    </div>
+    <div class="dcj-sc" data-s="gpt">
+      <div class="dcj-gpt">
+        <div class="dcj-log" id="dcjLog"></div>
+        <div class="dcj-box"><span class="dcj-tag" id="dcjTag">Dream Cast</span><span id="dcjTyped"></span><i class="dcj-caret"></i></div>
+      </div>
+    </div>
+    <div class="dcj-cur" id="dcjCur" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 2l15 10-7 1.5L8.5 21z" fill="#fff" stroke="#041015" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+    <div class="dcj-ring" id="dcjRing"></div>
+  </div></div>
+  <div class="dcj-cap" id="dcjCap" aria-live="polite">Watch the whole thing in 1 minute</div>
+  <div class="dcj-bar"><button type="button" class="dcj-play" id="dcjPlay">▶ Play</button><div class="dcj-dots" id="dcjDots"></div></div>
+</div>
+<style>
+.dcj{margin:0 0 14px;border:1px solid rgba(47,243,224,.35);border-radius:16px;padding:10px;background:rgba(4,16,21,.6)}
+.dcj-wrap{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:10px;background:#0b1d24}
+.dcj-stage{position:absolute;left:0;top:0;width:640px;height:400px;transform-origin:0 0;font:13px/1.4 var(--body,system-ui);color:#e8f4f4}
+.dcj-sc{position:absolute;inset:0;opacity:0;transition:opacity .4s}.dcj-sc.on{opacity:1}
+.dcj-hq{position:absolute;inset:0;padding:24px 34px;background:radial-gradient(30rem 16rem at 50% 0,rgba(47,243,224,.18),transparent 70%),#06161c}
+.dcj-t{font:700 12px var(--mono,monospace);letter-spacing:.14em;color:#2ff3e0;margin-bottom:16px}
+.dcj-row{display:flex;align-items:center;gap:8px;margin:10px 0}
+.dcj-l{width:70px;color:#9cc3c6;font-size:12px}
+.dcj-in{min-width:180px;min-height:18px;border:1px solid #2a4a52;border-radius:8px;padding:6px 10px;background:#041015}
+.dcj-chip{border:1px solid rgba(47,243,224,.45);border-radius:999px;padding:5px 12px;color:#cfe}
+.dcj-chip.on{background:#2ff3e0;color:#041015;font-weight:800}
+.dcj-try{display:inline-block;margin-top:14px;background:#2ff3e0;color:#041015;font-weight:800;padding:10px 18px;border-radius:12px}
+.dcj-ok{display:none;margin-top:12px;color:#2ff3e0;font-weight:800}
+.dcj-gpt{position:absolute;inset:0;background:#fff;color:#111;padding:16px 60px 0}
+.dcj-log{height:300px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.dcj-me{align-self:flex-end;background:#f0f0f2;border-radius:16px;padding:7px 12px;max-width:70%}
+.dcj-bot{align-self:flex-start;max-width:85%;font-size:12.5px}
+.dcj-pic{width:92px;height:118px;border-radius:10px;margin-top:4px;background:linear-gradient(#e7d2bf,#c99a72);position:relative;overflow:hidden}
+.dcj-pic::before{content:"";position:absolute;left:28px;top:20px;width:36px;height:44px;border-radius:50%;background:#7a4a2e}
+.dcj-pic::after{content:"";position:absolute;left:14px;top:70px;width:64px;height:60px;border-radius:30px 30px 0 0;background:#2b3a55}
+.dcj-pic.hair::before{box-shadow:0 -8px 0 6px #1d120c}
+.dcj-pic.long::before{box-shadow:0 -10px 0 10px #1d120c}
+.dcj-sheet{width:230px;height:84px;border-radius:8px;margin-top:4px;background:repeating-linear-gradient(90deg,#d9d9dc 0 40px,#c4c4c8 40px 42px);position:relative}
+.dcj-sheet::after{content:"ADJOA";position:absolute;right:6px;top:6px;font:700 10px var(--mono,monospace);color:#333}
+.dcj-box{margin:10px 0 0;border:1px solid #ddd;border-radius:22px;padding:9px 14px;min-height:20px;display:flex;gap:6px;align-items:center}
+.dcj-tag{display:none;background:#eef;border-radius:8px;padding:1px 7px;font-size:11.5px;color:#334}
+.dcj-caret{display:inline-block;width:1px;height:14px;background:#111;animation:dcjb 1s steps(1) infinite}@keyframes dcjb{50%{opacity:0}}
+.dcj-cur{position:absolute;left:560px;top:340px;z-index:9;transition:left .7s cubic-bezier(.4,0,.2,1),top .7s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));pointer-events:none}
+.dcj-ring{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #ff6fd8;opacity:0;z-index:8;pointer-events:none}
+.dcj-ring.go{animation:dcjr .5s ease-out}@keyframes dcjr{from{opacity:1;transform:scale(.4)}to{opacity:0;transform:scale(1.6)}}
+.dcj-cap{min-height:44px;margin:10px 4px 6px;font-size:15px;font-weight:700;color:#f2d9a6}
+.dcj-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.dcj-play{background:#2ff3e0;color:#041015;border:0;border-radius:12px;padding:10px 16px;font-weight:800;font-size:15px;cursor:pointer}
+.dcj-dots{display:flex;gap:6px;flex-wrap:wrap}
+.dcj-dots button{border:1px solid rgba(47,243,224,.5);background:transparent;color:#9cc3c6;border-radius:999px;padding:5px 11px;font-weight:700;cursor:pointer}
+.dcj-dots button[aria-current="step"]{background:#2ff3e0;color:#041015}
+@media (prefers-reduced-motion:reduce){.dcj-cur,.dcj-sc{transition:none}.dcj-ring.go{animation:none}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id), stage=$("dcjStage"), wrap=stage.parentElement;
+  const fit=()=>{ stage.style.transform=`scale(${wrap.clientWidth/640})`; }; new ResizeObserver(fit).observe(wrap); fit();
+  const STEPS=[
+    "1. In HQ, give her a name and tap her looks. Then tap “Try her on.”",
+    "2. In ChatGPT, type @Dream, pick Dream Cast, and say “Show me Adjoa.”",
+    "3. Not quite right? Just say what to change. Dream Cast makes a new one.",
+    "4. Love her? Say “Keep her.” She's saved in HQ and you get her character sheet.",
+    "5. Save the sheet to your phone. Now add scenes to your shoot list in Step 2! 🎬"];
+  let run=0, playing=false, cur=0;
+  const sleep=(ms,r)=>new Promise((ok,no)=>setTimeout(()=>r===run?ok():no("stop"),ms));
+  const scene=n=>document.querySelectorAll("#dcjStage .dcj-sc").forEach(s=>s.classList.toggle("on",s.dataset.s===n));
+  const rel=el=>{ const a=el.getBoundingClientRect(), b=stage.getBoundingClientRect(), k=640/b.width; return {x:(a.left-b.left+a.width/2)*k,y:(a.top-b.top+a.height/2)*k}; };
+  async function moveTo(el,r){ const p=rel(el), c=$("dcjCur"); c.style.left=(p.x-4)+"px"; c.style.top=(p.y-2)+"px"; await sleep(750,r); }
+  async function click(el,r){ await moveTo(el,r); const p=rel(el), g=$("dcjRing"); g.style.left=p.x+"px"; g.style.top=p.y+"px"; g.classList.remove("go"); void g.offsetWidth; g.classList.add("go"); await sleep(320,r); }
+  async function type(el,t,r,ms=55){ el.textContent=""; for(const ch of t){ el.textContent+=ch; await sleep(ms,r); } }
+  const log=$("dcjLog");
+  const me=t=>{ const d=document.createElement("div"); d.className="dcj-me"; d.textContent="Dream Cast  "+t; log.append(d); };
+  const bot=(t,extra)=>{ const d=document.createElement("div"); d.className="dcj-bot"; d.innerHTML=t; if(extra){ const x=document.createElement("div"); x.className=extra; d.append(x);} log.append(d); };
+  async function say(t,r){ $("dcjTag").style.display="inline-block"; await type($("dcjTyped"),t,r); await sleep(300,r); me(t); $("dcjTyped").textContent=""; await sleep(500,r); }
+  function setup(n){
+    ["dcjC1","dcjC2","dcjC3"].forEach(id=>$(id).classList.remove("on")); $("dcjName").textContent=""; $("dcjOk").style.display="none";
+    log.innerHTML=""; $("dcjTyped").textContent=""; $("dcjTag").style.display="none";
+    if(n>=2){ me("Show me Adjoa"); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); }
+    if(n>=3){ me("Longer hair please"); bot("Better? Want another change, or should I keep her?","dcj-pic long"); }
+    if(n>=4){ me("Keep her"); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); }
+  }
+  async function step(n,r){
+    cur=n; $("dcjCap").textContent=STEPS[n]; [...$("dcjDots").children].forEach((b,i)=>b.setAttribute("aria-current",i===n?"step":"false")); setup(n);
+    if(n===0){ scene("hq"); await sleep(400,r); await click($("dcjName"),r); await type($("dcjName"),"Adjoa",r,90);
+      for(const id of ["dcjC1","dcjC2","dcjC3"]){ await click($(id),r); $(id).classList.add("on"); }
+      await click($("dcjTry"),r); $("dcjOk").style.display="block"; await sleep(1500,r); }
+    if(n===1){ scene("gpt"); await sleep(400,r); await click($("dcjTyped").parentElement,r); await say("Show me Adjoa",r); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); await sleep(1800,r); }
+    if(n===2){ scene("gpt"); await sleep(400,r); await say("Longer hair please",r); bot("Better? Want another change, or should I keep her?","dcj-pic long"); await sleep(1800,r); }
+    if(n===3){ scene("gpt"); await sleep(400,r); await say("Keep her",r); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); await sleep(2000,r); }
+    if(n===4){ scene("gpt"); await sleep(300,r); bot("💛 Save this sheet to your phone. In every new chat, attach it and tell me the scene. 🎬"); const last=log.querySelector(".dcj-sheet"); if(last) await click(last,r); await sleep(2400,r); }
+  }
+  async function play(from){ const r=++run; playing=true; $("dcjPlay").textContent="❚❚ Pause";
+    try{ for(let i=from;i<STEPS.length;i++) await step(i,r); $("dcjPlay").textContent="↻ Replay"; playing=false; cur=0; }catch(e){} }
+  STEPS.forEach((_,i)=>{ const b=document.createElement("button"); b.type="button"; b.textContent=i+1; b.setAttribute("aria-label","Show step "+(i+1)); b.onclick=()=>play(i); $("dcjDots").append(b); });
+  $("dcjPlay").onclick=()=>{ if(playing){ run++; playing=false; $("dcjPlay").textContent="▶ Play"; } else play(cur||0); };
+  scene("hq");
+})();
+</script>
+
+      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF H</span></div>
       <div class="cb-layout">
         <div class="cb-steps">
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">A</span><h2>Who are we making?</h2></div>
-        <div class="chips" data-cb="mode" data-single></div>
-        <div id="cbGuide" class="cb-guide" hidden>
-          <div class="tag">📸 Your twin photo checklist (30 seconds)</div>
-          <ol class="steps">
-            <li>Face a window. Daylight on your face, no harsh shadows.</li>
-            <li>No filters, no beauty mode, no heavy edits.</li>
-            <li>Hair the way you usually wear it, and the earrings or glasses you always wear.</li>
-            <li>Phone at eye level, about an arm's length away. Neutral face or a soft smile.</li>
-            <li>Take 3: straight on, a little to the left, a little to the right.</li>
-            <li>Then tap the choices below that match <b>your real features</b>. They help the app keep your face, skin tone and hair the same.</li>
-          </ol>
-        </div>
-        <div id="cbPhotoGuide" class="cb-guide" hidden>
-          <div class="tag">📷 Start from a picture</div>
-          <ol class="steps">
-            <li>Use <b>your own photo</b> or <b>a picture AI made</b>. Never a real person's photo from Google, Pinterest or social media, and never a celebrity.</li>
-            <li>Tap what to <b>keep</b> from the picture. Everything else comes from your taps below.</li>
-            <li>In ChatGPT, attach the picture <b>first</b>, then paste your prompt.</li>
-          </ol>
-          <p class="tiny cb-l">Keep from the picture</p><div class="chips" data-cb="keep"></div>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">B</span><h2>The basics</h2></div>
-        <p class="tiny cb-l">Shot type</p><div class="chips" data-cb="shot" data-single></div>
-        <p class="tiny cb-l">Gender</p><div class="chips" data-cb="gender" data-single></div>
-        <p class="tiny cb-l">Age range</p><div class="chips" data-cb="age" data-single></div>
-        <p class="tiny cb-l">Looks (how attractive should they be?)</p><div class="chips" data-cb="look" data-single></div>
-      </div>
-
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">C</span><h2>Face and skin</h2></div>
-        <p class="tiny cb-l">Face shape</p><div class="chips" data-cb="face" data-single></div>
-        <p class="tiny cb-l">Skin tone (how light or deep)</p><div class="chips" data-cb="depth" data-single></div>
-        <p class="tiny cb-l">Undertone (look at the veins on your wrist: blue = cool, green = warm, both = neutral)</p><div class="chips" data-cb="under" data-single></div>
-        <p class="tiny cb-l">Eyes</p><div class="chips" data-cb="eyes" data-single></div>
-        <p class="tiny cb-l">Eye color</p><div class="chips" data-cb="eyecolor" data-single></div>
-        <p class="tiny cb-l">Nose</p><div class="chips" data-cb="nose" data-single></div>
-        <p class="tiny cb-l">Lips</p><div class="chips" data-cb="lips" data-single></div>
-        <p class="tiny cb-l">Brows</p><div class="chips" data-cb="brows" data-single></div>
-      </div>
-
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">D</span><h2>Hair, body and style</h2></div>
-        <div class="cb-w"><p class="tiny cb-l">Hair texture</p><div class="chips" data-cb="hair" data-single></div>
-        <p class="tiny cb-l">Hair length</p><div class="chips" data-cb="hlen" data-single></div>
-        <p class="tiny cb-l">Worn as</p><div class="chips" data-cb="hstyle" data-single></div></div>
-        <div class="cb-m" hidden><p class="tiny cb-l">Haircut</p><div class="chips" data-cb="mcut" data-single></div>
-        <p class="tiny cb-l">Facial hair</p><div class="chips" data-cb="fhair" data-single></div></div>
-        <p class="tiny cb-l">Hair color</p><div class="chips" data-cb="hcolor" data-single></div>
-        <p class="tiny cb-l">Body type (used for half and full body shots)</p><div class="chips" data-cb="body" data-single></div>
-        <div class="cb-w"><p class="tiny cb-l">Makeup</p><div class="chips" data-cb="makeup" data-single></div></div>
-        <p class="tiny cb-l">Extras (tap any)</p><div class="chips" data-cb="extras"></div>
-        <label class="tiny cb-l" for="cbCustom">Anything else? Type it in (say which side)</label>
-        <input type="text" id="cbCustom" maxlength="160" placeholder="Like: small lip piercing in the center, rose tattoo on her left wrist" style="width:100%">
-      </div>
-
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">E</span><h2>Make it look real</h2></div>
-        <p class="tiny cb-l">Real-skin details (1 or 2 is plenty: too many make the face look rough)</p><div class="chips" data-cb="real"></div>
-        <p class="tiny cb-l">Outfit</p><div class="chips" data-cb="outfit" data-single></div>
-        <p class="tiny cb-l">Background</p><div class="chips" data-cb="bg" data-single></div>
-        <p class="tiny cb-l">Light</p><div class="chips" data-cb="light" data-single></div>
-        <p class="tiny cb-l">Camera look</p><div class="chips" data-cb="cam" data-single></div>
-      </div>
-
-      <div class="panel cb-out" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">F</span><h2>Your prompt</h2></div>
-        <div class="row cb-row"><button class="btn ghost" type="button" id="cbSurprise">🎲 Surprise me</button><button class="btn ghost" type="button" id="cbReset">Start over</button></div>
-        <div class="cb-term"><div class="cb-term-h"><i></i><i></i><i></i><span>PROMPT.TXT</span><em id="cbUpd">LIVE</em></div><pre class="prompt" id="cbPrompt" aria-live="polite"></pre></div>
-        <div class="row cb-row">
-          <button class="btn" type="button" id="cbCopy" data-label="Copy prompt">Copy prompt</button>
-          <a class="btn ghost" id="cbOpenGpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT</a>
-          <a class="btn ghost" href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer">Open Google Flow (recommended for video)</a>
-        </div>
-        <p class="tiny" id="cbHow"></p>
-      </div>
-
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">G</span><h2>Save your character</h2></div>
-        <p class="muted" style="font-size:14px">Love the picture? Give your character a name and save her card. Every scene below will use her exact description, so she looks the same in every post.</p>
-        <div class="row cb-row"><input type="text" id="cbName" maxlength="40" placeholder="Character name, like Megan" style="flex:1;min-width:180px"><button class="btn" type="button" id="cbSave">Save character</button></div>
-        <div class="chips" id="cbSaved" style="margin-top:10px"></div>
-        <p class="tiny">Saved to your HQ account, so your characters are there on any phone or computer you sign in on.</p>
-      </div>
-
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">H</span><h2>Make her character sheet</h2></div>
-        <p class="muted" style="font-size:14px">A pro sheet of <b class="cbHomeName">your character</b>: 4 full-body views (front, both sides, back), 2 face close-ups, and a list of her features. It becomes her "master photo" and keeps her the same in every new picture.</p>
-        <ol class="steps easy"><li>In ChatGPT, open the chat where you made her picture (or start a new chat and attach her best picture).</li><li>Tap <b>Copy sheet prompt</b>, paste it there and send.</li><li>ChatGPT may ask you 1 or 2 quick questions first (like "which side is the piercing?"). Just answer. That stops it from changing her look.</li><li>Download the sheet. Add it to her ChatGPT Project's <b>files</b> (part I) so it's always there. Use it as her photo from now on.</li></ol>
-        <div class="row cb-row"><button class="btn" type="button" id="cbSheetCopy" data-label="Copy sheet prompt">Copy sheet prompt</button></div>
-        <p class="tiny">Don't cut the sheet into pieces. Every prompt in HQ already tells ChatGPT it's the same person and to show her only once.</p>
-      </div>
-
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">I</span><h2>Give her a home in ChatGPT</h2></div>
-        <p class="muted" style="font-size:14px">Pick the way you like. Both keep <b class="cbHomeName">your character</b> looking the same.</p>
-        <div class="grid">
-          <div class="card"><div class="tag">Quick way · no setup</div><h4>Start each chat with this</h4>
-            <p class="tiny" style="margin:0">Open a <b>new chat</b>, attach her character sheet, paste this and send. Then just say scenes, like <i>"now at the beach in a red dress."</i> It remembers for the whole chat.</p>
-            <button class="btn" type="button" id="cbStarterCopy" data-label="Copy starter message" style="margin-top:10px">Copy starter message</button>
-            <p class="tiny">Tip: save it in your phone's Notes so it's always handy.</p></div>
-          <div class="card"><div class="tag">Best way · 5-minute setup</div><h4>Make her a ChatGPT Project</h4>
-            <ol class="steps easy"><li>In ChatGPT tap <b>Projects → New project</b>. Name it <b class="cbHomeName">your character</b>.</li><li>Open the project's <b>Instructions</b>, paste, and save.</li><li>Add her character sheet to the project's <b>files</b>.</li><li>Each new picture: start a <b>new chat inside the project</b>, attach her sheet, say the scene.</li></ol>
-            <button class="btn" type="button" id="cbProjCopy" data-label="Copy project instructions">Copy project instructions</button></div>
-        </div>
-        <div class="card" id="dcCard" style="margin-top:12px"><div class="tag">New · Dream Cast inside ChatGPT</div><h4>Use Dream Cast right inside ChatGPT</h4>
+        <div class="cb-step"><span class="cb-n">A</span><h2>Connect Dream Cast (one time)</h2></div>
+        <p class="muted" style="font-size:14px">Dream Cast is your picture studio inside ChatGPT. Connect it once, and you'll never copy a prompt again. You just tell it what you want. Already connected? Skip to B.</p>
+<div id="dcCard"><div class="tag">New · Dream Cast inside ChatGPT</div><h4>Use Dream Cast right inside ChatGPT</h4>
           <p class="tiny" style="margin:0">Connect once, then type <b>@Dream Cast</b> in any ChatGPT chat. It already knows your saved characters, the scene library and the quick fixes. You just attach her sheet and say what you want.</p>
           <p class="tiny cb-l" style="margin-bottom:0">Watch first (1 minute):</p>
 <div class="dcd" id="dcDemo" aria-label="Animated walkthrough: how to connect Dream Cast in ChatGPT">
   <div class="dcd-stage-wrap"><div class="dcd-stage" id="dcdStage">
     <!-- scene 1: HQ -->
     <div class="dcd-scene" data-s="1">
-      <div class="dcd-hq"><div class="dcd-hq-t">✦ Dream Cast · part I</div>
+      <div class="dcd-hq"><div class="dcd-hq-t">✦ Dream Cast · part A</div>
         <div class="dcd-card"><b>Use Dream Cast right inside ChatGPT</b>
           <div class="dcd-btn" id="dcdShow">Show my Dream Cast link</div>
           <div class="dcd-link" id="dcdLink">https://…supabase.co/functions/v1/dreamcast/••••••</div>
@@ -650,11 +681,145 @@ body.cb-on .side{display:none}
             <p class="tiny">Saved a new character or changed her look? Dream Cast sees it right away. Link shared by mistake? <a href="#" id="dcNew">Make a new link</a> (the old one stops working).</p>
           </div>
         </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">B</span><h2>Who are we making?</h2></div>
+        <label class="tiny cb-l" for="cbName">Her name (you can change it later)</label>
+        <input type="text" id="cbName" maxlength="40" placeholder="Like: Adjoa, Megan or Grace" style="width:100%;margin-bottom:6px">
+        <p class="tiny cb-l">Who is she?</p><div class="chips" data-cb="mode" data-single></div>
+        <div id="cbGuide" class="cb-guide" hidden>
+          <div class="tag">📸 Your twin photo checklist (30 seconds)</div>
+          <ol class="steps">
+            <li>Face a window. Daylight on your face, no harsh shadows.</li>
+            <li>No filters, no beauty mode, no heavy edits.</li>
+            <li>Hair the way you usually wear it, and the earrings or glasses you always wear.</li>
+            <li>Phone at eye level, about an arm's length away. Neutral face or a soft smile.</li>
+            <li>Take 3: straight on, a little to the left, a little to the right.</li>
+            <li>Then tap the choices below that match <b>your real features</b>. They help the app keep your face, skin tone and hair the same.</li>
+          </ol>
+        </div>
+        <div id="cbPhotoGuide" class="cb-guide" hidden>
+          <div class="tag">📷 Start from a picture</div>
+          <ol class="steps">
+            <li>Use <b>your own photo</b> or <b>a picture AI made</b>. Never a real person's photo from Google, Pinterest or social media, and never a celebrity.</li>
+            <li>Tap what to <b>keep</b> from the picture. Everything else comes from your taps below.</li>
+            <li>In ChatGPT, attach the picture <b>first</b>, then paste your prompt.</li>
+          </ol>
+          <p class="tiny cb-l">Keep from the picture</p><div class="chips" data-cb="keep"></div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">C</span><h2>The basics</h2></div>
+        <p class="tiny cb-l">Shot type</p><div class="chips" data-cb="shot" data-single></div>
+        <p class="tiny cb-l">Gender</p><div class="chips" data-cb="gender" data-single></div>
+        <p class="tiny cb-l">Age range</p><div class="chips" data-cb="age" data-single></div>
+        <p class="tiny cb-l">Looks (how attractive should they be?)</p><div class="chips" data-cb="look" data-single></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">D</span><h2>Face and skin</h2></div>
+        <p class="tiny cb-l">Face shape</p><div class="chips" data-cb="face" data-single></div>
+        <p class="tiny cb-l">Skin tone (how light or deep)</p><div class="chips" data-cb="depth" data-single></div>
+        <p class="tiny cb-l">Undertone (look at the veins on your wrist: blue = cool, green = warm, both = neutral)</p><div class="chips" data-cb="under" data-single></div>
+        <p class="tiny cb-l">Eyes</p><div class="chips" data-cb="eyes" data-single></div>
+        <p class="tiny cb-l">Eye color</p><div class="chips" data-cb="eyecolor" data-single></div>
+        <p class="tiny cb-l">Nose</p><div class="chips" data-cb="nose" data-single></div>
+        <p class="tiny cb-l">Lips</p><div class="chips" data-cb="lips" data-single></div>
+        <p class="tiny cb-l">Brows</p><div class="chips" data-cb="brows" data-single></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">E</span><h2>Hair, body and style</h2></div>
+        <div class="cb-w"><p class="tiny cb-l">Hair texture</p><div class="chips" data-cb="hair" data-single></div>
+        <p class="tiny cb-l">Hair length</p><div class="chips" data-cb="hlen" data-single></div>
+        <p class="tiny cb-l">Worn as</p><div class="chips" data-cb="hstyle" data-single></div></div>
+        <div class="cb-m" hidden><p class="tiny cb-l">Haircut</p><div class="chips" data-cb="mcut" data-single></div>
+        <p class="tiny cb-l">Facial hair</p><div class="chips" data-cb="fhair" data-single></div></div>
+        <p class="tiny cb-l">Hair color</p><div class="chips" data-cb="hcolor" data-single></div>
+        <p class="tiny cb-l">Body type (used for half and full body shots)</p><div class="chips" data-cb="body" data-single></div>
+        <div class="cb-w"><p class="tiny cb-l">Makeup</p><div class="chips" data-cb="makeup" data-single></div></div>
+        <p class="tiny cb-l">Extras (tap any)</p><div class="chips" data-cb="extras"></div>
+        <label class="tiny cb-l" for="cbCustom">Anything else? Type it in (say which side)</label>
+        <input type="text" id="cbCustom" maxlength="160" placeholder="Like: small lip piercing in the center, rose tattoo on her left wrist" style="width:100%">
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">F</span><h2>Make it look real</h2></div>
+        <p class="tiny cb-l">Real-skin details (1 or 2 is plenty: too many make the face look rough)</p><div class="chips" data-cb="real"></div>
+        <p class="tiny cb-l">Outfit</p><div class="chips" data-cb="outfit" data-single></div>
+        <p class="tiny cb-l">Background</p><div class="chips" data-cb="bg" data-single></div>
+        <p class="tiny cb-l">Light</p><div class="chips" data-cb="light" data-single></div>
+        <p class="tiny cb-l">Camera look</p><div class="chips" data-cb="cam" data-single></div>
+      </div>
+
+      <div class="panel cb-out" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">G</span><h2>Try her on</h2></div>
+        <p class="muted" style="font-size:14px">Happy with your taps? Tap <b>Try her on</b>. Nothing is final yet: you'll see her in ChatGPT and change anything you want there.</p>
+        <div class="row cb-row"><button class="btn" type="button" id="cbSave">✨ Try her on</button><button class="btn ghost" type="button" id="cbSurprise">🎲 Surprise me</button><button class="btn ghost" type="button" id="cbReset">Start over</button></div>
+        <div id="cbTryBox" class="cb-guide" hidden>
+          <div class="tag">Now go to ChatGPT</div>
+          <ol class="steps easy">
+            <li>Start a new chat. Type <b>@Dream</b> and pick <b>Dream Cast</b>.<span class="cbTwinTip" hidden> Attach your best photo of yourself too.</span></li>
+            <li>Say: <b id="cbTryLine">Show me my character</b> <button class="btn ghost" type="button" id="cbTryCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
+            <li>Not quite right? Just say what to change, like <i>"shorter hair"</i> or <i>"warmer skin."</i></li>
+            <li>Love her? Say <b>"Keep her."</b> Dream Cast saves her here in HQ and makes her character sheet.</li>
+            <li>Save the sheet to your phone. You'll attach it in every new chat.</li>
+          </ol>
+          <a class="btn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;text-align:center;display:inline-block">Open ChatGPT</a>
+        </div>
+        <p class="tiny cb-l" style="margin-top:12px">Your characters</p>
+        <div class="chips" id="cbSaved"></div>
+        <p class="tiny">✓ kept = she's final. ✎ trying on = still a draft. Saved in your HQ account, on any phone or computer.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">H</span><h2>🎉 She's ready!</h2></div>
+        <p class="muted" style="font-size:14px">Once you said <b>"Keep her"</b> and saved her sheet, your star is done. Time to put her to work.</p>
+        <a class="btn" href="#scenes" style="text-decoration:none;text-align:center;display:inline-block">Next: pick scenes for your shoot list →</a>
+        <p class="tiny" style="margin-top:10px">Want to change her for good later (new haircut, new look)? In ChatGPT, tell Dream Cast: <i>"Change her look and keep it."</i> HQ updates by itself.</p>
+      </div>
+
+      <details class="cb-alt" style="margin:4px 0 12px"><summary class="btn ghost" style="display:inline-block;cursor:pointer">No Dream Cast? Use the copy-paste way</summary>
+      <p class="tiny" style="margin:10px 0">The old way: copy each prompt here and paste it into ChatGPT yourself. It works on any ChatGPT, no connecting needed.</p>
+      <div class="panel cb-out" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">1</span><h2>Your prompt</h2></div>
+        
+        <div class="cb-term"><div class="cb-term-h"><i></i><i></i><i></i><span>PROMPT.TXT</span><em id="cbUpd">LIVE</em></div><pre class="prompt" id="cbPrompt" aria-live="polite"></pre></div>
+        <div class="row cb-row">
+          <button class="btn" type="button" id="cbCopy" data-label="Copy prompt">Copy prompt</button>
+          <a class="btn ghost" id="cbOpenGpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT</a>
+        </div>
+        <p class="tiny" id="cbHow"></p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">2</span><h2>Make her character sheet</h2></div>
+        <p class="muted" style="font-size:14px">A pro sheet of <b class="cbHomeName">your character</b>: 4 full-body views (front, both sides, back), 2 face close-ups, and a list of her features. It becomes her "master photo" and keeps her the same in every new picture.</p>
+        <ol class="steps easy"><li>In ChatGPT, open the chat where you made her picture (or start a new chat and attach her best picture).</li><li>Tap <b>Copy sheet prompt</b>, paste it there and send.</li><li>ChatGPT may ask you 1 or 2 quick questions first (like "which side is the piercing?"). Just answer. That stops it from changing her look.</li><li>Download the sheet. Add it to her ChatGPT Project's <b>files</b> (step 3) so it's always there. Use it as her photo from now on.</li></ol>
+        <div class="row cb-row"><button class="btn" type="button" id="cbSheetCopy" data-label="Copy sheet prompt">Copy sheet prompt</button></div>
+        <p class="tiny">Don't cut the sheet into pieces. Every prompt in HQ already tells ChatGPT it's the same person and to show her only once.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:12px">
+        <div class="cb-step"><span class="cb-n">3</span><h2>Give her a home in ChatGPT</h2></div>
+        <p class="muted" style="font-size:14px">Pick the way you like. Both keep <b class="cbHomeName">your character</b> looking the same.</p>
+        <div class="grid">
+          <div class="card"><div class="tag">Quick way · no setup</div><h4>Start each chat with this</h4>
+            <p class="tiny" style="margin:0">Open a <b>new chat</b>, attach her character sheet, paste this and send. Then just say scenes, like <i>"now at the beach in a red dress."</i> It remembers for the whole chat.</p>
+            <button class="btn" type="button" id="cbStarterCopy" data-label="Copy starter message" style="margin-top:10px">Copy starter message</button>
+            <p class="tiny">Tip: save it in your phone's Notes so it's always handy.</p></div>
+          <div class="card"><div class="tag">Best way · 5-minute setup</div><h4>Make her a ChatGPT Project</h4>
+            <ol class="steps easy"><li>In ChatGPT tap <b>Projects → New project</b>. Name it <b class="cbHomeName">your character</b>.</li><li>Open the project's <b>Instructions</b>, paste, and save.</li><li>Add her character sheet to the project's <b>files</b>.</li><li>Each new picture: start a <b>new chat inside the project</b>, attach her sheet, say the scene.</li></ol>
+            <button class="btn" type="button" id="cbProjCopy" data-label="Copy project instructions">Copy project instructions</button></div>
+        </div>
+        
         <p class="tiny">Pictures come from ChatGPT. Videos come from your video app (we recommend Google Flow) in <a href="#series">3 Make videos</a>.</p>
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">J</span><h2>Changed her look in ChatGPT? Update her here</h2></div>
+        <div class="cb-step"><span class="cb-n">4</span><h2>Changed her look in ChatGPT? Update her here</h2></div>
         <p class="muted" style="font-size:14px">Made her face rounder or her hair longer while chatting? Bring the new look back here so every HQ prompt matches. Do this once, when you love her new look.</p>
         <ol class="steps easy"><li>Tap <b>Copy the question</b>, paste it in your ChatGPT chat with her newest picture, and send.</li><li>Copy ChatGPT's answer and paste it in the box below.</li><li>Tap <b>Save her new look</b>. Then make a new character sheet (part H) and update your project instructions (part I).</li></ol>
         <div class="row cb-row"><button class="btn ghost" type="button" id="cbAskLook" data-label="Copy the question">Copy the question</button></div>
@@ -665,8 +830,8 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">K</span><h2>Put your character in a scene</h2></div>
-        <ol class="steps" style="margin-bottom:6px"><li>Save your character in part G above, then pick her here. (Using her Project or starter message from part I? You can also just pick scenes in <a href="#scenes">2 Make posts</a>.)</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
+        <div class="cb-step"><span class="cb-n">5</span><h2>Put your character in a scene</h2></div>
+        <ol class="steps" style="margin-bottom:6px"><li>Tap Try her on in part G above, then pick her here. (Using her Project or starter message from copy-paste step 3? You can also just pick scenes in <a href="#scenes">2 Make posts</a>.)</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
         <p class="tiny cb-l">Character</p><div class="chips" id="cbSceneWho"></div>
         <p class="tiny cb-l">Scene (each one comes with a caption idea)</p><div class="chips" data-cb="scene" data-single></div>
         <label class="cb-check"><input type="checkbox" id="cbProduct"> I'm adding a product photo too (keeps the label, colors and shape exactly the same)</label>
@@ -676,7 +841,8 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel">
-        <div class="cb-step"><span class="cb-n">L</span><h2>Picture came out wrong? Tap the fix</h2></div>
+        <div class="cb-step"><span class="cb-n">6</span><h2>Picture came out wrong? Tap the fix</h2>      </details>
+</div>
         <p class="muted" style="font-size:14px">Paste the fix into the same chat, right under the picture. Attach your photo again if the face changed.</p>
         <div class="grid" id="cbFixes"></div>
       </div>
@@ -969,7 +1135,8 @@ async function loadScenes(){
   $("sceneSearch").addEventListener("input", ()=>drawScenes());
   const sh=$("scShort"); try{ sh.checked = localStorage.getItem("sos_sc_short")==="1"; }catch(e){} sh.onchange=()=>{ try{ localStorage.setItem("sos_sc_short", sh.checked?"1":"0"); }catch(e){} };
   const fx=$("scFixes"); fx.innerHTML=""; CB_FIX.forEach(f=>{ const c=el("div","card"); c.append(el("h4",null,f[0])); const btn=el("button","btn ghost","Copy the fix"); btn.type="button"; btn.dataset.label="Copy the fix"; btn.onclick=e=>copyText(f[1],e.currentTarget); c.append(btn); fx.append(c); });
-  drawToday(); drawScenes();
+  $("shootCopy").onclick = e => copyText("Make my shoot list", e.currentTarget);
+  drawToday(); drawScenes(); loadShoot();
 }
 function sheetRule(n){ n = n || "this person"; return `If my attached picture is a character sheet showing ${n} from several angles, it is the SAME person. Show only ONE ${n} in each picture.`; }
 function scShortOn(){ return !!($("scShort") && $("scShort").checked); }
@@ -986,14 +1153,36 @@ function scenePin(s){
   return `${who}\n\nPicture 2 = a Pinterest picture. Use it ONLY for ideas: the outfit, pose, setting, colors and lighting. Never copy the face, body or identity of the person in it, and do not copy the photo exactly. Make it original.\n\nSCENE: ${s[2]}\n\n${SC.avoid}`;
 }
 function pinUrl(s){ const q = (s[1].replace(/^[^:]+:\s*/,"").replace(/\(.*?\)/g,"")+" "+(s[0]==="Mini Story"?"cinematic scene":s[0].split(" ")[0]+" aesthetic")).trim(); return "https://www.pinterest.com/search/pins/?q="+encodeURIComponent(q); }
+let shoot = [];
+async function loadShoot(){ const { data, error } = await sb.from("shoot_list").select("id,title,scene,category,character_id,done").order("created_at"); if(!error) shoot = data||[]; drawShoot(); }
+function onList(s){ return shoot.find(x=>!x.done && x.title===s[1] && x.scene===s[2]); }
+async function toggleShot(s, btn){
+  const hit = onList(s); btn.disabled = true;
+  if(hit){ const { error } = await sb.from("shoot_list").delete().eq("id", hit.id); if(error) toast("Couldn't remove. Try again."); }
+  else { const { error } = await sb.from("shoot_list").insert({ title:s[1].slice(0,200), scene:s[2].slice(0,4000), category:(s[0]||"").slice(0,60), character_id: scWho ? scWho.id : null }); if(error){ toast("Couldn't add. Try again."); } else toast("Added to your shoot list 🎬"); }
+  btn.disabled = false; await loadShoot(); drawScenesKeep();
+}
+function drawScenesKeep(){ const y = window.scrollY; drawScenes(); window.scrollTo(0,y); }
+function drawShoot(){
+  const box = $("shootList"); if(!box) return; box.innerHTML = "";
+  const todo = shoot.filter(x=>!x.done), made = shoot.filter(x=>x.done);
+  if(!todo.length) box.append(el("p","tiny","Your list is empty. Scroll down and tap + Add to shoot list on scenes you like."));
+  todo.forEach((x,i)=>{ const who = scChars.find(c=>c.id===x.character_id); const row = el("div","row"); row.style.cssText="align-items:center;gap:8px;margin:6px 0";
+    row.append(el("span",null,(i+1)+". "+x.title+(who?" · "+who.name:"")));
+    const rm = el("button","btn ghost","Remove"); rm.type="button"; rm.style.cssText="padding:4px 10px;font-size:13px;margin-left:auto"; rm.onclick=async()=>{ await sb.from("shoot_list").delete().eq("id",x.id); await loadShoot(); drawScenesKeep(); };
+    row.append(rm); box.append(row); });
+  if(made.length){ const r = el("p","tiny","✓ "+made.length+" made. "); const c = el("a",null,"Clear them"); c.href="#"; c.onclick=async e=>{ e.preventDefault(); await sb.from("shoot_list").delete().eq("done",true); await loadShoot(); drawScenesKeep(); }; r.append(c); box.append(r); }
+}
 function sceneCard(s){
   const c = el("div","card"); c.append(el("div","tag",s[0]), el("h4",null,s[1]), el("p",null,s[2]));
-  const b = el("button","btn","Copy prompt"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(sceneFull(s),b);
+  if(s[0]!=="Start here"){ const on = !!onList(s); const a = el("button","btn",on?"✓ On your shoot list":"+ Add to shoot list"); a.type="button"; a.setAttribute("aria-pressed",on); a.onclick=()=>toggleShot(s,a); c.append(a); }
+  const b = el("button","btn ghost","Copy prompt (copy-paste way)"); b.type="button"; b.dataset.label=b.textContent; b.style.marginTop="8px"; b.onclick=()=>copyText(sceneFull(s),b);
   c.append(b);
   if(s[0]!=="Start here" && s[0]!=="Mini Story"){
-    const p = el("a","btn ghost","1. Find ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p);
-    const q = el("button","btn ghost","2. Saved one? Copy the Pinterest version"); q.type="button"; q.dataset.label=q.textContent; q.style.marginTop="8px"; q.onclick=()=>copyText(scenePin(s),q); c.append(q);
-    c.append(el("p","tiny","Pinterest version: screenshot the Pinterest picture. In ChatGPT add her picture or sheet first, the screenshot second, then paste. Two pictures at most."));
+    const dd = el("details"); dd.style.marginTop="8px"; dd.append(el("summary","tiny","Use a Pinterest picture (copy-paste way)")); c.append(dd);
+    const p = el("a","btn ghost","1. Find ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; dd.append(p);
+    const q = el("button","btn ghost","2. Saved one? Copy the Pinterest version"); q.type="button"; q.dataset.label=q.textContent; q.style.marginTop="8px"; q.onclick=()=>copyText(scenePin(s),q); dd.append(q);
+    dd.append(el("p","tiny","Pinterest version: screenshot the Pinterest picture. In ChatGPT add her picture or sheet first, the screenshot second, then paste. Two pictures at most."));
   } else if(s[0]==="Mini Story"){ const p = el("a","btn ghost","Ideas on Pinterest"); p.href=pinUrl(s); p.target="_blank"; p.rel="noopener noreferrer"; p.style.textAlign="center"; p.style.textDecoration="none"; p.style.marginTop="8px"; c.append(p); }
   return c;
 }
@@ -1095,6 +1284,7 @@ function sbPrompt(){
   return `I'm attaching ${who}'s character sheet. Plan a vertical video, about ${secs} seconds, in ${sbLen} scenes, starring ${who}.\nIdea: ${idea}\nKind of video: ${sbStyle}\n\nStep 1. Write the storyboard. For each scene give:\n- Scene number and seconds (like 0-3s)\n- Visual: what we see\n- Camera: the shot (close-up, wide, slow push-in...)\n- POV: whose eyes we see it through\n- Action: what moves or happens\n- Line: what ${who} says, if anything (one short sentence)\nKeep it simple and real. Nothing appears or disappears. ${who} looks exactly like the sheet in every scene. ${sheetRule(who)}\n\nStep 2. Make ONE storyboard picture: all ${sbLen} scenes in a numbered grid of small vertical frames, the same ${who} in every frame.\n\nStep 3. Under the storyboard, give me for each scene:\n- Picture prompt: to make that scene's starting picture of ${who}.\n- Video prompt: under 80 words, vertical 9:16, starts from that picture, natural small movements, natural sound, no music, no text on screen.\n\nIf the idea is unclear, ask me one short question first. When we're done, I'll say "Make the scene 1 picture" and we'll go scene by scene.`;
 }
 function initMove(){ if(initMove.done) return; initMove.done=1;
+  $("mvSay").onclick=e=>copyText("Make it move",e.currentTarget);
   const ss=$("sbStyle"), sl=$("sbLen");
   const drawSb=()=>{ ss.innerHTML=""; ["Product video (UGC)","Mini story","Day in my life","How-to / tips"].forEach(t=>{ const c=el("button","chip",t); c.type="button"; c.setAttribute("aria-pressed",sbStyle===t); c.onclick=()=>{ sbStyle=t; drawSb(); }; ss.append(c); });
     sl.innerHTML=""; [[3,"15 sec · 3 scenes"],[5,"30 sec · 5 scenes"],[7,"Mini story · 7 scenes"]].forEach(([n,t])=>{ const c=el("button","chip",t); c.type="button"; c.setAttribute("aria-pressed",sbLen===n); c.onclick=()=>{ sbLen=n; drawSb(); }; sl.append(c); }); };
@@ -1257,7 +1447,7 @@ let cb = JSON.parse(JSON.stringify(CB_DEF));
 let cbWho = null; // saved character for scenes
 let cbChars = [];
 async function cbFetch(){
-  const { data, error } = await sb.from("characters").select("id,name,lock").order("created_at");
+  const { data, error } = await sb.from("characters").select("id,name,lock,status").order("created_at");
   if(!error) cbChars = data || [];
   // one-time move of anything saved on this device before accounts were used
   try{ const old = JSON.parse(localStorage.getItem("sos_characters_v1")||"[]");
@@ -1363,7 +1553,7 @@ function cbDrawSaved(){
   if(!list.length){ box.append(el("span","tiny","No saved characters yet.")); }
   const cur = el("button","chip","Current build"); cur.type="button"; cur.setAttribute("aria-pressed", !cbWho); cur.onclick=()=>{ cbWho=null; cbDrawScene(); cbDrawSaved(); }; who.append(cur);
   list.forEach((c,i)=>{
-    const b = el("button","chip","🗑 "+c.name); b.type="button"; b.title="Delete "+c.name; b.onclick=async()=>{ if(confirm("Delete "+c.name+"?")){ const { error } = await sb.from("characters").delete().eq("id", c.id); if(error){ toast("Couldn't delete. Try again."); return; } if(cbWho&&cbWho.name===c.name) cbWho=null; await cbFetch(); cbDrawScene(); } }; box.append(b);
+    const b = el("button","chip",(c.status==="draft"?"✎ ":"✓ ")+c.name+"  🗑"); b.type="button"; b.title=(c.status==="draft"?"Trying on":"Kept")+". Tap to delete "+c.name; b.onclick=async()=>{ if(confirm("Delete "+c.name+"?")){ const { error } = await sb.from("characters").delete().eq("id", c.id); if(error){ toast("Couldn't delete. Try again."); return; } if(cbWho&&cbWho.name===c.name) cbWho=null; await cbFetch(); cbDrawScene(); } }; box.append(b);
     const w = el("button","chip",c.name); w.type="button"; w.setAttribute("aria-pressed", !!cbWho && cbWho.name===c.name); w.onclick=()=>{ cbWho=c; cbDrawScene(); cbDrawSaved(); cbIdDraw(); }; who.append(w);
   });
 }
@@ -1456,7 +1646,7 @@ function cbProject(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `You are my
 const CB_ASK = "Describe the person in this picture so another AI could recreate them exactly. One paragraph, facts only: age range, face shape, skin tone and undertone, eye shape and color, nose, lips, brows, hair (color, texture, length and how it's worn), body type, makeup, and any jewelry they always wear. Don't describe the outfit or the background.";
 function cbDrawHome(){ const w=cbHomeWho(); document.querySelectorAll(".cbHomeName").forEach(e=>e.textContent=w.name); cbDrawUpd(); }
 let cbUpdId = null;
-function cbDrawUpd(){ const box=$("cbUpdWho"); if(!box) return; box.innerHTML=""; if(!cbChars.length){ box.append(el("span","tiny","Save her first in part G.")); return; } if(!cbChars.some(c=>c.id===cbUpdId)) cbUpdId = (cbWho&&cbWho.id) || cbChars[cbChars.length-1].id; cbChars.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed", c.id===cbUpdId); b.onclick=()=>{ cbUpdId=c.id; cbDrawUpd(); }; box.append(b); }); }
+function cbDrawUpd(){ const box=$("cbUpdWho"); if(!box) return; box.innerHTML=""; if(!cbChars.length){ box.append(el("span","tiny","Tap Try her on in part G first.")); return; } if(!cbChars.some(c=>c.id===cbUpdId)) cbUpdId = (cbWho&&cbWho.id) || cbChars[cbChars.length-1].id; cbChars.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed", c.id===cbUpdId); b.onclick=()=>{ cbUpdId=c.id; cbDrawUpd(); }; box.append(b); }); }
 function initBuilder(){
   cbDrawSaved(); cbDraw(); cbFetch(); cbProgInit();
   $("cbCopy").onclick = e => copyText(cbPrompt(), e.currentTarget);
@@ -1466,14 +1656,19 @@ function initBuilder(){
   $("cbReset").onclick = () => { cb = JSON.parse(JSON.stringify(CB_DEF)); cbWho=null; $("cbCustom").value=""; cbDraw(); cbDrawSaved(); };
   $("cbSurprise").onclick = () => { ["shot","age","face","depth","under","eyes","eyecolor","nose","lips","brows","hair","hlen","hstyle","hcolor","body","makeup","outfit","bg","light","mcut","fhair"].forEach(k=>cb[k]=cbRand(CB[k])); if(cb.gender==="Man") cb.makeup="Bare"; if(cb.hair==="Bald") cb.hair="Wavy"; cb.mode="avatar"; cbDraw(); toast("New character rolled 🎲"); };
   $("cbSave").onclick = async () => {
-    const name = ($("cbName").value||"").trim(); if(!name){ toast("Give your character a name first"); return; }
+    const name = ($("cbName").value||"").trim(); if(!name){ toast("Give her a name first (part B)"); $("cbName").focus(); return; }
     const btn = $("cbSave"); btn.disabled = true;
-    const lock = cbLock(), ex = cbChars.find(c=>c.name===name);
-    const { error } = ex ? await sb.from("characters").update({lock}).eq("id", ex.id) : await sb.from("characters").insert({name, lock});
+    const lock = cbLock(), start_prompt = cbPrompt().slice(0,8000), ex = cbChars.find(c=>c.name.toLowerCase()===name.toLowerCase());
+    if(ex && ex.status!=="draft" && !confirm(name+" is already kept. Replace her look with these new taps?")){ btn.disabled=false; return; }
+    const row = {lock, start_prompt, status:"draft", updated_at:new Date().toISOString()};
+    const { error } = ex ? await sb.from("characters").update(row).eq("id", ex.id) : await sb.from("characters").insert({name, ...row});
     btn.disabled = false;
     if(error){ toast("Couldn't save. Try again."); return; }
-    await cbFetch(); cbWho = cbChars.find(c=>c.name===name) || null; cbDrawSaved(); cbDrawScene(); toast(name+" saved ✓");
+    await cbFetch(); cbWho = cbChars.find(c=>c.name.toLowerCase()===name.toLowerCase()) || null; cbDrawSaved(); cbDrawScene();
+    $("cbTryLine").textContent = "Show me "+name; document.querySelectorAll(".cbTwinTip").forEach(e=>e.hidden = cb.mode!=="twin");
+    $("cbTryBox").hidden = false; $("cbTryBox").scrollIntoView({behavior:"smooth",block:"nearest"}); toast(name+" is ready to try on ✨");
   };
+  $("cbTryCopy").onclick = e => copyText($("cbTryLine").textContent, e.currentTarget);
   $("cbSheetCopy").onclick = e => copyText(cbSheetPrompt(), e.currentTarget);
   $("cbStarterCopy").onclick = e => copyText(cbStarter(), e.currentTarget);
   $("cbProjCopy").onclick = e => copyText(cbProject(), e.currentTarget);
@@ -1487,14 +1682,14 @@ function initBuilder(){
   $("dcNew").onclick=async e=>{ e.preventDefault(); if(confirm("Make a new link? Your old link will stop working in ChatGPT, and you'll paste the new one there.")){ await dcLoad(true); toast("New link ready. Paste it in ChatGPT."); } };
   $("cbSaveLook").onclick = async () => {
     const txt = ($("cbNewLook").value||"").trim().replace(/\s+/g," "); const c = cbChars.find(x=>x.id===cbUpdId);
-    if(!c){ $("cbLookMsg").textContent="Save your character in part G first."; return; }
+    if(!c){ $("cbLookMsg").textContent="Tap Try her on in part G first."; return; }
     if(txt.length<40){ $("cbLookMsg").textContent="Paste ChatGPT's full description first."; return; }
     const btn=$("cbSaveLook"); btn.disabled=true;
     const { error } = await sb.from("characters").update({lock: txt}).eq("id", c.id);
     btn.disabled=false;
     if(error){ $("cbLookMsg").textContent="Couldn't save. Try again."; return; }
     await cbFetch(); if(cbWho && cbWho.id===c.id) cbWho = cbChars.find(x=>x.id===c.id)||cbWho; if(scWho && scWho.id===c.id) scWho = null;
-    $("cbNewLook").value=""; $("cbLookMsg").textContent = c.name+"'s new look is saved ✓ Every HQ prompt now uses it. Next: make a new character sheet (part H) and update your project instructions (part I).";
+    $("cbNewLook").value=""; $("cbLookMsg").textContent = c.name+"'s new look is saved ✓ Every HQ prompt now uses it. Next: make a new character sheet (copy-paste step 2) and update your project instructions (step 3).";
     cbDrawSaved(); cbDrawScene(); toast(c.name+" updated ✓");
   };
   const fx = $("cbFixes"); fx.innerHTML="";
