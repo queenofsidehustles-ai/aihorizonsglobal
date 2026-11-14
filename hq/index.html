@@ -268,9 +268,9 @@ body.cb-on .side{display:none}
         <div class="cb-guide" style="margin-top:12px">
           <div class="tag">When your list is ready</div>
           <ol class="steps easy">
-            <li>In ChatGPT, start a new chat. Type <b>@Dream</b> and pick <b>Dream Cast</b>.</li>
+            <li>In ChatGPT, start a new chat. Type <b>@Dream</b>, pick <b>Dream Cast</b> and say <b>Hi</b>.</li>
             <li>Attach her character sheet (tap <b>+</b>).</li>
-            <li>Say: <b>Make my shoot list</b> <button class="btn ghost" type="button" id="shootCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
+            <li>Then say: <b>Make my shoot list</b> <button class="btn ghost" type="button" id="shootCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
           </ol>
           <a class="btn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;text-align:center;display:inline-block">Open ChatGPT</a>
         </div>
@@ -467,7 +467,7 @@ body.cb-on .side{display:none}
   const fit=()=>{ stage.style.transform=`scale(${wrap.clientWidth/640})`; }; new ResizeObserver(fit).observe(wrap); fit();
   const STEPS=[
     "1. In HQ, give her a name and tap her looks. Then tap “Try her on.”",
-    "2. In ChatGPT, type @Dream, pick Dream Cast, and say “Show me Adjoa.”",
+    "2. In ChatGPT, type @Dream, pick Dream Cast and say “Hi.” Then say “Make a picture of Adjoa.”",
     "3. Not quite right? Just say what to change. Dream Cast makes a new one.",
     "4. Love her? Say “Keep her.” She's saved in HQ and you get her character sheet.",
     "5. Save the sheet to your phone. Now add scenes to your shoot list in Step 2! 🎬"];
@@ -479,13 +479,13 @@ body.cb-on .side{display:none}
   async function click(el,r){ await moveTo(el,r); const p=rel(el), g=$("dcjRing"); g.style.left=p.x+"px"; g.style.top=p.y+"px"; g.classList.remove("go"); void g.offsetWidth; g.classList.add("go"); await sleep(320,r); }
   async function type(el,t,r,ms=55){ el.textContent=""; for(const ch of t){ el.textContent+=ch; await sleep(ms,r); } }
   const log=$("dcjLog");
-  const me=t=>{ const d=document.createElement("div"); d.className="dcj-me"; d.textContent="Dream Cast  "+t; log.append(d); };
+  const me=t=>{ const d=document.createElement("div"); d.className="dcj-me"; d.textContent=(t==="Hi"?"Dream Cast  ":"")+t; log.append(d); };
   const bot=(t,extra)=>{ const d=document.createElement("div"); d.className="dcj-bot"; d.innerHTML=t; if(extra){ const x=document.createElement("div"); x.className=extra; d.append(x);} log.append(d); };
-  async function say(t,r){ $("dcjTag").style.display="inline-block"; await type($("dcjTyped"),t,r); await sleep(300,r); me(t); $("dcjTyped").textContent=""; await sleep(500,r); }
+  async function say(t,r){ $("dcjTag").style.display=t==="Hi"?"inline-block":"none"; await type($("dcjTyped"),t,r); await sleep(300,r); me(t); $("dcjTyped").textContent=""; await sleep(500,r); }
   function setup(n){
     ["dcjC1","dcjC2","dcjC3"].forEach(id=>$(id).classList.remove("on")); $("dcjName").textContent=""; $("dcjOk").style.display="none";
     log.innerHTML=""; $("dcjTyped").textContent=""; $("dcjTag").style.display="none";
-    if(n>=2){ me("Show me Adjoa"); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); }
+    if(n>=2){ me("Make a picture of Adjoa"); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); }
     if(n>=3){ me("Longer hair please"); bot("Better? Want another change, or should I keep her?","dcj-pic long"); }
     if(n>=4){ me("Keep her"); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); }
   }
@@ -494,7 +494,7 @@ body.cb-on .side{display:none}
     if(n===0){ scene("hq"); await sleep(400,r); await click($("dcjName"),r); await type($("dcjName"),"Adjoa",r,90);
       for(const id of ["dcjC1","dcjC2","dcjC3"]){ await click($(id),r); $(id).classList.add("on"); }
       await click($("dcjTry"),r); $("dcjOk").style.display="block"; await sleep(1500,r); }
-    if(n===1){ scene("gpt"); await sleep(400,r); await click($("dcjTyped").parentElement,r); await say("Show me Adjoa",r); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); await sleep(1800,r); }
+    if(n===1){ scene("gpt"); await sleep(400,r); await click($("dcjTyped").parentElement,r); await say("Hi",r); bot("🎬 Welcome to Dream Cast! What are we making today?"); await sleep(700,r); $("dcjTag").style.display="none"; await type($("dcjTyped"),"Make a picture of Adjoa",r); await sleep(300,r); { const d=document.createElement("div"); d.className="dcj-me"; d.textContent="Make a picture of Adjoa"; log.append(d); } $("dcjTyped").textContent=""; await sleep(500,r); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); await sleep(1800,r); }
     if(n===2){ scene("gpt"); await sleep(400,r); await say("Longer hair please",r); bot("Better? Want another change, or should I keep her?","dcj-pic long"); await sleep(1800,r); }
     if(n===3){ scene("gpt"); await sleep(400,r); await say("Keep her",r); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); await sleep(2000,r); }
     if(n===4){ scene("gpt"); await sleep(300,r); bot("💛 Save this sheet to your phone. In every new chat, attach it and tell me the scene. 🎬"); const last=log.querySelector(".dcj-sheet"); if(last) await click(last,r); await sleep(2400,r); }
@@ -676,7 +676,7 @@ body.cb-on .side{display:none}
               <li>Tap <b>Add</b> (top right), then <b>Add custom MCP server</b>.</li>
               <li>Name: <b>Dream Cast</b>. Paste your link into the <b>Server URL</b> box. Change Authentication to <b>No authentication</b>.</li>
               <li>Tick <b>I understand and want to continue</b>, then tap <b>Create as a plugin</b>.</li>
-              <li>Start a new chat, type <b>@Dream</b>, pick <b>Dream Cast</b> and say hi. 🎬 Attach her character sheet when you ask for a picture.</li>
+              <li>Start a new chat, type <b>@Dream</b>, pick <b>Dream Cast</b> and say <b>Hi</b>. 🎬 After that, just talk. No more @ needed in that chat.</li>
             </ol>
             <p class="tiny">Saved a new character or changed her look? Dream Cast sees it right away. Link shared by mistake? <a href="#" id="dcNew">Make a new link</a> (the old one stops working).</p>
           </div>
@@ -761,8 +761,8 @@ body.cb-on .side{display:none}
         <div id="cbTryBox" class="cb-guide" hidden>
           <div class="tag">Now go to ChatGPT</div>
           <ol class="steps easy">
-            <li>Start a new chat. Type <b>@Dream</b> and pick <b>Dream Cast</b>.<span class="cbTwinTip" hidden> Attach your best photo of yourself too.</span></li>
-            <li>Say: <b id="cbTryLine">Show me my character</b> <button class="btn ghost" type="button" id="cbTryCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
+            <li>Start a new chat. Type <b>@Dream</b>, pick <b>Dream Cast</b> and say <b>Hi</b>. That opens your studio.</li>
+            <li>Then (no @ needed) say: <b id="cbTryLine">Make a picture of my character</b><span class="cbTwinTip" hidden> and attach your best photo of yourself</span> <button class="btn ghost" type="button" id="cbTryCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
             <li>Not quite right? Just say what to change, like <i>"shorter hair"</i> or <i>"warmer skin."</i></li>
             <li>Love her? Say <b>"Keep her."</b> Dream Cast saves her here in HQ and makes her character sheet.</li>
             <li>Save the sheet to your phone. You'll attach it in every new chat.</li>
@@ -1665,7 +1665,7 @@ function initBuilder(){
     btn.disabled = false;
     if(error){ toast("Couldn't save. Try again."); return; }
     await cbFetch(); cbWho = cbChars.find(c=>c.name.toLowerCase()===name.toLowerCase()) || null; cbDrawSaved(); cbDrawScene();
-    $("cbTryLine").textContent = "Show me "+name; document.querySelectorAll(".cbTwinTip").forEach(e=>e.hidden = cb.mode!=="twin");
+    $("cbTryLine").textContent = "Make a picture of "+name; document.querySelectorAll(".cbTwinTip").forEach(e=>e.hidden = cb.mode!=="twin");
     $("cbTryBox").hidden = false; $("cbTryBox").scrollIntoView({behavior:"smooth",block:"nearest"}); toast(name+" is ready to try on ✨");
   };
   $("cbTryCopy").onclick = e => copyText($("cbTryLine").textContent, e.currentTarget);
