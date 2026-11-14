@@ -403,6 +403,7 @@ body.cb-on .side{display:none}
         <p class="tiny cb-l">Shot type</p><div class="chips" data-cb="shot" data-single></div>
         <p class="tiny cb-l">Gender</p><div class="chips" data-cb="gender" data-single></div>
         <p class="tiny cb-l">Age range</p><div class="chips" data-cb="age" data-single></div>
+        <p class="tiny cb-l">Looks (how attractive should they be?)</p><div class="chips" data-cb="look" data-single></div>
       </div>
 
       <div class="panel" style="margin-bottom:12px">
@@ -419,12 +420,14 @@ body.cb-on .side{display:none}
 
       <div class="panel" style="margin-bottom:12px">
         <div class="cb-step"><span class="cb-n">D</span><h2>Hair, body and style</h2></div>
-        <p class="tiny cb-l">Hair texture</p><div class="chips" data-cb="hair" data-single></div>
+        <div class="cb-w"><p class="tiny cb-l">Hair texture</p><div class="chips" data-cb="hair" data-single></div>
         <p class="tiny cb-l">Hair length</p><div class="chips" data-cb="hlen" data-single></div>
-        <p class="tiny cb-l">Worn as</p><div class="chips" data-cb="hstyle" data-single></div>
+        <p class="tiny cb-l">Worn as</p><div class="chips" data-cb="hstyle" data-single></div></div>
+        <div class="cb-m" hidden><p class="tiny cb-l">Haircut</p><div class="chips" data-cb="mcut" data-single></div>
+        <p class="tiny cb-l">Facial hair</p><div class="chips" data-cb="fhair" data-single></div></div>
         <p class="tiny cb-l">Hair color</p><div class="chips" data-cb="hcolor" data-single></div>
         <p class="tiny cb-l">Body type (used for half and full body shots)</p><div class="chips" data-cb="body" data-single></div>
-        <p class="tiny cb-l">Makeup</p><div class="chips" data-cb="makeup" data-single></div>
+        <div class="cb-w"><p class="tiny cb-l">Makeup</p><div class="chips" data-cb="makeup" data-single></div></div>
         <p class="tiny cb-l">Extras (tap any)</p><div class="chips" data-cb="extras"></div>
         <label class="tiny cb-l" for="cbCustom">Anything else? Type it in (say which side)</label>
         <input type="text" id="cbCustom" maxlength="160" placeholder="Like: small lip piercing in the center, rose tattoo on her left wrist" style="width:100%">
@@ -432,7 +435,7 @@ body.cb-on .side{display:none}
 
       <div class="panel" style="margin-bottom:12px">
         <div class="cb-step"><span class="cb-n">E</span><h2>Make it look real</h2></div>
-        <p class="tiny cb-l">Real-skin details (keep at least 3 on: perfect skin is what makes AI look fake)</p><div class="chips" data-cb="real"></div>
+        <p class="tiny cb-l">Real-skin details (1 or 2 is plenty: too many make the face look rough)</p><div class="chips" data-cb="real"></div>
         <p class="tiny cb-l">Outfit</p><div class="chips" data-cb="outfit" data-single></div>
         <p class="tiny cb-l">Background</p><div class="chips" data-cb="bg" data-single></div>
         <p class="tiny cb-l">Light</p><div class="chips" data-cb="light" data-single></div>
@@ -529,7 +532,7 @@ body.cb-on .side{display:none}
             </svg><div class="cb-id-scan"></div></div>
             <div class="cb-id-name" id="cbIdName">UNNAMED</div>
             <dl class="cb-id-dl" id="cbIdDl"></dl>
-            <div class="cb-id-meter"><span>REALISM</span><div><i id="cbIdReal"></i></div><b id="cbIdRealN">4/8</b></div>
+            <div class="cb-id-meter"><span>REALISM</span><div><i id="cbIdReal"></i></div><b id="cbIdRealN">Just right</b></div>
           </div>
         </aside>
       </div>
@@ -1056,6 +1059,9 @@ const CB = {
   keep:[["Face shape","face shape"],["Eyes","eyes"],["Nose","nose"],["Lips","lips"],["Skin tone","skin tone and undertone"],["Hair","hair"],["Body shape","body shape"],["Outfit","outfit"]],
   shot:[["Headshot","headshot portrait|Framed from the top of the head to just below the shoulders."],["Half body","half-body portrait|Framed from the top of the head to the waist."],["Full body","full-body portrait|Head to feet fully in frame."],["Character sheet","character reference sheet|Three views side by side: front, three-quarter and side profile, same outfit and light in each."]],
   gender:[["Woman","woman"],["Man","man"]],
+  look:[["Everyday attractive","good-looking and approachable, like an attractive person you'd see in real life"],["Very attractive","very attractive, with balanced features, bright engaged eyes, healthy skin with a natural glow and a polished, well-groomed look"],["Model / influencer","strikingly attractive, with model-like features, high cheekbones, luminous healthy skin and a confident, magnetic presence, like a top lifestyle influencer"]],
+  mcut:[["Low fade","a clean low fade with short hair on top and a sharp line-up"],["Taper fade","a taper fade with neat, textured hair on top"],["Waves","short brushed 360 waves with a crisp line-up"],["Buzz cut","a neat buzz cut with a crisp hairline"],["Textured crop","a textured crop with short sides"],["Twists on top","short twists on top with faded sides"],["Locs","neat, well-kept shoulder-length locs"],["Styled back","medium-length hair, neatly styled back"],["Bald","a clean-shaven bald head"]],
+  fhair:[["Clean-shaven","clean-shaven"],["Light stubble","light, even stubble"],["Short beard","a short, neatly trimmed beard with clean, sharp lines"],["Full beard","a full, well-groomed beard with sharp, clean edges"],["Goatee","a neat goatee and mustache"]],
   age:[["Early 20s","early 20s"],["Mid 20s","mid 20s"],["Late 20s","late 20s"],["30s","30s"],["40s","40s"],["50s","50s"],["60+","60s"]],
   face:[["Oval","an oval face with balanced proportions"],["Round","a round face with soft, full cheeks"],["Heart","a heart-shaped face with high cheekbones and a softly tapered chin"],["Square","a square face with a strong, defined jawline"],["Long","a long, oblong face with a straight jawline"],["Diamond","a diamond-shaped face with prominent cheekbones and a narrow chin"]],
   depth:[["Fair","fair and very light"],["Light","light"],["Light-medium","light-medium"],["Medium","medium"],["Tan","tan"],["Brown","medium brown"],["Deep brown","deep brown"],["Rich deep","rich, very deep brown"]],
@@ -1071,15 +1077,15 @@ const CB = {
   hcolor:[["Black","black"],["Dark brown","dark brown"],["Brown","medium brown"],["Honey blonde","honey blonde"],["Blonde","blonde"],["Auburn","auburn"],["Burgundy","burgundy"],["Gray / silver","natural gray and silver"]],
   body:[["Slim","a slim build"],["Athletic","an athletic, toned build"],["Average","an average build"],["Curvy","a curvy, hourglass build"],["Plus-size","a plus-size, full-figured build"],["Muscular","a muscular build"]],
   makeup:[["Bare","no makeup, bare natural skin"],["Natural","light natural makeup: a touch of mascara and tinted lip balm"],["Soft glam","soft glam makeup: visible blush, soft contour, mascara, filled brows and lip liner with gloss"],["Full glam","full glam makeup: defined contour, highlight, false lashes and a bold lip"]],
-  extras:[["Hoop earrings","small gold hoop earrings"],["Stud earrings","small stud earrings"],["Glasses","glasses"],["Nose stud","a small nose stud"],["Nose ring","a small nose ring"],["Lip piercing","a small stud piercing under the center of the lower lip"],["Beard","a neatly trimmed beard"],["Headband","a simple headband"]],
-  real:[["Visible pores","textured skin with visible pores"],["Uneven tone","slightly uneven skin tone, the way real skin looks"],["Flyaway hairs","a few natural flyaway hairs"],["Lip lines","natural lines in the lips"],["Light freckles","light freckles"],["Small blemish","a small blemish"],["Under-eye lines","faint lines under the eyes"],["Beauty mark","a small beauty mark"]],
+  extras:[["Hoop earrings","small gold hoop earrings"],["Stud earrings","small stud earrings"],["Glasses","glasses"],["Nose stud","a small nose stud"],["Nose ring","a small nose ring"],["Lip piercing","a small stud piercing under the center of the lower lip"],["Headband","a simple headband"]],
+  real:[["Visible pores","fine, natural skin texture with visible pores"],["Uneven tone","slight natural variation in skin tone"],["Flyaway hairs","a few natural flyaway hairs"],["Lip lines","natural lines in the lips"],["Light freckles","light freckles"],["Small blemish","a small blemish"],["Under-eye lines","faint lines under the eyes"],["Beauty mark","a small beauty mark"]],
   outfit:[["White tee","a plain white t-shirt"],["Cozy knit","a cozy knit sweater"],["Blazer","a tailored blazer over a simple top"],["Athleisure","a matching athleisure set"],["Casual chic","a casual chic outfit: fitted top and high-waisted jeans"],["Sundress","a simple sundress"],["Scrubs","medical scrubs"]],
   bg:[["Plain white wall","a plain off-white wall"],["Soft gray studio","a soft gray studio backdrop"],["Cozy home","a cozy, lived-in living room, softly blurred"],["Kitchen","a bright home kitchen, softly blurred"],["Café","a busy café, softly blurred"],["Outdoors","a city sidewalk, softly blurred"],["Office","a modern home office, softly blurred"]],
-  light:[["Window daylight","soft natural window light from one side"],["Studio softbox","soft, even studio light"],["Golden hour","warm golden-hour sunlight"],["Indoor lamp","warm indoor lamp light in the evening"]],
+  light:[["Window daylight","soft, flattering window light from one side at a slight angle, with a gentle catchlight in the eyes"],["Beauty light","soft, flattering beauty light from the front and slightly above, with bright catchlights in the eyes"],["Side light","directional side light that shapes the jawline and cheekbones, with soft shadows"],["Studio softbox","soft, even studio light"],["Golden hour","warm golden-hour sunlight"],["Indoor lamp","warm indoor lamp light in the evening"]],
   cam:[["Pro camera","shot on a full-frame camera with an 85mm lens, shallow depth of field, natural color"],["Phone selfie","a casual front-facing phone photo, slightly imperfect framing, like a real social media post"],["Phone (someone else)","shot on a phone by a friend, natural and candid"]],
   scene:[["Skincare routine","standing at a bathroom sink in the morning, gently applying [PRODUCT] to her face with her fingertips, soft window light, real skin texture","My morning skincare routine 🧴 What I use is linked. Comment LINK"],["Product review (UGC)","holding [PRODUCT] up near her face and smiling, talking to the camera like a real customer review, in a bright bedroom","Honest thoughts on [PRODUCT] after a week 👀 Link in bio"],["Unboxing","opening a package on a kitchen counter and lifting out [PRODUCT], excited, hands in focus","Unboxing [PRODUCT] 📦 Was it worth it? Comment LINK"],["Get ready with me","sitting at a vanity mirror doing her makeup, chatting to the camera, morning light","GRWM ✨ Everything I used is linked. Comment LINK"],["Outfit of the day","full-length mirror selfie in a stylish outfit, phone in hand, clean bedroom","Today's fit 🤍 Comment LINK and I'll send every piece"],["Kitchen cooking","cooking at a home stove, stirring a pot and smiling, steam rising","Dinner in 20 minutes 🍲 Save this one"],["Gym","at the gym between sets, wiping sweat, water bottle in hand","No excuses today 💪 Who's training with me?"],["Café laptop","working on a laptop at a café table with a latte","Building my business one coffee at a time ☕"],["Car selfie","sitting in the driver's seat of a parked car, talking to the camera, daylight","Real talk from my car 🚗 You need to hear this"],["Mini-drama moment","in a dramatic close-up, eyes wide, reacting to shocking news, cinematic light","She did NOT see that coming 😳 Part 2?"],["Pinterest pin","styled flat-lay-style shot from above, holding [PRODUCT] beside aesthetic props, clean neutral colors","Save this for later 📌"]]
 };
-const CB_DEF = {mode:"avatar",shot:"Headshot",gender:"Woman",age:"Mid 20s",face:"Oval",depth:"Brown",under:"Warm (golden)",eyes:"Almond",eyecolor:"Dark brown",nose:"Straight",lips:"Full",brows:"Natural full",hair:"Curly",hlen:"Shoulder",hstyle:"Worn down",hcolor:"Dark brown",body:"Average",makeup:"Soft glam",extras:[],real:["Visible pores","Uneven tone","Flyaway hairs","Lip lines"],outfit:"White tee",bg:"Plain white wall",light:"Window daylight",cam:"Pro camera",scene:"Skincare routine",keep:["Face shape","Skin tone"],custom:""};
+const CB_DEF = {mode:"avatar",shot:"Headshot",gender:"Woman",look:"Very attractive",mcut:"Low fade",fhair:"Short beard",age:"Mid 20s",face:"Oval",depth:"Brown",under:"Warm (golden)",eyes:"Almond",eyecolor:"Dark brown",nose:"Straight",lips:"Full",brows:"Natural full",hair:"Curly",hlen:"Shoulder",hstyle:"Worn down",hcolor:"Dark brown",body:"Average",makeup:"Soft glam",extras:[],real:["Visible pores"],outfit:"White tee",bg:"Plain white wall",light:"Window daylight",cam:"Pro camera",scene:"Skincare routine",keep:["Face shape","Skin tone"],custom:""};
 let cb = JSON.parse(JSON.stringify(CB_DEF));
 let cbWho = null; // saved character for scenes
 let cbChars = [];
@@ -1099,23 +1105,27 @@ function cbJoin(a){ return a.length<2 ? (a[0]||"") : a.slice(0,-1).join(", ")+" 
 
 function cbLock(){
   const she = cb.gender==="Man" ? "He" : "She", her = cb.gender==="Man" ? "his" : "her";
-  const hairLine = cb.hair==="Bald" ? `${she} is bald.` : `${she} has ${cbv("hcolor")} ${cbv("hair")}, ${cbv("hlen")}, ${cbv("hstyle")}.`;
+  const man = cb.gender==="Man";
+  const hairLine = man ? (cb.mcut==="Bald" ? `He has ${cbv("mcut")} and ${cbv("fhair")}.` : `He has ${cbv("hcolor")} hair cut in ${cbv("mcut")}, and ${cbv("fhair")}.`)
+    : cb.hair==="Bald" ? `${she} is bald.` : `${she} has ${cbv("hcolor")} ${cbv("hair")}, ${cbv("hlen")}, ${cbv("hstyle")}.`;
   const ex = cbList("extras");
+  const brows = man ? cbv("brows").replace("softly groomed","neatly groomed").replace("thin, arched","naturally shaped") : cbv("brows");
   return [
     `A ${cbv("gender")} in ${her} ${cbv("age")}.`,
+    (cb.mode!=="twin" ? `${she} is ${man?"handsome":"beautiful"} and ${cbv("look")}${man?", with a well-defined jawline and a strong, masculine brow line":""}.` : ""),
     `${she} has ${cbv("face")}.`,
     `${her[0].toUpperCase()+her.slice(1)} skin is ${cbv("depth")} ${cbv("under")}.`,
-    `${she} has ${cbv("eyecolor")} ${cbv("eyes")}, ${cbv("nose")}, ${cbv("lips")} and ${cbv("brows")}.`,
+    `${she} has ${cbv("eyecolor")} ${cbv("eyes")}, ${cbv("nose")}, ${cbv("lips")} and ${brows}.`,
     hairLine,
     (cb.shot!=="Headshot" ? `${she} has ${cbv("body")}.` : ""),
-    `Makeup: ${cbv("makeup")}.`,
+    (man ? (cb.makeup!=="Bare" ? `Grooming: ${cbv("makeup").replace(/makeup/,"grooming")}.` : "") : `Makeup: ${cbv("makeup")}.`),
     ex.length ? `${she} wears ${cbJoin(ex)}.` : "",
     (cb.custom||"").trim() ? `Also: ${(cb.custom||"").trim().replace(/[.\s]+$/,"")}.` : ""
   ].filter(Boolean).join(" ");
 }
 function cbRealLine(){
   const r = cbList("real");
-  return (r.length ? `Real skin, not retouched: ${cbJoin(r)}.` : "") + " Natural, unretouched look. No airbrushing, no plastic or overly smooth skin, no doll-like proportions.";
+  return (r.length ? `Real skin: ${cbJoin(r)}.` : "") + " Healthy skin with a natural glow, like a professional photo with light, invisible retouching. Not airbrushed, no plastic or waxy skin.";
 }
 function cbTwinLine(){
   return "Use my attached photo as the exact reference for this person. Keep the same face, facial structure, skin tone, undertone, hair texture and features exactly as in the photo. Do not beautify, slim, lighten, darken or change the age.";
@@ -1126,7 +1136,7 @@ function cbPrompt(){
   if(cb.mode==="twin") parts.push(cbTwinLine());
   if(cb.mode==="photo"){ const k=cbList("keep"); parts.push(k.length ? `Use my attached picture only as a starting point. Keep these exactly the same as in the picture: ${cbJoin(k)}. Change everything else to match the description below. The result must look like one real, original person.` : "Use my attached picture only for the pose and framing. Make a new, original person who matches the description below."); }
   const [shotType, framing] = cbv("shot").split("|");
-  parts.push(`Vertical ${shotType} of a ${cbv("gender")} in ${cb.gender==="Man"?"his":"her"} ${cbv("age")}. ${framing} ${she} is looking at the camera with a relaxed, natural expression.`);
+  parts.push(`Vertical ${shotType} of a ${cbv("gender")} in ${cb.gender==="Man"?"his":"her"} ${cbv("age")}. ${framing} ${she} is looking at the camera with a warm, confident expression and a slight, genuine smile, eyes bright and engaged. Good posture, shoulders relaxed.`);
   parts.push(cbLock().split(". ").slice(1).join(". "));
   parts.push(`${she} is wearing ${cbv("outfit")}. Background: ${cbv("bg")}. Light: ${cbv("light")}. ${cbv("cam")[0].toUpperCase()+cbv("cam").slice(1)}.`);
   parts.push(cbRealLine().trim());
@@ -1161,6 +1171,7 @@ const CB_FIX = [
   ["Hair changed","Keep the hair exactly like my reference photo: same texture, length, color and style. Do not straighten, lengthen or change the hairline."],
   ["Product looks wrong","The product changed. Use my attached product photo exactly: same label, logo, text, colors, shape and size. Do not redesign or relabel it."],
   ["Weird hands","Fix the hands: five natural fingers on each hand, relaxed and natural grip, correct size for the body. Keep everything else the same."],
+  ["Make more attractive","Keep the same person, face shape, skin tone and age, but make this a more flattering, attractive photo: soft light from one side with catchlights in the eyes, healthy even skin with a natural glow, neater grooming (crisp hairline and tidy facial hair for a man), a warm, confident expression with a slight smile and better posture. Same identity, just the best version of this person."],
   ["Too perfect, model-like","Make the person look like an everyday real person, not a model: natural proportions, real skin texture, a candid expression and casual posture. Keep the face and identity the same."]
 ];
 function cbChips(){
@@ -1171,7 +1182,7 @@ function cbChips(){
       const b = el("button","chip"); b.type="button"; const sw = cbSwatch(k, r[0]); if(sw) b.append(sw); b.append(document.createTextNode(r[0]));
       const on = single ? cb[k]===r[0] : cb[k].includes(r[0]);
       b.setAttribute("aria-pressed", on);
-      b.onclick = () => { if(k==="gender" && cb.gender!==r[0]){ cb.makeup = r[0]==="Man" ? "Bare" : "Soft glam"; } if(single) cb[k]=r[0]; else { cb[k] = cb[k].includes(r[0]) ? cb[k].filter(x=>x!==r[0]) : [...cb[k], r[0]]; } cbDraw(); };
+      b.onclick = () => { if(k==="gender" && cb.gender!==r[0]){ cb.makeup = r[0]==="Man" ? "Bare" : "Soft glam"; if(r[0]==="Man"){ cb.lips="Medium"; cb.brows="Straight"; cb.light="Side light"; } else { cb.lips="Full"; cb.brows="Natural full"; cb.light="Window daylight"; } } if(single) cb[k]=r[0]; else { cb[k] = cb[k].includes(r[0]) ? cb[k].filter(x=>x!==r[0]) : [...cb[k], r[0]]; } cbDraw(); };
       box.append(b);
     });
   });
@@ -1196,6 +1207,9 @@ function cbDrawScene(){
   $("cbCaption").textContent = "Caption idea: " + sc[2] + "  ·  Turn on the AI label.";
 }
 function cbDraw(){
+  const man = cb.gender==="Man";
+  if(man){ cb.hair = cb.mcut==="Bald" ? "Bald" : (cb.mcut==="Locs" ? "Locs" : "Short cut"); cb.hlen = cb.mcut==="Locs" ? "Shoulder" : "Very short"; cb.hstyle="Worn down"; }
+  document.querySelectorAll(".cb-w").forEach(e=>e.hidden=man); document.querySelectorAll(".cb-m").forEach(e=>e.hidden=!man);
   cbChips();
   $("cbGuide").hidden = cb.mode!=="twin"; $("cbPhotoGuide").hidden = cb.mode!=="photo";
   const p = cbPrompt(), pre = $("cbPrompt");
@@ -1247,9 +1261,9 @@ function cbIdDraw(){
   row("Shot",cb.shot); row("Who",(cb.gender==="Man"?"Man":"Woman")+", "+cb.age); row("Face",cb.face);
   row("Skin",cb.depth,cbSwatch("depth",cb.depth)); row("Undertone",cb.under,cbSwatch("under",cb.under));
   row("Eyes",cb.eyecolor+", "+cb.eyes.toLowerCase(),cbSwatch("eyecolor",cb.eyecolor));
-  row("Hair",cb.hair==="Bald"?"Bald":cb.hcolor+" "+cb.hair.toLowerCase()+", "+cb.hlen.toLowerCase(),cb.hair==="Bald"?null:cbSwatch("hcolor",cb.hcolor));
+  row("Hair",cb.gender==="Man"?(cb.mcut==="Bald"?"Bald":cb.hcolor+" "+cb.mcut.toLowerCase())+", "+cb.fhair.toLowerCase():cb.hair==="Bald"?"Bald":cb.hcolor+" "+cb.hair.toLowerCase()+", "+cb.hlen.toLowerCase(),cb.hair==="Bald"?null:cbSwatch("hcolor",cb.hcolor));
   row("Makeup",cb.makeup);
-  const n=cb.real.length; $("cbIdReal").style.width=(n/8*100)+"%"; $("cbIdRealN").textContent=n+"/8";
+  const n=cb.real.length, lv = n===0?["Too smooth",35]:n<=2?["Just right",100]:n===3?["A bit rough",65]:["Too rough",35]; $("cbIdReal").style.width=lv[1]+"%"; $("cbIdRealN").textContent=lv[0];
 }
 function cbProgInit(){
   const steps=[...document.querySelectorAll(".cb-steps > .panel")], dots=$("cbProgDots"); dots.innerHTML="";
@@ -1270,8 +1284,8 @@ function cbProgInit(){
 function cbHomeWho(){ if(cbWho) return cbWho; const n=($("cbName")&&$("cbName").value||"").trim(); return {name:n||"my character", lock:cbLock()}; }
 function cbHer(w){ return /^A man\b/.test(w.lock||"") ? ["he","his","him"] : ["she","her","her"]; }
 function cbSheetPrompt(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `Create a professional character reference sheet of this exact person, ${w.name}. One wide 16:9 image on a plain light gray background, laid out like this:\n- Top row: 4 full-body views of ${w.name} standing relaxed: front, left side, right side and back.\n- Bottom left: 2 face close-ups: straight on, and three-quarter.\n- Right side: a clean panel with the name "${w.name}" at the top and short labeled lines: age, face shape, skin tone and undertone, eyes, nose, lips, brows, hair, body type, makeup, and any jewelry or piercings (say which side).\n\nIt is the SAME person in every view. Keep the face, skin tone, hair, makeup, body shape and proportions exactly the same as my attached picture. Do not beautify or change ${his} age.\nSame plain fitted black top and pants and white sneakers in every view. Soft even studio light, calm expression with a slight smile. No props, no logos, no watermark. Spell every word clearly.\n\nWho ${w.name} is: ${w.lock}\n\nBefore you make it: if anything about ${his} look is unclear or doesn't match the picture (like hair color, or which side a piercing or mark is on), ask me up to 2 short questions first. If everything is clear, make it right away.`; }
-function cbStarter(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `For this whole chat, my attached picture is my character, ${w.name}. ${sheetRule(w.name)}\nIn every picture you make in this chat: keep ${his} face, skin tone, undertone, hair and body exactly the same as the attached picture. Do not beautify, slim or change ${his} age. Real, unretouched look with visible skin texture and natural light. Vertical 9:16. No text, logos or watermarks.\nWho ${w.name} is: ${w.lock}\nIf something I ask would change ${his} look and it's unclear (like hair color, or which side a mark is on), ask me one short question first.\nSay "Ready" and wait. Then I'll tell you scenes in a few words, and you make each picture.`; }
-function cbProject(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `You are my picture studio for my character, ${w.name}.\n\nWho ${w.name} is: ${w.lock}\n\nRules for every picture:\n1. Always use the picture or character sheet I attach (or the one in this project's files) as ${w.name}'s exact reference. Keep ${his} face, skin tone, undertone, hair and body shape exactly the same. Do not beautify, slim or change ${his} age.\n2. A character sheet shows the SAME person from several angles. Show only ONE ${w.name} in each picture.\n3. If I attach another picture (an outfit or a place), use it only for that: the outfit, or the setting. Never copy anyone else's face or body.\n4. Real, unretouched look: visible skin texture, natural light, no plastic skin, no beauty filters.\n5. Vertical 9:16 unless I ask for something else. No text, logos or watermarks.\n6. When I describe a scene in a few words, fill in the details yourself and make the picture right away, keeping ${w.name}'s look the same.\n7. If something I ask would change ${w.name}'s look and it's unclear (like hair color, or which side a piercing or mark is on), ask me one short question first. Otherwise don't ask, just make it.`; }
+function cbStarter(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `For this whole chat, my attached picture is my character, ${w.name}. ${sheetRule(w.name)}\nIn every picture you make in this chat: keep ${his} face, skin tone, undertone, hair and body exactly the same as the attached picture. Do not beautify, slim or change ${his} age. Natural photo look: real skin texture, healthy glow and flattering light. No plastic skin or heavy beauty filters. Vertical 9:16. No text, logos or watermarks.\nWho ${w.name} is: ${w.lock}\nIf something I ask would change ${his} look and it's unclear (like hair color, or which side a mark is on), ask me one short question first.\nSay "Ready" and wait. Then I'll tell you scenes in a few words, and you make each picture.`; }
+function cbProject(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `You are my picture studio for my character, ${w.name}.\n\nWho ${w.name} is: ${w.lock}\n\nRules for every picture:\n1. Always use the picture or character sheet I attach (or the one in this project's files) as ${w.name}'s exact reference. Keep ${his} face, skin tone, undertone, hair and body shape exactly the same. Do not beautify, slim or change ${his} age.\n2. A character sheet shows the SAME person from several angles. Show only ONE ${w.name} in each picture.\n3. If I attach another picture (an outfit or a place), use it only for that: the outfit, or the setting. Never copy anyone else's face or body.\n4. Natural photo look: real skin texture, healthy glow, flattering light. Keep ${w.name} as attractive as in the reference. No plastic skin or heavy beauty filters.\n5. Vertical 9:16 unless I ask for something else. No text, logos or watermarks.\n6. When I describe a scene in a few words, fill in the details yourself and make the picture right away, keeping ${w.name}'s look the same.\n7. If something I ask would change ${w.name}'s look and it's unclear (like hair color, or which side a piercing or mark is on), ask me one short question first. Otherwise don't ask, just make it.`; }
 const CB_ASK = "Describe the person in this picture so another AI could recreate them exactly. One paragraph, facts only: age range, face shape, skin tone and undertone, eye shape and color, nose, lips, brows, hair (color, texture, length and how it's worn), body type, makeup, and any jewelry they always wear. Don't describe the outfit or the background.";
 function cbDrawHome(){ const w=cbHomeWho(); document.querySelectorAll(".cbHomeName").forEach(e=>e.textContent=w.name); cbDrawUpd(); }
 let cbUpdId = null;
@@ -1283,7 +1297,7 @@ function initBuilder(){
   $("cbMove").onclick = e => copyText(cbMovePrompt(), e.currentTarget);
   $("cbProduct").onchange = cbDrawScene;
   $("cbReset").onclick = () => { cb = JSON.parse(JSON.stringify(CB_DEF)); cbWho=null; $("cbCustom").value=""; cbDraw(); cbDrawSaved(); };
-  $("cbSurprise").onclick = () => { ["shot","age","face","depth","under","eyes","eyecolor","nose","lips","brows","hair","hlen","hstyle","hcolor","body","makeup","outfit","bg","light"].forEach(k=>cb[k]=cbRand(CB[k])); if(cb.hair==="Bald") cb.hair="Wavy"; cb.mode="avatar"; cbDraw(); toast("New character rolled 🎲"); };
+  $("cbSurprise").onclick = () => { ["shot","age","face","depth","under","eyes","eyecolor","nose","lips","brows","hair","hlen","hstyle","hcolor","body","makeup","outfit","bg","light","mcut","fhair"].forEach(k=>cb[k]=cbRand(CB[k])); if(cb.gender==="Man") cb.makeup="Bare"; if(cb.hair==="Bald") cb.hair="Wavy"; cb.mode="avatar"; cbDraw(); toast("New character rolled 🎲"); };
   $("cbSave").onclick = async () => {
     const name = ($("cbName").value||"").trim(); if(!name){ toast("Give your character a name first"); return; }
     const btn = $("cbSave"); btn.disabled = true;
