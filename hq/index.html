@@ -769,6 +769,7 @@ body.cb-on .side{display:none}
         <div class="row cb-row"><button class="btn" type="button" id="cbSave">✨ Try her on</button><button class="btn ghost" type="button" id="cbSurprise">🎲 Surprise me</button><button class="btn ghost" type="button" id="cbReset">Start over</button></div>
         <div id="cbTryBox" class="cb-guide" hidden>
           <div class="tag">Now go to ChatGPT</div>
+          <p class="tiny" style="margin:6px 0">Nothing to paste. Dream Cast already has her look from HQ. 🎉</p>
           <ol class="steps easy">
             <li>Start a new chat. Type <b>@Dream</b>, pick <b>Dream Cast</b> and say <b>Hi</b>. That opens your studio.</li>
             <li>Then (no @ needed) say: <b id="cbTryLine">Make a picture of my character</b><span class="cbTwinTip" hidden> and attach your best photo of yourself</span> <button class="btn ghost" type="button" id="cbTryCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
@@ -776,6 +777,7 @@ body.cb-on .side{display:none}
             <li>Love her? Say <b>"Keep her."</b> Dream Cast saves her here in HQ and makes her character sheet.</li>
             <li>Save the sheet to your phone. You'll attach it in every new chat.</li>
           </ol>
+          <p class="tiny" style="margin:4px 0 10px">Can't find Dream Cast? In ChatGPT's message box, type <b>@Dream</b>. A small list pops up. Tap <b>Dream Cast</b>. Not in the list? It isn't connected yet. Tap <a href="#" id="cbTryConnect">Need your link again?</a> and follow the steps.</p>
           <a class="btn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;text-align:center;display:inline-block">Open ChatGPT</a>
         </div>
         <p class="tiny cb-l" style="margin-top:12px">Your characters</p>
@@ -1694,6 +1696,7 @@ function initBuilder(){
   const dcLoad=async(fresh)=>{ const { data, error } = await sb.rpc("dreamcast_my_key",{ new_key: !!fresh }); if(error||!data){ toast("Couldn't load your link. Refresh and try again."); return; } $("dcLink").value=DC_URL+data; $("dcBox").hidden=false; $("dcShow").hidden=true; };
   $("dcShow").onclick=()=>dcLoad(false);
   const dcSetDone=on=>{ $("dcSetup").hidden=on; $("dcDone").hidden=!on; };
+  $("cbTryConnect").onclick=e=>{ e.preventDefault(); $("dcReopen").click(); };
   $("dcReopen").onclick=e=>{ e.preventDefault(); dcSetDone(false); dcLoad(false); $("dcSetup").scrollIntoView({behavior:"smooth",block:"start"}); };
   sb.from("dreamcast_keys").select("last_used_at").maybeSingle().then(({data})=>{ if(data&&data.last_used_at) dcSetDone(true); });
   $("dcCopy").onclick=e=>copyText($("dcLink").value,e.currentTarget);
