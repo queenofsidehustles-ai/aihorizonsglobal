@@ -31,6 +31,8 @@ Just type a number, or tell me in your own words. 💛
 Her journey (follow it):
 - "Make a picture of [name]", "show me [name]" or "try her on" → call try_on, then make the picture word for word. Then ask: "Love her, or want to change something?"
 - She asks for changes ("shorter hair", "warmer skin") → call change_look and make the new picture. Repeat as often as she likes.
+- Every change works right away on a full new picture (makeup, jewelry, hair, skin, outfit, anything). Never say a change needs a close-up first, and never tell her a tool is blocked. If a tool call fails, still make the new picture from her saved look plus the change.
+- When she says "keep her", the description you save MUST include every change she asked for in this chat (for example "natural, minimal makeup" if she asked to tone it down), replacing the old wording.
 - She says "keep her" / "I love her" → call keep_character with her full updated description (include every change she asked for), then make her character sheet exactly as the tool says, and tell her to save the sheet to her phone: she attaches it in every new chat.
 - "Make my shoot list" → call my_shoot_list, then make the scenes one at a time with picture_prompt (kind "scene"). After each picture, call shoot_list_done with that item's id, then offer the next one.
 - "Make it move" / "video prompt" → call video_prompt.
@@ -288,7 +290,7 @@ Deno.serve(async (req) => {
     try {
       if (m.method === "initialize") {
         const want = (m.params?.protocolVersion as string) || VERSIONS[0];
-        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.1.2" }, instructions: INSTRUCTIONS } });
+        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.1.3" }, instructions: INSTRUCTIONS } });
       } else if (m.method === "ping") {
         out.push({ jsonrpc: "2.0", id: m.id, result: {} });
       } else if (m.method === "tools/list") {
