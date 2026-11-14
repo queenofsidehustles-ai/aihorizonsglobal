@@ -394,136 +394,19 @@ body.cb-on .side{display:none}
     <!-- CHARACTER BUILDER -->
     <section data-pane="builder" class="cb" hidden>
       <div class="studio-tabs" data-tabs></div>
-      <div class="hero"><div class="eyebrow">● Dream Cast · Step 1</div><h1>Make your character</h1><p>Connect Dream Cast once (A). Tap what she looks like (B to F). Tap <b>Try her on</b> (G), then meet her in ChatGPT, change anything you like, and say <b>"Keep her."</b> That's it.</p></div>
+      <div class="hero"><div class="eyebrow">● Dream Cast · Step 1</div><h1>Make your character</h1><p>First time? Connect Dream Cast in the yellow box (one time). Then name her and tap what she looks like (A to E). Tap <b>Try her on</b> (F), then meet her in ChatGPT, change anything you like, and say <b>"Keep her."</b> That's it.</p></div>
 
-      <p class="tiny cb-l" style="margin:4px 0 6px">New here? Watch how it works (1 minute). This is just a video. You'll type her real name in <a href="#" class="goName">part B</a>.</p>
-<div class="dcj" id="dcJourney" aria-label="Animated walkthrough: making your character with Dream Cast">
-  <div class="dcj-wrap"><span class="demo-badge">▶ VIDEO · JUST WATCH</span><div class="dcj-stage" id="dcjStage">
-    <div class="dcj-sc" data-s="hq">
-      <div class="dcj-hq">
-        <div class="dcj-t">✦ Dream Cast · Step 1</div>
-        <div class="dcj-row"><span class="dcj-l">Her name</span><span class="dcj-in" id="dcjName"></span></div>
-        <div class="dcj-row"><span class="dcj-l">Skin</span><span class="dcj-chip" id="dcjC1">Brown</span><span class="dcj-chip">Deep brown</span><span class="dcj-chip">Tan</span></div>
-        <div class="dcj-row"><span class="dcj-l">Hair</span><span class="dcj-chip">Straight</span><span class="dcj-chip" id="dcjC2">Curly</span><span class="dcj-chip">Locs</span></div>
-        <div class="dcj-row"><span class="dcj-l">Outfit</span><span class="dcj-chip" id="dcjC3">Blazer</span><span class="dcj-chip">Sundress</span></div>
-        <div class="dcj-try" id="dcjTry">✨ Try her on</div>
-        <div class="dcj-ok" id="dcjOk">Adjoa is ready to try on ✨</div>
-      </div>
-    </div>
-    <div class="dcj-sc" data-s="gpt">
-      <div class="dcj-gpt">
-        <div class="dcj-log" id="dcjLog"></div>
-        <div class="dcj-box"><span class="dcj-tag" id="dcjTag">Dream Cast</span><span id="dcjTyped"></span><i class="dcj-caret"></i></div>
-      </div>
-    </div>
-    <div class="dcj-cur" id="dcjCur" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 2l15 10-7 1.5L8.5 21z" fill="#fff" stroke="#041015" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-    <div class="dcj-ring" id="dcjRing"></div>
-  </div></div>
-  <div class="dcj-cap" id="dcjCap" aria-live="polite">Watch the whole thing in 1 minute</div>
-  <div class="dcj-bar"><button type="button" class="dcj-play" id="dcjPlay">▶ Play</button><div class="dcj-dots" id="dcjDots"></div></div>
-</div>
-<style>
-.dcj-wrap,.dcd-stage-wrap{cursor:pointer}
-.dcj-stage *,.dcd-stage *{pointer-events:none}
-.demo-badge{position:absolute;top:8px;right:8px;z-index:5;background:#ff5fa2;color:#fff;font:700 11px/1 system-ui;letter-spacing:.06em;padding:5px 8px;border-radius:999px;pointer-events:none}
-.dcj{margin:0 0 14px;border:1px solid rgba(47,243,224,.35);border-radius:16px;padding:10px;background:rgba(4,16,21,.6)}
-.dcj-wrap{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:10px;background:#0b1d24}
-.dcj-stage{position:absolute;left:0;top:0;width:640px;height:400px;transform-origin:0 0;font:13px/1.4 var(--body,system-ui);color:#e8f4f4}
-.dcj-sc{position:absolute;inset:0;opacity:0;transition:opacity .4s}.dcj-sc.on{opacity:1}
-.dcj-hq{position:absolute;inset:0;padding:24px 34px;background:radial-gradient(30rem 16rem at 50% 0,rgba(47,243,224,.18),transparent 70%),#06161c}
-.dcj-t{font:700 12px var(--mono,monospace);letter-spacing:.14em;color:#2ff3e0;margin-bottom:16px}
-.dcj-row{display:flex;align-items:center;gap:8px;margin:10px 0}
-.dcj-l{width:70px;color:#9cc3c6;font-size:12px}
-.dcj-in{min-width:180px;min-height:18px;border:1px solid #2a4a52;border-radius:8px;padding:6px 10px;background:#041015}
-.dcj-chip{border:1px solid rgba(47,243,224,.45);border-radius:999px;padding:5px 12px;color:#cfe}
-.dcj-chip.on{background:#2ff3e0;color:#041015;font-weight:800}
-.dcj-try{display:inline-block;margin-top:14px;background:#2ff3e0;color:#041015;font-weight:800;padding:10px 18px;border-radius:12px}
-.dcj-ok{display:none;margin-top:12px;color:#2ff3e0;font-weight:800}
-.dcj-gpt{position:absolute;inset:0;background:#fff;color:#111;padding:16px 60px 0}
-.dcj-log{height:300px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
-.dcj-me{align-self:flex-end;background:#f0f0f2;border-radius:16px;padding:7px 12px;max-width:70%}
-.dcj-bot{align-self:flex-start;max-width:85%;font-size:12.5px}
-.dcj-pic{width:92px;height:118px;border-radius:10px;margin-top:4px;background:linear-gradient(#e7d2bf,#c99a72);position:relative;overflow:hidden}
-.dcj-pic::before{content:"";position:absolute;left:28px;top:20px;width:36px;height:44px;border-radius:50%;background:#7a4a2e}
-.dcj-pic::after{content:"";position:absolute;left:14px;top:70px;width:64px;height:60px;border-radius:30px 30px 0 0;background:#2b3a55}
-.dcj-pic.hair::before{box-shadow:0 -8px 0 6px #1d120c}
-.dcj-pic.long::before{box-shadow:0 -10px 0 10px #1d120c}
-.dcj-sheet{width:230px;height:84px;border-radius:8px;margin-top:4px;background:repeating-linear-gradient(90deg,#d9d9dc 0 40px,#c4c4c8 40px 42px);position:relative}
-.dcj-sheet::after{content:"ADJOA";position:absolute;right:6px;top:6px;font:700 10px var(--mono,monospace);color:#333}
-.dcj-box{margin:10px 0 0;border:1px solid #ddd;border-radius:22px;padding:9px 14px;min-height:20px;display:flex;gap:6px;align-items:center}
-.dcj-tag{display:none;background:#eef;border-radius:8px;padding:1px 7px;font-size:11.5px;color:#334}
-.dcj-caret{display:inline-block;width:1px;height:14px;background:#111;animation:dcjb 1s steps(1) infinite}@keyframes dcjb{50%{opacity:0}}
-.dcj-cur{position:absolute;left:560px;top:340px;z-index:9;transition:left .7s cubic-bezier(.4,0,.2,1),top .7s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));pointer-events:none}
-.dcj-ring{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #ff6fd8;opacity:0;z-index:8;pointer-events:none}
-.dcj-ring.go{animation:dcjr .5s ease-out}@keyframes dcjr{from{opacity:1;transform:scale(.4)}to{opacity:0;transform:scale(1.6)}}
-.dcj-cap{min-height:44px;margin:10px 4px 6px;font-size:15px;font-weight:700;color:#f2d9a6}
-.dcj-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.dcj-play{background:#2ff3e0;color:#041015;border:0;border-radius:12px;padding:10px 16px;font-weight:800;font-size:15px;cursor:pointer}
-.dcj-dots{display:flex;gap:6px;flex-wrap:wrap}
-.dcj-dots button{border:1px solid rgba(47,243,224,.5);background:transparent;color:#9cc3c6;border-radius:999px;padding:5px 11px;font-weight:700;cursor:pointer}
-.dcj-dots button[aria-current="step"]{background:#2ff3e0;color:#041015}
-@media (prefers-reduced-motion:reduce){.dcj-cur,.dcj-sc{transition:none}.dcj-ring.go{animation:none}}
-</style>
-<script>
-(function(){
-  const $=id=>document.getElementById(id), stage=$("dcjStage"), wrap=stage.parentElement;
-  const fit=()=>{ stage.style.transform=`scale(${wrap.clientWidth/640})`; }; new ResizeObserver(fit).observe(wrap); fit();
-  const STEPS=[
-    "1. In HQ, give her a name and tap her looks. Then tap “Try her on.”",
-    "2. In ChatGPT, type @Dream, pick Dream Cast and say “Hi.” Then say “Make a picture of Adjoa.”",
-    "3. Not quite right? Just say what to change. Dream Cast makes a new one.",
-    "4. Love her? Say “Keep her.” She's saved in HQ and you get her character sheet.",
-    "5. Save the sheet to your phone. Now add scenes to your shoot list in Step 2! 🎬"];
-  let run=0, playing=false, cur=0;
-  const sleep=(ms,r)=>new Promise((ok,no)=>setTimeout(()=>r===run?ok():no("stop"),ms));
-  const scene=n=>document.querySelectorAll("#dcjStage .dcj-sc").forEach(s=>s.classList.toggle("on",s.dataset.s===n));
-  const rel=el=>{ const a=el.getBoundingClientRect(), b=stage.getBoundingClientRect(), k=640/b.width; return {x:(a.left-b.left+a.width/2)*k,y:(a.top-b.top+a.height/2)*k}; };
-  async function moveTo(el,r){ const p=rel(el), c=$("dcjCur"); c.style.left=(p.x-4)+"px"; c.style.top=(p.y-2)+"px"; await sleep(750,r); }
-  async function click(el,r){ await moveTo(el,r); const p=rel(el), g=$("dcjRing"); g.style.left=p.x+"px"; g.style.top=p.y+"px"; g.classList.remove("go"); void g.offsetWidth; g.classList.add("go"); await sleep(320,r); }
-  async function type(el,t,r,ms=55){ el.textContent=""; for(const ch of t){ el.textContent+=ch; await sleep(ms,r); } }
-  const log=$("dcjLog");
-  const me=t=>{ const d=document.createElement("div"); d.className="dcj-me"; d.textContent=(t==="Hi"?"Dream Cast  ":"")+t; log.append(d); };
-  const bot=(t,extra)=>{ const d=document.createElement("div"); d.className="dcj-bot"; d.innerHTML=t; if(extra){ const x=document.createElement("div"); x.className=extra; d.append(x);} log.append(d); };
-  async function say(t,r){ $("dcjTag").style.display=t==="Hi"?"inline-block":"none"; await type($("dcjTyped"),t,r); await sleep(300,r); me(t); $("dcjTyped").textContent=""; await sleep(500,r); }
-  function setup(n){
-    ["dcjC1","dcjC2","dcjC3"].forEach(id=>$(id).classList.remove("on")); $("dcjName").textContent=""; $("dcjOk").style.display="none";
-    log.innerHTML=""; $("dcjTyped").textContent=""; $("dcjTag").style.display="none";
-    if(n>=2){ me("Make a picture of Adjoa"); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); }
-    if(n>=3){ me("Longer hair please"); bot("Better? Want another change, or should I keep her?","dcj-pic long"); }
-    if(n>=4){ me("Keep her"); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); }
-  }
-  async function step(n,r){
-    cur=n; $("dcjCap").textContent=STEPS[n]; [...$("dcjDots").children].forEach((b,i)=>b.setAttribute("aria-current",i===n?"step":"false")); setup(n);
-    if(n===0){ scene("hq"); await sleep(400,r); await click($("dcjName"),r); await type($("dcjName"),"Adjoa",r,90);
-      for(const id of ["dcjC1","dcjC2","dcjC3"]){ await click($(id),r); $(id).classList.add("on"); }
-      await click($("dcjTry"),r); $("dcjOk").style.display="block"; await sleep(1500,r); }
-    if(n===1){ scene("gpt"); await sleep(400,r); await click($("dcjTyped").parentElement,r); await say("Hi",r); bot("🎬 Welcome to Dream Cast! What are we making today?"); await sleep(700,r); $("dcjTag").style.display="none"; await type($("dcjTyped"),"Make a picture of Adjoa",r); await sleep(300,r); { const d=document.createElement("div"); d.className="dcj-me"; d.textContent="Make a picture of Adjoa"; log.append(d); } $("dcjTyped").textContent=""; await sleep(500,r); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); await sleep(1800,r); }
-    if(n===2){ scene("gpt"); await sleep(400,r); await say("Longer hair please",r); bot("Better? Want another change, or should I keep her?","dcj-pic long"); await sleep(1800,r); }
-    if(n===3){ scene("gpt"); await sleep(400,r); await say("Keep her",r); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); await sleep(2000,r); }
-    if(n===4){ scene("gpt"); await sleep(300,r); bot("💛 Save this sheet to your phone. In every new chat, attach it and tell me the scene. 🎬"); const last=log.querySelector(".dcj-sheet"); if(last) await click(last,r); await sleep(2400,r); }
-  }
-  async function play(from){ const r=++run; playing=true; $("dcjPlay").textContent="❚❚ Pause";
-    try{ for(let i=from;i<STEPS.length;i++) await step(i,r); $("dcjPlay").textContent="↻ Replay"; playing=false; cur=0; }catch(e){} }
-  STEPS.forEach((_,i)=>{ const b=document.createElement("button"); b.type="button"; b.textContent=i+1; b.setAttribute("aria-label","Show step "+(i+1)); b.onclick=()=>play(i); $("dcjDots").append(b); });
-  $("dcjPlay").onclick=()=>{ if(playing){ run++; playing=false; $("dcjPlay").textContent="▶ Play"; } else play(cur||0); };
-  scene("hq");
-})();
-</script>
-
-      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF H</span></div>
-      <div class="cb-layout">
-        <div class="cb-steps">
-      <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">A</span><h2>Connect Dream Cast (one time)</h2></div>
-        <p class="muted" style="font-size:14px">Dream Cast is your picture studio inside ChatGPT. Connect it once, and you'll never copy a prompt again. You just tell it what you want. Already connected? Skip to B.</p>
-<div id="dcCard"><div class="tag">New · Dream Cast inside ChatGPT</div><h4>Use Dream Cast right inside ChatGPT</h4>
-          <p class="tiny" style="margin:0">Connect once, then type <b>@Dream Cast</b> in any ChatGPT chat. It already knows your saved characters, the scene library and the quick fixes. You just attach her sheet and say what you want.</p>
+      <div class="panel dc-setup" id="dcSetup" style="margin-bottom:16px">
+        <div class="dc-pre">Before you start</div>
+        <div class="cb-step"><span class="cb-n">✦</span><h2>Connect Dream Cast (one time, about 2 minutes)</h2></div>
+        <p class="muted" style="font-size:14px">Dream Cast is your picture studio inside ChatGPT. Connect it once, and you'll never copy a prompt again. You just tell it what you want. Do this once. After that, this box tucks itself away.</p>
+<div id="dcCard">
           <p class="tiny cb-l" style="margin-bottom:0">Watch first (1 minute):</p>
 <div class="dcd" id="dcDemo" aria-label="Animated walkthrough: how to connect Dream Cast in ChatGPT">
   <div class="dcd-stage-wrap"><span class="demo-badge">▶ VIDEO · JUST WATCH</span><div class="dcd-stage" id="dcdStage">
     <!-- scene 1: HQ -->
     <div class="dcd-scene" data-s="1">
-      <div class="dcd-hq"><div class="dcd-hq-t">✦ Dream Cast · part A</div>
+      <div class="dcd-hq"><div class="dcd-hq-t">✦ Dream Cast · Before you start</div>
         <div class="dcd-card"><b>Use Dream Cast right inside ChatGPT</b>
           <div class="dcd-btn" id="dcdShow">Show my Dream Cast link</div>
           <div class="dcd-link" id="dcdLink">https://…supabase.co/functions/v1/dreamcast/••••••</div>
@@ -686,8 +569,131 @@ body.cb-on .side{display:none}
         </div>
       </div>
 
+      <div class="panel dc-done" id="dcDone" hidden style="margin-bottom:16px"><b>✓ Dream Cast is connected.</b> <span class="tiny">In ChatGPT: @Dream, pick Dream Cast, say Hi.</span> <a href="#" id="dcReopen" class="tiny">Need your link again?</a></div>
+      <div class="cb-step" style="margin-top:6px"><span class="cb-n">♥</span><h2>Now let's make her</h2></div>
+      <p class="tiny cb-l" style="margin:4px 0 6px">Watch how it works first (1 minute). This is just a video. You'll type her real name in <a href="#" class="goName">part A</a> below.</p>
+<div class="dcj" id="dcJourney" aria-label="Animated walkthrough: making your character with Dream Cast">
+  <div class="dcj-wrap"><span class="demo-badge">▶ VIDEO · JUST WATCH</span><div class="dcj-stage" id="dcjStage">
+    <div class="dcj-sc" data-s="hq">
+      <div class="dcj-hq">
+        <div class="dcj-t">✦ Dream Cast · Step 1</div>
+        <div class="dcj-row"><span class="dcj-l">Her name</span><span class="dcj-in" id="dcjName"></span></div>
+        <div class="dcj-row"><span class="dcj-l">Skin</span><span class="dcj-chip" id="dcjC1">Brown</span><span class="dcj-chip">Deep brown</span><span class="dcj-chip">Tan</span></div>
+        <div class="dcj-row"><span class="dcj-l">Hair</span><span class="dcj-chip">Straight</span><span class="dcj-chip" id="dcjC2">Curly</span><span class="dcj-chip">Locs</span></div>
+        <div class="dcj-row"><span class="dcj-l">Outfit</span><span class="dcj-chip" id="dcjC3">Blazer</span><span class="dcj-chip">Sundress</span></div>
+        <div class="dcj-try" id="dcjTry">✨ Try her on</div>
+        <div class="dcj-ok" id="dcjOk">Adjoa is ready to try on ✨</div>
+      </div>
+    </div>
+    <div class="dcj-sc" data-s="gpt">
+      <div class="dcj-gpt">
+        <div class="dcj-log" id="dcjLog"></div>
+        <div class="dcj-box"><span class="dcj-tag" id="dcjTag">Dream Cast</span><span id="dcjTyped"></span><i class="dcj-caret"></i></div>
+      </div>
+    </div>
+    <div class="dcj-cur" id="dcjCur" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 2l15 10-7 1.5L8.5 21z" fill="#fff" stroke="#041015" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+    <div class="dcj-ring" id="dcjRing"></div>
+  </div></div>
+  <div class="dcj-cap" id="dcjCap" aria-live="polite">Watch the whole thing in 1 minute</div>
+  <div class="dcj-bar"><button type="button" class="dcj-play" id="dcjPlay">▶ Play</button><div class="dcj-dots" id="dcjDots"></div></div>
+</div>
+<style>
+.dc-pre{display:inline-block;font:700 11px/1 var(--mono,monospace);letter-spacing:.12em;text-transform:uppercase;color:#041015;background:#ffd34d;padding:5px 9px;border-radius:999px;margin-bottom:8px}
+.dc-setup{border:2px solid #ffd34d!important}
+.dc-done{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 16px!important}
+.dc-done[hidden]{display:none}
+.dcj-wrap,.dcd-stage-wrap{cursor:pointer}
+.dcj-stage *,.dcd-stage *{pointer-events:none}
+.demo-badge{position:absolute;top:8px;right:8px;z-index:5;background:#ff5fa2;color:#fff;font:700 11px/1 system-ui;letter-spacing:.06em;padding:5px 8px;border-radius:999px;pointer-events:none}
+.dcj{margin:0 0 14px;border:1px solid rgba(47,243,224,.35);border-radius:16px;padding:10px;background:rgba(4,16,21,.6)}
+.dcj-wrap{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:10px;background:#0b1d24}
+.dcj-stage{position:absolute;left:0;top:0;width:640px;height:400px;transform-origin:0 0;font:13px/1.4 var(--body,system-ui);color:#e8f4f4}
+.dcj-sc{position:absolute;inset:0;opacity:0;transition:opacity .4s}.dcj-sc.on{opacity:1}
+.dcj-hq{position:absolute;inset:0;padding:24px 34px;background:radial-gradient(30rem 16rem at 50% 0,rgba(47,243,224,.18),transparent 70%),#06161c}
+.dcj-t{font:700 12px var(--mono,monospace);letter-spacing:.14em;color:#2ff3e0;margin-bottom:16px}
+.dcj-row{display:flex;align-items:center;gap:8px;margin:10px 0}
+.dcj-l{width:70px;color:#9cc3c6;font-size:12px}
+.dcj-in{min-width:180px;min-height:18px;border:1px solid #2a4a52;border-radius:8px;padding:6px 10px;background:#041015}
+.dcj-chip{border:1px solid rgba(47,243,224,.45);border-radius:999px;padding:5px 12px;color:#cfe}
+.dcj-chip.on{background:#2ff3e0;color:#041015;font-weight:800}
+.dcj-try{display:inline-block;margin-top:14px;background:#2ff3e0;color:#041015;font-weight:800;padding:10px 18px;border-radius:12px}
+.dcj-ok{display:none;margin-top:12px;color:#2ff3e0;font-weight:800}
+.dcj-gpt{position:absolute;inset:0;background:#fff;color:#111;padding:16px 60px 0}
+.dcj-log{height:300px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.dcj-me{align-self:flex-end;background:#f0f0f2;border-radius:16px;padding:7px 12px;max-width:70%}
+.dcj-bot{align-self:flex-start;max-width:85%;font-size:12.5px}
+.dcj-pic{width:92px;height:118px;border-radius:10px;margin-top:4px;background:linear-gradient(#e7d2bf,#c99a72);position:relative;overflow:hidden}
+.dcj-pic::before{content:"";position:absolute;left:28px;top:20px;width:36px;height:44px;border-radius:50%;background:#7a4a2e}
+.dcj-pic::after{content:"";position:absolute;left:14px;top:70px;width:64px;height:60px;border-radius:30px 30px 0 0;background:#2b3a55}
+.dcj-pic.hair::before{box-shadow:0 -8px 0 6px #1d120c}
+.dcj-pic.long::before{box-shadow:0 -10px 0 10px #1d120c}
+.dcj-sheet{width:230px;height:84px;border-radius:8px;margin-top:4px;background:repeating-linear-gradient(90deg,#d9d9dc 0 40px,#c4c4c8 40px 42px);position:relative}
+.dcj-sheet::after{content:"ADJOA";position:absolute;right:6px;top:6px;font:700 10px var(--mono,monospace);color:#333}
+.dcj-box{margin:10px 0 0;border:1px solid #ddd;border-radius:22px;padding:9px 14px;min-height:20px;display:flex;gap:6px;align-items:center}
+.dcj-tag{display:none;background:#eef;border-radius:8px;padding:1px 7px;font-size:11.5px;color:#334}
+.dcj-caret{display:inline-block;width:1px;height:14px;background:#111;animation:dcjb 1s steps(1) infinite}@keyframes dcjb{50%{opacity:0}}
+.dcj-cur{position:absolute;left:560px;top:340px;z-index:9;transition:left .7s cubic-bezier(.4,0,.2,1),top .7s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));pointer-events:none}
+.dcj-ring{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #ff6fd8;opacity:0;z-index:8;pointer-events:none}
+.dcj-ring.go{animation:dcjr .5s ease-out}@keyframes dcjr{from{opacity:1;transform:scale(.4)}to{opacity:0;transform:scale(1.6)}}
+.dcj-cap{min-height:44px;margin:10px 4px 6px;font-size:15px;font-weight:700;color:#f2d9a6}
+.dcj-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.dcj-play{background:#2ff3e0;color:#041015;border:0;border-radius:12px;padding:10px 16px;font-weight:800;font-size:15px;cursor:pointer}
+.dcj-dots{display:flex;gap:6px;flex-wrap:wrap}
+.dcj-dots button{border:1px solid rgba(47,243,224,.5);background:transparent;color:#9cc3c6;border-radius:999px;padding:5px 11px;font-weight:700;cursor:pointer}
+.dcj-dots button[aria-current="step"]{background:#2ff3e0;color:#041015}
+@media (prefers-reduced-motion:reduce){.dcj-cur,.dcj-sc{transition:none}.dcj-ring.go{animation:none}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id), stage=$("dcjStage"), wrap=stage.parentElement;
+  const fit=()=>{ stage.style.transform=`scale(${wrap.clientWidth/640})`; }; new ResizeObserver(fit).observe(wrap); fit();
+  const STEPS=[
+    "1. In HQ, give her a name and tap her looks. Then tap “Try her on.”",
+    "2. In ChatGPT, type @Dream, pick Dream Cast and say “Hi.” Then say “Make a picture of Adjoa.”",
+    "3. Not quite right? Just say what to change. Dream Cast makes a new one.",
+    "4. Love her? Say “Keep her.” She's saved in HQ and you get her character sheet.",
+    "5. Save the sheet to your phone. Now add scenes to your shoot list in Step 2! 🎬"];
+  let run=0, playing=false, cur=0;
+  const sleep=(ms,r)=>new Promise((ok,no)=>setTimeout(()=>r===run?ok():no("stop"),ms));
+  const scene=n=>document.querySelectorAll("#dcjStage .dcj-sc").forEach(s=>s.classList.toggle("on",s.dataset.s===n));
+  const rel=el=>{ const a=el.getBoundingClientRect(), b=stage.getBoundingClientRect(), k=640/b.width; return {x:(a.left-b.left+a.width/2)*k,y:(a.top-b.top+a.height/2)*k}; };
+  async function moveTo(el,r){ const p=rel(el), c=$("dcjCur"); c.style.left=(p.x-4)+"px"; c.style.top=(p.y-2)+"px"; await sleep(750,r); }
+  async function click(el,r){ await moveTo(el,r); const p=rel(el), g=$("dcjRing"); g.style.left=p.x+"px"; g.style.top=p.y+"px"; g.classList.remove("go"); void g.offsetWidth; g.classList.add("go"); await sleep(320,r); }
+  async function type(el,t,r,ms=55){ el.textContent=""; for(const ch of t){ el.textContent+=ch; await sleep(ms,r); } }
+  const log=$("dcjLog");
+  const me=t=>{ const d=document.createElement("div"); d.className="dcj-me"; d.textContent=(t==="Hi"?"Dream Cast  ":"")+t; log.append(d); };
+  const bot=(t,extra)=>{ const d=document.createElement("div"); d.className="dcj-bot"; d.innerHTML=t; if(extra){ const x=document.createElement("div"); x.className=extra; d.append(x);} log.append(d); };
+  async function say(t,r){ $("dcjTag").style.display=t==="Hi"?"inline-block":"none"; await type($("dcjTyped"),t,r); await sleep(300,r); me(t); $("dcjTyped").textContent=""; await sleep(500,r); }
+  function setup(n){
+    ["dcjC1","dcjC2","dcjC3"].forEach(id=>$(id).classList.remove("on")); $("dcjName").textContent=""; $("dcjOk").style.display="none";
+    log.innerHTML=""; $("dcjTyped").textContent=""; $("dcjTag").style.display="none";
+    if(n>=2){ me("Make a picture of Adjoa"); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); }
+    if(n>=3){ me("Longer hair please"); bot("Better? Want another change, or should I keep her?","dcj-pic long"); }
+    if(n>=4){ me("Keep her"); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); }
+  }
+  async function step(n,r){
+    cur=n; $("dcjCap").textContent=STEPS[n]; [...$("dcjDots").children].forEach((b,i)=>b.setAttribute("aria-current",i===n?"step":"false")); setup(n);
+    if(n===0){ scene("hq"); await sleep(400,r); await click($("dcjName"),r); await type($("dcjName"),"Adjoa",r,90);
+      for(const id of ["dcjC1","dcjC2","dcjC3"]){ await click($(id),r); $(id).classList.add("on"); }
+      await click($("dcjTry"),r); $("dcjOk").style.display="block"; await sleep(1500,r); }
+    if(n===1){ scene("gpt"); await sleep(400,r); await click($("dcjTyped").parentElement,r); await say("Hi",r); bot("🎬 Welcome to Dream Cast! What are we making today?"); await sleep(700,r); $("dcjTag").style.display="none"; await type($("dcjTyped"),"Make a picture of Adjoa",r); await sleep(300,r); { const d=document.createElement("div"); d.className="dcj-me"; d.textContent="Make a picture of Adjoa"; log.append(d); } $("dcjTyped").textContent=""; await sleep(500,r); bot("Here's Adjoa! ✨ Love her, or want to change something?","dcj-pic"); await sleep(1800,r); }
+    if(n===2){ scene("gpt"); await sleep(400,r); await say("Longer hair please",r); bot("Better? Want another change, or should I keep her?","dcj-pic long"); await sleep(1800,r); }
+    if(n===3){ scene("gpt"); await sleep(400,r); await say("Keep her",r); bot("Saved ✓ Adjoa is kept in HQ. Here's her sheet:","dcj-sheet"); await sleep(2000,r); }
+    if(n===4){ scene("gpt"); await sleep(300,r); bot("💛 Save this sheet to your phone. In every new chat, attach it and tell me the scene. 🎬"); const last=log.querySelector(".dcj-sheet"); if(last) await click(last,r); await sleep(2400,r); }
+  }
+  async function play(from){ const r=++run; playing=true; $("dcjPlay").textContent="❚❚ Pause";
+    try{ for(let i=from;i<STEPS.length;i++) await step(i,r); $("dcjPlay").textContent="↻ Replay"; playing=false; cur=0; }catch(e){} }
+  STEPS.forEach((_,i)=>{ const b=document.createElement("button"); b.type="button"; b.textContent=i+1; b.setAttribute("aria-label","Show step "+(i+1)); b.onclick=()=>play(i); $("dcjDots").append(b); });
+  $("dcjPlay").onclick=()=>{ if(playing){ run++; playing=false; $("dcjPlay").textContent="▶ Play"; } else play(cur||0); };
+  scene("hq");
+})();
+</script>
+
+      <div class="cb-prog" id="cbProg" role="navigation" aria-label="Character page parts"><div class="cb-prog-bar"><i id="cbProgFill"></i></div><div class="cb-prog-dots" id="cbProgDots"></div><span class="cb-prog-t" id="cbProgT">PART A OF G</span></div>
+      <div class="cb-layout">
+        <div class="cb-steps">
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">B</span><h2>Who are we making?</h2></div>
+        <div class="cb-step"><span class="cb-n">A</span><h2>Who are we making?</h2></div>
         <label class="tiny cb-l" for="cbName">Her name (you can change it later)</label>
         <input type="text" id="cbName" maxlength="40" placeholder="Like: Adjoa, Megan or Grace" style="width:100%;margin-bottom:6px">
         <p class="tiny cb-l">Who is she?</p><div class="chips" data-cb="mode" data-single></div>
@@ -714,7 +720,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">C</span><h2>The basics</h2></div>
+        <div class="cb-step"><span class="cb-n">B</span><h2>The basics</h2></div>
         <p class="tiny cb-l">Shot type</p><div class="chips" data-cb="shot" data-single></div>
         <p class="tiny cb-l">Gender</p><div class="chips" data-cb="gender" data-single></div>
         <p class="tiny cb-l">Age range</p><div class="chips" data-cb="age" data-single></div>
@@ -722,7 +728,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">D</span><h2>Face and skin</h2></div>
+        <div class="cb-step"><span class="cb-n">C</span><h2>Face and skin</h2></div>
         <p class="tiny cb-l">Face shape</p><div class="chips" data-cb="face" data-single></div>
         <p class="tiny cb-l">Skin tone (how light or deep)</p><div class="chips" data-cb="depth" data-single></div>
         <p class="tiny cb-l">Undertone (look at the veins on your wrist: blue = cool, green = warm, both = neutral)</p><div class="chips" data-cb="under" data-single></div>
@@ -734,7 +740,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">E</span><h2>Hair, body and style</h2></div>
+        <div class="cb-step"><span class="cb-n">D</span><h2>Hair, body and style</h2></div>
         <div class="cb-w"><p class="tiny cb-l">Hair texture</p><div class="chips" data-cb="hair" data-single></div>
         <p class="tiny cb-l">Hair length</p><div class="chips" data-cb="hlen" data-single></div>
         <p class="tiny cb-l">Worn as</p><div class="chips" data-cb="hstyle" data-single></div></div>
@@ -749,7 +755,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">F</span><h2>Make it look real</h2></div>
+        <div class="cb-step"><span class="cb-n">E</span><h2>Make it look real</h2></div>
         <p class="tiny cb-l">Real-skin details (1 or 2 is plenty: too many make the face look rough)</p><div class="chips" data-cb="real"></div>
         <p class="tiny cb-l">Outfit</p><div class="chips" data-cb="outfit" data-single></div>
         <p class="tiny cb-l">Background</p><div class="chips" data-cb="bg" data-single></div>
@@ -758,7 +764,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel cb-out" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">G</span><h2>Try her on</h2></div>
+        <div class="cb-step"><span class="cb-n">F</span><h2>Try her on</h2></div>
         <p class="muted" style="font-size:14px">Happy with your taps? Tap <b>Try her on</b>. Nothing is final yet: you'll see her in ChatGPT and change anything you want there.</p>
         <div class="row cb-row"><button class="btn" type="button" id="cbSave">✨ Try her on</button><button class="btn ghost" type="button" id="cbSurprise">🎲 Surprise me</button><button class="btn ghost" type="button" id="cbReset">Start over</button></div>
         <div id="cbTryBox" class="cb-guide" hidden>
@@ -778,7 +784,7 @@ body.cb-on .side{display:none}
       </div>
 
       <div class="panel" style="margin-bottom:12px">
-        <div class="cb-step"><span class="cb-n">H</span><h2>🎉 She's ready!</h2></div>
+        <div class="cb-step"><span class="cb-n">G</span><h2>🎉 She's ready!</h2></div>
         <p class="muted" style="font-size:14px">Once you said <b>"Keep her"</b> and saved her sheet, your star is done. Time to put her to work.</p>
         <a class="btn" href="#scenes" style="text-decoration:none;text-align:center;display:inline-block">Next: pick scenes for your shoot list →</a>
         <p class="tiny" style="margin-top:10px">Want to change her for good later (new haircut, new look)? In ChatGPT, tell Dream Cast: <i>"Change her look and keep it."</i> HQ updates by itself.</p>
@@ -824,7 +830,7 @@ body.cb-on .side{display:none}
       <div class="panel" style="margin-bottom:12px">
         <div class="cb-step"><span class="cb-n">4</span><h2>Changed her look in ChatGPT? Update her here</h2></div>
         <p class="muted" style="font-size:14px">Made her face rounder or her hair longer while chatting? Bring the new look back here so every HQ prompt matches. Do this once, when you love her new look.</p>
-        <ol class="steps easy"><li>Tap <b>Copy the question</b>, paste it in your ChatGPT chat with her newest picture, and send.</li><li>Copy ChatGPT's answer and paste it in the box below.</li><li>Tap <b>Save her new look</b>. Then make a new character sheet (part H) and update your project instructions (part I).</li></ol>
+        <ol class="steps easy"><li>Tap <b>Copy the question</b>, paste it in your ChatGPT chat with her newest picture, and send.</li><li>Copy ChatGPT's answer and paste it in the box below.</li><li>Tap <b>Save her new look</b>. Then make a new character sheet (copy-paste step 2) and update your project instructions (step 3).</li></ol>
         <div class="row cb-row"><button class="btn ghost" type="button" id="cbAskLook" data-label="Copy the question">Copy the question</button></div>
         <p class="tiny cb-l">Updating</p><div class="chips" id="cbUpdWho"></div>
         <textarea id="cbNewLook" rows="4" maxlength="1500" placeholder="Paste ChatGPT's description of her here" style="width:100%;margin-top:6px"></textarea>
@@ -834,7 +840,7 @@ body.cb-on .side{display:none}
 
       <div class="panel" style="margin-bottom:12px">
         <div class="cb-step"><span class="cb-n">5</span><h2>Put your character in a scene</h2></div>
-        <ol class="steps" style="margin-bottom:6px"><li>Tap Try her on in part G above, then pick her here. (Using her Project or starter message from copy-paste step 3? You can also just pick scenes in <a href="#scenes">2 Make posts</a>.)</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
+        <ol class="steps" style="margin-bottom:6px"><li>Tap Try her on in part F above, then pick her here. (Using her Project or starter message from copy-paste step 3? You can also just pick scenes in <a href="#scenes">2 Make posts</a>.)</li><li>Download the picture ChatGPT made of her. That's her master photo.</li><li>Copy the scene prompt. In the same ChatGPT chat, attach her picture <b>first</b> (and your product photo <b>second</b>, if you're using one), paste and send.</li></ol>
         <p class="tiny cb-l">Character</p><div class="chips" id="cbSceneWho"></div>
         <p class="tiny cb-l">Scene (each one comes with a caption idea)</p><div class="chips" data-cb="scene" data-single></div>
         <label class="cb-check"><input type="checkbox" id="cbProduct"> I'm adding a product photo too (keeps the label, colors and shape exactly the same)</label>
@@ -1655,7 +1661,7 @@ function cbProject(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `You are my
 const CB_ASK = "Describe the person in this picture so another AI could recreate them exactly. One paragraph, facts only: age range, face shape, skin tone and undertone, eye shape and color, nose, lips, brows, hair (color, texture, length and how it's worn), body type, makeup, and any jewelry they always wear. Don't describe the outfit or the background.";
 function cbDrawHome(){ const w=cbHomeWho(); document.querySelectorAll(".cbHomeName").forEach(e=>e.textContent=w.name); cbDrawUpd(); }
 let cbUpdId = null;
-function cbDrawUpd(){ const box=$("cbUpdWho"); if(!box) return; box.innerHTML=""; if(!cbChars.length){ box.append(el("span","tiny","Tap Try her on in part G first.")); return; } if(!cbChars.some(c=>c.id===cbUpdId)) cbUpdId = (cbWho&&cbWho.id) || cbChars[cbChars.length-1].id; cbChars.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed", c.id===cbUpdId); b.onclick=()=>{ cbUpdId=c.id; cbDrawUpd(); }; box.append(b); }); }
+function cbDrawUpd(){ const box=$("cbUpdWho"); if(!box) return; box.innerHTML=""; if(!cbChars.length){ box.append(el("span","tiny","Tap Try her on in part F first.")); return; } if(!cbChars.some(c=>c.id===cbUpdId)) cbUpdId = (cbWho&&cbWho.id) || cbChars[cbChars.length-1].id; cbChars.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed", c.id===cbUpdId); b.onclick=()=>{ cbUpdId=c.id; cbDrawUpd(); }; box.append(b); }); }
 function initBuilder(){
   cbDrawSaved(); cbDraw(); cbFetch(); cbProgInit();
   $("cbCopy").onclick = e => copyText(cbPrompt(), e.currentTarget);
@@ -1665,7 +1671,7 @@ function initBuilder(){
   $("cbReset").onclick = () => { cb = JSON.parse(JSON.stringify(CB_DEF)); cbWho=null; $("cbCustom").value=""; cbDraw(); cbDrawSaved(); };
   $("cbSurprise").onclick = () => { ["shot","age","face","depth","under","eyes","eyecolor","nose","lips","brows","hair","hlen","hstyle","hcolor","body","makeup","outfit","bg","light","mcut","fhair"].forEach(k=>cb[k]=cbRand(CB[k])); if(cb.gender==="Man") cb.makeup="Bare"; if(cb.hair==="Bald") cb.hair="Wavy"; cb.mode="avatar"; cbDraw(); toast("New character rolled 🎲"); };
   $("cbSave").onclick = async () => {
-    const name = ($("cbName").value||"").trim(); if(!name){ toast("Give her a name first (part B)"); $("cbName").focus(); return; }
+    const name = ($("cbName").value||"").trim(); if(!name){ toast("Give her a name first (part A)"); $("cbName").focus(); return; }
     const btn = $("cbSave"); btn.disabled = true;
     const lock = cbLock(), start_prompt = cbPrompt().slice(0,8000), ex = cbChars.find(c=>c.name.toLowerCase()===name.toLowerCase());
     if(ex && ex.status!=="draft" && !confirm(name+" is already kept. Replace her look with these new taps?")){ btn.disabled=false; return; }
@@ -1687,11 +1693,14 @@ function initBuilder(){
   const DC_URL="https://npomhoaxigydsxgqziwd.supabase.co/functions/v1/dreamcast/";
   const dcLoad=async(fresh)=>{ const { data, error } = await sb.rpc("dreamcast_my_key",{ new_key: !!fresh }); if(error||!data){ toast("Couldn't load your link. Refresh and try again."); return; } $("dcLink").value=DC_URL+data; $("dcBox").hidden=false; $("dcShow").hidden=true; };
   $("dcShow").onclick=()=>dcLoad(false);
+  const dcSetDone=on=>{ $("dcSetup").hidden=on; $("dcDone").hidden=!on; };
+  $("dcReopen").onclick=e=>{ e.preventDefault(); dcSetDone(false); dcLoad(false); $("dcSetup").scrollIntoView({behavior:"smooth",block:"start"}); };
+  sb.from("dreamcast_keys").select("last_used_at").maybeSingle().then(({data})=>{ if(data&&data.last_used_at) dcSetDone(true); });
   $("dcCopy").onclick=e=>copyText($("dcLink").value,e.currentTarget);
   $("dcNew").onclick=async e=>{ e.preventDefault(); if(confirm("Make a new link? Your old link will stop working in ChatGPT, and you'll paste the new one there.")){ await dcLoad(true); toast("New link ready. Paste it in ChatGPT."); } };
   $("cbSaveLook").onclick = async () => {
     const txt = ($("cbNewLook").value||"").trim().replace(/\s+/g," "); const c = cbChars.find(x=>x.id===cbUpdId);
-    if(!c){ $("cbLookMsg").textContent="Tap Try her on in part G first."; return; }
+    if(!c){ $("cbLookMsg").textContent="Tap Try her on in part F first."; return; }
     if(txt.length<40){ $("cbLookMsg").textContent="Paste ChatGPT's full description first."; return; }
     const btn=$("cbSaveLook"); btn.disabled=true;
     const { error } = await sb.from("characters").update({lock: txt}).eq("id", c.id);
