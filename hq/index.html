@@ -285,6 +285,23 @@ body.cb-on .side{display:none}
         <details style="margin-top:8px"><summary class="tiny"><b>Picture came out wrong? Quick fixes</b></summary><p class="tiny" style="margin-top:6px">Paste the fix in the same chat, right under the picture. Attach her picture again if the face changed. Want her look changed for good? Use <a href="#builder">Step 1, part J</a>.</p><div class="grid" id="scFixes"></div></details>
         <details style="margin-top:8px"><summary class="tiny">Tip: give her a home in ChatGPT</summary><p class="tiny" style="margin-top:6px">Set up her starter message or ChatGPT Project once in <a href="#builder">Step 1, part I</a>. Then making a new picture is just: new chat, attach her sheet, say the scene.</p></details>
       </div>
+      <div class="panel" style="margin-bottom:12px">
+        <h2>Quick tools</h2>
+        <div class="grid">
+          <div class="card"><div class="tag">Outfit swap</div><h4>Change her outfit</h4>
+            <p class="tiny" style="margin:0">Love an outfit you saw? Screenshot it. Your character wears it, same face, same body.</p>
+            <p class="tiny cb-l" style="margin-bottom:4px">What do you want back?</p><div class="chips" id="osMode"></div>
+            <button class="btn" type="button" id="osCopy" data-label="Copy outfit swap prompt" style="margin-top:8px">Copy outfit swap prompt</button>
+            <ol class="steps easy"><li>In ChatGPT tap <b>+</b>. Add her sheet <b>first</b>, the outfit picture <b>second</b>.</li><li>Paste and send.</li></ol></div>
+          <div class="card"><div class="tag">Cast</div><h4>Two characters in one picture</h4>
+            <p class="tiny" style="margin:0">For mini-dramas and stories. Your character (picked above) plus one more.</p>
+            <p class="tiny cb-l" style="margin-bottom:4px">Second character</p><div class="chips" id="duoWho"></div>
+            <label class="tiny cb-l" for="duoWhat">What are they doing?</label>
+            <input type="text" id="duoWhat" maxlength="200" placeholder="Like: arguing in the bakery kitchen" style="width:100%">
+            <button class="btn" type="button" id="duoCopy" data-label="Copy two-character prompt" style="margin-top:8px">Copy two-character prompt</button>
+            <ol class="steps easy"><li>In ChatGPT tap <b>+</b>. Add the first character's sheet <b>first</b>, the second's <b>second</b>.</li><li>Paste and send.</li></ol></div>
+        </div>
+      </div>
       <div class="panel" id="sceneToday" style="margin-bottom:12px" hidden></div>
             <input type="search" id="sceneSearch" placeholder="Search 300 scenes (try kitchen, unboxing, romance)" aria-label="Search scenes" style="width:100%;margin-bottom:10px">
       <div class="chips" id="sceneChips"></div>
@@ -329,6 +346,22 @@ body.cb-on .side{display:none}
           </ol>
           <p class="tiny">Filming for you needs the free "Claude in Chrome" add-on on a computer. Full steps: <a href="#kit">Mini Story Quick Start</a> in your kit.</p></div>
       </div>
+      <div class="panel" style="margin-top:12px">
+        <div class="tag">Plan it first · storyboard</div><h2 style="margin-top:6px">Plan a short video, scene by scene</h2>
+        <p class="tiny" style="margin:0">Your AI plans every scene for you: what we see, the camera, whose eyes we see it through, and what happens. Then it makes one storyboard picture and a picture prompt and video prompt for each scene.</p>
+        <label class="tiny cb-l" for="sbIdea">What's the video about?</label>
+        <div class="mv-in"><input type="text" id="sbIdea" maxlength="240" placeholder="Like: she shows how she sets up her morning smoothie"><button class="mv-mic" type="button" data-for="sbIdea" aria-label="Speak instead of typing">🎤</button></div>
+        <p class="tiny cb-l" style="margin-bottom:4px">Kind of video</p><div class="chips" id="sbStyle"></div>
+        <p class="tiny cb-l" style="margin-bottom:4px">How long?</p><div class="chips" id="sbLen"></div>
+        <button class="btn" type="button" id="sbCopy" data-label="Copy my storyboard message" style="margin-top:10px">Copy my storyboard message</button>
+        <p class="tiny" id="sbNext" aria-live="polite" style="margin:8px 0 0"></p>
+        <ol class="steps easy">
+          <li>Open ChatGPT (her Project, if she has one). Attach her character sheet. Paste and send.</li>
+          <li>It writes the plan and makes one storyboard picture. Like it? Type <i>"Make the scene 1 picture."</i></li>
+          <li>Take that picture and scene 1's video prompt to your video app (see <b>Turn one picture into a video</b> above). Repeat for each scene.</li>
+          <li>Most apps make 8-second clips. Trim each one to its best few seconds and put them together in CapCut.</li>
+        </ol>
+      </div>
       <div class="panel" style="margin-top:12px"><h2>Before you post</h2><ol class="steps easy"><li>Turn on the <b>AI label</b> in the app.</li><li>Add a sound from the app's own music, kept low.</li><li>Use your own made-up characters. Never a real person's face (except yours) or a celebrity.</li></ol></div>
     </section>
 
@@ -353,6 +386,15 @@ body.cb-on .side{display:none}
             <li>Take 3: straight on, a little to the left, a little to the right.</li>
             <li>Then tap the choices below that match <b>your real features</b>. They help the app keep your face, skin tone and hair the same.</li>
           </ol>
+        </div>
+        <div id="cbPhotoGuide" class="cb-guide" hidden>
+          <div class="tag">📷 Start from a picture</div>
+          <ol class="steps">
+            <li>Use <b>your own photo</b> or <b>a picture AI made</b>. Never a real person's photo from Google, Pinterest or social media, and never a celebrity.</li>
+            <li>Tap what to <b>keep</b> from the picture. Everything else comes from your taps below.</li>
+            <li>In ChatGPT, attach the picture <b>first</b>, then paste your prompt.</li>
+          </ol>
+          <p class="tiny cb-l">Keep from the picture</p><div class="chips" data-cb="keep"></div>
         </div>
       </div>
 
@@ -384,6 +426,8 @@ body.cb-on .side{display:none}
         <p class="tiny cb-l">Body type (used for half and full body shots)</p><div class="chips" data-cb="body" data-single></div>
         <p class="tiny cb-l">Makeup</p><div class="chips" data-cb="makeup" data-single></div>
         <p class="tiny cb-l">Extras (tap any)</p><div class="chips" data-cb="extras"></div>
+        <label class="tiny cb-l" for="cbCustom">Anything else? Type it in (say which side)</label>
+        <input type="text" id="cbCustom" maxlength="160" placeholder="Like: small lip piercing in the center, rose tattoo on her left wrist" style="width:100%">
       </div>
 
       <div class="panel" style="margin-bottom:12px">
@@ -417,8 +461,8 @@ body.cb-on .side{display:none}
 
       <div class="panel" style="margin-bottom:12px">
         <div class="cb-step"><span class="cb-n">H</span><h2>Make her character sheet</h2></div>
-        <p class="muted" style="font-size:14px">One picture of <b class="cbHomeName">your character</b> from 3 angles. It becomes her "master photo" and keeps her face the same in every new picture.</p>
-        <ol class="steps easy"><li>In ChatGPT, open the chat where you made her picture (or start a new chat and attach her best picture).</li><li>Tap <b>Copy sheet prompt</b>, paste it there and send.</li><li>Download the sheet. Use it as her photo from now on.</li></ol>
+        <p class="muted" style="font-size:14px">A pro sheet of <b class="cbHomeName">your character</b>: 4 full-body views (front, both sides, back), 2 face close-ups, and a list of her features. It becomes her "master photo" and keeps her the same in every new picture.</p>
+        <ol class="steps easy"><li>In ChatGPT, open the chat where you made her picture (or start a new chat and attach her best picture).</li><li>Tap <b>Copy sheet prompt</b>, paste it there and send.</li><li>ChatGPT may ask you 1 or 2 quick questions first (like "which side is the piercing?"). Just answer. That stops it from changing her look.</li><li>Download the sheet. Add it to her ChatGPT Project's <b>files</b> (part I) so it's always there. Use it as her photo from now on.</li></ol>
         <div class="row cb-row"><button class="btn" type="button" id="cbSheetCopy" data-label="Copy sheet prompt">Copy sheet prompt</button></div>
         <p class="tiny">Don't cut the sheet into pieces. Every prompt in HQ already tells ChatGPT it's the same person and to show her only once.</p>
       </div>
@@ -435,6 +479,7 @@ body.cb-on .side{display:none}
             <ol class="steps easy"><li>In ChatGPT tap <b>Projects → New project</b>. Name it <b class="cbHomeName">your character</b>.</li><li>Open the project's <b>Instructions</b>, paste, and save.</li><li>Add her character sheet to the project's <b>files</b>.</li><li>Each new picture: start a <b>new chat inside the project</b>, attach her sheet, say the scene.</li></ol>
             <button class="btn" type="button" id="cbProjCopy" data-label="Copy project instructions">Copy project instructions</button></div>
         </div>
+        <div class="card" id="cbGptCard" style="margin-top:12px" hidden><div class="tag">Easiest · no setup</div><h4>Use the SOS Picture Studio in ChatGPT</h4><p class="tiny" style="margin:0">Open it, attach her character sheet, and tell it the scene. It already knows all the rules.</p><a class="btn" id="cbGptLink" href="#" target="_blank" rel="noopener noreferrer" style="margin-top:10px;text-align:center;text-decoration:none">Open SOS Picture Studio</a></div>
         <p class="tiny">Pictures come from ChatGPT. Videos come from your video app (we recommend Google Flow) in <a href="#series">3 Make videos</a>.</p>
       </div>
 
@@ -806,11 +851,38 @@ async function loadScWho(){
   scChars = data || []; if(scWho && !scChars.some(c=>c.id===scWho.id)) scWho=null;
   if(!scWho && scChars.length) scWho = scChars[scChars.length-1];
   const box=$("scWho"); box.innerHTML="";
-  if(!scChars.length){ const a=el("a","chip","➕ Make my character first (Step 1)"); a.href="#builder"; a.style.textDecoration="none"; box.append(a); return; }
+  if(!scChars.length){ const a=el("a","chip","➕ Make my character first (Step 1)"); a.href="#builder"; a.style.textDecoration="none"; box.append(a); drawTools(); return; }
   scChars.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed", !!scWho && scWho.id===c.id); b.onclick=()=>{ scWho=c; loadScWhoDraw(); }; box.append(b); });
   const n=el("button","chip","No character"); n.type="button"; n.setAttribute("aria-pressed", !scWho); n.onclick=()=>{ scWho=null; loadScWhoDraw(); }; box.append(n);
+  drawTools();
 }
-function loadScWhoDraw(){ [...$("scWho").querySelectorAll("button")].forEach(b=>b.setAttribute("aria-pressed", scWho ? b.textContent===scWho.name : b.textContent==="No character")); }
+function loadScWhoDraw(){ [...$("scWho").querySelectorAll("button")].forEach(b=>b.setAttribute("aria-pressed", scWho ? b.textContent===scWho.name : b.textContent==="No character")); drawTools(); }
+let osMode="one", duoId=null;
+function outfitPrompt(){
+  const nm = scWho ? scWho.name : "my character";
+  return `Picture 1 = ${nm}'s picture or character sheet. Use it as ${nm}'s exact reference: keep the face, skin tone, hair, makeup and body shape exactly the same. Do not beautify or change the age. ${sheetRule(nm)}` + (scWho ? `\n\nWho ${nm} is: ${scWho.lock}` : "") +
+  `\n\nPicture 2 = an outfit. Use it ONLY for the clothes: same style, colors, fabric and details, shoes too if they show. Never copy the face, body or identity of anyone in it.\n\n` +
+  (osMode==="sheet" ? `Make a new character sheet of ${nm} wearing this outfit: 4 full-body views (front, left side, right side and back) and 2 face close-ups, on a plain light gray background. Wide 16:9.` : `Make one full-body picture of ${nm} wearing this outfit, standing relaxed on a clean white background. Soft, even studio light. Vertical 9:16.`) +
+  `\n\nReal, unretouched look. No text, logos or watermarks.\n\nBefore you make it: if part of the outfit is unclear (like the shoes or the back), ask me one short question first. Otherwise make it right away.`;
+}
+function duoPrompt(){
+  const a = scWho, b = scChars.find(c=>c.id===duoId); if(!a || !b) return "";
+  const what = ($("duoWhat").value||"").trim() || "talking together, both clearly in frame";
+  return `Picture 1 = ${a.name}'s character sheet. Picture 2 = ${b.name}'s character sheet. Each sheet shows ONE person from several angles.\n\nMake one picture with exactly TWO people: ${a.name} (from picture 1) and ${b.name} (from picture 2). Keep each person's face, skin tone, hair and body exactly like their own sheet. Don't mix their features. No extra people.\n\n${a.name}: ${a.lock}\n${b.name}: ${b.lock}\n\nScene: ${what}.\n\nReal and cinematic, natural light, like a still from a TV drama. Vertical 9:16. No text, logos or watermarks.`;
+}
+function drawTools(){
+  const om=$("osMode"); if(!om) return;
+  if(!drawTools.done){ drawTools.done=1;
+    $("osCopy").onclick=e=>copyText(outfitPrompt(),e.currentTarget);
+    $("duoCopy").onclick=e=>{ const t=duoPrompt(); if(!t){ toast(scChars.length<2?"Save 2 characters in Step 1 first":"Pick your character above and a second one here"); return; } copyText(t,e.currentTarget); };
+  }
+  om.innerHTML=""; [["One picture, white background","one"],["A new character sheet","sheet"]].forEach(([l,v])=>{ const c=el("button","chip",l); c.type="button"; c.setAttribute("aria-pressed",osMode===v); c.onclick=()=>{ osMode=v; drawTools(); }; om.append(c); });
+  const dw=$("duoWho"); dw.innerHTML="";
+  const others = scChars.filter(c=>!scWho || c.id!==scWho.id);
+  if(scChars.length<2){ const a=el("a","chip","➕ Save a second character in Step 1"); a.href="#builder"; a.style.textDecoration="none"; dw.append(a); return; }
+  if(!others.some(c=>c.id===duoId)) duoId = others.length ? others[0].id : null;
+  others.forEach(c=>{ const b=el("button","chip",c.name); b.type="button"; b.setAttribute("aria-pressed",c.id===duoId); b.onclick=()=>{ duoId=c.id; drawTools(); }; dw.append(b); });
+}
 function drawStudioTabs(v){
   const T=[["builder","1","Your character","Make her once"],["scenes","2","Make posts","300+ ideas"],["series","3","Make videos","Clips and series"]];
   document.querySelectorAll("[data-tabs]").forEach(box=>{ box.innerHTML=""; T.forEach(t=>{ const a=el("a"); a.href="#"+t[0]; if(t[0]===v){ a.className="on"; a.setAttribute("aria-current","page"); } const b=el("b",null,t[1]); const s=el("span"); s.append(document.createTextNode(t[2])); s.append(el("small",null,t[3])); a.append(b,s); box.append(a); }); });
@@ -845,7 +917,19 @@ function mvMic(btn){
   rec.onend = () => { btn.classList.remove("on"); mvMic.rec=null; if(!$("mvMicMsg").textContent.startsWith("Please")) $("mvMicMsg").textContent=""; };
   mvMic.rec = rec; btn.classList.add("on"); $("mvMicMsg").textContent="Listening… speak now, then pause."; rec.start();
 }
+let sbStyle="Product video (UGC)", sbLen=3;
+function sbPrompt(){
+  const who = scWho ? scWho.name : "my character";
+  const idea = ($("sbIdea").value||"").trim() || "a simple, relatable everyday moment";
+  const secs = {3:15,5:30,7:30}[sbLen];
+  return `I'm attaching ${who}'s character sheet. Plan a vertical video, about ${secs} seconds, in ${sbLen} scenes, starring ${who}.\nIdea: ${idea}\nKind of video: ${sbStyle}\n\nStep 1. Write the storyboard. For each scene give:\n- Scene number and seconds (like 0-3s)\n- Visual: what we see\n- Camera: the shot (close-up, wide, slow push-in...)\n- POV: whose eyes we see it through\n- Action: what moves or happens\n- Line: what ${who} says, if anything (one short sentence)\nKeep it simple and real. Nothing appears or disappears. ${who} looks exactly like the sheet in every scene. ${sheetRule(who)}\n\nStep 2. Make ONE storyboard picture: all ${sbLen} scenes in a numbered grid of small vertical frames, the same ${who} in every frame.\n\nStep 3. Under the storyboard, give me for each scene:\n- Picture prompt: to make that scene's starting picture of ${who}.\n- Video prompt: under 80 words, vertical 9:16, starts from that picture, natural small movements, natural sound, no music, no text on screen.\n\nIf the idea is unclear, ask me one short question first. When we're done, I'll say "Make the scene 1 picture" and we'll go scene by scene.`;
+}
 function initMove(){ if(initMove.done) return; initMove.done=1;
+  const ss=$("sbStyle"), sl=$("sbLen");
+  const drawSb=()=>{ ss.innerHTML=""; ["Product video (UGC)","Mini story","Day in my life","How-to / tips"].forEach(t=>{ const c=el("button","chip",t); c.type="button"; c.setAttribute("aria-pressed",sbStyle===t); c.onclick=()=>{ sbStyle=t; drawSb(); }; ss.append(c); });
+    sl.innerHTML=""; [[3,"15 sec · 3 scenes"],[5,"30 sec · 5 scenes"],[7,"Mini story · 7 scenes"]].forEach(([n,t])=>{ const c=el("button","chip",t); c.type="button"; c.setAttribute("aria-pressed",sbLen===n); c.onclick=()=>{ sbLen=n; drawSb(); }; sl.append(c); }); };
+  drawSb();
+  $("sbCopy").onclick=e=>{ copyText(sbPrompt(),e.currentTarget); $("sbNext").innerHTML="<b>Copied!</b> Now open ChatGPT, attach her character sheet, paste and send."; };
   $("mvCopy").onclick=e=>{ copyText(mvPrompt(),e.currentTarget); $("mvNext").innerHTML="<b>Copied!</b> Now open your video app, add your ONE picture, paste and tap Generate."; };
   $("mvAsk").onclick=e=>{ copyText(mvAskMsg(),e.currentTarget); $("mvNext").innerHTML="<b>Copied!</b> Now open your Claude or ChatGPT, paste it, attach your picture and send. Copy the prompt it writes, then paste that into your video app."; };
   const box=$("mvIdeas"); MV_IDEAS.forEach(([lab,txt])=>{ const c=el("button","chip",lab); c.type="button"; c.onclick=()=>{ $("mvWhat").value=txt; box.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed","false")); c.setAttribute("aria-pressed","true"); }; box.append(c); });
@@ -966,8 +1050,10 @@ $("addBtn").onclick = async () => {
 
 
 // ---------- character builder ----------
+const SOS_GPT_URL = ""; // paste the SOS Picture Studio GPT link here to show its card in part I
 const CB = {
-  mode:[["My twin (from my photo)","twin"],["An avatar (made from scratch)","avatar"]],
+  mode:[["My twin (from my photo)","twin"],["An avatar (made from scratch)","avatar"],["From a picture (keep some, change some)","photo"]],
+  keep:[["Face shape","face shape"],["Eyes","eyes"],["Nose","nose"],["Lips","lips"],["Skin tone","skin tone and undertone"],["Hair","hair"],["Body shape","body shape"],["Outfit","outfit"]],
   shot:[["Headshot","headshot portrait|Framed from the top of the head to just below the shoulders."],["Half body","half-body portrait|Framed from the top of the head to the waist."],["Full body","full-body portrait|Head to feet fully in frame."],["Character sheet","character reference sheet|Three views side by side: front, three-quarter and side profile, same outfit and light in each."]],
   gender:[["Woman","woman"],["Man","man"]],
   age:[["Early 20s","early 20s"],["Mid 20s","mid 20s"],["Late 20s","late 20s"],["30s","30s"],["40s","40s"],["50s","50s"],["60+","60s"]],
@@ -985,7 +1071,7 @@ const CB = {
   hcolor:[["Black","black"],["Dark brown","dark brown"],["Brown","medium brown"],["Honey blonde","honey blonde"],["Blonde","blonde"],["Auburn","auburn"],["Burgundy","burgundy"],["Gray / silver","natural gray and silver"]],
   body:[["Slim","a slim build"],["Athletic","an athletic, toned build"],["Average","an average build"],["Curvy","a curvy, hourglass build"],["Plus-size","a plus-size, full-figured build"],["Muscular","a muscular build"]],
   makeup:[["Bare","no makeup, bare natural skin"],["Natural","light natural makeup: a touch of mascara and tinted lip balm"],["Soft glam","soft glam makeup: visible blush, soft contour, mascara, filled brows and lip liner with gloss"],["Full glam","full glam makeup: defined contour, highlight, false lashes and a bold lip"]],
-  extras:[["Hoop earrings","small gold hoop earrings"],["Stud earrings","small stud earrings"],["Glasses","glasses"],["Nose stud","a small nose stud"],["Beard","a neatly trimmed beard"],["Headband","a simple headband"]],
+  extras:[["Hoop earrings","small gold hoop earrings"],["Stud earrings","small stud earrings"],["Glasses","glasses"],["Nose stud","a small nose stud"],["Nose ring","a small nose ring"],["Lip piercing","a small stud piercing under the center of the lower lip"],["Beard","a neatly trimmed beard"],["Headband","a simple headband"]],
   real:[["Visible pores","textured skin with visible pores"],["Uneven tone","slightly uneven skin tone, the way real skin looks"],["Flyaway hairs","a few natural flyaway hairs"],["Lip lines","natural lines in the lips"],["Light freckles","light freckles"],["Small blemish","a small blemish"],["Under-eye lines","faint lines under the eyes"],["Beauty mark","a small beauty mark"]],
   outfit:[["White tee","a plain white t-shirt"],["Cozy knit","a cozy knit sweater"],["Blazer","a tailored blazer over a simple top"],["Athleisure","a matching athleisure set"],["Casual chic","a casual chic outfit: fitted top and high-waisted jeans"],["Sundress","a simple sundress"],["Scrubs","medical scrubs"]],
   bg:[["Plain white wall","a plain off-white wall"],["Soft gray studio","a soft gray studio backdrop"],["Cozy home","a cozy, lived-in living room, softly blurred"],["Kitchen","a bright home kitchen, softly blurred"],["Café","a busy café, softly blurred"],["Outdoors","a city sidewalk, softly blurred"],["Office","a modern home office, softly blurred"]],
@@ -993,7 +1079,7 @@ const CB = {
   cam:[["Pro camera","shot on a full-frame camera with an 85mm lens, shallow depth of field, natural color"],["Phone selfie","a casual front-facing phone photo, slightly imperfect framing, like a real social media post"],["Phone (someone else)","shot on a phone by a friend, natural and candid"]],
   scene:[["Skincare routine","standing at a bathroom sink in the morning, gently applying [PRODUCT] to her face with her fingertips, soft window light, real skin texture","My morning skincare routine 🧴 What I use is linked. Comment LINK"],["Product review (UGC)","holding [PRODUCT] up near her face and smiling, talking to the camera like a real customer review, in a bright bedroom","Honest thoughts on [PRODUCT] after a week 👀 Link in bio"],["Unboxing","opening a package on a kitchen counter and lifting out [PRODUCT], excited, hands in focus","Unboxing [PRODUCT] 📦 Was it worth it? Comment LINK"],["Get ready with me","sitting at a vanity mirror doing her makeup, chatting to the camera, morning light","GRWM ✨ Everything I used is linked. Comment LINK"],["Outfit of the day","full-length mirror selfie in a stylish outfit, phone in hand, clean bedroom","Today's fit 🤍 Comment LINK and I'll send every piece"],["Kitchen cooking","cooking at a home stove, stirring a pot and smiling, steam rising","Dinner in 20 minutes 🍲 Save this one"],["Gym","at the gym between sets, wiping sweat, water bottle in hand","No excuses today 💪 Who's training with me?"],["Café laptop","working on a laptop at a café table with a latte","Building my business one coffee at a time ☕"],["Car selfie","sitting in the driver's seat of a parked car, talking to the camera, daylight","Real talk from my car 🚗 You need to hear this"],["Mini-drama moment","in a dramatic close-up, eyes wide, reacting to shocking news, cinematic light","She did NOT see that coming 😳 Part 2?"],["Pinterest pin","styled flat-lay-style shot from above, holding [PRODUCT] beside aesthetic props, clean neutral colors","Save this for later 📌"]]
 };
-const CB_DEF = {mode:"avatar",shot:"Headshot",gender:"Woman",age:"Mid 20s",face:"Oval",depth:"Brown",under:"Warm (golden)",eyes:"Almond",eyecolor:"Dark brown",nose:"Straight",lips:"Full",brows:"Natural full",hair:"Curly",hlen:"Shoulder",hstyle:"Worn down",hcolor:"Dark brown",body:"Average",makeup:"Soft glam",extras:[],real:["Visible pores","Uneven tone","Flyaway hairs","Lip lines"],outfit:"White tee",bg:"Plain white wall",light:"Window daylight",cam:"Pro camera",scene:"Skincare routine"};
+const CB_DEF = {mode:"avatar",shot:"Headshot",gender:"Woman",age:"Mid 20s",face:"Oval",depth:"Brown",under:"Warm (golden)",eyes:"Almond",eyecolor:"Dark brown",nose:"Straight",lips:"Full",brows:"Natural full",hair:"Curly",hlen:"Shoulder",hstyle:"Worn down",hcolor:"Dark brown",body:"Average",makeup:"Soft glam",extras:[],real:["Visible pores","Uneven tone","Flyaway hairs","Lip lines"],outfit:"White tee",bg:"Plain white wall",light:"Window daylight",cam:"Pro camera",scene:"Skincare routine",keep:["Face shape","Skin tone"],custom:""};
 let cb = JSON.parse(JSON.stringify(CB_DEF));
 let cbWho = null; // saved character for scenes
 let cbChars = [];
@@ -1023,7 +1109,8 @@ function cbLock(){
     hairLine,
     (cb.shot!=="Headshot" ? `${she} has ${cbv("body")}.` : ""),
     `Makeup: ${cbv("makeup")}.`,
-    ex.length ? `${she} wears ${cbJoin(ex)}.` : ""
+    ex.length ? `${she} wears ${cbJoin(ex)}.` : "",
+    (cb.custom||"").trim() ? `Also: ${(cb.custom||"").trim().replace(/[.\s]+$/,"")}.` : ""
   ].filter(Boolean).join(" ");
 }
 function cbRealLine(){
@@ -1037,6 +1124,7 @@ function cbPrompt(){
   const she = cb.gender==="Man" ? "He" : "She";
   const parts = [];
   if(cb.mode==="twin") parts.push(cbTwinLine());
+  if(cb.mode==="photo"){ const k=cbList("keep"); parts.push(k.length ? `Use my attached picture only as a starting point. Keep these exactly the same as in the picture: ${cbJoin(k)}. Change everything else to match the description below. The result must look like one real, original person.` : "Use my attached picture only for the pose and framing. Make a new, original person who matches the description below."); }
   const [shotType, framing] = cbv("shot").split("|");
   parts.push(`Vertical ${shotType} of a ${cbv("gender")} in ${cb.gender==="Man"?"his":"her"} ${cbv("age")}. ${framing} ${she} is looking at the camera with a relaxed, natural expression.`);
   parts.push(cbLock().split(". ").slice(1).join(". "));
@@ -1109,12 +1197,12 @@ function cbDrawScene(){
 }
 function cbDraw(){
   cbChips();
-  $("cbGuide").hidden = cb.mode!=="twin";
+  $("cbGuide").hidden = cb.mode!=="twin"; $("cbPhotoGuide").hidden = cb.mode!=="photo";
   const p = cbPrompt(), pre = $("cbPrompt");
   if(pre.textContent && pre.textContent!==p){ pre.classList.remove("flash"); void pre.offsetWidth; pre.classList.add("flash"); }
   pre.textContent = p; cbIdDraw();
   const gpt = $("cbOpenGpt");
-  if(cb.mode==="twin"){ gpt.href="https://chatgpt.com/"; gpt.textContent="Open ChatGPT"; $("cbHow").textContent = "Twin: tap Copy prompt, open ChatGPT, attach your photo first, then paste and send."; }
+  if(cb.mode==="twin" || cb.mode==="photo"){ gpt.href="https://chatgpt.com/"; gpt.textContent="Open ChatGPT"; $("cbHow").textContent = (cb.mode==="twin"?"Twin":"From a picture")+": tap Copy prompt, open ChatGPT, attach your picture first, then paste and send."; }
   else { gpt.href="https://chatgpt.com/?q="+encodeURIComponent(p); gpt.textContent="Open in ChatGPT (prompt filled in)"; $("cbHow").textContent = "Avatar: tap Open in ChatGPT and your prompt is filled in for you. Using another app? Tap Copy prompt and paste it there."; }
   cbDrawScene();
 }
@@ -1152,7 +1240,7 @@ function cbIdDraw(){
     front=`M${side} ${92} Q${side-2} ${top-6} 100 ${top-8} Q${side2+2} ${top-6} ${side2} 92 Q${100+rx*0.6} ${top+16} 100 ${top+18} Q${100-rx*0.6} ${top+16} ${side} 92 Z`;
   }
   ["cbIdHairBack","cbIdHairTop"].forEach((id,i)=>{ const e=$(id); e.setAttribute("d", i?front:back); e.setAttribute("fill", hair); });
-  $("cbIdMode").textContent = cb.mode==="twin" ? "TWIN" : "AVATAR";
+  $("cbIdMode").textContent = cb.mode==="twin" ? "TWIN" : cb.mode==="photo" ? "PHOTO" : "AVATAR";
   $("cbIdName").textContent = (($("cbName")&&$("cbName").value.trim()) || (cbWho&&cbWho.name) || "UNNAMED").toUpperCase();
   const dl=$("cbIdDl"); dl.innerHTML="";
   const row=(k,v,sw)=>{ dl.append(el("dt",null,k)); const d=el("dd"); if(sw) d.append(sw); d.append(document.createTextNode(v)); dl.append(d); };
@@ -1181,9 +1269,9 @@ function cbProgInit(){
 }
 function cbHomeWho(){ if(cbWho) return cbWho; const n=($("cbName")&&$("cbName").value||"").trim(); return {name:n||"my character", lock:cbLock()}; }
 function cbHer(w){ return /^A man\b/.test(w.lock||"") ? ["he","his","him"] : ["she","her","her"]; }
-function cbSheetPrompt(){ const w=cbHomeWho(); return `Create a character reference sheet of this exact person, ${w.name}.\nShow ${w.name} 3 times side by side on a plain light gray background: front view, three-quarter view and side view, all full body, standing relaxed.\nKeep the face, skin tone, hair, makeup, body shape and proportions exactly the same as my attached picture. Do not beautify or change the age.\nSimple fitted neutral clothes, soft even studio light, calm expression with a slight smile.\nNo text, no labels, no props. Wide 3:2 image.`; }
-function cbStarter(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `For this whole chat, my attached picture is my character, ${w.name}. ${sheetRule(w.name)}\nIn every picture you make in this chat: keep ${his} face, skin tone, undertone, hair and body exactly the same as the attached picture. Do not beautify, slim or change ${his} age. Real, unretouched look with visible skin texture and natural light. Vertical 9:16. No text, logos or watermarks.\nWho ${w.name} is: ${w.lock}\nSay "Ready" and wait. Then I'll tell you scenes in a few words, and you make each picture.`; }
-function cbProject(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `You are my picture studio for my character, ${w.name}.\n\nWho ${w.name} is: ${w.lock}\n\nRules for every picture:\n1. Always use the picture or character sheet I attach (or the one in this project's files) as ${w.name}'s exact reference. Keep ${his} face, skin tone, undertone, hair and body shape exactly the same. Do not beautify, slim or change ${his} age.\n2. A character sheet shows the SAME person from several angles. Show only ONE ${w.name} in each picture.\n3. If I attach another picture (an outfit or a place), use it only for that: the outfit, or the setting. Never copy anyone else's face or body.\n4. Real, unretouched look: visible skin texture, natural light, no plastic skin, no beauty filters.\n5. Vertical 9:16 unless I ask for something else. No text, logos or watermarks.\n6. When I describe a scene in a few words, fill in the details yourself and make the picture right away, keeping ${w.name}'s look the same.`; }
+function cbSheetPrompt(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `Create a professional character reference sheet of this exact person, ${w.name}. One wide 16:9 image on a plain light gray background, laid out like this:\n- Top row: 4 full-body views of ${w.name} standing relaxed: front, left side, right side and back.\n- Bottom left: 2 face close-ups: straight on, and three-quarter.\n- Right side: a clean panel with the name "${w.name}" at the top and short labeled lines: age, face shape, skin tone and undertone, eyes, nose, lips, brows, hair, body type, makeup, and any jewelry or piercings (say which side).\n\nIt is the SAME person in every view. Keep the face, skin tone, hair, makeup, body shape and proportions exactly the same as my attached picture. Do not beautify or change ${his} age.\nSame plain fitted black top and pants and white sneakers in every view. Soft even studio light, calm expression with a slight smile. No props, no logos, no watermark. Spell every word clearly.\n\nWho ${w.name} is: ${w.lock}\n\nBefore you make it: if anything about ${his} look is unclear or doesn't match the picture (like hair color, or which side a piercing or mark is on), ask me up to 2 short questions first. If everything is clear, make it right away.`; }
+function cbStarter(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `For this whole chat, my attached picture is my character, ${w.name}. ${sheetRule(w.name)}\nIn every picture you make in this chat: keep ${his} face, skin tone, undertone, hair and body exactly the same as the attached picture. Do not beautify, slim or change ${his} age. Real, unretouched look with visible skin texture and natural light. Vertical 9:16. No text, logos or watermarks.\nWho ${w.name} is: ${w.lock}\nIf something I ask would change ${his} look and it's unclear (like hair color, or which side a mark is on), ask me one short question first.\nSay "Ready" and wait. Then I'll tell you scenes in a few words, and you make each picture.`; }
+function cbProject(){ const w=cbHomeWho(), [he,his]=cbHer(w); return `You are my picture studio for my character, ${w.name}.\n\nWho ${w.name} is: ${w.lock}\n\nRules for every picture:\n1. Always use the picture or character sheet I attach (or the one in this project's files) as ${w.name}'s exact reference. Keep ${his} face, skin tone, undertone, hair and body shape exactly the same. Do not beautify, slim or change ${his} age.\n2. A character sheet shows the SAME person from several angles. Show only ONE ${w.name} in each picture.\n3. If I attach another picture (an outfit or a place), use it only for that: the outfit, or the setting. Never copy anyone else's face or body.\n4. Real, unretouched look: visible skin texture, natural light, no plastic skin, no beauty filters.\n5. Vertical 9:16 unless I ask for something else. No text, logos or watermarks.\n6. When I describe a scene in a few words, fill in the details yourself and make the picture right away, keeping ${w.name}'s look the same.\n7. If something I ask would change ${w.name}'s look and it's unclear (like hair color, or which side a piercing or mark is on), ask me one short question first. Otherwise don't ask, just make it.`; }
 const CB_ASK = "Describe the person in this picture so another AI could recreate them exactly. One paragraph, facts only: age range, face shape, skin tone and undertone, eye shape and color, nose, lips, brows, hair (color, texture, length and how it's worn), body type, makeup, and any jewelry they always wear. Don't describe the outfit or the background.";
 function cbDrawHome(){ const w=cbHomeWho(); document.querySelectorAll(".cbHomeName").forEach(e=>e.textContent=w.name); cbDrawUpd(); }
 let cbUpdId = null;
@@ -1194,7 +1282,7 @@ function initBuilder(){
   $("cbSceneCopy").onclick = e => copyText(cbScenePrompt(), e.currentTarget);
   $("cbMove").onclick = e => copyText(cbMovePrompt(), e.currentTarget);
   $("cbProduct").onchange = cbDrawScene;
-  $("cbReset").onclick = () => { cb = JSON.parse(JSON.stringify(CB_DEF)); cbWho=null; cbDraw(); cbDrawSaved(); };
+  $("cbReset").onclick = () => { cb = JSON.parse(JSON.stringify(CB_DEF)); cbWho=null; $("cbCustom").value=""; cbDraw(); cbDrawSaved(); };
   $("cbSurprise").onclick = () => { ["shot","age","face","depth","under","eyes","eyecolor","nose","lips","brows","hair","hlen","hstyle","hcolor","body","makeup","outfit","bg","light"].forEach(k=>cb[k]=cbRand(CB[k])); if(cb.hair==="Bald") cb.hair="Wavy"; cb.mode="avatar"; cbDraw(); toast("New character rolled 🎲"); };
   $("cbSave").onclick = async () => {
     const name = ($("cbName").value||"").trim(); if(!name){ toast("Give your character a name first"); return; }
@@ -1210,6 +1298,8 @@ function initBuilder(){
   $("cbProjCopy").onclick = e => copyText(cbProject(), e.currentTarget);
   $("cbAskLook").onclick = e => copyText(CB_ASK, e.currentTarget);
   $("cbName").addEventListener("input", cbDrawHome);
+  $("cbCustom").addEventListener("input", e=>{ cb.custom=e.target.value; const pre=$("cbPrompt"); pre.textContent=cbPrompt(); cbDrawScene(); });
+  if(SOS_GPT_URL){ $("cbGptCard").hidden=false; $("cbGptLink").href=SOS_GPT_URL; }
   $("cbSaveLook").onclick = async () => {
     const txt = ($("cbNewLook").value||"").trim().replace(/\s+/g," "); const c = cbChars.find(x=>x.id===cbUpdId);
     if(!c){ $("cbLookMsg").textContent="Save your character in part G first."; return; }
