@@ -165,6 +165,59 @@ body.cb-on .side{display:none}
 @media (max-width:1100px){.cb-layout{grid-template-columns:minmax(0,1fr)}.cb-card-col{position:static;order:-1}.cb-id{max-width:420px;margin:0 auto 12px}}
 @media (max-width:980px){body.cb-on .shell{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:980px){.shell{grid-template-columns:minmax(0,1fr)}.rail nav{position:static;flex-direction:row;overflow-x:auto}.rail a{white-space:nowrap}}
+
+/* ---- Two doors + Live Office (Nov 24) ---- */
+.navlbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:12px 14px 2px;opacity:.85}
+@media (max-width:980px){.navlbl{display:none}}
+.navlbl.biz{color:var(--neon)}.navlbl.dc{color:#ff8fd2}
+.rail a.dcnav .ic{color:#ff8fd2}
+.doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:720px){.doors{grid-template-columns:1fr}}
+.door{display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:20px;text-decoration:none;color:var(--fg);min-height:240px;transition:transform .15s,box-shadow .2s}
+.door:hover{transform:translateY(-2px)}
+.door b{font-family:var(--disp);font-size:clamp(18px,2.4vw,24px);letter-spacing:.04em}
+.door span{color:var(--muted);font-size:14.5px}
+.door .door-k{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.door .door-names{font-family:var(--mono);font-size:12px}
+.door .door-go{margin-top:auto;font-weight:700;color:var(--fg)}
+.door.biz{background:linear-gradient(150deg,#14223a,#0a1120 70%);border:1px solid rgba(71,215,255,.55);box-shadow:0 0 30px rgba(71,215,255,.16)}
+.door.biz .door-k,.door.biz .door-names{color:var(--neon)}
+.door.dc{background:linear-gradient(150deg,#2a1438,#140a20 70%);border:1px solid rgba(255,79,184,.55);box-shadow:0 0 30px rgba(255,79,184,.16)}
+.door.dc .door-k,.door.dc .door-names{color:#ff8fd2}
+.lo-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.lo-stat{font-family:var(--mono);font-size:12px;color:var(--muted);background:rgba(4,6,12,.55);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.lo-stat b{color:var(--fg);font-size:14px}.lo-stat.warn b{color:var(--gold)}
+.lo-team{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin:0 0 14px}
+.lo-agent{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 12px 12px 16px;display:grid;gap:4px;min-width:0;overflow:hidden}
+.lo-agent::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
+.lo-agent .nm{font-family:var(--disp);font-size:13px;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+.lo-agent .rl{font-size:12px;color:var(--muted)}
+.lo-agent .last{font-size:12.5px;color:var(--fg);overflow-wrap:anywhere}
+.lo-agent .when{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.lo-agent.busy{border-color:var(--pink);box-shadow:0 0 18px rgba(255,79,184,.25)}
+.lo-agent.need{border-color:var(--gold)}
+.sdot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--muted)}
+.sdot.done{background:#4fe3b0;box-shadow:0 0 8px #4fe3b0}.sdot.working{background:var(--pink);box-shadow:0 0 8px var(--pink);animation:p 1.4s ease-in-out infinite}
+.sdot.needs_you{background:var(--gold);box-shadow:0 0 8px var(--gold)}.sdot.failed{background:var(--bad);box-shadow:0 0 8px var(--bad)}
+.lo-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.lo-cols{grid-template-columns:1fr}}
+.lo-list{display:grid;gap:8px}
+.lo-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;padding:10px 12px;border-radius:12px;background:var(--void);border:1px solid var(--line);border-left:3px solid var(--c,var(--neon))}
+.lo-row .sdot{margin-top:7px}
+.lo-row .t{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.lo-row .t small{font-family:var(--mono);font-weight:500;font-size:11px;color:var(--muted);margin-left:6px}
+.lo-row .n{grid-column:2;font-size:13px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+.lo-row .n a{color:var(--neon)}
+.lo-connect summary{cursor:pointer;list-style:none}.lo-connect summary::-webkit-details-marker{display:none}
+.lo-connect{margin-top:14px}
+.lo-key{display:flex;gap:8px;flex-wrap:wrap}.lo-key input{flex:1;min-width:220px;font-family:var(--mono);font-size:12px}
+/* Dream Cast door: its own look (pink and purple studio) */
+body.dc{--neon:#ff6fc8;--neon2:#c9a2ff;background-image:radial-gradient(70rem 30rem at 50% -10%,rgba(255,79,184,.20),transparent 65%),radial-gradient(40rem 20rem at 100% 100%,rgba(160,110,255,.14),transparent 70%)}
+body.dc .hero{border-color:rgba(255,111,200,.55);background:linear-gradient(135deg,#2a1438,#120a20 60%);box-shadow:0 0 30px rgba(255,79,184,.18)}
+body.dc h1{text-shadow:0 0 18px rgba(255,111,200,.35)}
+body.dc .btn{box-shadow:0 0 14px rgba(255,111,200,.45)}
+body.dc .rail a.on{background:linear-gradient(90deg,rgba(255,111,200,.18),rgba(255,111,200,.02));border-color:rgba(255,111,200,.5);box-shadow:0 0 18px rgba(255,111,200,.18),inset 3px 0 0 var(--neon)}
+body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 
@@ -199,11 +252,16 @@ body.cb-on .side{display:none}
 <!-- Members app -->
 <div class="shell" id="app" hidden>
   <aside class="rail"><nav aria-label="Members area" id="nav">
-    <a href="#community" data-view="community"><span class="ic">◉</span>Community</a>
+    <a href="#home" data-view="home"><span class="ic">⌂</span>Home</a>
+    <div class="navlbl biz">SOS HQ · run my business</div>
     <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
-    <a href="#kit" data-view="kit"><span class="ic">▣</span>Build Your AI Team kit</a>
-    <a href="#builder" data-view="builder" data-views="builder scenes series"><span class="ic">✦</span>Dream Cast</a>
-    <a href="#products" data-view="products"><span class="ic">🛍</span>Hot Products</a>
+    <a href="#kit" data-view="kit"><span class="ic">▣</span>Team Installer</a>
+    <div class="navlbl dc">Dream Cast · make my content</div>
+    <a href="#builder" data-view="builder" data-views="builder scenes series" class="dcnav"><span class="ic">✦</span>Dream Cast studio</a>
+    <a href="#products" data-view="products" class="dcnav"><span class="ic">🛍</span>Shop Trends</a>
+    <a href="#dckit" data-view="dckit" class="dcnav"><span class="ic">✧</span>Dream Cast Installer</a>
+    <div class="navlbl">Together</div>
+    <a href="#community" data-view="community"><span class="ic">◉</span>Community</a>
     <a href="#help" data-view="help"><span class="ic">?</span>Help desk</a>
     <a href="#store" data-view="store"><span class="ic">⬡</span>Add-on store</a>
     <a href="#host" data-view="host" id="hostNav" hidden><span class="ic">★</span>Host panel</a>
@@ -222,37 +280,72 @@ body.cb-on .side{display:none}
       <div class="posts" id="posts"><p class="muted">Loading the feed…</p></div>
     </section>
 
-    <!-- MY TEAM -->
+    <!-- HOME: two doors -->
+    <section data-pane="home" hidden>
+      <div class="hero"><div class="eyebrow">● Welcome to your HQ</div><h1 id="homeHi">What do you want your team to do?</h1><p>Your $47 kit opens both doors. Start with the one that makes you money first.</p></div>
+      <div class="doors">
+        <a class="door biz" href="#team">
+          <span class="door-k">SOS HQ</span>
+          <b>Run my business</b>
+          <span>Five AI employees answer leads, follow up, find business, plan your posts and watch your money. You get one brief every morning.</span>
+          <span class="door-names">Genesis · Aria · Envoy · Nova · Sterling</span>
+          <span class="door-go">Open My AI Team →</span>
+        </a>
+        <a class="door dc" href="#builder">
+          <span class="door-k">Dream Cast</span>
+          <b>Make my content</b>
+          <span>Your AI twin, avatar or character, post cards, UGC, TikTok Shop videos and mini series. Frame turns it into finished videos.</span>
+          <span class="door-names">Creator Studio · Story Studio · Frame</span>
+          <span class="door-go">Open the studio →</span>
+        </a>
+      </div>
+      <p class="tiny" style="margin-top:12px">Not sure? Most owners start with <b>Run my business</b>. Your content studio is here whenever you want it.</p>
+    </section>
+
+    <!-- MY TEAM: Live Office -->
     <section data-pane="team" hidden>
-      <div class="hero"><div class="eyebrow">● Your AI team</div><h1>Hire your team in about 10 minutes</h1><p>Your team lives in your own Claude account. This page walks you through hiring them.</p></div>
-      <div class="panel">
-        <h2>Step by step</h2>
+      <div class="hero"><div class="eyebrow">● SOS HQ · Live Office</div><h1>Your AI team, at work</h1><p>Every time an agent finishes a job, it reports here. Nothing gets sent, posted or paid without your yes.</p>
+        <div class="lo-stats"><span class="lo-stat"><b id="loToday">0</b> reports today</span><span class="lo-stat warn"><b id="loNeeds">0</b> need you</span><span class="lo-stat"><b id="loLast">–</b> last check-in</span></div>
+      </div>
+      <div class="lo-team" id="loTeam" aria-label="Your team"></div>
+      <div class="lo-cols">
+        <div class="panel"><h2>Needs you</h2><div id="loNeedList" class="lo-list" aria-live="polite"></div></div>
+        <div class="panel"><h2>Just finished</h2><div id="loDoneList" class="lo-list"></div></div>
+      </div>
+      <details class="panel lo-connect" id="loConnect">
+        <summary><h2 style="display:inline">Connect your team to this page</h2> <span class="tiny" id="loConnState"></span></summary>
+        <p class="muted" style="margin-top:10px">This is your private report link. Your agents open it at the end of every run, and their work shows up here. Paste it into the Team Installer when it asks for it.</p>
+        <div class="lo-key"><input id="loLink" type="text" readonly aria-label="Your private report link" value="Loading…"><button class="btn" id="loCopy" type="button" data-label="Copy my report link">Copy my report link</button></div>
+        <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center"><button class="btn ghost" id="loTest" type="button">Send a test report</button><button class="linkbtn" id="loReset" type="button">Make a new link</button><span class="tiny">Keep it private. Anyone with it can post to your Live Office. A new link stops the old one.</span></div>
+      </details>
+      <div class="panel" style="margin-top:14px">
+        <h2>Hire your team (about 15 minutes)</h2>
         <ol class="steps">
-          <li>Make sure you have the <b>Claude desktop app</b> and a <b>Pro plan</b> (about $20 a month). Your team runs there.</li>
-          <li>Open <a href="#kit">the kit</a>, watch the 4-minute setup video, and tap <b>Copy the Team Installer</b>.</li>
-          <li>In the Claude desktop app, start a new chat, paste it, and press Enter.</li>
-          <li>Answer the questions one at a time. It will help you connect your Gmail and hire each employee.</li>
-          <li>Your first morning brief arrives right away. Post it in <a href="#community">My AI Team</a> (blur anything private).</li>
+          <li>Get the <b>Claude desktop app</b> and the <b>Pro plan</b> (about $20 a month). Your team works there.</li>
+          <li>Tap <b>Copy my report link</b> above, then open the <a href="#kit">Team Installer</a> and tap <b>Copy the SOS HQ Team Installer</b>.</li>
+          <li>In the Claude desktop app, start a new chat, paste it and press Enter. Answer one question at a time.</li>
+          <li>When it asks, connect your Gmail and the apps you use, and paste your report link.</li>
+          <li>Your first morning brief arrives right away, and your team shows up on this page.</li>
         </ol>
         <p class="tiny" style="margin-top:12px">Stuck? Ask the <a href="#help">Help desk</a>. It answers right away.</p>
       </div>
-      <div class="grid" style="margin-top:12px">
-        <div class="card"><div class="tag">Run it</div><h4>Morning Planner</h4><p>Your morning brief: who needs you, today's schedule, money in, and one money move.</p></div>
-        <div class="card"><div class="tag">Win it</div><h4>Front Desk &amp; Follow-Up</h4><p>Drafts replies and gentle follow-ups so nobody slips through. Never sends without you.</p></div>
-        <div class="card"><div class="tag">Find it</div><h4>Lead Finder</h4><p>Finds customers, trends, grants, contracts or events, depending on your business.</p></div>
-        <div class="card"><div class="tag">Grow it</div><h4>Your specialist</h4><p>Content Studio, Product Creator or Business Builder. On call whenever you need it.</p></div>
-      </div>
+    </section>
+
+    <!-- DREAM CAST KIT -->
+    <section data-pane="dckit" hidden>
+      <div class="hero"><div class="eyebrow">● Dream Cast · your content studio</div><h1>Set up your studio</h1><p>One paste sets up your studio helper and Story Studio in Claude. Then build your character in the studio.</p></div>
+      <div id="dcKitList" class="grid"><p class="muted">Loading…</p></div>
     </section>
 
     <!-- KIT -->
     <section data-pane="kit" hidden>
-      <div class="hero"><div class="eyebrow">● Build Your AI Team</div><h1>Your kit</h1><p>Everything you need to hire your team and run your HQ.</p></div>
+      <div class="hero"><div class="eyebrow">● SOS HQ · Team Installer</div><h1>Hire your team</h1><p>One paste in Claude hires Genesis, Aria, Envoy, Nova and Sterling for your business.</p></div>
       <div class="panel" style="margin-bottom:14px">
         <div class="tag">▶ Watch first: setup in under 4 minutes</div>
         <div style="position:relative;padding-top:56.25%;margin-top:10px;border-radius:14px;overflow:hidden;background:#000">
           <iframe src="https://www.youtube-nocookie.com/embed/QE2GDltgu4U?rel=0" title="Team Installer setup tutorial" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
         </div>
-        <p class="tiny" style="margin-top:8px">Watch it once, then tap <b>Copy the Team Installer</b> below and follow along. Can't see the video? <a href="https://youtu.be/QE2GDltgu4U" target="_blank" rel="noopener noreferrer">Open it on YouTube</a>.</p>
+        <p class="tiny" style="margin-top:8px">Watch it once, then tap <b>Copy the SOS HQ Team Installer</b> below and follow along. (The video shows the earlier team names; the steps are the same.) Can't see the video? <a href="https://youtu.be/QE2GDltgu4U" target="_blank" rel="noopener noreferrer">Open it on YouTube</a>.</p>
       </div>
       <div id="kitList" class="grid"><p class="muted">Loading your kit…</p></div>
     </section>
@@ -942,8 +1035,8 @@ body.cb-on .side{display:none}
     <section data-pane="store" hidden>
       <div class="hero"><div class="eyebrow">● Add-ons</div><h1>Upgrade your team</h1><p>Add more specialists and powers whenever you're ready.</p></div>
       <div class="grid">
-        <div class="card"><div class="tag">Voice</div><h4>Voice Morning Planner</h4><p>Talk to your Morning Planner with its own name and voice, push-to-talk, like Monica's Genesis. (Free voice already works in the Claude app; see the Kit.)</p><button class="btn ghost" type="button" data-wait="voice">Join the waitlist</button></div>
-        <div class="card"><div class="tag">Specialist</div><h4>Extra specialist</h4><p>Add Content Studio, Product Creator or Business Builder alongside the one you have.</p><button class="btn ghost" type="button" data-wait="specialist">Join the waitlist</button></div>
+        <div class="card"><div class="tag">Voice</div><h4>Voice Genesis</h4><p>Talk to Genesis with her own voice, push-to-talk, like Monica's. (Free voice already works in the Claude app; see the Kit.)</p><button class="btn ghost" type="button" data-wait="voice">Join the waitlist</button></div>
+        <div class="card"><div class="tag">Specialist</div><h4>Second Dream Cast helper</h4><p>Use Creator Studio, Product Creator and Business Builder at the same time, not just one.</p><button class="btn ghost" type="button" data-wait="specialist">Join the waitlist</button></div>
         <div class="card"><div class="tag">Phase 2</div><h4>Twin Studio credits</h4><p>Make twin and avatar images right here in your HQ, without leaving.</p><button class="btn ghost" type="button" data-wait="twin_studio">Join the waitlist</button></div>
         <div class="card"><div class="tag">Done for you</div><h4>Have Monica's team build it</h4><p>We set up your whole team for you. Your $47 is credited.</p><button class="btn ghost" type="button" data-wait="done_for_you">Join the waitlist</button></div>
       </div>
@@ -1076,13 +1169,16 @@ $("saveMe").onclick = async () => {
 // ---------- routing ----------
 const loaded = {};
 function route(){
-  let v = (location.hash || "#community").slice(1);
-  if(!document.querySelector(`[data-pane="${v}"]`) || (v==="host" && !isHost)) v = "community";
+  let v = (location.hash || "#home").slice(1);
+  if(!document.querySelector(`[data-pane="${v}"]`) || (v==="host" && !isHost)) v = "home";
   document.querySelectorAll("[data-pane]").forEach(p => p.hidden = p.dataset.pane !== v);
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", (a.dataset.views||a.dataset.view).split(" ").includes(v)));
   drawStudioTabs(v);
   document.body.classList.toggle("cb-on", v==="builder");
-  if(v==="kit" && !loaded.kit){ loaded.kit=1; loadKit(); }
+  document.body.classList.toggle("dc", ["builder","scenes","series","products","dckit"].includes(v));
+  if(v==="home"){ const n=myFirst(); $("homeHi").textContent = (n ? n+", what" : "What") + " do you want your team to do?"; }
+  if(v==="team"){ loadTeam(); }
+  if((v==="kit"||v==="dckit") && !loaded.kit){ loaded.kit=1; loadKit(); }
   if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
   if(v==="scenes"){ loadScWho(); }
   if(v==="series"){ initMove(); (scChars.length ? Promise.resolve() : loadScWho()).then(()=>{ $("mvWho").innerHTML = scWho ? "Character: <b>"+scWho.name.replace(/[<>&]/g,"")+"</b> (change it in <a href='#scenes'>2 Make posts</a>)" : "No character picked. That's okay: the prompt works for any picture."; }); }
@@ -1234,22 +1330,101 @@ function renderPost(p, cmts, hearts){
 // ---------- kit ----------
 async function loadKit(){
   const { data, error } = await sb.from("kit_resources").select("slug,title,kind,body").in("kind",["prompt","guide"]).order("sort");
-  const box = $("kitList"); box.innerHTML="";
-  if(error || !data){ box.append(el("p","err","Your kit didn't load. Refresh to try again.")); return; }
+  const biz = $("kitList"), dc = $("dcKitList"); biz.innerHTML=""; dc.innerHTML="";
+  if(error || !data){ [biz,dc].forEach(b=>b.append(el("p","err","Your kit didn't load. Refresh to try again."))); return; }
+  const DC = new Set(["dreamcast_installer","ministory"]);
   data.forEach(r => {
+    const isDc = DC.has(r.slug), box = isDc ? dc : biz;
     const c = el("div","card"); c.style.gridColumn = r.kind==="prompt" ? "1 / -1" : "";
-    c.append(el("div","tag", r.kind==="prompt" ? "Step 1 · Paste into Claude" : "Guide"), el("h4",null,r.title));
+    const label = r.slug==="dreamcast_installer" ? "Copy the Dream Cast Installer" : "Copy the SOS HQ Team Installer";
+    c.append(el("div","tag", r.kind==="prompt" ? (isDc ? "Dream Cast · Paste into Claude" : "SOS HQ · Paste into Claude") : "Guide"), el("h4",null,r.title));
     if(r.kind==="prompt"){
-      c.append(el("p",null,"Copy this, open the Claude desktop app, start a new chat, paste it, and press Enter. It walks you through everything."));
-      const b = el("button","btn","Copy the Team Installer"); b.type="button"; b.dataset.label=b.textContent; b.onclick=()=>copyText(r.body,b);
+      c.append(el("p",null, isDc ? "Copy this, open the Claude desktop app, start a new chat, paste it, and press Enter. It sets up your studio helper and Story Studio."
+                                 : "Copy this, open the Claude desktop app, start a new chat, paste it, and press Enter. It hires your five-person team. Have your report link from My AI Team ready."));
+      const b = el("button","btn",label); b.type="button"; b.dataset.label=label; b.onclick=()=>copyText(r.body,b);
       const det = el("details"); det.append(el("summary","tiny","Peek inside"), Object.assign(el("pre","prompt"),{textContent:r.body}));
       c.append(b, det);
     } else { const pre = el("pre","prompt"); pre.textContent = r.body; c.append(pre); }
     box.append(c);
   });
-  const sc = el("div","card"); sc.append(el("div","tag","Creator Studio · Story Studio"), el("h4",null,"Dream Cast"), el("p",null,"How your posts and episodes get made in 4 moves, plus 300 scene ideas and a new Scene of the Day."));
-  const go = el("a","btn","Open Dream Cast"); go.href="#builder"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); box.append(sc);
+  const sc = el("div","card"); sc.append(el("div","tag","Next"), el("h4",null,"Build your character"), el("p",null,"Make her once in the studio, then get post ideas from 300+ scenes and turn pictures into videos."));
+  const go = el("a","btn","Open the Dream Cast studio"); go.href="#builder"; go.style.textAlign="center"; go.style.textDecoration="none"; sc.append(go); dc.append(sc);
+  const tm = el("div","card"); tm.append(el("div","tag","Before you paste"), el("h4",null,"Get your report link"), el("p",null,"The installer asks for it so your team can report to your Live Office."));
+  const go2 = el("a","btn ghost","Open My AI Team"); go2.href="#team"; go2.style.textAlign="center"; go2.style.textDecoration="none"; tm.append(go2); biz.append(tm);
 }
+
+// ---------- my team: Live Office ----------
+const LEADS = [
+  ["Genesis","Leadership · runs the team","var(--gold)"],
+  ["Aria","Front Desk · answers everyone","var(--neon)"],
+  ["Envoy","Sales · finds business","var(--pink)"],
+  ["Nova","Marketing · plans your posts","#8c96ff"],
+  ["Sterling","Money · watches the money","#4fe3b0"]
+];
+const ST_LABEL = { working:"Working", done:"Done", needs_you:"Needs you", failed:"Didn't finish" };
+let loRuns = [], loChan = null, loKey = null;
+const REPORT_BASE = SB_URL + "/functions/v1/team-report";
+function agentColor(name){ const l = LEADS.find(x=>x[0].toLowerCase()===String(name).toLowerCase()); return l ? l[2] : "var(--muted)"; }
+async function loadTeam(){
+  if(!loKey){
+    const { data, error } = await sb.rpc("my_report_key");
+    loKey = error ? null : data;
+    $("loLink").value = loKey ? REPORT_BASE + "?k=" + loKey : "Couldn't load your link. Refresh to try again.";
+  }
+  const { data } = await sb.from("member_agent_runs").select("id,agent,task,status,note,link,created_at").order("created_at",{ascending:false}).limit(60);
+  loRuns = data || []; drawTeam();
+  if(!loChan){
+    try{
+      loChan = sb.channel("lo-"+me.id).on("postgres_changes",{ event:"INSERT", schema:"public", table:"member_agent_runs", filter:"user_id=eq."+me.id },
+        payload => { loRuns.unshift(payload.new); loRuns = loRuns.slice(0,60); drawTeam(); if(location.hash==="#team") toast(payload.new.agent+" just reported"); }).subscribe();
+    }catch(e){}
+    setInterval(()=>{ if(location.hash==="#team") sb.from("member_agent_runs").select("id,agent,task,status,note,link,created_at").order("created_at",{ascending:false}).limit(60).then(({data})=>{ if(data){ loRuns=data; drawTeam(); } }); }, 60000);
+  }
+}
+function loRow(r){
+  const row = el("div","lo-row"); row.style.setProperty("--c", agentColor(r.agent));
+  const t = el("div","t"); t.append(document.createTextNode(r.agent + (r.task ? " · " + r.task : "")), el("small",null, ago(r.created_at)));
+  row.append(el("span","sdot "+r.status), t);
+  if(r.note || r.link){ const n = el("div","n"); if(r.note) n.append(document.createTextNode(r.note)); if(r.link && /^https?:\/\//.test(r.link)){ if(r.note) n.append(document.createTextNode(" ")); const a=el("a",null,"Open it ↗"); a.href=r.link; a.target="_blank"; a.rel="noopener noreferrer"; n.append(a); } row.append(n); }
+  return row;
+}
+function drawTeam(){
+  const latest = {}; loRuns.forEach(r=>{ const k=r.agent.toLowerCase(); if(!latest[k]) latest[k]=r; });
+  const team = $("loTeam"); team.innerHTML="";
+  const names = LEADS.map(l=>l[0]); Object.values(latest).forEach(r=>{ if(!names.some(n=>n.toLowerCase()===r.agent.toLowerCase())) names.push(r.agent); });
+  names.forEach(n=>{
+    const lead = LEADS.find(l=>l[0]===n), r = latest[n.toLowerCase()];
+    const c = el("div","lo-agent"+(r&&r.status==="working"?" busy":"")+(r&&r.status==="needs_you"?" need":"")); c.style.setProperty("--c", lead ? lead[2] : "var(--muted)");
+    const nm = el("div","nm"); nm.append(el("span","sdot "+(r?r.status:"")), document.createTextNode(n));
+    c.append(nm, el("div","rl", lead ? lead[1] : "Specialist"));
+    c.append(el("div","last", r ? ((ST_LABEL[r.status]||"Done") + (r.task ? ": " + r.task : "")) : "Waiting for first report"));
+    if(r) c.append(el("div","when", ago(r.created_at)));
+    team.append(c);
+  });
+  const day = Date.now()-864e5, today = loRuns.filter(r=>new Date(r.created_at)>day);
+  const needs = loRuns.filter(r=>r.status==="needs_you" || r.status==="failed").slice(0,8), done = loRuns.filter(r=>r.status==="done"||r.status==="working").slice(0,12);
+  $("loToday").textContent = today.length; $("loNeeds").textContent = needs.filter(r=>new Date(r.created_at)>day).length;
+  $("loLast").textContent = loRuns[0] ? ago(loRuns[0].created_at) : "–";
+  const nl=$("loNeedList"), dl=$("loDoneList"); nl.innerHTML=""; dl.innerHTML="";
+  if(!needs.length) nl.append(el("p","tiny", loRuns.length ? "Nothing needs you right now. Your team has it." : "When an agent has something for your OK, it shows up here."));
+  needs.forEach(r=>nl.append(loRow(r)));
+  if(!done.length) dl.append(el("p","tiny","No reports yet. Hire your team with the Team Installer, and each agent will check in here after every run."));
+  done.forEach(r=>dl.append(loRow(r)));
+  $("loConnect").open = !loRuns.length; $("loConnState").textContent = loRuns.length ? "· connected ✓" : "· not connected yet";
+}
+$("loCopy").onclick = () => { if(loKey) copyText($("loLink").value, $("loCopy")); };
+$("loReset").onclick = async () => {
+  const b=$("loReset"); if(!b.dataset.sure){ b.dataset.sure=1; b.textContent="Tap again: your agents will need the new link"; return; }
+  delete b.dataset.sure; b.textContent="Make a new link";
+  const { data, error } = await sb.rpc("reset_report_key"); if(error||!data){ toast("Couldn't make a new link. Try again."); return; }
+  loKey=data; $("loLink").value = REPORT_BASE + "?k=" + loKey; toast("New link ready. Paste it into your team's instructions.");
+};
+$("loTest").onclick = async () => {
+  if(!loKey) return; const b=$("loTest"); b.disabled=true;
+  try{ const r = await fetch(REPORT_BASE + "?k=" + loKey + "&agent=Genesis&status=done&task=" + encodeURIComponent("Test report") + "&note=" + encodeURIComponent("Your Live Office is connected.")); toast(r.ok ? "Test sent. Watch it appear." : "The test didn't go through. Try again."); if(r.ok) setTimeout(loadTeam, 800); }
+  catch(e){ toast("The test didn't go through. Try again."); }
+  b.disabled=false;
+};
 
 // ---------- scenes ----------
 let SC = null, scat = "All";
@@ -1508,7 +1683,7 @@ async function loadHostHelp(){
 }
 async function loadHostWait(){
   const { data } = await sb.rpc("host_waitlist");
-  const names = { voice:"Voice Morning Planner", specialist:"Extra specialist", twin_studio:"Twin Studio", done_for_you:"Done for you" };
+  const names = { voice:"Voice Genesis", specialist:"Second Dream Cast helper", twin_studio:"Twin Studio", done_for_you:"Done for you" };
   const box = $("hostWait"); box.innerHTML="";
   Object.keys(names).forEach(k => { const n = ((data||[]).find(r=>r.item===k)||{}).members || 0; const row=el("div"); row.style.cssText="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)"; row.append(el("span",null,names[k]), el("b",null,String(n))); box.append(row); });
 }

@@ -61,6 +61,9 @@ section{padding:56px 0}
 .pain b{display:block;font-size:17px;margin-bottom:4px}
 /* team */
 .team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+.team.five{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+@media (min-width:1000px){.team.five{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.team.five .card{padding:18px}}
+.panel.dc{border-color:rgba(255,79,184,.5);background:linear-gradient(150deg,rgba(42,20,56,.85),rgba(20,10,32,.85));box-shadow:0 0 30px rgba(255,79,184,.14)}
 .card{position:relative;border-radius:18px;border:1px solid rgba(71,215,255,.45);background:linear-gradient(160deg,rgba(20,34,58,.9),rgba(12,20,36,.9));padding:22px;box-shadow:0 0 24px rgba(71,215,255,.12)}
 .card .role{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--neon);text-transform:uppercase}
 .card h3{margin:8px 0 10px;font-size:19px}
@@ -115,7 +118,7 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
     <div>
       <span class="eyebrow"><span class="pulse"></span>Founding Members · first 10</span>
       <h1>Build Your <em>AI Team</em></h1>
-      <p class="lead">Hire 3 AI employees and 1 specialist for your business in about 15 minutes. They find leads, follow up, and hand you a plan every morning. No tech skills needed.</p>
+      <p class="lead">Hire 5 AI employees for your business in about 15 minutes. They answer your leads, follow up, find new business, plan your posts and watch your money. Then they report to your own Live Office. No tech skills needed.</p>
       <div class="cta-row">
         <a class="btn buy" href="#join">Join for $47 <small>one time</small></a>
         <span class="spots">◆ Founding price for the first 10</span>
@@ -127,11 +130,11 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
         <div class="hi">Good morning, Tasha.</div>
         <div class="muted" style="font-size:14px">Your team worked while you slept.</div>
         <div class="stats">
-          <div class="stat"><b>4/4</b><span>Team online</span></div>
-          <div class="stat"><b style="color:var(--gold)">3</b><span>Drafts ready</span></div>
+          <div class="stat"><b>5/5</b><span>Team online</span></div>
+          <div class="stat"><b style="color:var(--gold)">3</b><span>For your OK</span></div>
           <div class="stat"><b style="color:#fff">6.5h</b><span>Hours back</span></div>
         </div>
-        <div class="move"><i>⚡ Today's one money move</i>Reply to Dana about your coaching package. Your Front Desk already drafted it.</div>
+        <div class="move"><i>⚡ Today's one money move</i>Dana wants a quote for Saturday. Aria already wrote it. Reply 1A to send it.</div>
         <div class="tag">SAMPLE BRIEF · DEMO BUSINESS</div>
       </div>
     </div>
@@ -155,45 +158,45 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
 <section id="team">
   <div class="wrap">
     <span class="eyebrow">Meet your team</span>
-    <h2>3 core employees, working every day</h2>
-    <div class="team">
-      <div class="card"><div class="role">Run it</div><h3>Morning Planner</h3><ul><li>Morning brief with your one money move</li><li>Monday plan, Friday report</li><li>Keeps your calendar and inbox in order</li></ul></div>
-      <div class="card"><div class="role">Find it</div><h3>Lead Finder</h3><ul><li>Finds people asking for what you sell</li><li>Spots grants, bids, partners, trending products and brands hiring UGC creators</li><li>Brings you a short list, not a pile</li></ul></div>
-      <div class="card"><div class="role">Win it</div><h3>Front Desk &amp; Follow-Up</h3><ul><li>Drafts replies to every lead</li><li>Writes the follow-ups you forget</li><li>Handles "let me think about it" for you, kindly</li><li>Drafts proposals and offers</li></ul></div>
+    <h2>5 AI employees. One job each. One number each.</h2>
+    <p class="muted" style="margin-top:8px">Built from the AI team I use to run my own businesses, like Dazzle &amp; Shine, Bear Hug Events and Kids Party Profit System. Rename them anything you like.</p>
+    <div class="team five">
+      <div class="card"><div class="role">Leadership</div><h3>Genesis</h3><ul><li>Runs the team and writes your morning brief</li><li>Picks your one money move for the day</li><li>Sends what you approve, nothing else</li></ul></div>
+      <div class="card"><div class="role">Front Desk</div><h3>Aria</h3><ul><li>Writes a reply to every lead in your voice</li><li>Follows up with people who went quiet</li><li>Handles "let me think about it," kindly</li><li>Asks past customers back and asks for reviews</li></ul></div>
+      <div class="card"><div class="role">Sales</div><h3>Envoy</h3><ul><li>Finds local businesses and partners who could hire you</li><li>Finds events, vendor booths and grants</li><li>Writes the first email for you</li></ul></div>
+      <div class="card"><div class="role">Marketing</div><h3>Nova</h3><ul><li>Plans and writes a week of posts in your voice</li><li>Warns you before your posts run out</li><li>Frame turns your own photos and clips into reels</li></ul></div>
+      <div class="card"><div class="role">Money</div><h3>Sterling</h3><ul><li>Tracks money in against your monthly goal</li><li>Writes kind reminders for unpaid invoices</li><li>Never moves money. Ever.</li></ul></div>
     </div>
-    <p class="muted" style="text-align:center;margin-top:14px">Name your team anything you like. Mine are Genesis, Aria and Envoy.</p>
-    <div class="plus">+ pick 1 specialist</div>
-    <div class="specs">
-      <div class="spec"><div class="role eyebrow" style="color:var(--gold)">Grow it</div><h3 style="margin-top:8px">Creator Studio</h3><p class="muted" style="margin-top:8px">Videos with your AI twin, avatar or AI influencer, UGC pitches and brand deals, TikTok Shop and live plans, and digital product launches.</p></div>
-      <div class="spec"><div class="role eyebrow" style="color:var(--gold)">Grow it</div><h3 style="margin-top:8px">Product Creator</h3><p class="muted" style="margin-top:8px">Turns what you know into ebooks, courses and digital products. Student support included.</p></div>
-      <div class="spec"><div class="role eyebrow" style="color:var(--gold)">Grow it</div><h3 style="margin-top:8px">Business Builder</h3><p class="muted" style="margin-top:8px">Business setup and funding-readiness steps, one at a time.</p></div>
-    </div>
+    <p class="muted" style="text-align:center;margin-top:14px">Getting busy? Add specialists any time at no extra cost: Echo finds people in your Facebook groups asking for what you do, Bloom welcomes new customers, Confetti finds vendor booths, Bid Radar finds contracts, Harper helps you hire.</p>
+
     <div class="panel" style="margin-top:22px">
-      <span class="eyebrow" style="color:var(--gold)">Bonus for every member</span>
-      <h2 style="margin-top:8px">Story Studio: your AI mini drama director</h2>
-      <p style="margin-top:8px;font-weight:700;color:var(--gold)">Pick a story. Approve it. Your AI team films it.</p>
-      <p class="muted" style="margin-top:8px">Romance, thriller, suspense, family, comedy, pet and food dramas, or your own idea. Story Studio plans the whole season, locks your characters so they don't change from episode to episode, and hands you a one-page packet for every episode: numbered shots with paste-ready prompts, voices and lines included.</p>
+      <span class="eyebrow" style="color:var(--gold)">Included: your Live Office</span>
+      <h2 style="margin-top:8px">Watch your team work</h2>
+      <p class="muted" style="margin-top:8px">Your HQ has a Live Office page. Every time an agent finishes a job, it checks in: who did what, what's done, and what needs you. It's the same view I show on my lives.</p>
       <ul class="list">
-        <li><b>New: Director Mode.</b> Story Studio films your scenes for you. It shows you the cost first, you approve, and it makes each clip and downloads them. You just watch, listen and pick your keepers</li>
-        <li>Then your team puts the episode together for you, with captions and your end card. Free options included, and the prompts work in most popular AI video apps</li>
-        <li>Written checklist for every episode, no videos to rewatch</li>
-        <li>Posting plan and what it takes to get paid on TikTok, Instagram and Facebook</li>
-        <li>One starter season included</li>
+        <li>Your 5 agents on one screen, with what each one did last</li>
+        <li>"Needs you" and "Just finished" lists that update on their own</li>
+        <li>Your own Business Brain: your services, prices, voice and decisions, so no agent ever guesses</li>
+        <li>A morning brief where you approve with one reply, like "1A"</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- PATHS -->
+<!-- DREAM CAST -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">Built for how you earn</span>
-    <h2>Same team. Set up for your kind of business.</h2>
-    <p class="muted" style="margin-top:8px">The installer asks a few questions, figures out your path, and sets up every employee for it.</p>
-    <div class="specs">
-      <div class="spec"><div class="role eyebrow" style="color:var(--gold)">Local business</div><h3 style="margin-top:8px">Customers near you</h3><p class="muted" style="margin-top:8px">Cleaning, parties, beauty, real estate. Your Lead Finder finds local customers and vendor booths, your Front Desk follows up on quotes, and your brief shows today's jobs and unpaid invoices.</p></div>
-      <div class="spec"><div class="role eyebrow" style="color:var(--gold)">Online business</div><h3 style="margin-top:8px">Customers anywhere</h3><p class="muted" style="margin-top:8px">Coaching, courses, digital products. Your Lead Finder finds people asking for what you teach, your Front Desk answers "is this worth it?", and your brief tracks sign-ups and launches.</p></div>
-      <div class="spec"><div class="role eyebrow" style="color:var(--gold)">Creator</div><h3 style="margin-top:8px">UGC, TikTok Shop, mini dramas</h3><p class="muted" style="margin-top:8px">Your Lead Finder finds trending products and brands hiring creators, your Front Desk handles brand-deal emails, and your brief keeps deadlines and payouts in view.</p></div>
+    <div class="panel dc">
+      <span class="eyebrow" style="color:var(--pink)">Also included · Dream Cast, your content studio</span>
+      <h2 style="margin-top:8px">Want content too? Open the second door.</h2>
+      <p class="muted" style="margin-top:8px">Dream Cast has its own installer and its own studio inside your HQ. Use it when you're ready. Your business team doesn't need it.</p>
+      <ul class="list">
+        <li><b>Your character, built once:</b> your AI twin, an avatar or an AI influencer that looks the same in every picture</li>
+        <li><b>A studio helper you pick:</b> Creator Studio (post cards, UGC, TikTok Shop), Product Creator (ebooks and courses) or Business Builder (starting from zero)</li>
+        <li><b>Story Studio:</b> your AI mini drama director. It plans the season and writes every episode, and with Director Mode it can film the clips after you approve the cost. One starter season included</li>
+        <li><b>Frame:</b> turns your clips and AI scenes into finished vertical videos with captions and your end card</li>
+        <li><b>300+ scene ideas and Shop Trends</b> for what's selling on TikTok Shop</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -205,8 +208,8 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
     <h2>Set up once. Your team takes it from there.</h2>
     <div class="steps">
       <div class="step"><b>Join and log in</b><span class="muted">You get instant access to SOS HQ, your members home.</span></div>
-      <div class="step"><b>Paste one prompt</b><span class="muted">The Team Installer interviews you about your business and builds your team. About 15 minutes.</span></div>
-      <div class="step"><b>Wake up to your brief</b><span class="muted">Your team runs on a schedule. You read, approve and tap send.</span></div>
+      <div class="step"><b>Paste one prompt</b><span class="muted">The Team Installer asks about your business, connects your Gmail and the apps you use, and hires your 5 employees. About 15 minutes.</span></div>
+      <div class="step"><b>Wake up to your brief</b><span class="muted">Your team checks in 3 to 4 times a day. You read your brief, reply with what to send, and watch it all in your Live Office.</span></div>
     </div>
   </div>
 </section>
@@ -218,11 +221,11 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
       <span class="eyebrow">What's inside</span>
       <h2 style="margin-top:8px">Everything you need to start</h2>
       <ul class="list">
-        <li>The Team Installer: one copy-and-paste prompt that builds your team</li>
-        <li>Your 3 core employees + 1 specialist</li>
-        <li>Your brand colors on your briefs and reports</li>
-        <li>Story Studio bonus with a Mini Story Quick Start guide</li>
-        <li>Content Studio: not sure what to sell? Find your path in 6 questions. Build your twin, avatar or AI influencer once (face, outfits, places and style), then get ready-to-film post cards and mini series episodes every week, plus 300 scene ideas</li>
+        <li>The SOS HQ Team Installer: one paste hires Genesis, Aria, Envoy, Nova and Sterling</li>
+        <li>Your Live Office in SOS HQ, plus your Business Brain</li>
+        <li>Specialists when you need them: Echo, Bloom, Confetti, Bid Radar, Harper and Frame</li>
+        <li>Your brand colors on your morning brief</li>
+        <li>Dream Cast: your content studio, with its own installer, Story Studio and one starter season</li>
         <li>SOS HQ community to ask questions and share wins</li>
         <li>Personal help if you get stuck: just reach out</li>
       </ul>
@@ -232,6 +235,7 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
       <h2 style="margin-top:8px">What your team will never do</h2>
       <ul class="list rules">
         <li>Send, post or pay anything without your yes</li>
+        <li>Quote a price you didn't give it, or make up anything</li>
         <li>Ask for passwords, card numbers or your SSN</li>
         <li>Delete your files or emails</li>
         <li>Pretend to be human. AI content is labeled as AI.</li>
@@ -247,17 +251,17 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
     <div class="offer">
       <span class="eyebrow"><span class="pulse"></span>Founding Members</span>
       <div class="price">$47</div>
-      <div class="muted">one time · first 10 members</div>
+      <div class="muted">one time · founding price for the first 10 members</div>
       <ul class="list">
-        <li>Team Installer + 3 core employees</li>
-        <li>1 specialist of your choice</li>
-        <li>Story Studio bonus: 1 starter season</li>
-        <li>Content Studio: find your path, build your cast, weekly post cards + 300 scene ideas</li>
+        <li>SOS HQ Team Installer + your 5 AI employees</li>
+        <li>Your Live Office and Business Brain</li>
+        <li>Specialists when you need them</li>
+        <li>Dream Cast content studio + Story Studio starter season</li>
         <li>SOS HQ members community</li>
         <li>Personal help when you need it</li>
       </ul>
       <a class="btn buy" href="#join">Join the team for $47</a>
-      <p class="need">You'll need a paid Claude plan (Pro, about $20/month) and a Google account for email and calendar.</p>
+      <p class="need">You'll need a paid Claude plan (Pro, about $20/month) and a Google account for email and calendar. Your team works in your own Claude account, so you own it.</p>
     </div>
   </div>
 </section>
@@ -269,13 +273,13 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
     <h2>Good to know</h2>
     <details><summary>Do I need to be good with tech?</summary><p>No. You copy one prompt, paste it, and answer questions about your business. If you can send a text, you can do this.</p></details>
     <details><summary>Why do I need Claude Pro?</summary><p>Your team runs as scheduled tasks inside Claude, which needs a paid plan. The $47 is for the system, the prompts and the community. It's a one-time payment.</p></details>
-    <details><summary>Will it send emails or post for me?</summary><p>Your team drafts. You approve. Nothing goes out without your yes.</p></details>
-    <details><summary>What kind of business is this for?</summary><p>Service businesses, coaches, consultants, content creators, UGC creators, TikTok Shop and live sellers, digital product creators, AI mini drama creators and people just starting out. The installer adapts to your business.</p></details>
+    <details><summary>Will it send emails or post for me?</summary><p>Your team gets everything ready: replies, follow-ups, outreach and posts. You reply to your morning brief with what to send, like "send 1 and 3," and only those go out. Nothing goes out without your yes.</p></details>
+    <details><summary>What kind of business is this for?</summary><p>Your business team is built for local service businesses: cleaning, parties and events, beauty, home services, real estate, food, fitness and coaching. Dream Cast is for content: creators, UGC, TikTok Shop, digital products and AI mini series. Your kit opens both.</p></details>
+    <details><summary>Can my team read my texts and DMs?</summary><p>It reads your email and the apps you connect, like your calendar and Square, PayPal or Stripe. It can't read texts or DMs directly. Forward them to your email or paste them in, and Aria writes the reply right away. The installer also sets up an instant text back for missed calls from your own phone.</p></details>
     <details><summary>Do I have to use my own face?</summary><p>No. Use your AI twin (you), or create an original avatar or AI influencer that isn't a real person. The Scene Library and Story Studio work with either.</p></details>
     <details><summary>Does it make the videos for me?</summary><p>More than most, and we want to be upfront about how. Your team writes the scripts, scenes and prompts. With Director Mode, Story Studio films the clips for you after you approve the cost, and then puts the episode together. You still listen to each clip and choose your keepers. Director Mode works on a computer with the Chrome browser. Prefer to do it yourself? Every episode also comes with a simple step-by-step checklist.</p></details>
-    <details><summary>Can it see my TikTok or Instagram stats and DMs?</summary><p>Not directly. Your team works from your email and what you paste in. If you paste your numbers or comments, it uses them.</p></details>
-    <details><summary>What if I get stuck?</summary><p>Post in the SOS HQ community or reach out for personal help.</p></details>
-    <details><summary>Can I add more specialists later?</summary><p>Yes. More specialists will be available as add-ons inside SOS HQ.</p></details>
+        <details><summary>What if I get stuck?</summary><p>Post in the SOS HQ community or reach out for personal help.</p></details>
+    <details><summary>Can I add more specialists later?</summary><p>Yes. Business specialists like Echo, Bloom, Confetti, Bid Radar, Harper and Frame are included. Just ask your installer. In Dream Cast, your kit includes one studio helper at a time, and you can switch whenever you like.</p></details>
   </div>
 </section>
 
