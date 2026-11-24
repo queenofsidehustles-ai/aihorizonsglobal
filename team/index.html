@@ -62,6 +62,7 @@ section{padding:56px 0}
 /* team */
 .team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
 .team.five{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.team.five .card h3{font-size:20px;margin:0}.team.five .card .role{margin:4px 0 10px;letter-spacing:.12em}
 @media (min-width:1000px){.team.five{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.team.five .card{padding:18px}}
 .panel.dc{border-color:rgba(255,79,184,.5);background:linear-gradient(150deg,rgba(42,20,56,.85),rgba(20,10,32,.85));box-shadow:0 0 30px rgba(255,79,184,.14)}
 .card{position:relative;border-radius:18px;border:1px solid rgba(71,215,255,.45);background:linear-gradient(160deg,rgba(20,34,58,.9),rgba(12,20,36,.9));padding:22px;box-shadow:0 0 24px rgba(71,215,255,.12)}
@@ -158,14 +159,14 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
 <section id="team">
   <div class="wrap">
     <span class="eyebrow">Meet your team</span>
-    <h2>5 AI employees. One job each. One number each.</h2>
+    <h2>5 AI employees. One job each.</h2>
     <p class="muted" style="margin-top:8px">Built from the AI team I use to run my own businesses, like Dazzle &amp; Shine, Bear Hug Events and Kids Party Profit System. Rename them anything you like.</p>
     <div class="team five">
-      <div class="card"><div class="role">Leadership</div><h3>Genesis</h3><ul><li>Runs the team and writes your morning brief</li><li>Picks your one money move for the day</li><li>Sends what you approve, nothing else</li></ul></div>
-      <div class="card"><div class="role">Front Desk</div><h3>Aria</h3><ul><li>Writes a reply to every lead in your voice</li><li>Follows up with people who went quiet</li><li>Handles "let me think about it," kindly</li><li>Asks past customers back and asks for reviews</li></ul></div>
-      <div class="card"><div class="role">Sales</div><h3>Envoy</h3><ul><li>Finds local businesses and partners who could hire you</li><li>Finds events, vendor booths and grants</li><li>Writes the first email for you</li></ul></div>
-      <div class="card"><div class="role">Marketing</div><h3>Nova</h3><ul><li>Plans and writes a week of posts in your voice</li><li>Warns you before your posts run out</li><li>Frame turns your own photos and clips into reels</li></ul></div>
-      <div class="card"><div class="role">Money</div><h3>Sterling</h3><ul><li>Tracks money in against your monthly goal</li><li>Writes kind reminders for unpaid invoices</li><li>Never moves money. Ever.</li></ul></div>
+      <div class="card"><h3>Team Lead</h3><div class="role">Genesis</div><ul><li>Sends your morning brief</li><li>Picks your one money move</li><li>Sends only what you approve</li></ul></div>
+      <div class="card"><h3>Front Desk</h3><div class="role">Aria</div><ul><li>Answers every lead in your voice</li><li>Follows up when people go quiet</li><li>Asks past customers back</li></ul></div>
+      <div class="card"><h3>Sales</h3><div class="role">Envoy</div><ul><li>Finds businesses who could hire you</li><li>Finds events, booths and grants</li><li>Writes the first email</li></ul></div>
+      <div class="card"><h3>Marketing</h3><div class="role">Nova</div><ul><li>Writes a week of posts</li><li>Warns you before posts run out</li><li>Frame turns your clips into reels</li></ul></div>
+      <div class="card"><h3>Money</h3><div class="role">Sterling</div><ul><li>Tracks money against your goal</li><li>Writes reminders for unpaid invoices</li><li>Never moves money</li></ul></div>
     </div>
     <p class="muted" style="text-align:center;margin-top:14px">Getting busy? Add specialists any time at no extra cost: Echo finds people in your Facebook groups asking for what you do, Bloom welcomes new customers, Confetti finds vendor booths, Bid Radar finds contracts, Harper helps you hire.</p>
 
@@ -191,11 +192,12 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
       <h2 style="margin-top:8px">Want content too? Open the second door.</h2>
       <p class="muted" style="margin-top:8px">Dream Cast has its own installer and its own studio inside your HQ. Use it when you're ready. Your business team doesn't need it.</p>
       <ul class="list">
-        <li><b>Your character, built once:</b> your AI twin, an avatar or an AI influencer that looks the same in every picture</li>
-        <li><b>A studio helper you pick:</b> Creator Studio (post cards, UGC, TikTok Shop), Product Creator (ebooks and courses) or Business Builder (starting from zero)</li>
-        <li><b>Story Studio:</b> your AI mini drama director. It plans the season and writes every episode, and with Director Mode it can film the clips after you approve the cost. One starter season included</li>
-        <li><b>Frame:</b> turns your clips and AI scenes into finished vertical videos with captions and your end card</li>
-        <li><b>300+ scene ideas and Shop Trends</b> for what's selling on TikTok Shop</li>
+        <li><b>Plugs into ChatGPT:</b> connect Dream Cast to your ChatGPT once. Your character looks the same in every picture you make there</li>
+        <li><b>Your character, built once:</b> your AI twin, an avatar or an AI influencer</li>
+        <li><b>One studio helper:</b> Creator Studio, Product Creator or Business Builder</li>
+        <li><b>Story Studio:</b> plans and writes your mini series. Director Mode films the clips after you approve the cost</li>
+        <li><b>Frame:</b> turns clips into finished videos with captions</li>
+        <li><b>300+ scene ideas</b> and <b>Shop Trends</b> for TikTok Shop</li>
       </ul>
     </div>
   </div>
@@ -225,7 +227,7 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
         <li>Your Live Office in SOS HQ, plus your Business Brain</li>
         <li>Specialists when you need them: Echo, Bloom, Confetti, Bid Radar, Harper and Frame</li>
         <li>Your brand colors on your morning brief</li>
-        <li>Dream Cast: your content studio, with its own installer, Story Studio and one starter season</li>
+        <li>Dream Cast: your content studio. Plugs into ChatGPT, plus Story Studio</li>
         <li>SOS HQ community to ask questions and share wins</li>
         <li>Personal help if you get stuck: just reach out</li>
       </ul>
@@ -256,7 +258,7 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
         <li>SOS HQ Team Installer + your 5 AI employees</li>
         <li>Your Live Office and Business Brain</li>
         <li>Specialists when you need them</li>
-        <li>Dream Cast content studio + Story Studio starter season</li>
+        <li>Dream Cast content studio, plugs into ChatGPT</li>
         <li>SOS HQ members community</li>
         <li>Personal help when you need it</li>
       </ul>

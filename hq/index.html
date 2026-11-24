@@ -190,7 +190,7 @@ body.cb-on .side{display:none}
 .lo-team{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin:0 0 14px}
 .lo-agent{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 12px 12px 16px;display:grid;gap:4px;min-width:0;overflow:hidden}
 .lo-agent::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
-.lo-agent .nm{font-family:var(--disp);font-size:13px;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+.lo-agent .nm{font-family:var(--disp);font-size:15px;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
 .lo-agent .rl{font-size:12px;color:var(--muted)}
 .lo-agent .last{font-size:12.5px;color:var(--fg);overflow-wrap:anywhere}
 .lo-agent .when{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
@@ -287,15 +287,15 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
         <a class="door biz" href="#team">
           <span class="door-k">SOS HQ</span>
           <b>Run my business</b>
-          <span>Five AI employees answer leads, follow up, find business, plan your posts and watch your money. You get one brief every morning.</span>
-          <span class="door-names">Genesis · Aria · Envoy · Nova · Sterling</span>
+          <span>Five AI employees answer leads, find business, write posts and track money. One brief every morning.</span>
+          <span class="door-names">Front Desk · Sales · Marketing · Money · Team Lead</span>
           <span class="door-go">Open My AI Team →</span>
         </a>
         <a class="door dc" href="#builder">
           <span class="door-k">Dream Cast</span>
           <b>Make my content</b>
-          <span>Your AI twin, avatar or character, post cards, UGC, TikTok Shop videos and mini series. Frame turns it into finished videos.</span>
-          <span class="door-names">Creator Studio · Story Studio · Frame</span>
+          <span>Plugs into ChatGPT, so your character looks the same in every picture. Post ideas, TikTok Shop videos and mini series.</span>
+          <span class="door-names">ChatGPT plug-in · Story Studio · Frame</span>
           <span class="door-go">Open the studio →</span>
         </a>
       </div>
@@ -1355,11 +1355,11 @@ async function loadKit(){
 
 // ---------- my team: Live Office ----------
 const LEADS = [
-  ["Genesis","Leadership · runs the team","var(--gold)"],
-  ["Aria","Front Desk · answers everyone","var(--neon)"],
-  ["Envoy","Sales · finds business","var(--pink)"],
-  ["Nova","Marketing · plans your posts","#8c96ff"],
-  ["Sterling","Money · watches the money","#4fe3b0"]
+  ["Genesis","Team Lead","var(--gold)"],
+  ["Aria","Front Desk","var(--neon)"],
+  ["Envoy","Sales","var(--pink)"],
+  ["Nova","Marketing","#8c96ff"],
+  ["Sterling","Money","#4fe3b0"]
 ];
 const ST_LABEL = { working:"Working", done:"Done", needs_you:"Needs you", failed:"Didn't finish" };
 let loRuns = [], loChan = null, loKey = null;
@@ -1395,8 +1395,8 @@ function drawTeam(){
   names.forEach(n=>{
     const lead = LEADS.find(l=>l[0]===n), r = latest[n.toLowerCase()];
     const c = el("div","lo-agent"+(r&&r.status==="working"?" busy":"")+(r&&r.status==="needs_you"?" need":"")); c.style.setProperty("--c", lead ? lead[2] : "var(--muted)");
-    const nm = el("div","nm"); nm.append(el("span","sdot "+(r?r.status:"")), document.createTextNode(n));
-    c.append(nm, el("div","rl", lead ? lead[1] : "Specialist"));
+    const nm = el("div","nm"); nm.append(el("span","sdot "+(r?r.status:"")), document.createTextNode(lead ? lead[1] : "Specialist"));
+    c.append(nm, el("div","rl", n));
     c.append(el("div","last", r ? ((ST_LABEL[r.status]||"Done") + (r.task ? ": " + r.task : "")) : "Waiting for first report"));
     if(r) c.append(el("div","when", ago(r.created_at)));
     team.append(c);
