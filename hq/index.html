@@ -237,9 +237,9 @@ body.cb-on .side{display:none}
         <p class="tiny" style="margin-top:12px">Stuck? Ask the <a href="#help">Help desk</a>. It answers right away.</p>
       </div>
       <div class="grid" style="margin-top:12px">
-        <div class="card"><div class="tag">Run it</div><h4>Chief of Staff</h4><p>Your morning brief: who needs you, today's schedule, money in, and one money move.</p></div>
-        <div class="card"><div class="tag">Win it</div><h4>Closer</h4><p>Drafts replies and gentle follow-ups so nobody slips through. Never sends without you.</p></div>
-        <div class="card"><div class="tag">Find it</div><h4>Growth Scout</h4><p>Finds customers, trends, grants, contracts or events, depending on your business.</p></div>
+        <div class="card"><div class="tag">Run it</div><h4>Morning Planner</h4><p>Your morning brief: who needs you, today's schedule, money in, and one money move.</p></div>
+        <div class="card"><div class="tag">Win it</div><h4>Front Desk &amp; Follow-Up</h4><p>Drafts replies and gentle follow-ups so nobody slips through. Never sends without you.</p></div>
+        <div class="card"><div class="tag">Find it</div><h4>Lead Finder</h4><p>Finds customers, trends, grants, contracts or events, depending on your business.</p></div>
         <div class="card"><div class="tag">Grow it</div><h4>Your specialist</h4><p>Content Studio, Product Creator or Business Builder. On call whenever you need it.</p></div>
       </div>
     </section>
@@ -942,7 +942,7 @@ body.cb-on .side{display:none}
     <section data-pane="store" hidden>
       <div class="hero"><div class="eyebrow">● Add-ons</div><h1>Upgrade your team</h1><p>Add more specialists and powers whenever you're ready.</p></div>
       <div class="grid">
-        <div class="card"><div class="tag">Voice</div><h4>Voice Chief of Staff</h4><p>Talk to your Chief of Staff with its own name and voice, push-to-talk, like Monica's Genesis. (Free voice already works in the Claude app; see the Kit.)</p><button class="btn ghost" type="button" data-wait="voice">Join the waitlist</button></div>
+        <div class="card"><div class="tag">Voice</div><h4>Voice Morning Planner</h4><p>Talk to your Morning Planner with its own name and voice, push-to-talk, like Monica's Genesis. (Free voice already works in the Claude app; see the Kit.)</p><button class="btn ghost" type="button" data-wait="voice">Join the waitlist</button></div>
         <div class="card"><div class="tag">Specialist</div><h4>Extra specialist</h4><p>Add Content Studio, Product Creator or Business Builder alongside the one you have.</p><button class="btn ghost" type="button" data-wait="specialist">Join the waitlist</button></div>
         <div class="card"><div class="tag">Phase 2</div><h4>Twin Studio credits</h4><p>Make twin and avatar images right here in your HQ, without leaving.</p><button class="btn ghost" type="button" data-wait="twin_studio">Join the waitlist</button></div>
         <div class="card"><div class="tag">Done for you</div><h4>Have Monica's team build it</h4><p>We set up your whole team for you. Your $47 is credited.</p><button class="btn ghost" type="button" data-wait="done_for_you">Join the waitlist</button></div>
@@ -1508,7 +1508,7 @@ async function loadHostHelp(){
 }
 async function loadHostWait(){
   const { data } = await sb.rpc("host_waitlist");
-  const names = { voice:"Voice Chief of Staff", specialist:"Extra specialist", twin_studio:"Twin Studio", done_for_you:"Done for you" };
+  const names = { voice:"Voice Morning Planner", specialist:"Extra specialist", twin_studio:"Twin Studio", done_for_you:"Done for you" };
   const box = $("hostWait"); box.innerHTML="";
   Object.keys(names).forEach(k => { const n = ((data||[]).find(r=>r.item===k)||{}).members || 0; const row=el("div"); row.style.cssText="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)"; row.append(el("span",null,names[k]), el("b",null,String(n))); box.append(row); });
 }
