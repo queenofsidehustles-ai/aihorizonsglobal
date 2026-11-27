@@ -889,7 +889,7 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
             <li>Then (no @ needed) say: <b id="cbTryLine">Make a picture of my character</b><span class="cbTwinTip" hidden> and attach your best photo of yourself</span> <button class="btn ghost" type="button" id="cbTryCopy" data-label="Copy" style="padding:4px 10px;font-size:13px">Copy</button></li>
             <li>Not quite right? Just say what to change, like <i>"shorter hair"</i> or <i>"warmer skin."</i></li>
             <li>Love her? Say <b>"Keep her."</b> Dream Cast saves her here in HQ and makes her character sheet.</li>
-            <li>Save the sheet to your phone. You'll attach it in every new chat. Add it under <b>Your characters</b> below to see her here.</li>
+            <li>Her sheet shows up under <b>Your characters</b> below. Save it to your phone too. You'll attach it in every new chat.</li>
           </ol>
           <p class="tiny" style="margin:4px 0 10px">Can't find Dream Cast? In ChatGPT's message box, type <b>@Dream</b>. A small list pops up. Tap <b>Dream Cast</b>. Not in the list? It isn't connected yet. Tap <a href="#" id="cbTryConnect">Need your link again?</a> and follow the steps.</p>
           <a class="btn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;text-align:center;display:inline-block">Open ChatGPT</a>
@@ -899,7 +899,7 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
         <div class="chips" id="cbSaved"></div>
         <p class="tiny">✓ kept = she's final. ✎ trying on = still a draft. Saved in your HQ account, on any phone or computer.</p>
         <div class="cb-sheets" id="cbSheets"></div>
-        <p class="tiny" id="cbSheetsNote" hidden>Sheet pictures are kept on this phone or computer only. Keep the original in your photos too.</p>
+        <p class="tiny" id="cbSheetsNote" hidden>A sheet you added here is kept on this phone or computer only. Keep the original in your photos too.</p>
       </div>
 
       <div class="panel" style="margin-bottom:12px">
@@ -1770,7 +1770,8 @@ let cb = JSON.parse(JSON.stringify(CB_DEF));
 let cbWho = null; // saved character for scenes
 let cbChars = [];
 async function cbFetch(){
-  const { data, error } = await sb.from("characters").select("id,name,lock,status").order("created_at");
+  let { data, error } = await sb.from("characters").select("id,name,lock,status,sheet_path").order("created_at");
+  if(error){ ({ data, error } = await sb.from("characters").select("id,name,lock,status").order("created_at")); }
   if(!error) cbChars = data || [];
   // one-time move of anything saved on this device before accounts were used
   try{ const old = JSON.parse(localStorage.getItem("sos_characters_v1")||"[]");
@@ -1876,7 +1877,7 @@ function cbDrawSaved(){
   if(!list.length){ box.append(el("span","tiny","No saved characters yet.")); }
   const cur = el("button","chip","Current build"); cur.type="button"; cur.setAttribute("aria-pressed", !cbWho); cur.onclick=()=>{ cbWho=null; cbDrawScene(); cbDrawSaved(); }; who.append(cur);
   list.forEach((c,i)=>{
-    const b = el("button","chip",(c.status==="draft"?"✎ ":"✓ ")+c.name+"  🗑"); b.type="button"; b.title=(c.status==="draft"?"Trying on":"Kept")+". Tap to delete "+c.name; b.onclick=async()=>{ if(confirm("Delete "+c.name+"?")){ const { error } = await sb.from("characters").delete().eq("id", c.id); if(error){ toast("Couldn't delete. Try again."); return; } try{ localStorage.removeItem(shKey(c.id)); }catch(e){} if(cbWho&&cbWho.name===c.name) cbWho=null; await cbFetch(); cbDrawScene(); } }; box.append(b);
+    const b = el("button","chip",(c.status==="draft"?"✎ ":"✓ ")+c.name+"  🗑"); b.type="button"; b.title=(c.status==="draft"?"Trying on":"Kept")+". Tap to delete "+c.name; b.onclick=async()=>{ if(confirm("Delete "+c.name+"?")){ const { error } = await sb.from("characters").delete().eq("id", c.id); if(error){ toast("Couldn't delete. Try again."); return; } try{ localStorage.removeItem(shKey(c.id)); if(c.sheet_path) sb.storage.from(SH_BUCKET).remove([c.sheet_path]); }catch(e){} if(cbWho&&cbWho.name===c.name) cbWho=null; await cbFetch(); cbDrawScene(); } }; box.append(b);
     const w = el("button","chip",c.name); w.type="button"; w.setAttribute("aria-pressed", !!cbWho && cbWho.name===c.name); w.onclick=()=>{ cbWho=c; cbDrawScene(); cbDrawSaved(); cbIdDraw(); }; who.append(w);
   });
   cbDrawSheets();
@@ -1886,25 +1887,41 @@ const SH_PH = '<svg viewBox="0 0 320 180" aria-hidden="true"><rect width="320" h
 const shKey = id => "sos_sheet_"+id;
 function shGet(id){ try{ return localStorage.getItem(shKey(id)); }catch(e){ return null; } }
 function shShrink(file){ return new Promise((ok,no)=>{ const u=URL.createObjectURL(file), im=new Image(); im.onload=()=>{ const k=Math.min(1,1400/Math.max(im.width,im.height)), c=document.createElement("canvas"); c.width=Math.round(im.width*k); c.height=Math.round(im.height*k); c.getContext("2d").drawImage(im,0,0,c.width,c.height); URL.revokeObjectURL(u); ok(c.toDataURL("image/jpeg",.82)); }; im.onerror=()=>{ URL.revokeObjectURL(u); no(new Error("bad picture")); }; im.src=u; }); }
+const SH_BUCKET = "character-sheets";
 async function shAdd(c, file){
   if(!file) return;
   if(!/^image\//.test(file.type)){ toast("Pick a picture (a photo or screenshot)."); return; }
   let d; try{ d = await shShrink(file); }catch(e){ toast("Couldn't open that picture. Try another one."); return; }
-  try{ localStorage.setItem(shKey(c.id), d); }catch(e){ toast("This device is out of room for pictures. Remove an older sheet and try again."); return; }
-  if(c.status==="draft"){ const { error } = await sb.from("characters").update({status:"kept", updated_at:new Date().toISOString()}).eq("id", c.id); if(!error) await cbFetch(); }
-  cbDrawSheets(); toast(c.name+"'s sheet is here ✓");
+  let saved = false;
+  try{ // first choice: her HQ account, so it shows on any phone or computer
+    const blob = await (await fetch(d)).blob(), path = me.id+"/"+c.id;
+    const up = await sb.storage.from(SH_BUCKET).upload(path, blob, {upsert:true, contentType:"image/jpeg"});
+    if(!up.error){ const r = await sb.from("characters").update({sheet_path:path, updated_at:new Date().toISOString()}).eq("id", c.id); saved = !r.error; }
+  }catch(e){}
+  if(saved){ try{ localStorage.removeItem(shKey(c.id)); }catch(e){} }
+  else { try{ localStorage.setItem(shKey(c.id), d); }catch(e){ toast("This device is out of room for pictures. Remove an older sheet and try again."); return; } }
+  if(c.status==="draft") await sb.from("characters").update({status:"kept", updated_at:new Date().toISOString()}).eq("id", c.id);
+  await cbFetch(); toast(c.name+"'s sheet is here ✓");
+}
+async function shRemove(c){
+  try{ localStorage.removeItem(shKey(c.id)); }catch(e){}
+  if(c.sheet_path){ try{ await sb.storage.from(SH_BUCKET).remove([c.sheet_path]); await sb.from("characters").update({sheet_path:null}).eq("id", c.id); }catch(e){} await cbFetch(); }
+  else cbDrawSheets();
 }
 function cbDrawSheets(){
-  const box=$("cbSheets"); if(!box) return; const list=cbLoad(); box.innerHTML=""; $("cbSheetsNote").hidden = !list.length;
+  const box=$("cbSheets"); if(!box) return; const list=cbLoad(); box.innerHTML=""; let onDevice=false;
   list.forEach(c=>{
     const card=el("div","cb-sheet"); card.append(el("h4",null,c.name));
-    const src=shGet(c.id), inp=el("input"); inp.type="file"; inp.accept="image/*"; inp.onchange=()=>shAdd(c, inp.files[0]);
-    if(src){ const im=el("img"); im.src=src; im.alt=c.name+"'s character sheet"; im.loading="lazy"; card.append(im); }
+    const local=shGet(c.id), has=!!(c.sheet_path||local), inp=el("input"); inp.type="file"; inp.accept="image/*"; inp.onchange=()=>shAdd(c, inp.files[0]);
+    if(has){ const im=el("img"); im.alt=c.name+"'s character sheet"; card.append(im);
+      if(c.sheet_path){ sb.storage.from(SH_BUCKET).createSignedUrl(c.sheet_path, 3600).then(({data})=>{ if(data&&data.signedUrl) im.src=data.signedUrl; else if(local) im.src=local; }).catch(()=>{ if(local) im.src=local; }); }
+      else { im.src=local; onDevice=true; } }
     else { const ph=el("div","cb-sheet-ph"); ph.innerHTML=SH_PH; ph.append(el("p","tiny","Her sheet will look like this: 4 body views, 2 close-ups and her features.")); card.append(ph); }
-    const row=el("div","row cb-row"), add=el("button","btn"+(src?" ghost":""),src?"Change picture":"＋ Add her sheet"); add.type="button"; add.onclick=()=>inp.click(); row.append(add);
-    if(src){ const rm=el("button","btn ghost","Remove"); rm.type="button"; rm.onclick=()=>{ try{ localStorage.removeItem(shKey(c.id)); }catch(e){} cbDrawSheets(); }; row.append(rm); }
+    const row=el("div","row cb-row"), add=el("button","btn"+(has?" ghost":""),has?"Change picture":"＋ Add her sheet"); add.type="button"; add.onclick=()=>inp.click(); row.append(add);
+    if(has){ const rm=el("button","btn ghost","Remove"); rm.type="button"; rm.onclick=()=>shRemove(c); row.append(rm); }
     card.append(row, inp); box.append(card);
   });
+  $("cbSheetsNote").hidden = !onDevice;
 }
 function cbDrawScene(){
   cbDrawHome();
