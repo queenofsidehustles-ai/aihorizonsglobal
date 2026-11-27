@@ -34,7 +34,7 @@ Her journey (follow it):
 - She asks for changes ("shorter hair", "warmer skin") → call change_look and make the new picture. Repeat as often as she likes.
 - Every change works right away on a full new picture (makeup, jewelry, hair, skin, outfit, anything). Never say a change needs a close-up first, and never tell her a tool is blocked. If a tool call fails, still make the new picture from her saved look plus the change.
 - When she says "keep her", the description you save MUST include every change she asked for in this chat (for example "natural, minimal makeup" if she asked to tone it down), replacing the old wording.
-- She says "keep her" / "I love her" → call keep_character with her full updated description (include every change she asked for), then make her character sheet exactly as the tool says, and tell her to save the sheet to her phone: she attaches it in every new chat.
+- She says "keep her" / "I love her" → call keep_character with her full updated description (include every change she asked for), then make her character sheet exactly as the tool says, call save_sheet with that sheet picture so it shows in her HQ, and tell her to save the sheet to her phone too: she attaches it in every new chat.
 - "Make my shoot list" → call my_shoot_list, then make the scenes one at a time with picture_prompt (kind "scene"). After each picture, call shoot_list_done with that item's id, then offer the next one.
 - "Make it move" / "video prompt" → call video_prompt.
 - "Make a product video for ..." → call product_video with the product and style (Full presenter, Hands only or Product only). Show her the 10 scene ideas as a short numbered list. When she picks one, call product_video again with that scene, then follow it: write the script, make the picture, give the video prompt and the caption.
@@ -72,6 +72,12 @@ const TOOLS = [
   { name: "try_on", title: "Try her on", description: "Make the first picture of a character she designed in SOS HQ (works for drafts). Returns the exact prompt to make her picture now.", inputSchema: { type: "object", properties: { character: { type: "string" } }, required: ["character"], additionalProperties: false }, annotations: R },
   { name: "change_look", title: "Change her look", description: "She wants her character to look different (hair, skin, age, face, body...). Returns the prompt for a new picture with the changes, keeping everything else the same.", inputSchema: { type: "object", properties: { character: { type: "string" }, changes: { type: "string", description: "The changes, in her words" } }, required: ["character", "changes"], additionalProperties: false }, annotations: R },
   { name: "keep_character", title: "Keep her", description: "She loves how her character looks. Saves the final look to SOS HQ (so every future picture uses it) and returns the character sheet prompt to make next.", inputSchema: { type: "object", properties: { character: { type: "string" }, description: { type: "string", description: "Her full updated look in one paragraph, facts only, same style as her saved description, including every change she asked for. Leave empty if nothing changed." } }, required: ["character"], additionalProperties: false }, annotations: W },
+  {
+    name: "save_sheet", title: "Save her sheet",
+    description: "Right after you create a character's sheet picture, call this with that picture as `sheet` so it shows up in her SOS HQ. Only for the character sheet image you just made.",
+    inputSchema: { type: "object", properties: { character: { type: "string" }, sheet: { type: "object", properties: { download_url: { type: "string" }, file_id: { type: "string" }, mime_type: { type: "string" }, file_name: { type: "string" } }, required: ["download_url", "file_id"] } }, required: ["character", "sheet"], additionalProperties: false },
+    annotations: W, _meta: { "openai/fileParams": ["sheet"] },
+  },
   { name: "my_shoot_list", title: "My shoot list", description: "The scenes she picked in SOS HQ to make next. Make them one at a time with picture_prompt (kind scene), then call shoot_list_done for each.", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations: R },
   { name: "shoot_list_done", title: "Mark scenes done", description: "Mark shoot list scenes as made, after their pictures are done.", inputSchema: { type: "object", properties: { ids: { type: "array", items: { type: "string" }, minItems: 1, maxItems: 20 } }, required: ["ids"], additionalProperties: false }, annotations: W },
   { name: "product_video", title: "Product video", description: "Plan a TikTok Shop style product video starring her character. First call without scene: returns 10 scene ideas. Second call with the scene she picked: returns the script, picture prompt, video prompt and caption.", inputSchema: { type: "object", properties: { product: { type: "string", description: "Product name, as she said it or from her saved products" }, style: { type: "string", enum: ["Full presenter", "Hands only", "Product only"] }, character: { type: "string", description: "Saved character (not needed for Product only)" }, scene: { type: "string", description: "The scene she picked (second call)" } }, required: ["product"], additionalProperties: false }, annotations: R },
@@ -176,7 +182,28 @@ async function callTool(name: string, a: Record<string, unknown>, chars: Char[],
       const { error } = await db.from("characters").update(upd).eq("id", c.id).eq("user_id", uid);
       if (error) return "Couldn't save to HQ just now. Tell her to try 'keep her' again in a minute.";
       const kept = { ...c, lock: (upd.lock as string) || c.lock };
-      return `Saved ✓ ${c.name} is kept in SOS HQ${upd.lock ? " with her new look" : ""}. Tell her that in one happy line.\n\nNow make her character sheet:\n${sheetPrompt(kept)}\n\nThen tell her: "Save this sheet to your phone. In every new chat, attach it and tell me the scene. 🎬"`;
+      return `Saved ✓ ${c.name} is kept in SOS HQ${upd.lock ? " with her new look" : ""}. Tell her that in one happy line.\n\nNow make her character sheet:\n${sheetPrompt(kept)}\n\nAs soon as the sheet picture is made, call save_sheet with character "${c.name}" and that picture as sheet. If it saves, tell her: "Her sheet is in your HQ ✓ Save it to your phone too. In every new chat, attach it and tell me the scene. 🎬" If it doesn't save, tell her: "Save this sheet to your phone, then tap Add her sheet in HQ. In every new chat, attach it and tell me the scene. 🎬"`;
+    }
+    case "save_sheet": {
+      const c = pick(chars, a.character as string); if (typeof c === "string") return c;
+      const fail = `I couldn't put the sheet in HQ this time. Tell her: "Save this sheet to your phone, then tap Add her sheet in HQ."`;
+      const f = a.sheet as { download_url?: string } | undefined;
+      let u: URL; try { u = new URL(f?.download_url || ""); } catch { return fail; }
+      if (u.protocol !== "https:" || u.hostname === "localhost" || /^[\d.]+$/.test(u.hostname) || u.hostname.includes(":")) return fail;
+      try {
+        const r = await fetch(u, { redirect: "follow" });
+        if (!r.ok || !r.url.startsWith("https://")) return fail;
+        const buf = new Uint8Array(await r.arrayBuffer());
+        if (buf.length < 1000 || buf.length > 10 * 1024 * 1024) return fail;
+        const type = buf[0] === 0x89 && buf[1] === 0x50 ? "image/png" : buf[0] === 0xff && buf[1] === 0xd8 ? "image/jpeg" : buf[0] === 0x52 && buf[8] === 0x57 ? "image/webp" : "";
+        if (!type) return fail;
+        const path = `${uid}/${c.id}`;
+        const up = await db.storage.from("character-sheets").upload(path, buf, { upsert: true, contentType: type });
+        if (up.error) return fail;
+        const { error } = await db.from("characters").update({ sheet_path: path, status: "kept", updated_at: new Date().toISOString() }).eq("id", c.id).eq("user_id", uid);
+        if (error) return fail;
+        return `Saved ✓ ${c.name}'s sheet now shows in SOS HQ under Your characters. Tell her that in one happy line, and remind her to save it to her phone too: she attaches it in every new chat.`;
+      } catch { return fail; }
     }
     case "my_shoot_list": {
       const { data } = await db.from("shoot_list").select("id,character_id,category,title,scene").eq("user_id", uid).eq("done", false).order("created_at").limit(12);
@@ -320,7 +347,7 @@ Deno.serve(async (req) => {
     try {
       if (m.method === "initialize") {
         const want = (m.params?.protocolVersion as string) || VERSIONS[0];
-        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.2.0" }, instructions: INSTRUCTIONS } });
+        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.3.0" }, instructions: INSTRUCTIONS } });
       } else if (m.method === "ping") {
         out.push({ jsonrpc: "2.0", id: m.id, result: {} });
       } else if (m.method === "tools/list") {
