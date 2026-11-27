@@ -1152,7 +1152,7 @@ async function boot(session){
   isHost = !!acc.host; $("hostNav").hidden = !isHost;
   if(isHost){ sb.from("help_requests").select("id",{count:"exact",head:true}).eq("status","open").then(({count})=>{ if(count){ $("hostNav").lastChild.textContent = "Host panel ("+count+")"; toast(count+" help request"+(count>1?"s":"")+" waiting for you"); } }); }
   $("app").hidden=false; $("statusText").textContent="COMMAND DECK ONLINE";
-  await ensureMe(); setupCommunity(); loadWaits(); route();
+  await ensureMe(); setupCommunity(); loadWaits(); doorInit(); route();
 }
 sb.auth.onAuthStateChange((evt, session) => {
   if (session && !me) setTimeout(() => boot(session), 0);
@@ -1192,6 +1192,19 @@ $("saveMe").onclick = async () => {
 
 // ---------- routing ----------
 const loaded = {};
+// Remember which door she picked (content or business) so HQ opens there and her side of the menu comes first.
+function doorGet(){ try{ return localStorage.getItem("sos_door"); }catch(e){ return null; } }
+function doorApply(){
+  const nav=$("nav"), biz=nav.querySelector(".navlbl.biz"), dcl=nav.querySelector(".navlbl.dc"); if(!biz||!dcl) return;
+  const dcNodes=[dcl, ...nav.querySelectorAll("a.dcnav")], bizNodes=[biz, nav.querySelector('a[data-view="team"]'), nav.querySelector('a[data-view="kit"]')];
+  const first = doorGet()==="dc" ? dcNodes : bizNodes, second = doorGet()==="dc" ? bizNodes : dcNodes, anchor=nav.querySelector('a[data-view="community"]').previousElementSibling;
+  [...first, ...second].forEach(n=>{ if(n) nav.insertBefore(n, anchor); });
+}
+function doorInit(){
+  document.querySelectorAll(".doors .door").forEach(a=>a.addEventListener("click", ()=>{ try{ localStorage.setItem("sos_door", a.classList.contains("dc") ? "dc" : "biz"); }catch(e){} doorApply(); }));
+  doorApply();
+  if(!location.hash && doorGet()) history.replaceState(null, "", doorGet()==="dc" ? "#builder" : "#team");
+}
 function route(){
   let v = (location.hash || "#home").slice(1);
   if(!document.querySelector(`[data-pane="${v}"]`) || (v==="host" && !isHost)) v = "home";
