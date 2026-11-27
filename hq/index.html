@@ -153,6 +153,7 @@ body.cb-on .side{display:none}
 .cb-id-mode{color:var(--ink);background:var(--gold);border-radius:999px;padding:1px 8px}
 .cb-id-art{position:relative;margin:10px auto 6px;width:180px;height:198px;border-radius:16px;background:radial-gradient(circle at 50% 30%,rgba(71,215,255,.12),rgba(4,6,12,.6));border:1px solid rgba(155,230,255,.2);overflow:hidden}
 .cb-id-art svg{width:100%;height:100%;display:block}
+.cb-id-photo{position:absolute;inset:0;z-index:1;background-repeat:no-repeat;background-size:500% auto;background-position:13% 90%;background-color:#0a0f1a}
 .cb-id-scan{position:absolute;left:0;right:0;height:30%;top:-30%;background:linear-gradient(180deg,transparent,rgba(71,215,255,.28),transparent);animation:idscan 3.2s linear infinite}
 @keyframes idscan{to{top:110%}}
 .cb-id-name{font-family:var(--disp);font-size:20px;letter-spacing:.08em;text-align:center;text-shadow:0 0 14px rgba(71,215,255,.6);margin:4px 0 8px}
@@ -179,6 +180,11 @@ body.cb-on .side{display:none}
 .navlbl.biz{color:var(--neon)}.navlbl.dc{color:#ff8fd2}
 .rail a.dcnav .ic{color:#ff8fd2}
 .doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.doors.three{grid-template-columns:repeat(3,minmax(0,1fr))}.doors.three .door{min-height:200px}
+@media (max-width:860px){.doors.three{grid-template-columns:1fr}}
+.home-bonus{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.home-view{margin-top:16px}
+body.only-dc .navlbl.biz,body.only-dc #nav a.biznav,body.only-biz .navlbl.dc,body.only-biz #nav a.dcnav{display:none}
 @media (max-width:720px){.doors{grid-template-columns:1fr}}
 .door{display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:20px;text-decoration:none;color:var(--fg);min-height:240px;transition:transform .15s,box-shadow .2s}
 .door:hover{transform:translateY(-2px)}
@@ -261,8 +267,8 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
   <aside class="rail"><nav aria-label="Members area" id="nav">
     <a href="#home" data-view="home"><span class="ic">⌂</span>Home</a>
     <div class="navlbl biz">SOS HQ · run my business</div>
-    <a href="#team" data-view="team"><span class="ic">◈</span>My AI Team</a>
-    <a href="#kit" data-view="kit"><span class="ic">▣</span>Team Installer</a>
+    <a href="#team" data-view="team" class="biznav"><span class="ic">◈</span>My AI Team</a>
+    <a href="#kit" data-view="kit" class="biznav"><span class="ic">▣</span>Team Installer</a>
     <div class="navlbl dc">Dream Cast · make my content</div>
     <a href="#builder" data-view="builder" data-views="builder scenes series" class="dcnav"><span class="ic">✦</span>Dream Cast studio</a>
     <a href="#products" data-view="products" class="dcnav"><span class="ic">🛍</span>Shop Trends</a>
@@ -277,7 +283,7 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
   <main class="main" id="main">
     <!-- COMMUNITY -->
     <section data-pane="community">
-      <div class="hero"><div class="eyebrow">● Founding Members · Transmission</div><h1>Welcome to the command deck.</h1><p>Show off your team, ask questions, celebrate wins.</p></div>
+      <div class="hero"><div class="eyebrow">● Founding Members · Transmission</div><h1>Welcome to the command deck.</h1><p><span id="commSub">Show off your team, ask questions, celebrate wins.</span></p></div>
       <div class="chips" id="spaceChips"></div>
       <div class="panel compose">
         <label for="newPost" class="tiny">SHARE WITH THE COMMUNITY</label>
@@ -289,8 +295,15 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
 
     <!-- HOME: two doors -->
     <section data-pane="home" hidden>
-      <div class="hero"><div class="eyebrow">● Welcome to your HQ</div><h1 id="homeHi">What do you want your team to do?</h1><p>Your $47 kit opens both doors. Start with the one that makes you money first.</p></div>
-      <div class="doors">
+      <div class="hero"><div class="eyebrow">● Welcome to your HQ</div><h1 id="homeHi">Where do you want to start?</h1><p id="homeSub">Pick the one you came for. You can add the other any time.</p></div>
+      <div class="doors" id="homeDoors">
+        <a class="door dc" href="#builder">
+          <span class="door-k">Dream Cast</span>
+          <b>Make my content</b>
+          <span>Design your AI character by tapping, then meet her in ChatGPT. Her look and her character sheet save here by themselves. Then scenes, short videos and mini series.</span>
+          <span class="door-names">ChatGPT plug-in · Story Studio · Frame</span>
+          <span class="door-go">Start here: make your character →</span>
+        </a>
         <a class="door biz" href="#team">
           <span class="door-k">SOS HQ</span>
           <b>Run my business</b>
@@ -298,15 +311,27 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
           <span class="door-names">Front Desk · Sales · Marketing · Money · Team Lead</span>
           <span class="door-go">Open My AI Team →</span>
         </a>
-        <a class="door dc" href="#builder">
-          <span class="door-k">Dream Cast</span>
-          <b>Make my content</b>
-          <span>Plugs into ChatGPT, so your character looks the same in every picture. Post ideas, TikTok Shop videos and mini series.</span>
-          <span class="door-names">ChatGPT plug-in · Story Studio · Frame</span>
-          <span class="door-go">Open the studio →</span>
-        </a>
       </div>
-      <p class="tiny" style="margin-top:12px">Not sure? Most owners start with <b>Run my business</b>. Your content studio is here whenever you want it.</p>
+      <p class="tiny" id="homeDoorsNote" style="margin-top:12px">Not sure? Pick one now. Both are included and you can switch any time.</p>
+
+      <div id="homeDc" hidden>
+        <div class="doors three">
+          <a class="door dc" href="#builder"><span class="door-k">Step 1</span><b>Make your character</b><span>Connect Dream Cast once, design her by tapping, then meet her in ChatGPT.</span><span class="door-go">Start here →</span></a>
+          <a class="door dc" href="#scenes"><span class="door-k">Step 2</span><b>Put her in scenes</b><span>Pick from 300+ scene ideas and build your shoot list.</span><span class="door-go">Open scenes →</span></a>
+          <a class="door dc" href="#series"><span class="door-k">Step 3</span><b>Make videos</b><span>Plan a short video scene by scene and get the prompt that makes her move.</span><span class="door-go">Open videos →</span></a>
+        </div>
+        <div class="panel home-bonus"><div><b>Also in your membership: Build Your AI Team</b><p class="tiny" style="margin:4px 0 0">Five AI employees that help run a small business. It's tucked away so your studio stays simple.</p></div><button class="btn ghost" type="button" data-setview="both">Show it in my menu</button></div>
+      </div>
+
+      <div id="homeBiz" hidden>
+        <div class="doors">
+          <a class="door biz" href="#kit"><span class="door-k">Step 1</span><b>Hire your team</b><span>One paste in the Team Installer sets up your five AI employees. About 15 minutes.</span><span class="door-go">Open the installer →</span></a>
+          <a class="door biz" href="#team"><span class="door-k">Step 2</span><b>Watch them work</b><span>Your Live Office shows who did what, what's done and what needs your yes.</span><span class="door-go">Open My AI Team →</span></a>
+        </div>
+        <div class="panel home-bonus"><div><b>Also in your membership: Dream Cast content studio</b><p class="tiny" style="margin:4px 0 0">Make an AI character and faceless content. It's tucked away so your office stays simple.</p></div><button class="btn ghost" type="button" data-setview="both">Show it in my menu</button></div>
+      </div>
+
+      <p class="tiny home-view" id="homeView" hidden>Showing: <b id="homeViewNow"></b> · <a href="#" data-setview="dc">Content only</a> · <a href="#" data-setview="biz">Business only</a> · <a href="#" data-setview="both">Both</a></p>
     </section>
 
     <!-- MY TEAM: Live Office -->
@@ -978,7 +1003,7 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
         <aside class="cb-card-col">
           <div class="cb-id" id="cbId" aria-label="Your character so far">
             <div class="cb-id-top"><span>SOS · CHARACTER ID</span><span class="cb-id-mode" id="cbIdMode">AVATAR</span></div>
-            <div class="cb-id-art"><svg viewBox="0 0 200 220" aria-hidden="true" id="cbIdSvg">
+            <div class="cb-id-art"><div class="cb-id-photo" id="cbIdPhoto" hidden></div><svg viewBox="0 0 200 220" aria-hidden="true" id="cbIdSvg">
               <defs><radialGradient id="cbGlow" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#47d7ff" stop-opacity=".35"/><stop offset="1" stop-color="#47d7ff" stop-opacity="0"/></radialGradient>
               <linearGradient id="cbShade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient></defs>
               <circle cx="100" cy="95" r="92" fill="url(#cbGlow)"/>
@@ -1151,7 +1176,7 @@ async function boot(session){
   isHost = !!acc.host; $("hostNav").hidden = !isHost;
   if(isHost){ sb.from("help_requests").select("id",{count:"exact",head:true}).eq("status","open").then(({count})=>{ if(count){ $("hostNav").lastChild.textContent = "Host panel ("+count+")"; toast(count+" help request"+(count>1?"s":"")+" waiting for you"); } }); }
   $("app").hidden=false; $("statusText").textContent="COMMAND DECK ONLINE";
-  await ensureMe(); setupCommunity(); loadWaits(); route();
+  await ensureMe(); setupCommunity(); loadWaits(); await viewInit(); route();
 }
 sb.auth.onAuthStateChange((evt, session) => {
   if (session && !me) setTimeout(() => boot(session), 0);
@@ -1191,6 +1216,42 @@ $("saveMe").onclick = async () => {
 
 // ---------- routing ----------
 const loaded = {};
+// One portal, three views. "dc" = content only, "biz" = business only, "both" = everything.
+// Set by the page she bought from, the door she picks, or the switch on Home. Kept on her account when the
+// members.track column exists (see supabase-functions/hq-view.sql), and on this device either way.
+let hqView = null;
+const VIEWS = ["dc","biz","both"];
+function viewLocal(){ try{ const v=localStorage.getItem("sos_door"); return VIEWS.includes(v) ? v : null; }catch(e){ return null; } }
+function viewApply(){
+  document.body.classList.toggle("only-dc", hqView==="dc"); document.body.classList.toggle("only-biz", hqView==="biz");
+  const nav=$("nav"), biz=nav.querySelector(".navlbl.biz"), dcl=nav.querySelector(".navlbl.dc"), anchor=nav.querySelector('a[data-view="community"]').previousElementSibling;
+  const dcNodes=[dcl, ...nav.querySelectorAll("a.dcnav")], bizNodes=[biz, ...nav.querySelectorAll("a.biznav")];
+  [...(hqView==="biz" ? bizNodes : dcNodes), ...(hqView==="biz" ? dcNodes : bizNodes)].forEach(n=>{ if(n) nav.insertBefore(n, anchor); });
+  $("homeDoors").hidden = $("homeDoorsNote").hidden = hqView==="dc" || hqView==="biz";
+  $("homeDc").hidden = hqView!=="dc"; $("homeBiz").hidden = hqView!=="biz"; $("homeView").hidden = !hqView;
+  $("homeViewNow").textContent = hqView==="dc" ? "content only" : hqView==="biz" ? "business only" : "both";
+  const n=myFirst(), hi=$("homeHi"), sub=$("homeSub");
+  if(hqView==="dc"){ hi.textContent=(n ? n+", let's" : "Let's")+" make your character."; sub.textContent="Three steps. Start with step 1 and come back here any time."; }
+  else if(hqView==="biz"){ hi.textContent=(n ? n+", let's" : "Let's")+" get your team hired."; sub.textContent="Two steps. Your team checks in here once it's set up."; }
+  else if(hqView==="both"){ hi.textContent=(n ? n+", where" : "Where")+" do you want to go?"; sub.textContent="Both sides are in your menu."; }
+  else { hi.textContent=(n ? n+", where" : "Where")+" do you want to start?"; sub.textContent="Pick the one you came for. You can add the other any time."; }
+  const cs=$("commSub"); if(cs) cs.textContent = hqView==="dc" ? "Show off your characters, ask questions, celebrate wins." : "Show off your team, ask questions, celebrate wins.";
+}
+function viewSet(v, quiet){
+  if(!VIEWS.includes(v)) return; hqView=v;
+  try{ localStorage.setItem("sos_door", v); }catch(e){}
+  if(me) sb.from("members").update({ track: v }).eq("user_id", me.id).then(()=>{}, ()=>{});
+  viewApply(); if(!quiet) toast(v==="both" ? "Both sides are in your menu now." : v==="dc" ? "Showing your content studio." : "Showing your business team.");
+}
+async function viewInit(){
+  let acct=null; try{ const { data, error } = await sb.from("members").select("track").eq("user_id", me.id).maybeSingle(); if(!error && data && VIEWS.includes(data.track)) acct=data.track; }catch(e){}
+  const q=new URLSearchParams(location.search).get("door"), fromLink = VIEWS.includes(q) ? q : null;
+  hqView = acct || fromLink || viewLocal();
+  if(hqView && hqView!==acct) viewSet(hqView, true); else viewApply();
+  if(fromLink) history.replaceState(null, "", location.pathname + location.hash);
+  document.querySelectorAll("#homeDoors .door").forEach(a=>a.addEventListener("click", ()=>viewSet(a.classList.contains("dc") ? "dc" : "biz", true)));
+  document.querySelectorAll("[data-setview]").forEach(b=>b.addEventListener("click", e=>{ e.preventDefault(); viewSet(b.dataset.setview); if(location.hash!=="#home") location.hash="#home"; }));
+}
 function route(){
   let v = (location.hash || "#home").slice(1);
   if(!document.querySelector(`[data-pane="${v}"]`) || (v==="host" && !isHost)) v = "home";
@@ -1199,7 +1260,7 @@ function route(){
   drawStudioTabs(v);
   document.body.classList.toggle("cb-on", v==="builder");
   document.body.classList.toggle("dc", ["builder","scenes","series","products","dckit"].includes(v));
-  if(v==="home"){ const n=myFirst(); $("homeHi").textContent = (n ? n+", what" : "What") + " do you want your team to do?"; }
+  if(v==="home") viewApply();
   if(v==="team"){ loadTeam(); }
   if((v==="kit"||v==="dckit") && !loaded.kit){ loaded.kit=1; loadKit(); }
   if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
@@ -1903,6 +1964,25 @@ async function shAdd(c, file){
   if(c.status==="draft") await sb.from("characters").update({status:"kept", updated_at:new Date().toISOString()}).eq("id", c.id);
   await cbFetch(); toast(c.name+"'s sheet is here ✓");
 }
+const shUrls = {};
+let cbIdShow = null; // saved character she tapped to see on the ID card
+async function shUrlFor(c){
+  const local = shGet(c.id);
+  if(!c.sheet_path) return local;
+  const hit = shUrls[c.id]; if(hit && hit.path===c.sheet_path && hit.at > Date.now()-3000000) return hit.url;
+  try{ const { data } = await sb.storage.from(SH_BUCKET).createSignedUrl(c.sheet_path, 3600); if(data&&data.signedUrl){ shUrls[c.id]={path:c.sheet_path,url:data.signedUrl,at:Date.now()}; return data.signedUrl; } }catch(e){}
+  return local;
+}
+function cbIdPhoto(){
+  const ph=$("cbIdPhoto"); if(!ph) return;
+  const typed=(($("cbName")&&$("cbName").value)||"").trim().toLowerCase();
+  if(cbIdShow && !cbLoad().some(c=>c.id===cbIdShow.id)) cbIdShow=null;
+  const who = cbIdShow || (typed ? cbLoad().find(c=>c.name.toLowerCase()===typed) : cbWho);
+  if(!who || !(who.sheet_path||shGet(who.id))){ ph.hidden=true; ph.dataset.who=""; return; }
+  if(ph.dataset.who===who.id+"|"+(who.sheet_path||"d") && !ph.hidden) return;
+  ph.dataset.who=who.id+"|"+(who.sheet_path||"d");
+  shUrlFor(who).then(u=>{ if(ph.dataset.who!==who.id+"|"+(who.sheet_path||"d")) return; if(u){ ph.style.backgroundImage='url("'+u+'")'; ph.hidden=false; } else ph.hidden=true; });
+}
 async function shRemove(c){
   try{ localStorage.removeItem(shKey(c.id)); }catch(e){}
   if(c.sheet_path){ try{ await sb.storage.from(SH_BUCKET).remove([c.sheet_path]); await sb.from("characters").update({sheet_path:null}).eq("id", c.id); }catch(e){} await cbFetch(); }
@@ -1914,14 +1994,16 @@ function cbDrawSheets(){
     const card=el("div","cb-sheet"); card.append(el("h4",null,c.name));
     const local=shGet(c.id), has=!!(c.sheet_path||local), inp=el("input"); inp.type="file"; inp.accept="image/*"; inp.onchange=()=>shAdd(c, inp.files[0]);
     if(has){ const im=el("img"); im.alt=c.name+"'s character sheet"; card.append(im);
-      if(c.sheet_path){ sb.storage.from(SH_BUCKET).createSignedUrl(c.sheet_path, 3600).then(({data})=>{ if(data&&data.signedUrl) im.src=data.signedUrl; else if(local) im.src=local; }).catch(()=>{ if(local) im.src=local; }); }
-      else { im.src=local; onDevice=true; } }
+      if(c.sheet_path) shUrlFor(c).then(u=>{ if(u) im.src=u; });
+      else { im.src=local; onDevice=true; }
+      im.style.cursor="pointer"; im.title="Show "+c.name+" on the ID card"; im.onclick=()=>{ cbIdShow=c; cbIdDraw(); const card=document.querySelector(".cb-id"); if(card) card.scrollIntoView({behavior:"smooth",block:"nearest"}); }; }
     else { const ph=el("div","cb-sheet-ph"); ph.innerHTML=SH_PH; ph.append(el("p","tiny","Her sheet will look like this: 4 body views, 2 close-ups and her features.")); card.append(ph); }
     const row=el("div","row cb-row"), add=el("button","btn"+(has?" ghost":""),has?"Change picture":"＋ Add her sheet"); add.type="button"; add.onclick=()=>inp.click(); row.append(add);
     if(has){ const rm=el("button","btn ghost","Remove"); rm.type="button"; rm.onclick=()=>shRemove(c); row.append(rm); }
     card.append(row, inp); box.append(card);
   });
   $("cbSheetsNote").hidden = !onDevice;
+  cbIdPhoto();
 }
 function cbDrawScene(){
   cbDrawHome();
@@ -1979,6 +2061,7 @@ function cbIdDraw(){
   ["cbIdHairBack","cbIdHairTop"].forEach((id,i)=>{ const e=$(id); e.setAttribute("d", i?front:back); e.setAttribute("fill", hair); });
   $("cbIdMode").textContent = cb.mode==="twin" ? "TWIN" : cb.mode==="photo" ? "PHOTO" : "AVATAR";
   $("cbIdName").textContent = (($("cbName")&&$("cbName").value.trim()) || (cbWho&&cbWho.name) || "UNNAMED").toUpperCase();
+  cbIdPhoto();
   const dl=$("cbIdDl"); dl.innerHTML="";
   const row=(k,v,sw)=>{ dl.append(el("dt",null,k)); const d=el("dd"); if(sw) d.append(sw); d.append(document.createTextNode(v)); dl.append(d); };
   row("Shot",cb.shot); row("Who",(cb.gender==="Man"?"Man":"Woman")+", "+cb.age); row("Face",cb.face);
@@ -1986,6 +2069,7 @@ function cbIdDraw(){
   row("Eyes",cb.eyecolor+", "+cb.eyes.toLowerCase(),cbSwatch("eyecolor",cb.eyecolor));
   row("Hair",cb.gender==="Man"?(cb.mcut==="Bald"?"Bald":cb.hcolor+" "+cb.mcut.toLowerCase())+", "+cb.fhair.toLowerCase():cb.hair==="Bald"?"Bald":cb.hcolor+" "+cb.hair.toLowerCase()+", "+cb.hlen.toLowerCase(),cb.hair==="Bald"?null:cbSwatch("hcolor",cb.hcolor));
   row("Makeup",cb.makeup);
+  if(cbIdShow){ $("cbIdName").textContent=cbIdShow.name.toUpperCase(); $("cbIdMode").textContent="SAVED"; dl.innerHTML=""; const look=(cbIdShow.lock||"").trim(); row("Look", look.length>230 ? look.slice(0,230).replace(/\s+\S*$/,"")+"…" : look); }
   const n=cb.real.length, lv = n===0?["Too smooth",35]:n<=2?["Just right",100]:n===3?["A bit rough",65]:["Too rough",35]; $("cbIdReal").style.width=lv[1]+"%"; $("cbIdRealN").textContent=lv[0];
 }
 function cbProgInit(){
@@ -2041,6 +2125,7 @@ function initBuilder(){
     $("cbTryBox").hidden = false; $("cbTryBox").scrollIntoView({behavior:"smooth",block:"nearest"}); toast(name+" is ready to try on ✨");
   };
   $("cbTryCopy").onclick = e => copyText($("cbTryLine").textContent, e.currentTarget);
+  $("cbName").addEventListener("input", ()=>{ if(cbIdShow){ cbIdShow=null; cbIdDraw(); } });
   $("cbTryPrompt").onclick = e => copyText(cbPrompt(), e.currentTarget);
   $("cbTrySheet").onclick = e => copyText(cbSheetPrompt(), e.currentTarget);
   $("cbTryUp").onclick = e => { e.preventDefault(); dcPaste(false); $("dcReopen").click(); };
