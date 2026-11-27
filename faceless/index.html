@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Faceless AI Content · Dream Cast by SOS</title>
+<meta name="description" content="Create your own AI character and make faceless content without showing your face. No camera, no tech skills. Founding Members $47.">
+<meta property="og:title" content="Show up online without showing your face · Founding Members $47">
+<meta property="og:description" content="Design your AI character by tapping, meet her in ChatGPT, and keep her looking the same in every picture.">
+<meta property="og:image" content="https://aihorizonsglobal.com/images/sos-hq-header.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{--void:#04060c;--deck:#0a1120;--panel:#0c1424;--line:#1b2a44;--fg:#e8f0fb;--muted:#8ea1bd;
+--neon:#47d7ff;--neon2:#9be6ff;--gold:#e3b75a;--pink:#ff4fb8;--ink:#04060c;
+--disp:"Michroma","Sora",system-ui,sans-serif;--body:"Sora",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--fg);font-family:var(--body);line-height:1.55;overflow-x:hidden;
+background-image:radial-gradient(70rem 34rem at 50% -8%,rgba(71,215,255,.24),transparent 65%),radial-gradient(40rem 22rem at 100% 60%,rgba(255,79,184,.09),transparent 70%),linear-gradient(rgba(71,215,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(71,215,255,.05) 1px,transparent 1px);background-size:auto,auto,36px 36px,36px 36px;background-attachment:fixed}
+a{color:var(--neon)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--fg)}
+.brand img{height:44px;width:auto;filter:drop-shadow(0 0 10px rgba(227,183,90,.45))}
+.brand span{font-family:var(--disp);font-weight:800;letter-spacing:.12em;font-size:14px;text-shadow:0 0 12px rgba(71,215,255,.6)}
+.top a.login{font-family:var(--mono);font-size:12px;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--neon);text-transform:uppercase;display:inline-flex;align-items:center;gap:8px}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon);animation:p 1.8s ease-in-out infinite}
+@keyframes p{50%{opacity:.35;box-shadow:0 0 2px var(--neon)}}
+h1,h2,h3{font-family:var(--disp);letter-spacing:.03em;margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,6.4vw,64px);line-height:1.05;margin:14px 0 16px;text-shadow:0 0 28px rgba(71,215,255,.35)}
+h1 em{font-style:normal;color:var(--neon)}
+h2{font-size:clamp(22px,3.4vw,32px);margin-bottom:10px}
+h3{font-size:16px;letter-spacing:.06em}
+p{margin:0 0 12px}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:44ch}
+.muted{color:var(--muted)}
+section{padding:56px 0}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:36px;align-items:center;padding:28px 0 56px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:800;font-size:17px;color:var(--ink);background:var(--neon);border:0;border-radius:14px;padding:16px 26px;text-decoration:none;cursor:pointer;box-shadow:0 0 28px rgba(71,215,255,.45);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(71,215,255,.65)}
+.btn small{font-weight:600;opacity:.75}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:18px}
+.spots{font-family:var(--mono);font-size:13px;color:var(--gold)}
+/* brief preview */
+.screen{position:relative;border-radius:20px;border:1px solid rgba(71,215,255,.6);background:linear-gradient(160deg,#14223a,#070b16 70%);box-shadow:0 0 50px rgba(71,215,255,.22);overflow:hidden}
+.screen::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(155,230,255,.14),transparent);transform:translateX(-100%);animation:scan 6s ease-in-out infinite;pointer-events:none}
+@keyframes scan{60%,100%{transform:translateX(100%)}}
+.screen img{display:block;width:100%;height:auto}
+.screen .body{padding:16px 18px 18px}
+.screen .hi{font-weight:800;font-size:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stat{border:1px solid rgba(71,215,255,.5);border-radius:12px;padding:10px 4px;text-align:center;background:rgba(4,6,12,.6)}
+.stat b{display:block;font-family:var(--mono);font-size:20px;color:var(--neon)}
+.stat span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.move{background:var(--neon);color:var(--ink);border-radius:12px;padding:11px 13px;font-weight:700;font-size:14px}
+.move i{display:block;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#5d6f8c;margin-top:10px}
+/* pains */
+.pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+.pain{border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(12,20,36,.7)}
+.pain b{display:block;font-size:17px;margin-bottom:4px}
+/* team */
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+.team.five{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.team.five .card h3{font-size:20px;margin:0}.team.five .card .role{margin:4px 0 10px;letter-spacing:.12em}
+@media (min-width:1000px){.team.five{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.team.five .card{padding:18px}}
+.panel.dc{border-color:rgba(255,79,184,.5);background:linear-gradient(150deg,rgba(42,20,56,.85),rgba(20,10,32,.85));box-shadow:0 0 30px rgba(255,79,184,.14)}
+.card{position:relative;border-radius:18px;border:1px solid rgba(71,215,255,.45);background:linear-gradient(160deg,rgba(20,34,58,.9),rgba(12,20,36,.9));padding:22px;box-shadow:0 0 24px rgba(71,215,255,.12)}
+.card .role{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--neon);text-transform:uppercase}
+.card h3{margin:8px 0 10px;font-size:19px}
+.card ul{margin:0;padding-left:18px;color:var(--muted)}
+.card li{margin-bottom:6px}
+.plus{text-align:center;font-family:var(--disp);font-size:28px;color:var(--gold);margin:22px 0 6px;text-shadow:0 0 16px rgba(227,183,90,.5)}
+.specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:10px}
+.spec{border-radius:18px;border:1px dashed rgba(227,183,90,.6);padding:20px;background:rgba(12,20,36,.75)}
+.spec .role{color:var(--gold)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px;counter-reset:s}
+.step{border-left:3px solid var(--neon);padding:4px 0 4px 18px}
+.step::before{counter-increment:s;content:"0" counter(s);display:block;font-family:var(--disp);font-size:30px;color:var(--neon);text-shadow:0 0 16px rgba(71,215,255,.6);margin-bottom:6px}
+.step b{display:block;font-size:17px;margin-bottom:4px}
+/* included + rules */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.list{list-style:none;margin:16px 0 0;padding:0}
+.list li{padding:11px 0 11px 30px;border-bottom:1px solid rgba(27,42,68,.6);position:relative}
+.list li::before{content:"◆";position:absolute;left:4px;top:11px;color:var(--neon);text-shadow:0 0 8px var(--neon)}
+.rules li::before{content:"✕";color:var(--pink);text-shadow:0 0 8px var(--pink)}
+.panel{border-radius:20px;border:1px solid var(--line);background:rgba(12,20,36,.75);padding:24px}
+/* offer */
+.offer{max-width:640px;margin:0 auto;text-align:center;border-radius:24px;border:2px solid var(--neon);background:radial-gradient(30rem 14rem at 50% 0,rgba(71,215,255,.22),transparent 70%),linear-gradient(160deg,#14223a,#070b16);padding:34px 24px;box-shadow:0 0 60px rgba(71,215,255,.25)}
+.price{font-family:var(--disp);font-size:clamp(54px,10vw,84px);color:var(--neon);text-shadow:0 0 30px rgba(71,215,255,.6);line-height:1;margin:12px 0 4px}
+.offer .list{text-align:left;margin:18px auto 22px;max-width:440px}
+.need{font-size:14px;color:var(--muted);margin-top:16px}
+/* faq */
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--neon);font-size:20px}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin:10px 0 0}
+footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:12px;color:#5d6f8c}
+.note{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--neon);border-radius:12px;padding:12px 16px;font-size:14px;box-shadow:0 0 24px rgba(71,215,255,.3);max-width:calc(100% - 32px);text-align:center}
+@media (max-width:860px){
+ .hero,.two{grid-template-columns:1fr}
+ .team,.specs,.steps{grid-template-columns:1fr}
+ section{padding:40px 0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+/* creator page extras */
+.sheet{padding:16px 18px 18px}
+.sheet svg{width:100%;height:auto;display:block;border-radius:12px}
+.sheet .hi{font-weight:800;font-size:18px;margin-top:12px}
+.saved{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:var(--neon);color:var(--ink);border-radius:12px;padding:9px 13px;font-weight:700;font-size:14px}
+.say{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.say span{font-family:var(--mono);font-size:13px;border:1px solid rgba(255,79,184,.6);color:#ffd0ec;border-radius:999px;padding:6px 12px;background:rgba(42,20,56,.6)}
+</style></head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/faceless/"><img src="/images/sos-logo.png" alt="Systems Over Stress"><span>SOS</span></a>
+    <a class="login" href="/hq/">Member login</a>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <span class="eyebrow"><span class="pulse"></span>Founding Members · first 10</span>
+      <h1>Show up online <em>without showing your face</em></h1>
+      <p class="lead">Create your own AI character and keep her looking the same in every picture. No camera. No tech skills. You tap her look, you talk to her in ChatGPT, and she's ready for your content.</p>
+      <div class="cta-row">
+        <a class="btn buy" href="#join">Start for $47 <small>one time</small></a>
+        <span class="spots">◆ Founding price for the first 10</span>
+      </div>
+    </div>
+    <div class="screen" aria-label="What your character looks like in your portal">
+      <div class="sheet">
+        <svg viewBox="0 0 320 180" role="img" aria-label="Drawing of a character sheet: four body views, two face close-ups and a list of her features"><rect width="320" height="180" rx="8" fill="#0f1726"/><g fill="#5d7391"><circle cx="34" cy="24" r="8"/><rect x="25" y="34" width="18" height="46" rx="6"/><rect x="26" y="80" width="7" height="24" rx="3"/><rect x="35" y="80" width="7" height="24" rx="3"/></g><g fill="#5d7391"><circle cx="76" cy="24" r="8"/><rect x="67" y="34" width="18" height="46" rx="6"/><rect x="68" y="80" width="7" height="24" rx="3"/><rect x="77" y="80" width="7" height="24" rx="3"/></g><g fill="#5d7391"><circle cx="118" cy="24" r="8"/><rect x="109" y="34" width="18" height="46" rx="6"/><rect x="110" y="80" width="7" height="24" rx="3"/><rect x="119" y="80" width="7" height="24" rx="3"/></g><g fill="#5d7391"><circle cx="160" cy="24" r="8"/><rect x="151" y="34" width="18" height="46" rx="6"/><rect x="152" y="80" width="7" height="24" rx="3"/><rect x="161" y="80" width="7" height="24" rx="3"/></g><g fill="#5d7391"><circle cx="48" cy="142" r="20"/><circle cx="112" cy="142" r="20"/></g><g fill="#7f97b8"><rect x="200" y="16" width="70" height="8" rx="3"/><rect x="200" y="36" width="100" height="5" rx="2"/><rect x="200" y="50" width="90" height="5" rx="2"/><rect x="200" y="64" width="100" height="5" rx="2"/><rect x="200" y="78" width="80" height="5" rx="2"/><rect x="200" y="92" width="96" height="5" rx="2"/><rect x="200" y="106" width="70" height="5" rx="2"/><rect x="200" y="120" width="92" height="5" rx="2"/></g></svg>
+        <div class="hi">Your character, saved in your portal</div>
+        <div class="muted" style="font-size:14px">Four body views, two close-ups and her features. Attach her sheet and she looks the same in every new picture.</div>
+        <div class="say"><span>"Make a picture of Amara"</span><span>"Shorter hair"</span><span>"Keep her"</span><span>"Save it"</span></div>
+        <div class="saved">✓ Her sheet saves to your portal by itself</div>
+        <div class="tag">DRAWING OF A CHARACTER SHEET · YOURS IS A REAL PICTURE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Sound familiar?</span>
+    <h2>You want to post. You just don't want to be on camera.</h2>
+    <div class="pains">
+      <div class="pain"><b>Camera shy</b><span class="muted">You have things to share, but filming yourself feels like too much.</span></div>
+      <div class="pain"><b>No idea where to begin</b><span class="muted">You've seen faceless pages and AI characters. Nobody shows you the first step.</span></div>
+      <div class="pain"><b>Tried it and got lost</b><span class="muted">A different face in every picture, five apps open, and nothing you'd post.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2>Three steps to your own character</h2>
+    <div class="steps">
+      <div class="step"><b>Design her by tapping</b><span class="muted">Pick her face, skin, hair and style in your studio. You never write a prompt.</span></div>
+      <div class="step"><b>Meet her in ChatGPT</b><span class="muted">Connect Dream Cast once, about 2 minutes, with a walkthrough. Then say "Make a picture of" and her name. Want a change? Just say it.</span></div>
+      <div class="step"><b>Keep her and put her to work</b><span class="muted">Say "Keep her," then "Save it." Her look and her character sheet save to your portal by themselves. Then pick scenes and plan your first short video.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIDE + HONEST -->
+<section>
+  <div class="wrap two">
+    <div class="panel">
+      <span class="eyebrow">What's inside</span>
+      <h2>Everything to get her made</h2>
+      <ul class="list">
+        <li>Dream Cast studio: build your character by tapping</li>
+        <li>A character sheet that saves to your portal by itself</li>
+        <li>The same face every time: Dream Cast remembers her look</li>
+        <li>300+ scene ideas and your own shoot list</li>
+        <li>A video planner: a short video, scene by scene, with the picture and video prompt for each</li>
+        <li>A product video helper for TikTok Shop style videos</li>
+        <li>Quick fixes for "looks too AI," "her face changed" and more</li>
+        <li>SOS HQ community, and personal help if you get stuck</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <span class="eyebrow" style="color:var(--pink)">Good to know first</span>
+      <h2>What this is not</h2>
+      <ul class="list rules">
+        <li>A promise of income. It helps you make content. What you earn depends on what you do with it.</li>
+        <li>A one-tap video maker. You get her picture and the exact video prompt, then make the clip in a video app. We show you which one inside.</li>
+        <li>Free pictures. They're made in your own ChatGPT account, so any ChatGPT cost is yours.</li>
+        <li>A way to copy real people. No real faces except your own, no celebrities, no realistic AI children.</li>
+        <li>A way to hide that it's AI. Turn on the AI label when you post.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section id="join">
+  <div class="wrap">
+    <div class="offer">
+      <span class="eyebrow"><span class="pulse"></span>Founding Members</span>
+      <div class="price">$47</div>
+      <div class="muted">one time · founding price for the first 10 members</div>
+      <ul class="list">
+        <li>Dream Cast studio and character builder</li>
+        <li>Character sheets saved to your portal</li>
+        <li>300+ scenes, shoot list and video planner</li>
+        <li>Product video helper</li>
+        <li>SOS HQ members community</li>
+        <li>Personal help when you need it</li>
+        <li>Bonus: Build Your AI Team, 5 AI employees for a business, when you're ready</li>
+      </ul>
+      <a class="btn buy" href="#join">Start for $47</a>
+      <p class="need">You'll need your own ChatGPT account that can make pictures and connect a plugin, plus a video app for your clips. The AI Team bonus runs in Claude and needs a paid Claude plan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap" style="max-width:760px">
+    <span class="eyebrow">Questions</span>
+    <h2>Good to know</h2>
+    <details><summary>Do I have to show my face?</summary><p>No. Create an original AI character that isn't a real person. If you'd like, you can also make an AI twin of yourself from your own photo.</p></details>
+    <details><summary>Do I need to be good with tech?</summary><p>No. If you can tap, copy and paste, you can do this. There is one setup step, connecting Dream Cast to your ChatGPT. It takes about 2 minutes and the portal walks you through each tap. If you get stuck there, you can start without it and connect later.</p></details>
+    <details><summary>Does it make the videos for me?</summary><p>It gets you most of the way, and we want to be upfront about how. Dream Cast makes her pictures with you in ChatGPT and writes the video prompt for each scene. You then make the clip in a video app, and the portal shows you the steps.</p></details>
+    <details><summary>Will she look the same every time?</summary><p>That's what her character sheet is for. Dream Cast saves her look and her sheet, and you attach the sheet when you start a new chat. AI isn't perfect, so the kit includes quick fixes for when a face or hairstyle drifts.</p></details>
+    <details><summary>Will this make me money?</summary><p>We can't promise that, and we'd rather be honest. This helps you make faceless content with your own character. Growing a page and earning from it takes consistent posting and time.</p></details>
+    <details><summary>What is the AI Team bonus?</summary><p>Your membership also opens Build Your AI Team: five AI employees that help run a small business. It's there if you ever want it. You don't need it to make content.</p></details>
+    <details><summary>What if I get stuck?</summary><p>Post in the SOS HQ community or reach out for personal help.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Systems Over Stress · AI Horizons Global · AI characters are AI. Label them when you post.</div>
+</footer>
+
+<script>
+const STRIPE_LINK = "https://buy.stripe.com/5kQ14n36RdPg1yXcbabAs04";
+document.querySelectorAll(".buy").forEach(b => { b.href = STRIPE_LINK; });
+</script>
+</body></html>

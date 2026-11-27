@@ -153,6 +153,7 @@ body.cb-on .side{display:none}
 .cb-id-mode{color:var(--ink);background:var(--gold);border-radius:999px;padding:1px 8px}
 .cb-id-art{position:relative;margin:10px auto 6px;width:180px;height:198px;border-radius:16px;background:radial-gradient(circle at 50% 30%,rgba(71,215,255,.12),rgba(4,6,12,.6));border:1px solid rgba(155,230,255,.2);overflow:hidden}
 .cb-id-art svg{width:100%;height:100%;display:block}
+.cb-id-photo{position:absolute;inset:0;z-index:1;background-repeat:no-repeat;background-size:500% auto;background-position:13% 90%;background-color:#0a0f1a}
 .cb-id-scan{position:absolute;left:0;right:0;height:30%;top:-30%;background:linear-gradient(180deg,transparent,rgba(71,215,255,.28),transparent);animation:idscan 3.2s linear infinite}
 @keyframes idscan{to{top:110%}}
 .cb-id-name{font-family:var(--disp);font-size:20px;letter-spacing:.08em;text-align:center;text-shadow:0 0 14px rgba(71,215,255,.6);margin:4px 0 8px}
@@ -289,8 +290,15 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
 
     <!-- HOME: two doors -->
     <section data-pane="home" hidden>
-      <div class="hero"><div class="eyebrow">● Welcome to your HQ</div><h1 id="homeHi">What do you want your team to do?</h1><p>Your $47 kit opens both doors. Start with the one that makes you money first.</p></div>
+      <div class="hero"><div class="eyebrow">● Welcome to your HQ</div><h1 id="homeHi">Where do you want to start?</h1><p>Your $47 kit opens both doors. Here for faceless content? Start with <b>Make my content</b>.</p></div>
       <div class="doors">
+        <a class="door dc" href="#builder">
+          <span class="door-k">Dream Cast</span>
+          <b>Make my content</b>
+          <span>Design your AI character by tapping, then meet her in ChatGPT. Her look and her character sheet save here by themselves. Then scenes, short videos and mini series.</span>
+          <span class="door-names">ChatGPT plug-in · Story Studio · Frame</span>
+          <span class="door-go">Start here: make your character →</span>
+        </a>
         <a class="door biz" href="#team">
           <span class="door-k">SOS HQ</span>
           <b>Run my business</b>
@@ -298,15 +306,8 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
           <span class="door-names">Front Desk · Sales · Marketing · Money · Team Lead</span>
           <span class="door-go">Open My AI Team →</span>
         </a>
-        <a class="door dc" href="#builder">
-          <span class="door-k">Dream Cast</span>
-          <b>Make my content</b>
-          <span>Plugs into ChatGPT, so your character looks the same in every picture. Post ideas, TikTok Shop videos and mini series.</span>
-          <span class="door-names">ChatGPT plug-in · Story Studio · Frame</span>
-          <span class="door-go">Open the studio →</span>
-        </a>
       </div>
-      <p class="tiny" style="margin-top:12px">Not sure? Most owners start with <b>Run my business</b>. Your content studio is here whenever you want it.</p>
+      <p class="tiny" style="margin-top:12px">Run a business too? <b>Run my business</b> gives you five AI employees. It's here whenever you want it.</p>
     </section>
 
     <!-- MY TEAM: Live Office -->
@@ -978,7 +979,7 @@ body.dc .brand .t{text-shadow:0 0 12px rgba(255,111,200,.6)}
         <aside class="cb-card-col">
           <div class="cb-id" id="cbId" aria-label="Your character so far">
             <div class="cb-id-top"><span>SOS · CHARACTER ID</span><span class="cb-id-mode" id="cbIdMode">AVATAR</span></div>
-            <div class="cb-id-art"><svg viewBox="0 0 200 220" aria-hidden="true" id="cbIdSvg">
+            <div class="cb-id-art"><div class="cb-id-photo" id="cbIdPhoto" hidden></div><svg viewBox="0 0 200 220" aria-hidden="true" id="cbIdSvg">
               <defs><radialGradient id="cbGlow" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#47d7ff" stop-opacity=".35"/><stop offset="1" stop-color="#47d7ff" stop-opacity="0"/></radialGradient>
               <linearGradient id="cbShade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient></defs>
               <circle cx="100" cy="95" r="92" fill="url(#cbGlow)"/>
@@ -1199,7 +1200,7 @@ function route(){
   drawStudioTabs(v);
   document.body.classList.toggle("cb-on", v==="builder");
   document.body.classList.toggle("dc", ["builder","scenes","series","products","dckit"].includes(v));
-  if(v==="home"){ const n=myFirst(); $("homeHi").textContent = (n ? n+", what" : "What") + " do you want your team to do?"; }
+  if(v==="home"){ const n=myFirst(); $("homeHi").textContent = (n ? n+", where" : "Where") + " do you want to start?"; }
   if(v==="team"){ loadTeam(); }
   if((v==="kit"||v==="dckit") && !loaded.kit){ loaded.kit=1; loadKit(); }
   if(v==="scenes" && !loaded.scenes){ loaded.scenes=1; loadScenes(); }
@@ -1903,6 +1904,25 @@ async function shAdd(c, file){
   if(c.status==="draft") await sb.from("characters").update({status:"kept", updated_at:new Date().toISOString()}).eq("id", c.id);
   await cbFetch(); toast(c.name+"'s sheet is here ✓");
 }
+const shUrls = {};
+let cbIdShow = null; // saved character she tapped to see on the ID card
+async function shUrlFor(c){
+  const local = shGet(c.id);
+  if(!c.sheet_path) return local;
+  const hit = shUrls[c.id]; if(hit && hit.path===c.sheet_path && hit.at > Date.now()-3000000) return hit.url;
+  try{ const { data } = await sb.storage.from(SH_BUCKET).createSignedUrl(c.sheet_path, 3600); if(data&&data.signedUrl){ shUrls[c.id]={path:c.sheet_path,url:data.signedUrl,at:Date.now()}; return data.signedUrl; } }catch(e){}
+  return local;
+}
+function cbIdPhoto(){
+  const ph=$("cbIdPhoto"); if(!ph) return;
+  const typed=(($("cbName")&&$("cbName").value)||"").trim().toLowerCase();
+  if(cbIdShow && !cbLoad().some(c=>c.id===cbIdShow.id)) cbIdShow=null;
+  const who = cbIdShow || (typed ? cbLoad().find(c=>c.name.toLowerCase()===typed) : cbWho);
+  if(!who || !(who.sheet_path||shGet(who.id))){ ph.hidden=true; ph.dataset.who=""; return; }
+  if(ph.dataset.who===who.id+"|"+(who.sheet_path||"d") && !ph.hidden) return;
+  ph.dataset.who=who.id+"|"+(who.sheet_path||"d");
+  shUrlFor(who).then(u=>{ if(ph.dataset.who!==who.id+"|"+(who.sheet_path||"d")) return; if(u){ ph.style.backgroundImage='url("'+u+'")'; ph.hidden=false; } else ph.hidden=true; });
+}
 async function shRemove(c){
   try{ localStorage.removeItem(shKey(c.id)); }catch(e){}
   if(c.sheet_path){ try{ await sb.storage.from(SH_BUCKET).remove([c.sheet_path]); await sb.from("characters").update({sheet_path:null}).eq("id", c.id); }catch(e){} await cbFetch(); }
@@ -1914,14 +1934,16 @@ function cbDrawSheets(){
     const card=el("div","cb-sheet"); card.append(el("h4",null,c.name));
     const local=shGet(c.id), has=!!(c.sheet_path||local), inp=el("input"); inp.type="file"; inp.accept="image/*"; inp.onchange=()=>shAdd(c, inp.files[0]);
     if(has){ const im=el("img"); im.alt=c.name+"'s character sheet"; card.append(im);
-      if(c.sheet_path){ sb.storage.from(SH_BUCKET).createSignedUrl(c.sheet_path, 3600).then(({data})=>{ if(data&&data.signedUrl) im.src=data.signedUrl; else if(local) im.src=local; }).catch(()=>{ if(local) im.src=local; }); }
-      else { im.src=local; onDevice=true; } }
+      if(c.sheet_path) shUrlFor(c).then(u=>{ if(u) im.src=u; });
+      else { im.src=local; onDevice=true; }
+      im.style.cursor="pointer"; im.title="Show "+c.name+" on the ID card"; im.onclick=()=>{ cbIdShow=c; cbIdDraw(); const card=document.querySelector(".cb-id"); if(card) card.scrollIntoView({behavior:"smooth",block:"nearest"}); }; }
     else { const ph=el("div","cb-sheet-ph"); ph.innerHTML=SH_PH; ph.append(el("p","tiny","Her sheet will look like this: 4 body views, 2 close-ups and her features.")); card.append(ph); }
     const row=el("div","row cb-row"), add=el("button","btn"+(has?" ghost":""),has?"Change picture":"＋ Add her sheet"); add.type="button"; add.onclick=()=>inp.click(); row.append(add);
     if(has){ const rm=el("button","btn ghost","Remove"); rm.type="button"; rm.onclick=()=>shRemove(c); row.append(rm); }
     card.append(row, inp); box.append(card);
   });
   $("cbSheetsNote").hidden = !onDevice;
+  cbIdPhoto();
 }
 function cbDrawScene(){
   cbDrawHome();
@@ -1979,6 +2001,7 @@ function cbIdDraw(){
   ["cbIdHairBack","cbIdHairTop"].forEach((id,i)=>{ const e=$(id); e.setAttribute("d", i?front:back); e.setAttribute("fill", hair); });
   $("cbIdMode").textContent = cb.mode==="twin" ? "TWIN" : cb.mode==="photo" ? "PHOTO" : "AVATAR";
   $("cbIdName").textContent = (($("cbName")&&$("cbName").value.trim()) || (cbWho&&cbWho.name) || "UNNAMED").toUpperCase();
+  cbIdPhoto();
   const dl=$("cbIdDl"); dl.innerHTML="";
   const row=(k,v,sw)=>{ dl.append(el("dt",null,k)); const d=el("dd"); if(sw) d.append(sw); d.append(document.createTextNode(v)); dl.append(d); };
   row("Shot",cb.shot); row("Who",(cb.gender==="Man"?"Man":"Woman")+", "+cb.age); row("Face",cb.face);
@@ -1986,6 +2009,7 @@ function cbIdDraw(){
   row("Eyes",cb.eyecolor+", "+cb.eyes.toLowerCase(),cbSwatch("eyecolor",cb.eyecolor));
   row("Hair",cb.gender==="Man"?(cb.mcut==="Bald"?"Bald":cb.hcolor+" "+cb.mcut.toLowerCase())+", "+cb.fhair.toLowerCase():cb.hair==="Bald"?"Bald":cb.hcolor+" "+cb.hair.toLowerCase()+", "+cb.hlen.toLowerCase(),cb.hair==="Bald"?null:cbSwatch("hcolor",cb.hcolor));
   row("Makeup",cb.makeup);
+  if(cbIdShow){ $("cbIdName").textContent=cbIdShow.name.toUpperCase(); $("cbIdMode").textContent="SAVED"; dl.innerHTML=""; const look=(cbIdShow.lock||"").trim(); row("Look", look.length>230 ? look.slice(0,230).replace(/\s+\S*$/,"")+"…" : look); }
   const n=cb.real.length, lv = n===0?["Too smooth",35]:n<=2?["Just right",100]:n===3?["A bit rough",65]:["Too rough",35]; $("cbIdReal").style.width=lv[1]+"%"; $("cbIdRealN").textContent=lv[0];
 }
 function cbProgInit(){
@@ -2041,6 +2065,7 @@ function initBuilder(){
     $("cbTryBox").hidden = false; $("cbTryBox").scrollIntoView({behavior:"smooth",block:"nearest"}); toast(name+" is ready to try on ✨");
   };
   $("cbTryCopy").onclick = e => copyText($("cbTryLine").textContent, e.currentTarget);
+  $("cbName").addEventListener("input", ()=>{ if(cbIdShow){ cbIdShow=null; cbIdDraw(); } });
   $("cbTryPrompt").onclick = e => copyText(cbPrompt(), e.currentTarget);
   $("cbTrySheet").onclick = e => copyText(cbSheetPrompt(), e.currentTarget);
   $("cbTryUp").onclick = e => { e.preventDefault(); dcPaste(false); $("dcReopen").click(); };
