@@ -234,7 +234,7 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
     <details><summary>Does it make the videos for me?</summary><p>It gets you most of the way, and we want to be upfront about how. Dream Cast makes her pictures with you in ChatGPT and writes the video prompt for each scene. You then make the clip in a video app, and the portal shows you the steps.</p></details>
     <details><summary>Will she look the same every time?</summary><p>That's what her character sheet is for. Dream Cast saves her look and her sheet, and you attach the sheet when you start a new chat. AI isn't perfect, so the kit includes quick fixes for when a face or hairstyle drifts.</p></details>
     <details><summary>Will this make me money?</summary><p>We can't promise that, and we'd rather be honest. This helps you make faceless content with your own character. Growing a page and earning from it takes consistent posting and time.</p></details>
-    <details><summary>What is the AI Team bonus?</summary><p>Your membership also opens Build Your AI Team: five AI employees that help run a small business. It's there if you ever want it. You don't need it to make content.</p></details>
+    <details><summary>What is the AI Team bonus?</summary><p>Your membership also includes Build Your AI Team: five AI employees that help run a small business. It stays tucked away in your portal so your studio is simple. One tap shows it if you ever want it.</p></details>
     <details><summary>What if I get stuck?</summary><p>Post in the SOS HQ community or reach out for personal help.</p></details>
   </div>
 </section>
@@ -244,6 +244,8 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
 </footer>
 
 <script>
+// Remember which page she came through, so her portal opens on the right side.
+try{ if(localStorage.getItem("sos_door")!=="both") localStorage.setItem("sos_door","dc"); }catch(e){}
 const STRIPE_LINK = "https://buy.stripe.com/5kQ14n36RdPg1yXcbabAs04";
 document.querySelectorAll(".buy").forEach(b => { b.href = STRIPE_LINK; });
 </script>

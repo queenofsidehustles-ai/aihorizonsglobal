@@ -293,6 +293,8 @@ footer{padding:36px 0 48px;text-align:center;font-family:var(--mono);font-size:1
 
 <script>
 // Paste the Stripe payment link here when it's ready.
+// Remember which page she came through, so her portal opens on the right side.
+try{ if(!localStorage.getItem("sos_door")) localStorage.setItem("sos_door","biz"); }catch(e){}
 const STRIPE_LINK = "https://buy.stripe.com/5kQ14n36RdPg1yXcbabAs04";
 document.querySelectorAll(".buy").forEach(b => {
   if (STRIPE_LINK) { b.href = STRIPE_LINK; return; }
