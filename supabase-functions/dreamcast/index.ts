@@ -34,7 +34,8 @@ Her journey (follow it):
 - She asks for changes ("shorter hair", "warmer skin") → call change_look and make the new picture. Repeat as often as she likes.
 - Every change works right away on a full new picture (makeup, jewelry, hair, skin, outfit, anything). Never say a change needs a close-up first, and never tell her a tool is blocked. If a tool call fails, still make the new picture from her saved look plus the change.
 - When she says "keep her", the description you save MUST include every change she asked for in this chat (for example "natural, minimal makeup" if she asked to tone it down), replacing the old wording.
-- She says "keep her" / "I love her" → call keep_character with her full updated description (include every change she asked for), then make her character sheet exactly as the tool says, call save_sheet with that sheet picture so it shows in her HQ, and tell her to save the sheet to her phone too: she attaches it in every new chat.
+- She says "keep her" / "I love her" → call keep_character with her full updated description (include every change she asked for), then make her character sheet exactly as the tool says and end with the "Say **Save it**" line it gives you.
+- A character sheet was made in this chat and isn't saved to HQ yet, and she says "save it", "save her sheet", "yes" or sends any next message → FIRST call save_sheet with that sheet picture as the file, then answer her. You can't call a tool in the same message where you make a picture, so the save always happens on her next message.
 - "Make my shoot list" → call my_shoot_list, then make the scenes one at a time with picture_prompt (kind "scene"). After each picture, call shoot_list_done with that item's id, then offer the next one.
 - "Make it move" / "video prompt" → call video_prompt.
 - "Make a product video for ..." → call product_video with the product and style (Full presenter, Hands only or Product only). Show her the 10 scene ideas as a short numbered list. When she picks one, call product_video again with that scene, then follow it: write the script, make the picture, give the video prompt and the caption.
@@ -74,7 +75,7 @@ const TOOLS = [
   { name: "keep_character", title: "Keep her", description: "She loves how her character looks. Saves the final look to SOS HQ (so every future picture uses it) and returns the character sheet prompt to make next.", inputSchema: { type: "object", properties: { character: { type: "string" }, description: { type: "string", description: "Her full updated look in one paragraph, facts only, same style as her saved description, including every change she asked for. Leave empty if nothing changed." } }, required: ["character"], additionalProperties: false }, annotations: W },
   {
     name: "save_sheet", title: "Save her sheet",
-    description: "Right after you create a character's sheet picture, call this with that picture as `sheet` so it shows up in her SOS HQ. Only for the character sheet image you just made.",
+    description: "Puts a character's sheet picture into her SOS HQ. Call it on her next message after you made the sheet (she says 'save it'), passing the sheet image from this chat as `sheet`. Only for character sheet images.",
     inputSchema: { type: "object", properties: { character: { type: "string" }, sheet: { type: "object", properties: { download_url: { type: "string" }, file_id: { type: "string" }, mime_type: { type: "string" }, file_name: { type: "string" } }, required: ["download_url", "file_id"] } }, required: ["character", "sheet"], additionalProperties: false },
     annotations: W, _meta: { "openai/fileParams": ["sheet"] },
   },
@@ -182,28 +183,30 @@ async function callTool(name: string, a: Record<string, unknown>, chars: Char[],
       const { error } = await db.from("characters").update(upd).eq("id", c.id).eq("user_id", uid);
       if (error) return "Couldn't save to HQ just now. Tell her to try 'keep her' again in a minute.";
       const kept = { ...c, lock: (upd.lock as string) || c.lock };
-      return `Saved ✓ ${c.name} is kept in SOS HQ${upd.lock ? " with her new look" : ""}. Tell her that in one happy line.\n\nNow make her character sheet:\n${sheetPrompt(kept)}\n\nAs soon as the sheet picture is made, call save_sheet with character "${c.name}" and that picture as sheet. If it saves, tell her: "Her sheet is in your HQ ✓ Save it to your phone too. In every new chat, attach it and tell me the scene. 🎬" If it doesn't save, tell her: "Save this sheet to your phone, then tap Add her sheet in HQ. In every new chat, attach it and tell me the scene. 🎬"`;
+      return `Saved ✓ ${c.name} is kept in SOS HQ${upd.lock ? " with her new look" : ""}. Tell her that in one happy line.\n\nNow make her character sheet:\n${sheetPrompt(kept)}\n\nRight under the sheet picture, end your message with exactly this line: "Say **Save it** and I'll put ${c.name}'s sheet in your HQ. 💛" When she replies (save it, yes, ok, or anything else), your FIRST step is to call save_sheet with character "${c.name}" and the sheet picture you just made as sheet.`;
     }
     case "save_sheet": {
       const c = pick(chars, a.character as string); if (typeof c === "string") return c;
-      const fail = `I couldn't put the sheet in HQ this time. Tell her: "Save this sheet to your phone, then tap Add her sheet in HQ."`;
+      const failMsg = `I couldn't put the sheet in HQ this time. Tell her: "Save this sheet to your phone, then tap Add her sheet in HQ."`;
       const f = a.sheet as { download_url?: string } | undefined;
-      let u: URL; try { u = new URL(f?.download_url || ""); } catch { return fail; }
-      if (u.protocol !== "https:" || u.hostname === "localhost" || /^[\d.]+$/.test(u.hostname) || u.hostname.includes(":")) return fail;
+      console.log(`save_sheet got ${f === undefined ? "nothing" : typeof f === "string" ? "a string" : Object.keys(f as object).join(",")}`);
+      let u: URL; try { u = new URL(f?.download_url || ""); } catch (e) { console.log("save_sheet fail fetch " + (e as Error).message); return failMsg; }
+      if (u.protocol !== "https:" || u.hostname === "localhost" || /^[\d.]+$/.test(u.hostname) || u.hostname.includes(":")) { console.log("save_sheet fail 2"); return failMsg; }
       try {
         const r = await fetch(u, { redirect: "follow" });
-        if (!r.ok || !r.url.startsWith("https://")) return fail;
+        if (!r.ok || !r.url.startsWith("https://")) { console.log("save_sheet fail 3"); return failMsg; }
         const buf = new Uint8Array(await r.arrayBuffer());
-        if (buf.length < 1000 || buf.length > 10 * 1024 * 1024) return fail;
+        if (buf.length < 1000 || buf.length > 10 * 1024 * 1024) { console.log("save_sheet fail 4"); return failMsg; }
         const type = buf[0] === 0x89 && buf[1] === 0x50 ? "image/png" : buf[0] === 0xff && buf[1] === 0xd8 ? "image/jpeg" : buf[0] === 0x52 && buf[8] === 0x57 ? "image/webp" : "";
-        if (!type) return fail;
+        if (!type) { console.log("save_sheet fail 5"); return failMsg; }
         const path = `${uid}/${c.id}`;
         const up = await db.storage.from("character-sheets").upload(path, buf, { upsert: true, contentType: type });
-        if (up.error) return fail;
+        if (up.error) { console.log("save_sheet fail 6 " + up.error.message); return failMsg; }
         const { error } = await db.from("characters").update({ sheet_path: path, status: "kept", updated_at: new Date().toISOString() }).eq("id", c.id).eq("user_id", uid);
-        if (error) return fail;
-        return `Saved ✓ ${c.name}'s sheet now shows in SOS HQ under Your characters. Tell her that in one happy line, and remind her to save it to her phone too: she attaches it in every new chat.`;
-      } catch { return fail; }
+        if (error) { console.log("save_sheet fail 7"); return failMsg; }
+        console.log(`save_sheet ok ${type} ${buf.length}b`);
+        return `Saved ✓ ${c.name}'s sheet now shows in SOS HQ under Your characters. Tell her that in one happy line, and remind her to save it to her phone too: she attaches it in every new chat. Then ask "🎬 Next take?"`;
+      } catch (e) { console.log("save_sheet fail fetch " + (e as Error).message); return failMsg; }
     }
     case "my_shoot_list": {
       const { data } = await db.from("shoot_list").select("id,character_id,category,title,scene").eq("user_id", uid).eq("done", false).order("created_at").limit(12);
@@ -347,7 +350,7 @@ Deno.serve(async (req) => {
     try {
       if (m.method === "initialize") {
         const want = (m.params?.protocolVersion as string) || VERSIONS[0];
-        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.3.0" }, instructions: INSTRUCTIONS } });
+        out.push({ jsonrpc: "2.0", id: m.id, result: { protocolVersion: VERSIONS.includes(want) ? want : VERSIONS[1], capabilities: { tools: { listChanged: false } }, serverInfo: { name: "dream-cast", title: "Dream Cast", version: "1.3.1" }, instructions: INSTRUCTIONS } });
       } else if (m.method === "ping") {
         out.push({ jsonrpc: "2.0", id: m.id, result: {} });
       } else if (m.method === "tools/list") {
@@ -355,6 +358,7 @@ Deno.serve(async (req) => {
       } else if (m.method === "tools/call") {
         const name = m.params?.name as string;
         if (!TOOLS.some((t) => t.name === name)) { out.push(rpcErr(m.id, -32602, `Unknown tool: ${name}`)); continue; }
+        console.log(`tool ${name}`);
         const text = await callTool(name, (m.params?.arguments as Record<string, unknown>) || {}, await loadChars(), krow.user_id);
         const final = /PROMPT:|PLAN \(/.test(text) ? GEN + text : text;
         out.push({ jsonrpc: "2.0", id: m.id, result: { content: [{ type: "text", text: final }], isError: false } });
